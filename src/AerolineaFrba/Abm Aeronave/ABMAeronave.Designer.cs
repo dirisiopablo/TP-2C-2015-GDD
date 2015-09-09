@@ -1,5 +1,5 @@
 ﻿namespace AerolineaFrba.Abm_Aeronave {
-    partial class Form2 {
+    partial class ABMAeronave {
         /// <summary>
         /// Required designer variable.
         /// </summary>

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Aeronave {
-    public partial class Form2 : Form {
-        public Form2() {
+    public partial class ABMAeronave : Form {
+        public ABMAeronave() {
             InitializeComponent();
         }
     }
