@@ -69,7 +69,7 @@ namespace AerolineaFrba.Services {
             return list;
         }
 
-        static public void save<T>(T entity, string TableName) {
+        static public int save<T>(T entity, string TableName) {
             
             _sqlCon.Open();
             string query = "INSERT INTO "+TableName+" (";
@@ -95,8 +95,9 @@ namespace AerolineaFrba.Services {
             query += queryValues;
 
             SqlCommand command = new SqlCommand(query, _sqlCon);
+            int rowsAffected = command.ExecuteNonQuery();
 
-            //...TODO
+            return rowsAffected;
 
         }
 
