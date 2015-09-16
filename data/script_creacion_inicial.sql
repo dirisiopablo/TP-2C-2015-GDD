@@ -71,13 +71,13 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Canje(
     cantidad       numeric(18, 0)    NULL,
     fecha          datetime          NULL,
     cliente_id     int               NULL,
-    cataloGO_id    int               NULL,
+    catalogo_id    int               NULL,
     CONSTRAINT PK20 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
 
-CREATE TABLE BIEN_MIGRADO_RAFA.CataloGO(
+CREATE TABLE BIEN_MIGRADO_RAFA.Catalogo(
     id             int               IDENTITY(1,1),
     descripcion    nvarchar(255)     NULL,
     costo          numeric(18, 0)    NULL,
@@ -129,7 +129,7 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Paquete(
     id              int               IDENTITY(1,1),
-    codiGO          numeric(18, 0)    NULL,
+    codigo          numeric(18, 0)    NULL,
     precio          numeric(18, 2)    NULL,
     kg              numeric(18, 0)    NULL,
     fecha_compra    datetime          NULL,
@@ -142,7 +142,7 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Pasaje(
     id              int               IDENTITY(1,1),
-    codiGO          numeric(18, 0)    NULL,
+    codigo          numeric(18, 0)    NULL,
     precio          numeric(18, 2)    NULL,
     fecha_compra    datetime          NULL,
     butaca_id       int               NULL,
@@ -162,7 +162,7 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     id                     int               IDENTITY(1,1),
-    codiGO                 numeric(18, 0)    NULL,
+    codigo                 numeric(18, 0)    NULL,
     precio_base_kg         numeric(18, 2)    NULL,
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
@@ -256,9 +256,9 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Canje ADD CONSTRAINT RefCliente25
 GO
 
 
-ALTER TABLE BIEN_MIGRADO_RAFA.Canje ADD CONSTRAINT RefCataloGO26 
-    FOREIGN KEY (cataloGO_id)
-    REFERENCES BIEN_MIGRADO_RAFA.CataloGO(id)
+ALTER TABLE BIEN_MIGRADO_RAFA.Canje ADD CONSTRAINT RefCatalogo26 
+    FOREIGN KEY (catalogo_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Catalogo(id)
 GO
 
 
