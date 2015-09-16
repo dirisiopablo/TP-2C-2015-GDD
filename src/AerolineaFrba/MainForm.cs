@@ -8,7 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AerolineaFrba.Base;
 using AerolineaFrba.Login;
+using AerolineaFrba.Abm_Rol;
+
+using AerolineaFrba.Services;
+using AerolineaFrba.Entity;
 
 namespace AerolineaFrba {
     public partial class MainForm : Form {
@@ -19,15 +24,17 @@ namespace AerolineaFrba {
 
         private void MainForm_Load(object sender, EventArgs e) {
 
-            this.showLoginForm();
+            DAO.connect();
+            DAO.save<Usertest>(new Usertest("asd", 23, 1), "TABLENAME");
+            //this.showLoginForm();
           
         }
 
         private void showLoginForm() {
 
-            LoginForm loginForm = LoginForm.getLoginFormInstance();
+            LoginForm loginForm = new LoginForm();
             var dr = loginForm.ShowDialog();
-
+         
             if (dr == DialogResult.Cancel) { //si cierra la ventana
 
                 loginForm.Close();
@@ -39,11 +46,7 @@ namespace AerolineaFrba {
 
                 var loginResult = loginForm.lastLoginResult;
 
-                if (loginResult == "SUCCESS")
-                    this.onLogin(loginForm.getLoggedUser());
-                else if (loginResult == "FAILURE") {
-                    this.showLoginForm();
-                }
+                this.onLogin(loginForm.getLoggedUser());
 
             }
 
@@ -53,7 +56,7 @@ namespace AerolineaFrba {
 
             //segun rol, ocultar/bloquear botones
             MessageBox.Show("Welcome to qqnessland " + loggedUser.role +" "+ loggedUser.username, "Hi", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
+            
             if (loggedUser.role == "admin")
                 this.adminConfig();
 
@@ -63,6 +66,16 @@ namespace AerolineaFrba {
 
 
         }
+
+        private void ABMRol_Button_Click(object sender, EventArgs e) {
+
+            ABMRol ABMRolForm = ABMRol.getInstance();
+            var dr = ABMRolForm.ShowDialog();
+
+        }
+
+
+
 
 
     }

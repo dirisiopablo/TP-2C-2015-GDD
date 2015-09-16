@@ -44,58 +44,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Aeronave\ABMAeronave.cs">
+    <Compile Include="ABM\Abm Aeronave\ABMAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\ABMAeronave.Designer.cs">
+    <Compile Include="ABM\Abm Aeronave\ABMAeronave.Designer.cs">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.cs">
+    <Compile Include="ABM\Abm Ciudad\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.Designer.cs">
+    <Compile Include="ABM\Abm Ciudad\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\Form1.cs">
+    <Compile Include="ABM\Abm Rol\ABMRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Form1.Designer.cs">
+    <Compile Include="ABM\Abm Rol\ABMRol.Designer.cs">
+      <DependentUpon>ABMRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM\Abm Ruta\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Ruta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.cs">
+    <Compile Include="Base Classes\ABM.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.Designer.cs">
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Entity\Usertest.cs" />
+    <Compile Include="Forms\Canje Millas\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Millas\Form1.cs">
+    <Compile Include="Forms\Compra\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Millas\Form1.Designer.cs">
+    <Compile Include="Forms\Compra\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\Form1.cs">
+    <Compile Include="Forms\Consulta Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\Form1.Designer.cs">
+    <Compile Include="Forms\Consulta Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.cs">
+    <Compile Include="Forms\Devolucion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.Designer.cs">
+    <Compile Include="Forms\Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Devolucion\Form1.cs">
+    <Compile Include="Interfaces\ISetteable.cs" />
+    <Compile Include="Security\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Devolucion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\Login.Designer.cs">
+    <Compile Include="Security\Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -104,33 +110,37 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.cs">
+    <Compile Include="Forms\Generacion Viaje\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.Designer.cs">
+    <Compile Include="Forms\Generacion Viaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Forms\Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
+    <Compile Include="Forms\Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro de Usuario\Form1.cs">
+    <Compile Include="Security\Registro de Usuario\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
+    <Compile Include="Security\Registro de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.cs">
+    <Compile Include="Forms\Registro Llegada Destino\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
+    <Compile Include="Forms\Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Login\Login.resx">
+    <Compile Include="Services\DAO.cs" />
+    <EmbeddedResource Include="ABM\Abm Rol\ABMRol.resx">
+      <DependentUpon>ABMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

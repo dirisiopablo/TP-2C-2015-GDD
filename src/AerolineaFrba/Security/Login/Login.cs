@@ -28,24 +28,14 @@ namespace AerolineaFrba.Login {
     }
 
 
-    public sealed partial class LoginForm : Form {
+    public partial class LoginForm : Form {
 
         public User loggedUser { get; set; }
         public String lastLoginResult { get; set; }
 
-
-        // Singleton Section
-
-        private static readonly LoginForm Instance = new LoginForm();
-
-        private LoginForm() {
+        public LoginForm() {
             InitializeComponent();
         }
-
-        public static LoginForm getLoginFormInstance() {
-            return Instance;
-        }
-
 
         //Functions Section 
 
@@ -63,12 +53,13 @@ namespace AerolineaFrba.Login {
 
             if(username == "qq" && password == "qq"){
 
-                lastLoginResult = "SUCCESS";
+                this.DialogResult = DialogResult.OK;
                 loggedUser = new User(username, password, "admin");
 
             }else{
 
-                lastLoginResult = "FAILURE";
+                MessageBox.Show("no qq", "no qq", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.None;
 
             }
 
