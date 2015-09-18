@@ -13,5 +13,7 @@ namespace AerolineaFrba.Config {
         static public string username = "gd";
         static public string password = "gd2015";
 
+        static public string schema = "BIEN_MIGRADO_RAFA";
+
     }
 }

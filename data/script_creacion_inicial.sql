@@ -181,6 +181,7 @@ GO
 
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Tipo_Servicio(
+	id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL
 )
 GO

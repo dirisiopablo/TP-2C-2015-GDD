@@ -68,11 +68,25 @@
     <Compile Include="ABM\Abm Ruta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base Classes\ABM.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Base Classes\MappedModel.cs" />
     <Compile Include="Config\Config.cs" />
-    <Compile Include="Entity\Usertest.cs" />
+    <Compile Include="Models\Aeronave.cs" />
+    <Compile Include="Models\BajaAeronave.cs" />
+    <Compile Include="Models\Butaca.cs" />
+    <Compile Include="Models\Catalogo.cs" />
+    <Compile Include="Models\Ciudad.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Canje.cs" />
+    <Compile Include="Models\Cancelacion.cs" />
+    <Compile Include="Models\Viaje.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\TipoServicio.cs" />
+    <Compile Include="Models\Ruta.cs" />
+    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Pasaje.cs" />
+    <Compile Include="Models\Paquete.cs" />
+    <Compile Include="Models\Funcionalidad.cs" />
+    <Compile Include="Models\TipoBaja.cs" />
     <Compile Include="Forms\Canje Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +111,6 @@
     <Compile Include="Forms\Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\ISetteable.cs" />
     <Compile Include="Security\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,7 +183,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

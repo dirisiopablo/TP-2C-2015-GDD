@@ -23,10 +23,10 @@ namespace AerolineaFrba.Services {
         static public Exception exception;
 
         static public void connect() {
-            _direccion = Config.DBConfig.direccion;
-            _database = Config.DBConfig.database;
-            _username = Config.DBConfig.username;
-            _password = Config.DBConfig.password;
+            _direccion = DBConfig.direccion;
+            _database = DBConfig.database;
+            _username = DBConfig.username;
+            _password = DBConfig.password;
 
             _strCon = makeStringConnection(_direccion, _database, _username, _password);
             _sqlCon = new SqlConnection(_strCon);
@@ -57,14 +57,14 @@ namespace AerolineaFrba.Services {
             return datatable;
         }
 
-        static public List<T> select<T>(string tableName) where T: ISetteable<T>, new() {
+        static public List<T> select<T>(string tableName) {
 
             DataTable dt = select(tableName);
 
             List<T> list = new List<T>();
 
-            foreach (DataRow dr in dt.Rows)
-                list.Add(new T().setData(dr));
+            //foreach (DataRow dr in dt.Rows)
+            //    list.Add(new T().setData(dr));
 
             return list;
         }

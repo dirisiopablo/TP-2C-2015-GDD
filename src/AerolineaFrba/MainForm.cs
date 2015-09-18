@@ -8,12 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using AerolineaFrba.Base;
 using AerolineaFrba.Login;
 using AerolineaFrba.Abm_Rol;
 
 using AerolineaFrba.Services;
-using AerolineaFrba.Entity;
+using AerolineaFrba.Models;
 
 namespace AerolineaFrba {
     public partial class MainForm : Form {
@@ -24,9 +23,7 @@ namespace AerolineaFrba {
 
         private void MainForm_Load(object sender, EventArgs e) {
 
-            DAO.connect();
-            DAO.save<Usertest>(new Usertest("asd", 23, 1), "TABLENAME");
-            //this.showLoginForm();
+            this.showLoginForm();
           
         }
 
