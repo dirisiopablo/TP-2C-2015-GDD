@@ -68,7 +68,6 @@
     <Compile Include="ABM\Abm Ruta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Base Classes\MappedModel.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Models\Aeronave.cs" />
     <Compile Include="Models\BajaAeronave.cs" />
@@ -184,6 +183,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Base Classes\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

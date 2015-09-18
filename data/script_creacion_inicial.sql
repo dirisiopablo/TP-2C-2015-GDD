@@ -2,9 +2,20 @@ USE [GD2C2015]
 GO
 
 
+--SCHEMA
+
 CREATE SCHEMA [BIEN_MIGRADO_RAFA]
 GO
 
+--TABLES
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
     id                        int               IDENTITY(1,1),
@@ -207,7 +218,100 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Viaje(
     CONSTRAINT PK5 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
+--END TABLES
+ 
+--MIGRATION
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+ 
+DECLARE crs CURSOR FOR SELECT TOP 15 * FROM gd_esquema.Maestra
+	
+DECLARE @Cli_Nombre nvarchar(255);
+DECLARE @Cli_Apellido nvarchar(255);
+DECLARE @Cli_Dni numeric(18,0);
+DECLARE @Cli_Dir nvarchar(255);
+DECLARE @Cli_Telefono numeric(18,0);
+DECLARE @Cli_Mail nvarchar(255);
+DECLARE @Cli_Fecha_Nac datetime;
+DECLARE @Pasaje_Codigo numeric(18,0);
+DECLARE @Pasaje_Precio numeric(18,2);
+DECLARE @Pasaje_FechaCompra datetime;
+DECLARE @Butaca_Nro numeric(18,0);
+DECLARE @Butaca_Tipo nvarchar(255);
+DECLARE @Butaca_Piso numeric(18,0);
+DECLARE @Paquete_Codigo numeric(18,0);
+DECLARE @Paquete_Precio numeric(18,2);
+DECLARE @Paquete_KG numeric(18,0);
+DECLARE @Paquete_FechaCompra datetime;
+DECLARE @FechaSalida datetime;
+DECLARE @Fecha_LLegada_Estimada datetime;
+DECLARE @FechaLLegada datetime;
+DECLARE @Ruta_Codigo numeric(18,0);
+DECLARE @Ruta_Precio_BaseKG numeric(18,2);
+DECLARE @Ruta_Precio_BasePasaje numeric(18,2);
+DECLARE @Ruta_Ciudad_Origen nvarchar(255);
+DECLARE @Ruta_Ciudad_Destino nvarchar(255);
+DECLARE @Aeronave_Matricula nvarchar(255);
+DECLARE @Aeronave_Modelo nvarchar(255);
+DECLARE @Aeronave_KG_Disponibles numeric(18,0);
+DECLARE @Aeronave_Fabricante nvarchar(255);
+DECLARE @Tipo_Servicio nvarchar(255)
 
+OPEN crs;
+	
+FETCH NEXT FROM crs INTO 
+
+@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac, 
+@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra,
+@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso,
+@Paquete_Codigo, @Paquete_Precio, @Paquete_KG, @Paquete_FechaCompra, 
+@FechaSalida, @Fecha_LLegada_Estimada, @FechaLLegada,
+@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ruta_Ciudad_Origen, @Ruta_Ciudad_Destino,
+@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante, 
+@Tipo_Servicio;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+
+	PRINT @Cli_Nombre + ' ' + @Cli_Apellido + ', ' + @Cli_Dir
+
+	FETCH NEXT FROM crs INTO
+	
+	@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac, 
+	@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra,
+	@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso,
+	@Paquete_Codigo, @Paquete_Precio, @Paquete_KG, @Paquete_FechaCompra, 
+	@FechaSalida, @Fecha_LLegada_Estimada, @FechaLLegada,
+	@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ruta_Ciudad_Origen, @Ruta_Ciudad_Destino,
+	@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante, 
+	@Tipo_Servicio;
+	
+END
+
+CLOSE crs;
+DEALLOCATE crs;
+
+GO
+
+ 
+ --END MIGRATION
+
+
+ --FOREIGN KEYS
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave ADD CONSTRAINT RefAeronave1 
     FOREIGN KEY (aeronave_id)
@@ -327,3 +431,5 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Viaje ADD CONSTRAINT RefAeronave4
     FOREIGN KEY (aeronave_id)
     REFERENCES BIEN_MIGRADO_RAFA.Aeronave(id)
 GO
+
+ --END FOREIGN KEYS
