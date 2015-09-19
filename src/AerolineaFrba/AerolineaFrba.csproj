@@ -69,6 +69,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
+    <Compile Include="Interfaces\IMappedModel.cs" />
     <Compile Include="Models\Aeronave.cs" />
     <Compile Include="Models\BajaAeronave.cs" />
     <Compile Include="Models\Butaca.cs" />
@@ -184,7 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base Classes\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

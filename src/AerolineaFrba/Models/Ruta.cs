@@ -18,6 +18,7 @@ namespace AerolineaFrba.Models {
         public int CiudadDestinoId { get; set; }
         public Ciudad CiudadDestino { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Ruta";
 
     }
 }

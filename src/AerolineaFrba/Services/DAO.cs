@@ -13,16 +13,16 @@ namespace AerolineaFrba.Services {
 
     public static class DAO {
 
-        static private SqlConnection _sqlCon;
-        static private string _direccion;
-        static private string _database;
-        static private string _username;
-        static private string _password;
-        static private string _strCon;
+        private static SqlConnection _sqlCon;
+        private static string _direccion;
+        private static string _database;
+        private static string _username;
+        private static string _password;
+        private static string _strCon;
         
         static public Exception exception;
 
-        static public void connect() {
+        public static void connect() {
             _direccion = DBConfig.direccion;
             _database = DBConfig.database;
             _username = DBConfig.username;
@@ -32,7 +32,7 @@ namespace AerolineaFrba.Services {
             _sqlCon = new SqlConnection(_strCon);
         }
 
-        static public void connect(string direccion, string database, string username, string password){
+        public static void connect(string direccion, string database, string username, string password) {
             _direccion = direccion;
             _database  = database;
             _username  = username;
@@ -42,10 +42,17 @@ namespace AerolineaFrba.Services {
             _sqlCon = new SqlConnection(_strCon);
         }
 
-        static public DataTable select(string tableName) {
+        public static DataTable select<T>() {
+
+            String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
+
+            if (tablename == null) throw new Exception("Type " + typeof(T) + "has no static field named TableName.");
+
+            if (_sqlCon == null) throw new Exception("Must call connect() before calling any DAO's method.");
 
             _sqlCon.Open();
-            string query = "SELECT * FROM "+ tableName;
+
+            string query = "SELECT * FROM " + tablename;
             SqlCommand command = new SqlCommand(query, _sqlCon);
 
             DataTable datatable = new DataTable();
@@ -57,19 +64,7 @@ namespace AerolineaFrba.Services {
             return datatable;
         }
 
-        static public List<T> select<T>(string tableName) {
-
-            DataTable dt = select(tableName);
-
-            List<T> list = new List<T>();
-
-            //foreach (DataRow dr in dt.Rows)
-            //    list.Add(new T().setData(dr));
-
-            return list;
-        }
-
-        static public int save<T>(T entity, string TableName) {
+        public static int save<T>(T entity, string TableName) {
             
             _sqlCon.Open();
             string query = "INSERT INTO "+TableName+" (";
@@ -102,9 +97,22 @@ namespace AerolineaFrba.Services {
         }
 
 
-        static private string makeStringConnection(string direccion, string database, string username, string password){
+        private static string makeStringConnection(string direccion, string database, string username, string password){
              return "Data Source=" + direccion + ";Initial Catalog=" +
                      database + ";User ID=" + username + ";Password=" + password + ";";
+        }
+
+
+        //TODO borrar esto
+        public static List<TSalida> map<TEntrada, TSalida>(Func<TEntrada, TSalida> function, List<TEntrada> list) {
+
+            List<TSalida> mappedList = new List<TSalida>();
+
+            foreach (TEntrada item in list)
+                mappedList.Add(function(item));
+
+            return mappedList;
+
         }
 
     }

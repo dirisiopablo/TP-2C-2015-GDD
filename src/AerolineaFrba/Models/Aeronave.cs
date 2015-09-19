@@ -9,7 +9,7 @@ using AerolineaFrba.Config;
 
 namespace AerolineaFrba.Models {
 
-    class Aeronave {
+    class Aeronave : IMappedModel {
 
         public int Id { get; set; }
         public int Numero { get; set; }
@@ -18,7 +18,7 @@ namespace AerolineaFrba.Models {
         public string Modelo { get; set; }
         public string Fabricante { get; set; }
 
-        public static string TableName = DBConfig.schema + ".Aeronave";
+        public static string TableName = "BIEN_MIGRADO_RAFA.Aeronave";
 
     }
 

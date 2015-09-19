@@ -16,5 +16,6 @@ namespace AerolineaFrba.Models {
         public DateTime FechaBaja { get; set; }
         public DateTime FechaReinicio { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Baja_Aeronave";
     }
 }

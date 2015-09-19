@@ -21,6 +21,7 @@ namespace AerolineaFrba.Models {
         public int[] CancelacionesIds { get; set; }
         List<Cancelacion> Cancelaciones { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Pasaje";
 
     }
 }

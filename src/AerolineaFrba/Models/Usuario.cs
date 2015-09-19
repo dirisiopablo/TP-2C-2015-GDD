@@ -14,5 +14,6 @@ namespace AerolineaFrba.Models {
         public int RolId { get; set; }
         public Rol Rol { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Usuario";
     }
 }

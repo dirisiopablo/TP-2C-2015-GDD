@@ -17,5 +17,7 @@ namespace AerolineaFrba.Models {
         public int CatalogoId { get; set; }
         public Catalogo Catalogo { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Canje";
+
     }
 }

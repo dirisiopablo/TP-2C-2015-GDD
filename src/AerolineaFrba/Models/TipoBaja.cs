@@ -10,5 +10,6 @@ namespace AerolineaFrba.Models {
         public int Id { get; set; }
         string Descripcion { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Tipo_Baja";
     }
 }

@@ -15,7 +15,6 @@ namespace AerolineaFrba.Abm_Rol{
     public sealed partial class ABMRol : Form{
 
         private static ABMRol _instance = null;
-        private string tableName = "test.Rol";
 
         private ABMRol() {
             this.InitializeComponent();
@@ -32,8 +31,7 @@ namespace AerolineaFrba.Abm_Rol{
         }
 
         private void Nuevo_Click(object sender, EventArgs e) {
-            DAO.connect();
-            DAO.select(tableName);
+
         }
 
         private void Modificar_Click(object sender, EventArgs e) {

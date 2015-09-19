@@ -18,5 +18,6 @@ namespace AerolineaFrba.Models {
         public int AeronaveId { get; set; }
         public Aeronave Aeronave { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Viaje";
     }
 }

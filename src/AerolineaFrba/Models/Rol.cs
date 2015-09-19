@@ -13,5 +13,6 @@ namespace AerolineaFrba.Models {
         public int[] FuncionalidadesIds { get; set; }
         public List<Funcionalidad> Funcionalidades { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Rol";
     }
 }

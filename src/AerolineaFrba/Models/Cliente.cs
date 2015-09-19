@@ -16,5 +16,7 @@ namespace AerolineaFrba.Models {
         public string Direccion { get; set; }
         public string Email { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Cliente";
+
     }
 }

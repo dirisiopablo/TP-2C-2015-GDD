@@ -12,5 +12,7 @@ namespace AerolineaFrba.Models {
         public int Costo { get; set; }
         public int Stock { get; set; }
 
+        public static string TableName = "BIEN_MIGRADO_RAFA.Catalogo";
+
     }
 }
