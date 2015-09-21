@@ -1,6 +1,8 @@
 USE [GD2C2015]
 GO
 
+SET NOCOUNT	ON
+GO
 
 --SCHEMA
 
@@ -19,21 +21,20 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
     id                        int               IDENTITY(1,1),
-    numero                    numeric(18, 0)    NULL,
     matricula                 nvarchar(255)     NULL,
     modelo                    nvarchar(255)     NULL,
     kilogramos_disponibles    numeric(18, 0)    NULL,
     fabricante                nvarchar(255)     NULL,
-    CONSTRAINT PK7 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave(
+	id				  int		  IDENTITY(1,1),
     fecha_baja        datetime    NULL,
     fecha_reinicio    datetime    NULL,
     aeronave_id       int         NULL,
-    tipo_baja_id      int         NULL
+    tipo_baja_id      int         NULL,
 )
 GO
 
@@ -44,7 +45,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Butaca(
     tipo           nvarchar(255)     NULL,
     piso           numeric(18, 0)    NULL,
     aeronave_id    int               NULL,
-    CONSTRAINT PK3 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -54,7 +54,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cancelacion(
     fecha            datetime          NULL,
     motivo           nvarchar(255)     NULL,
     numero_compra    numeric(18, 0)    NULL,
-    CONSTRAINT PK16 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -63,7 +62,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cancelacion_Paquete(
     id                int    NOT NULL,
     cancelacion_id    int    NULL,
     paquete_id        int    NULL,
-    CONSTRAINT PK18 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -72,7 +70,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cancelacion_Pasaje(
     id                int    IDENTITY(1,1),
     cancelacion_id    int    NULL,
     pasaje_id         int    NULL,
-    CONSTRAINT PK17 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -83,7 +80,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Canje(
     fecha          datetime          NULL,
     cliente_id     int               NULL,
     catalogo_id    int               NULL,
-    CONSTRAINT PK20 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -93,7 +89,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Catalogo(
     descripcion    nvarchar(255)     NULL,
     costo          numeric(18, 0)    NULL,
     stock          numeric(18, 0)    NULL,
-    CONSTRAINT PK19 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -101,7 +96,6 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-    CONSTRAINT PK13 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -116,7 +110,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cliente(
     telefono            numeric(18, 0)    NULL,
     mail                nvarchar(255)     NULL,
     fecha_nacimiento    datetime          NULL,
-    CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -124,7 +117,6 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Funcionalidad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-    CONSTRAINT PK10 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -133,7 +125,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol(
     id                  int    IDENTITY(1,1),
     funcionalidad_id    int    NULL,
     rol_id              int    NULL,
-    CONSTRAINT PK11 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -146,7 +137,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Paquete(
     fecha_compra    datetime          NULL,
     viaje_id        int               NULL,
     cliente_id      int               NULL,
-    CONSTRAINT PK4 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -158,7 +148,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Pasaje(
     fecha_compra    datetime          NULL,
     butaca_id       int               NULL,
     cliente_id      int               NULL,
-    CONSTRAINT PK2 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -166,7 +155,6 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Rol(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-    CONSTRAINT PK9 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -178,7 +166,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
-    CONSTRAINT PK6 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -186,7 +173,6 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Tipo_Baja(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-    CONSTRAINT PK14 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -200,10 +186,9 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Usuario(
     id          int              IDENTITY(1,1),
-    username    nvarchar(255)    NULL,
+    username    nvarchar(255)    NULL	UNIQUE,
     password    nvarchar(255)    NULL,
     rol_id      int              NULL,
-    CONSTRAINT PK12 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
 
@@ -215,10 +200,13 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Viaje(
     fecha_llegada_estimada    datetime    NULL,
     ruta_id                   int         NULL,
     aeronave_id               int         NULL,
-    CONSTRAINT PK5 PRIMARY KEY NONCLUSTERED (id)
 )
 GO
---END TABLES
+
+--End Tables
+
+
+
  
 --MIGRATION
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -289,22 +277,32 @@ FETCH NEXT FROM crs INTO
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
-	--tablas sin FK
 
+	SELECT @Cliente_Id = id FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni
+	SELECT @Aeronave_Id = id FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula
+	SELECT @Ciudad_Origen_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen
+	SELECT @Ciudad_Destino_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino	
+	SELECT @Butaca_Id = id FROM BIEN_MIGRADO_RAFA.Butaca b WHERE b.aeronave_id = @Aeronave_Id AND b.numero = @Butaca_Nro AND @Butaca_Piso = @Butaca_Piso AND b.tipo = @Butaca_Tipo
+	SELECT @Ruta_Id = id FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo
+	SELECT @Viaje_Id = id FROM BIEN_MIGRADO_RAFA.Viaje v WHERE v.aeronave_id = @Aeronave_Id AND v.ruta_id = @Ruta_Id
+
+	--tablas sin FK
 	--Cliente
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni )))
+	IF (@Cliente_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Cliente (nombre, apellido, dni, direccion, telefono, mail, fecha_nacimiento)
 		VALUES (@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac)
+		SELECT @Cliente_Id = id FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni
 	END
 	
 	--Aeronave
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula )))
+	IF (@Aeronave_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (matricula, modelo, kilogramos_disponibles, fabricante)
 		VALUES (@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante)
+		SELECT @Aeronave_Id = id FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula
 	END
-
+	
 	--Tipo_Servicio
 	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Tipo_Servicio t WHERE t.descripcion = @Tipo_Servicio )))
 	BEGIN
@@ -313,79 +311,72 @@ BEGIN
 	END 
 
 	--Ciudad (Origen)
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen )))
+	IF (@Ciudad_Origen_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Ciudad(descripcion)
 		VALUES (@Ruta_Ciudad_Origen)
+		SELECT @Ciudad_Origen_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen
 	END
 	
 	--Ciudad (Destino)
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino )))
+	IF (@Ciudad_Destino_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Ciudad(descripcion)
 		VALUES (@Ruta_Ciudad_Destino)
-	END  
+		SELECT @Ciudad_Destino_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino
+	END
+	
 
 	--tablas con FK
-
 	--Butaca
-	SELECT @Aeronave_Id = id  FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula 
-
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Butaca b 
-					WHERE b.numero = @Butaca_Nro 
-					AND b.piso = @Butaca_Piso 
-					AND b.tipo = @Butaca_Tipo 
-					AND b.aeronave_id = (@Aeronave_Id) 	
-	)))
+	IF (@Butaca_Tipo != '0')
 	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Butaca(numero, tipo, piso, aeronave_id)
-		VALUES (@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso, @Aeronave_Id)
+		IF (@Butaca_Id IS NULL)
+		BEGIN
+			INSERT INTO BIEN_MIGRADO_RAFA.Butaca(numero, tipo, piso, aeronave_id)
+			VALUES (@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso, @Aeronave_Id)
+			SELECT @Butaca_Id = id FROM BIEN_MIGRADO_RAFA.Butaca b WHERE b.aeronave_id = @Aeronave_Id AND b.numero = @Butaca_Nro AND @Butaca_Piso = @Butaca_Piso AND b.tipo = @Butaca_Tipo
+		END
 	END
-
+		
 	--Ruta
-	SELECT @Ciudad_Destino_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino
-	SELECT @Ciudad_Origen_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen
-
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo )))
+	IF (@Ruta_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
 		VALUES (@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ciudad_Destino_Id, @Ciudad_Origen_Id)
+		SELECT @Ruta_Id = id FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo
 	END 
-
+	
 	--Viaje
-	--(Aeronave_ID ya esta cargada)
-	SELECT @Ruta_Id = id  FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo
-
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Viaje v 
-					WHERE v.aeronave_id = @Aeronave_Id
-					AND v.ruta_id = @Ruta_Id
-	)))
+	IF (@Viaje_Id IS NULL)
 	BEGIN
 		INSERT INTO BIEN_MIGRADO_RAFA.Viaje(fecha_llegada, fecha_llegada_estimada, fecha_salida, aeronave_id, ruta_id)
 		VALUES (@FechaLLegada, @Fecha_LLegada_Estimada, @FechaSalida, @Aeronave_Id, @Ruta_Id)
+		SELECT @Viaje_Id = id FROM BIEN_MIGRADO_RAFA.Viaje v WHERE v.aeronave_id = @Aeronave_Id AND v.ruta_id = @Ruta_Id
 	END
-
+	
 	--Paquete
-	SELECT @Cliente_Id = id FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni
-	SELECT @Viaje_Id = id  FROM BIEN_MIGRADO_RAFA.Viaje v WHERE v.aeronave_id = @Aeronave_Id AND v.ruta_id = @Ruta_Id
-
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Paquete p 
-					WHERE p.cliente_id = @Cliente_Id 
-					AND p.viaje_id = @Viaje_Id 
-					AND p.codigo = @Paquete_Codigo --capaz no hace falta viaje y cliente
-	)))
+	IF (@Paquete_Codigo != '0')
 	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
-		VALUES (@Paquete_Codigo, @Paquete_FechaCompra, @Paquete_KG, @Paquete_Precio, @Cliente_Id, @Viaje_Id)
+		IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Paquete p 
+						WHERE p.cliente_id = @Cliente_Id 
+						AND p.viaje_id = @Viaje_Id 
+						AND p.codigo = @Paquete_Codigo --capaz no hace falta viaje y cliente
+		)))
+		BEGIN
+			INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
+			VALUES (@Paquete_Codigo, @Paquete_FechaCompra, @Paquete_KG, @Paquete_Precio, @Cliente_Id, @Viaje_Id)
+		END
 	END
 	
 	--Pasaje (Sin NOT EXISTS, no hay duplicados)
-	--(Cliente_Id ya esta cargada)
-	SELECT @Butaca_Id = id FROM BIEN_MIGRADO_RAFA.Butaca b WHERE b.aeronave_id = @Aeronave_Id AND b.numero = @Butaca_Nro AND @Butaca_Piso = @Butaca_Piso AND b.tipo = @Butaca_Tipo
+	IF (@Pasaje_Codigo != '0')
 	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id) 
-		VALUES (@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra, @Cliente_Id, @Butaca_Id)
-	END   
+		BEGIN
+			INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id) 
+			VALUES (@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra, @Cliente_Id, @Butaca_Id)
+		END   
+	END
 
 	FETCH NEXT FROM crs INTO
 	
@@ -397,7 +388,7 @@ BEGIN
 	@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ruta_Ciudad_Origen, @Ruta_Ciudad_Destino,
 	@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante, 
 	@Tipo_Servicio;
-	
+
 END
 
 CLOSE crs;
@@ -408,6 +399,115 @@ GO
  
  --END MIGRATION
 
+ --PKS & INDEXES 
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+ 
+ --PKS
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave
+ADD CONSTRAINT PK7 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave
+ADD CONSTRAINT PK666 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Butaca
+ADD CONSTRAINT PK3 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Cancelacion
+ADD CONSTRAINT PK16 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Cancelacion_Paquete
+ADD CONSTRAINT PK18 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Cancelacion_Pasaje
+ADD CONSTRAINT PK17 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Canje
+ADD CONSTRAINT PK20 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Catalogo
+ADD CONSTRAINT PK19 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Ciudad
+ADD CONSTRAINT PK13 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Cliente
+ADD CONSTRAINT PK1 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad
+ADD CONSTRAINT PK10 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol
+ADD CONSTRAINT PK11 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Paquete
+ADD CONSTRAINT PK4 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Pasaje
+ADD CONSTRAINT PK2 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Rol
+ADD CONSTRAINT PK9 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Ruta
+ADD CONSTRAINT PK6 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Tipo_Baja
+ADD CONSTRAINT PK14 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Tipo_Servicio
+ADD CONSTRAINT PK667 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Usuario
+ADD CONSTRAINT PK12 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Viaje
+ADD CONSTRAINT PK5 PRIMARY KEY CLUSTERED (id)
+GO
+
+
+--INDEXES
+
+CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065350] ON [BIEN_MIGRADO_RAFA].[Ciudad]
+(
+	[descripcion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065145] ON [BIEN_MIGRADO_RAFA].[Tipo_Servicio]
+(
+	[descripcion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+ 
 
  --FOREIGN KEYS
 ---------------------------------------------------------------------------------------------------------------------------------------

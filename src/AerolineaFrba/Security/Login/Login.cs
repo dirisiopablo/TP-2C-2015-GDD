@@ -58,7 +58,7 @@ namespace AerolineaFrba.Login {
 
             }else{
 
-                MessageBox.Show("no qq", "no qq", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid User or Password", "Login Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.None;
 
             }

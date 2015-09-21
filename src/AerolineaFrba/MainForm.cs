@@ -24,9 +24,6 @@ namespace AerolineaFrba {
 
         private void MainForm_Load(object sender, EventArgs e) {
 
-            DAO.connect();
-            DataTable dt = new DataTable();
-            dt = DAO.select<Aeronave>();
             this.showLoginForm();
           
         }
@@ -56,7 +53,6 @@ namespace AerolineaFrba {
         private void onLogin(User loggedUser){
 
             //segun rol, ocultar/bloquear botones
-            MessageBox.Show("Welcome to qqnessland " + loggedUser.role +" "+ loggedUser.username, "Hi", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             
             if (loggedUser.role == "admin")
                 this.adminConfig();

@@ -40,6 +40,25 @@ namespace AerolineaFrba.Abm_Rol{
 
         private void Eliminar_Click(object sender, EventArgs e) {
 
+            foreach (DataGridViewRow item in this.rolDatagrid.SelectedRows){
+
+                int id = (int)item.Cells[0].Value;
+
+                rolDatagrid.Rows.RemoveAt(item.Index);
+
+               // int rowID = int.Parse(rolDatagrid[0, item.Index].Value.ToString());
+            }
+
+            //string sql = "DELETE FROM Table1 WHERE RowID = @RowID";
+
+            rolDatagrid.Refresh();
+
+        }
+
+        private void ABMRol_Load(object sender, EventArgs e) {
+            // TODO: This line of code loads data into the 'gD2C2015DataSet.Rol' table. You can move, or remove it, as needed.
+            this.rolTableAdapter.Fill(this.gD2C2015DataSet.Rol);
+
         }
 
         //////////////////////////////////////////
