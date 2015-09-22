@@ -218,182 +218,73 @@ GO
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
  
---cursor
-DECLARE crs CURSOR FOR SELECT * FROM gd_esquema.Maestra
 
---Table variables	
-DECLARE @Cli_Nombre nvarchar(255);
-DECLARE @Cli_Apellido nvarchar(255);
-DECLARE @Cli_Dni numeric(18,0);
-DECLARE @Cli_Dir nvarchar(255);
-DECLARE @Cli_Telefono numeric(18,0);
-DECLARE @Cli_Mail nvarchar(255);
-DECLARE @Cli_Fecha_Nac datetime;
-DECLARE @Pasaje_Codigo numeric(18,0);
-DECLARE @Pasaje_Precio numeric(18,2);
-DECLARE @Pasaje_FechaCompra datetime;
-DECLARE @Butaca_Nro numeric(18,0);
-DECLARE @Butaca_Tipo nvarchar(255);
-DECLARE @Butaca_Piso numeric(18,0);
-DECLARE @Paquete_Codigo numeric(18,0);
-DECLARE @Paquete_Precio numeric(18,2);
-DECLARE @Paquete_KG numeric(18,0);
-DECLARE @Paquete_FechaCompra datetime;
-DECLARE @FechaSalida datetime;
-DECLARE @Fecha_LLegada_Estimada datetime;
-DECLARE @FechaLLegada datetime;
-DECLARE @Ruta_Codigo numeric(18,0);
-DECLARE @Ruta_Precio_BaseKG numeric(18,2);
-DECLARE @Ruta_Precio_BasePasaje numeric(18,2);
-DECLARE @Ruta_Ciudad_Origen nvarchar(255);
-DECLARE @Ruta_Ciudad_Destino nvarchar(255);
-DECLARE @Aeronave_Matricula nvarchar(255);
-DECLARE @Aeronave_Modelo nvarchar(255);
-DECLARE @Aeronave_KG_Disponibles numeric(18,0);
-DECLARE @Aeronave_Fabricante nvarchar(255);
-DECLARE @Tipo_Servicio nvarchar(255)
+--tablas sin FK
+--Cliente
+INSERT INTO BIEN_MIGRADO_RAFA.Cliente (apellido, nombre, direccion, dni, fecha_nacimiento, mail, telefono)
+SELECT DISTINCT Cli_Apellido, Cli_Nombre, Cli_Dir, Cli_Dni, Cli_Fecha_Nac, Cli_Mail, Cli_Telefono FROM gd_esquema.Maestra
+GO
 
---Aux Variables
-DECLARE @Butaca_Id int;
-DECLARE @Cliente_Id int;
-DECLARE @Ciudad_Destino_Id int;
-DECLARE @Ciudad_Origen_Id int;
-DECLARE @Aeronave_Id int;
-DECLARE @Ruta_Id int;
-DECLARE @Viaje_Id int;
+--Aeronave
+INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (fabricante, kilogramos_disponibles, matricula, modelo)
+SELECT DISTINCT Aeronave_Fabricante, Aeronave_KG_Disponibles, Aeronave_Matricula, Aeronave_Modelo FROM gd_esquema.Maestra
+GO
 
-OPEN crs;
-	
-FETCH NEXT FROM crs INTO 
+--Tipo servicio
+INSERT INTO BIEN_MIGRADO_RAFA.Tipo_Servicio (descripcion)
+SELECT DISTINCT Tipo_Servicio FROM gd_esquema.Maestra
+GO
 
-@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac, 
-@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra,
-@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso,
-@Paquete_Codigo, @Paquete_Precio, @Paquete_KG, @Paquete_FechaCompra, 
-@FechaSalida, @Fecha_LLegada_Estimada, @FechaLLegada,
-@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ruta_Ciudad_Origen, @Ruta_Ciudad_Destino,
-@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante, 
-@Tipo_Servicio;
+--Ciudad
+INSERT INTO BIEN_MIGRADO_RAFA.Ciudad (descripcion)
+SELECT DISTINCT Ruta_Ciudad_Destino AS Ciudad FROM gd_esquema.Maestra 
+UNION 
+SELECT DISTINCT Ruta_Ciudad_Origen FROM gd_esquema.Maestra
+GO
 
-WHILE @@FETCH_STATUS = 0
-BEGIN
 
-	SELECT @Cliente_Id = id FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni
-	SELECT @Aeronave_Id = id FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula
-	SELECT @Ciudad_Origen_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen
-	SELECT @Ciudad_Destino_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino	
-	SELECT @Butaca_Id = id FROM BIEN_MIGRADO_RAFA.Butaca b WHERE b.aeronave_id = @Aeronave_Id AND b.numero = @Butaca_Nro AND @Butaca_Piso = @Butaca_Piso AND b.tipo = @Butaca_Tipo
-	SELECT @Ruta_Id = id FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo
-	SELECT @Viaje_Id = id FROM BIEN_MIGRADO_RAFA.Viaje v WHERE v.aeronave_id = @Aeronave_Id AND v.ruta_id = @Ruta_Id
+--Butaca
+INSERT INTO BIEN_MIGRADO_RAFA.Butaca (numero, piso, tipo, aeronave_id)
+SELECT DISTINCT m.Butaca_Nro, m.Butaca_Piso, m.Butaca_Tipo, a.id FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON m.Aeronave_Matricula = a.matricula
+WHERE m.Butaca_Nro != '0'
+GO
 
-	--tablas sin FK
-	--Cliente
-	IF (@Cliente_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Cliente (nombre, apellido, dni, direccion, telefono, mail, fecha_nacimiento)
-		VALUES (@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac)
-		SELECT @Cliente_Id = id FROM BIEN_MIGRADO_RAFA.Cliente c WHERE c.dni = @Cli_Dni
-	END
-	
-	--Aeronave
-	IF (@Aeronave_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (matricula, modelo, kilogramos_disponibles, fabricante)
-		VALUES (@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante)
-		SELECT @Aeronave_Id = id FROM BIEN_MIGRADO_RAFA.Aeronave a WHERE a.matricula = @Aeronave_Matricula
-	END
-	
-	--Tipo_Servicio
-	IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Tipo_Servicio t WHERE t.descripcion = @Tipo_Servicio )))
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Tipo_Servicio (descripcion)
-		VALUES (@Tipo_Servicio)
-	END 
 
-	--Ciudad (Origen)
-	IF (@Ciudad_Origen_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Ciudad(descripcion)
-		VALUES (@Ruta_Ciudad_Origen)
-		SELECT @Ciudad_Origen_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Origen
-	END
-	
-	--Ciudad (Destino)
-	IF (@Ciudad_Destino_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Ciudad(descripcion)
-		VALUES (@Ruta_Ciudad_Destino)
-		SELECT @Ciudad_Destino_Id = id FROM BIEN_MIGRADO_RAFA.Ciudad c WHERE c.descripcion = @Ruta_Ciudad_Destino
-	END
-	
+--Ruta
+INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
+SELECT DISTINCT m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, c.id, c2.id FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = m.Ruta_Ciudad_Destino
+JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = m.Ruta_Ciudad_Origen 
+GO
 
-	--tablas con FK
-	--Butaca
-	IF (@Butaca_Tipo != '0')
-	BEGIN
-		IF (@Butaca_Id IS NULL)
-		BEGIN
-			INSERT INTO BIEN_MIGRADO_RAFA.Butaca(numero, tipo, piso, aeronave_id)
-			VALUES (@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso, @Aeronave_Id)
-			SELECT @Butaca_Id = id FROM BIEN_MIGRADO_RAFA.Butaca b WHERE b.aeronave_id = @Aeronave_Id AND b.numero = @Butaca_Nro AND @Butaca_Piso = @Butaca_Piso AND b.tipo = @Butaca_Tipo
-		END
-	END
-		
-	--Ruta
-	IF (@Ruta_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
-		VALUES (@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ciudad_Destino_Id, @Ciudad_Origen_Id)
-		SELECT @Ruta_Id = id FROM BIEN_MIGRADO_RAFA.Ruta r WHERE r.codigo = @Ruta_Codigo
-	END 
-	
-	--Viaje
-	IF (@Viaje_Id IS NULL)
-	BEGIN
-		INSERT INTO BIEN_MIGRADO_RAFA.Viaje(fecha_llegada, fecha_llegada_estimada, fecha_salida, aeronave_id, ruta_id)
-		VALUES (@FechaLLegada, @Fecha_LLegada_Estimada, @FechaSalida, @Aeronave_Id, @Ruta_Id)
-		SELECT @Viaje_Id = id FROM BIEN_MIGRADO_RAFA.Viaje v WHERE v.aeronave_id = @Aeronave_Id AND v.ruta_id = @Ruta_Id
-	END
-	
-	--Paquete
-	IF (@Paquete_Codigo != '0')
-	BEGIN
-		IF (NOT(EXISTS (SELECT 1 FROM BIEN_MIGRADO_RAFA.Paquete p 
-						WHERE p.cliente_id = @Cliente_Id 
-						AND p.viaje_id = @Viaje_Id 
-						AND p.codigo = @Paquete_Codigo --capaz no hace falta viaje y cliente
-		)))
-		BEGIN
-			INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
-			VALUES (@Paquete_Codigo, @Paquete_FechaCompra, @Paquete_KG, @Paquete_Precio, @Cliente_Id, @Viaje_Id)
-		END
-	END
-	
-	--Pasaje (Sin NOT EXISTS, no hay duplicados)
-	IF (@Pasaje_Codigo != '0')
-	BEGIN
-		BEGIN
-			INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id) 
-			VALUES (@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra, @Cliente_Id, @Butaca_Id)
-		END   
-	END
 
-	FETCH NEXT FROM crs INTO
-	
-	@Cli_Nombre, @Cli_Apellido, @Cli_Dni, @Cli_Dir, @Cli_Telefono, @Cli_Mail, @Cli_Fecha_Nac, 
-	@Pasaje_Codigo, @Pasaje_Precio, @Pasaje_FechaCompra,
-	@Butaca_Nro, @Butaca_Tipo, @Butaca_Piso,
-	@Paquete_Codigo, @Paquete_Precio, @Paquete_KG, @Paquete_FechaCompra, 
-	@FechaSalida, @Fecha_LLegada_Estimada, @FechaLLegada,
-	@Ruta_Codigo, @Ruta_Precio_BaseKG, @Ruta_Precio_BasePasaje, @Ruta_Ciudad_Origen, @Ruta_Ciudad_Destino,
-	@Aeronave_Matricula, @Aeronave_Modelo, @Aeronave_KG_Disponibles, @Aeronave_Fabricante, 
-	@Tipo_Servicio;
+--Viaje
+INSERT INTO BIEN_MIGRADO_RAFA.Viaje(fecha_llegada, fecha_llegada_estimada, fecha_salida, aeronave_id, ruta_id)
+SELECT DISTINCT m.FechaLLegada, m.Fecha_LLegada_Estimada, m.FechaSalida, a.id, r.id FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.Ruta_Codigo
+GO
 
-END
 
-CLOSE crs;
-DEALLOCATE crs;
+--Paquete
+INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
+SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, c.id, v.id FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.Ruta_Codigo
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni
+JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id AND v.ruta_id = r.id
+WHERE m.Paquete_Codigo != 0
+GO
 
+
+--Pasaje
+INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id)
+SELECT DISTINCT m.Pasaje_Codigo, m.Pasaje_Precio, m.Pasaje_FechaCompra, c.id, b.id FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni
+JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id AND b.numero = m.Butaca_Nro
+WHERE m.Pasaje_Codigo != 0
 GO
 
  
