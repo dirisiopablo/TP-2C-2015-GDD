@@ -62,6 +62,12 @@
     <Compile Include="ABM\Abm Rol\ABMRol.Designer.cs">
       <DependentUpon>ABMRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM\Abm Rol\RolDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Rol\RolDialog.Designer.cs">
+      <DependentUpon>RolDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM\Abm Ruta\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     <Compile Include="Services\DAO.cs" />
     <EmbeddedResource Include="ABM\Abm Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Rol\RolDialog.resx">
+      <DependentUpon>RolDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
