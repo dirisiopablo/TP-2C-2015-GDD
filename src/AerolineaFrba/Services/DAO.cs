@@ -123,7 +123,7 @@ namespace AerolineaFrba.Services {
                 set += prop.Name + "=";
 
                 if (String.Equals(prop.PropertyType.Name, "Boolean")) {
-                    if (prop.GetValue(entity).Equals("True")) {
+                    if ((bool)prop.GetValue(entity)) {
                         set += 1 + ", ";
                     }
                     else{
@@ -168,15 +168,27 @@ namespace AerolineaFrba.Services {
             var props = entity.GetType().GetProperties();
 
             foreach (var prop in props) {
+
+                if (prop.GetValue(entity) == null || prop.GetValue(entity).Equals("")) continue;
+                if (String.Equals(prop.Name, "Id")) continue; //not updating Id
+
                 query += prop.Name + ",";
 
-                if (String.Equals(prop.PropertyType.Name, "String"))
-                    queryValues += "'" + prop.GetValue(entity) + "'" + ",";
+                if (String.Equals(prop.PropertyType.Name, "Boolean")) {
+                    if ((bool)prop.GetValue(entity)) {
+                        queryValues += 1 + ", ";
+                    }
+                    else {
+                        queryValues += 0 + ", ";
+                    }
+                }
+                else if (String.Equals(prop.PropertyType.Name, "String"))
+                    queryValues += "'" + prop.GetValue(entity) + "'" + ", ";
                 else
-                    queryValues += prop.GetValue(entity) + ",";
+                    queryValues += prop.GetValue(entity) + ", ";
             }
 
-            query = query.Substring(0, query.Length - 2);
+            query = query.Substring(0, query.Length - 1);
             queryValues = queryValues.Substring(0, queryValues.Length - 2);
 
             query += ") ";

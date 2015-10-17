@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using AerolineaFrba.Login;
 using AerolineaFrba.Abm_Rol;
+using AerolineaFrba.ABM.Abm_Ciudad;
 
 using AerolineaFrba.Services;
 using AerolineaFrba.Models;
@@ -74,6 +75,13 @@ namespace AerolineaFrba {
         private void generarViaje_Click(object sender, EventArgs e) {
 
 
+
+        }
+
+        private void ABMCiudad_Button_Click(object sender, EventArgs e) {
+
+            ABMCiudad ABMCiudadForm = ABMCiudad.getInstance();
+            var dr = ABMCiudadForm.ShowDialog();
 
         }
 

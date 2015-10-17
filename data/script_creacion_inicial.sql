@@ -19,13 +19,13 @@ GO
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
-    id                        int               IDENTITY(1,1),
-    matricula                 nvarchar(255)     NULL,
-    modelo                    nvarchar(255)     NULL,
-    kilogramos_disponibles    numeric(18, 0)    NULL,
-    fabricante                nvarchar(255)     NULL,
-)
+	CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
+		id                        int               IDENTITY(1,1),
+		matricula                 nvarchar(255)     NULL,
+		modelo                    nvarchar(255)     NULL,
+		kilogramos_disponibles    numeric(18, 0)    NULL,
+		fabricante                nvarchar(255)     NULL,
+	)
 GO
 
 
@@ -155,6 +155,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Rol(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
+	activo		   bit              1
 )
 GO
 
@@ -166,6 +167,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
+	activo		   		   bit               1
 )
 GO
 

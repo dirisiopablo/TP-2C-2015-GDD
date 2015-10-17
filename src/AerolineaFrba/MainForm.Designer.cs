@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.ABMRol_Button = new System.Windows.Forms.Button();
             this.generarViaje = new System.Windows.Forms.Button();
+            this.ABMCiudad_Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -45,11 +46,22 @@
             this.generarViaje.Text = "Generar Viaje";
             this.generarViaje.UseVisualStyleBackColor = true;
             // 
+            // ABMCiudad_Button
+            // 
+            this.ABMCiudad_Button.Location = new System.Drawing.Point(140, 28);
+            this.ABMCiudad_Button.Name = "ABMCiudad_Button";
+            this.ABMCiudad_Button.Size = new System.Drawing.Size(78, 51);
+            this.ABMCiudad_Button.TabIndex = 2;
+            this.ABMCiudad_Button.Text = "ABM Ciudad";
+            this.ABMCiudad_Button.UseVisualStyleBackColor = true;
+            this.ABMCiudad_Button.Click += new System.EventHandler(this.ABMCiudad_Button_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.ABMCiudad_Button);
             this.Controls.Add(this.generarViaje);
             this.Controls.Add(this.ABMRol_Button);
             this.Name = "MainForm";
@@ -63,6 +75,7 @@
 
         private System.Windows.Forms.Button ABMRol_Button;
         private System.Windows.Forms.Button generarViaje;
+        private System.Windows.Forms.Button ABMCiudad_Button;
 
     }
 }

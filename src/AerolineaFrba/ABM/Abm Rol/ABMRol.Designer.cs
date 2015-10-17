@@ -34,16 +34,16 @@
             this.Eliminar = new System.Windows.Forms.Button();
             this.Buscar = new System.Windows.Forms.Button();
             this.Limpiar = new System.Windows.Forms.Button();
-            this.rolDatagrid = new System.Windows.Forms.DataGridView();
-            this.gD2C2015DataSet1 = new AerolineaFrba.GD2C2015DataSet1();
+            this.rolDataGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.rolBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rolTableAdapter = new AerolineaFrba.GD2C2015DataSet1TableAdapters.RolTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.activoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.rolDatagrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).BeginInit();
+            this.dataSetRol = new AerolineaFrba.DataSetRol();
+            this.rolTableAdapter = new AerolineaFrba.DataSetRolTableAdapters.RolTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.rolDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetRol)).BeginInit();
             this.SuspendLayout();
             // 
             // Nuevo
@@ -78,7 +78,7 @@
             // 
             // Buscar
             // 
-            this.Buscar.Location = new System.Drawing.Point(273, 44);
+            this.Buscar.Location = new System.Drawing.Point(286, 29);
             this.Buscar.Name = "Buscar";
             this.Buscar.Size = new System.Drawing.Size(75, 23);
             this.Buscar.TabIndex = 4;
@@ -87,67 +87,73 @@
             // 
             // Limpiar
             // 
-            this.Limpiar.Location = new System.Drawing.Point(12, 44);
+            this.Limpiar.Location = new System.Drawing.Point(12, 29);
             this.Limpiar.Name = "Limpiar";
             this.Limpiar.Size = new System.Drawing.Size(75, 23);
             this.Limpiar.TabIndex = 5;
             this.Limpiar.Text = "Limpiar";
             this.Limpiar.UseVisualStyleBackColor = true;
-            this.Limpiar.Click += new System.EventHandler(this.button2_Click);
             // 
-            // rolDatagrid
+            // rolDataGrid
             // 
-            this.rolDatagrid.AutoGenerateColumns = false;
-            this.rolDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.rolDatagrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.descripcionDataGridViewTextBoxColumn,
-            this.activoDataGridViewCheckBoxColumn});
-            this.rolDatagrid.DataSource = this.rolBindingSource;
-            this.rolDatagrid.Location = new System.Drawing.Point(3, 94);
-            this.rolDatagrid.Name = "rolDatagrid";
-            this.rolDatagrid.Size = new System.Drawing.Size(345, 150);
-            this.rolDatagrid.TabIndex = 6;
+            this.rolDataGrid.AllowUserToAddRows = false;
+            this.rolDataGrid.AllowUserToDeleteRows = false;
+            this.rolDataGrid.AllowUserToResizeColumns = false;
+            this.rolDataGrid.AllowUserToResizeRows = false;
+            this.rolDataGrid.AutoGenerateColumns = false;
+            this.rolDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rolDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewCheckBoxColumn1});
+            this.rolDataGrid.DataSource = this.rolBindingSource;
+            this.rolDataGrid.Location = new System.Drawing.Point(12, 76);
+            this.rolDataGrid.Name = "rolDataGrid";
+            this.rolDataGrid.ReadOnly = true;
+            this.rolDataGrid.Size = new System.Drawing.Size(349, 191);
+            this.rolDataGrid.TabIndex = 6;
             // 
-            // gD2C2015DataSet1
+            // dataGridViewTextBoxColumn1
             // 
-            this.gD2C2015DataSet1.DataSetName = "GD2C2015DataSet1";
-            this.gD2C2015DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "descripcion";
+            this.dataGridViewTextBoxColumn2.HeaderText = "descripcion";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "activo";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "activo";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
             // 
             // rolBindingSource
             // 
             this.rolBindingSource.DataMember = "Rol";
-            this.rolBindingSource.DataSource = this.gD2C2015DataSet1;
+            this.rolBindingSource.DataSource = this.dataSetRol;
+            // 
+            // dataSetRol
+            // 
+            this.dataSetRol.DataSetName = "DataSetRol";
+            this.dataSetRol.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // rolTableAdapter
             // 
             this.rolTableAdapter.ClearBeforeFill = true;
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descripcionDataGridViewTextBoxColumn
-            // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
-            // 
-            // activoDataGridViewCheckBoxColumn
-            // 
-            this.activoDataGridViewCheckBoxColumn.DataPropertyName = "activo";
-            this.activoDataGridViewCheckBoxColumn.HeaderText = "activo";
-            this.activoDataGridViewCheckBoxColumn.Name = "activoDataGridViewCheckBoxColumn";
-            // 
             // ABMRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 337);
-            this.Controls.Add(this.rolDatagrid);
+            this.ClientSize = new System.Drawing.Size(465, 322);
+            this.Controls.Add(this.rolDataGrid);
             this.Controls.Add(this.Limpiar);
             this.Controls.Add(this.Buscar);
             this.Controls.Add(this.Eliminar);
@@ -156,9 +162,9 @@
             this.Name = "ABMRol";
             this.Text = "ABM Rol";
             this.Load += new System.EventHandler(this.ABMRol_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.rolDatagrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rolDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetRol)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -170,12 +176,13 @@
         private System.Windows.Forms.Button Eliminar;
         private System.Windows.Forms.Button Buscar;
         private System.Windows.Forms.Button Limpiar;
-        private System.Windows.Forms.DataGridView rolDatagrid;
-        private GD2C2015DataSet1 gD2C2015DataSet1;
+
+        private System.Windows.Forms.DataGridView rolDataGrid;
+        private DataSetRol dataSetRol;
         private System.Windows.Forms.BindingSource rolBindingSource;
-        private GD2C2015DataSet1TableAdapters.RolTableAdapter rolTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn activoDataGridViewCheckBoxColumn;
+        private DataSetRolTableAdapters.RolTableAdapter rolTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
     }
 }

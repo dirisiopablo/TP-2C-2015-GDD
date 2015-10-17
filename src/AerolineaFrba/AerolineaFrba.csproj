@@ -50,11 +50,17 @@
     <Compile Include="ABM\Abm Aeronave\ABMAeronave.Designer.cs">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM\Abm Ciudad\Form1.cs">
+    <Compile Include="ABM\Abm Ciudad\ABMCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM\Abm Ciudad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM\Abm Ciudad\ABMCiudad.Designer.cs">
+      <DependentUpon>ABMCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM\Abm Ciudad\CiudadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Ciudad\CiudadDialog.Designer.cs">
+      <DependentUpon>CiudadDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM\Abm Rol\ABMRol.cs">
       <SubType>Form</SubType>
@@ -75,20 +81,17 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
-    <Compile Include="GD2C2015DataSet1.cs">
-      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GD2C2015DataSet1.Designer.cs">
+    <Compile Include="DataSetCiudad.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+      <DependentUpon>DataSetCiudad.xsd</DependentUpon>
     </Compile>
-    <Compile Include="GD2C2015DataSet11.Designer.cs">
+    <Compile Include="DataSetRol.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GD2C2015DataSet11.xsd</DependentUpon>
+      <DependentUpon>DataSetRol.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interfaces\IMappedModel.cs" />
     <Compile Include="Models\Aeronave.cs" />
     <Compile Include="Models\BajaAeronave.cs" />
@@ -170,6 +173,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\DAO.cs" />
+    <EmbeddedResource Include="ABM\Abm Ciudad\ABMCiudad.resx">
+      <DependentUpon>ABMCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Ciudad\CiudadDialog.resx">
+      <DependentUpon>CiudadDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,27 +200,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="GD2C2015DataSet1.xsc">
-      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+    <None Include="DataSetCiudad.xsc">
+      <DependentUpon>DataSetCiudad.xsd</DependentUpon>
     </None>
-    <None Include="GD2C2015DataSet1.xsd">
+    <None Include="DataSetCiudad.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GD2C2015DataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetCiudad.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="GD2C2015DataSet1.xss">
-      <DependentUpon>GD2C2015DataSet1.xsd</DependentUpon>
+    <None Include="DataSetCiudad.xss">
+      <DependentUpon>DataSetCiudad.xsd</DependentUpon>
     </None>
-    <None Include="GD2C2015DataSet11.xsc">
-      <DependentUpon>GD2C2015DataSet11.xsd</DependentUpon>
+    <None Include="DataSetRol.xsc">
+      <DependentUpon>DataSetRol.xsd</DependentUpon>
     </None>
-    <None Include="GD2C2015DataSet11.xsd">
+    <None Include="DataSetRol.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GD2C2015DataSet11.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetRol.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="GD2C2015DataSet11.xss">
-      <DependentUpon>GD2C2015DataSet11.xsd</DependentUpon>
+    <None Include="DataSetRol.xss">
+      <DependentUpon>DataSetRol.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
