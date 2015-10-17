@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using AerolineaFrba.Models;
 using AerolineaFrba.Services;
 using AerolineaFrba.Abm_Rol;
 using AerolineaFrba.ABM.Abm_Rol;
@@ -49,20 +50,27 @@ namespace AerolineaFrba.Abm_Rol{
 
                 int id = (int)item.Cells[0].Value;
 
-                rolDatagrid.Rows.RemoveAt(item.Index);
+                DAO.connect();
 
-               // int rowID = int.Parse(rolDatagrid[0, item.Index].Value.ToString());
+                Rol rol = DAO.selectOne<Rol>( new[] {"id = "+id} );
+                rol.Activo = false;
+                int affected = DAO.update<Rol>(rol);
+
+                DAO.closeConnection();
+
+                rolDatagrid.Update();
+
             }
-
-            //string sql = "DELETE FROM Table1 WHERE RowID = @RowID";
-
-            rolDatagrid.Refresh();
 
         }
 
         private void ABMRol_Load(object sender, EventArgs e) {
-            // TODO: This line of code loads data into the 'gD2C2015DataSet.Rol' table. You can move, or remove it, as needed.
-            this.rolTableAdapter.Fill(this.gD2C2015DataSet.Rol);
+            // TODO: This line of code loads data into the 'gD2C2015DataSet11.Rol' table. You can move, or remove it, as needed.
+            this.rolTableAdapter.Fill(this.gD2C2015DataSet1.Rol);
+            // TODO: This line of code loads data into the 'gD2C2015DataSet1.Rol' table. You can move, or remove it, as needed.
+            this.rolTableAdapter.Fill(this.gD2C2015DataSet1.Rol);
+            // TODO: This line of code loads data into the 'gD2C2015DataSet1.Rol' table. You can move, or remove it, as needed.
+            this.rolTableAdapter.Fill(this.gD2C2015DataSet1.Rol);
 
         }
 
@@ -78,6 +86,10 @@ namespace AerolineaFrba.Abm_Rol{
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void rolBindingSource_CurrentChanged(object sender, EventArgs e) {
 
         }
 

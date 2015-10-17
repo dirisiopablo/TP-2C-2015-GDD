@@ -22,7 +22,7 @@ namespace AerolineaFrba.Services {
         
         static public Exception exception;
 
-        public static void connect() {
+        public static void connect() { //default connection
             _direccion = DBConfig.direccion;
             _database = DBConfig.database;
             _username = DBConfig.username;
@@ -32,7 +32,7 @@ namespace AerolineaFrba.Services {
             _sqlCon = new SqlConnection(_strCon);
         }
 
-        public static void connect(string direccion, string database, string username, string password) {
+        public static void connect(string direccion, string database, string username, string password) { //custom connection
             _direccion = direccion;
             _database  = database;
             _username  = username;
@@ -42,7 +42,17 @@ namespace AerolineaFrba.Services {
             _sqlCon = new SqlConnection(_strCon);
         }
 
-        public static DataTable select<T>() {
+        public static void closeConnection() {
+
+            if (_sqlCon != null) _sqlCon.Close();
+
+        }
+
+        /* 
+         * PARA QUE FUNCIONE BIEN, LOS ATRIBUTOS DE LOS OBJ TIENEN QUE ESTAR EN EL MISMO ORDEN QUE LAS COLUMNAS EN LAS TABLAS,
+         * ATRIBUTOS DE TABLAS INTERMEDIAS Y ATRIBUTOS EXTRA AL FINAL
+         */
+        public static T selectOne<T>(String[] filters) where T: new() {
 
             String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
 
@@ -50,24 +60,109 @@ namespace AerolineaFrba.Services {
 
             if (_sqlCon == null) throw new Exception("Must call connect() before calling any DAO's method.");
 
-            _sqlCon.Open();
+            if (_sqlCon.State == ConnectionState.Closed) _sqlCon.Open();
 
             string query = "SELECT * FROM " + tablename;
+
+            if (filters != null && filters.Length != 0) {
+
+                query += " WHERE ";
+
+                foreach (String where in filters) {
+                    query += where;
+                    query += " AND ";
+                }
+
+                query = query.Substring(0, query.Length - 5); //saca el ultimo 'and'
+
+            }
+
             SqlCommand command = new SqlCommand(query, _sqlCon);
 
-            DataTable datatable = new DataTable();
+            T obj = new T();
 
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            adapter.Fill(datatable);
-            adapter.Dispose();
+            SqlDataReader reader = command.ExecuteReader();
 
-            return datatable;
+            reader.Read();
+            Object[] values = new Object[reader.FieldCount];
+            reader.GetValues(values);
+
+            int i = 0;
+            foreach (var prop in obj.GetType().GetProperties()) {
+                if (values.Length < i + 1) break;
+                prop.SetValue(obj, values[i], null);
+                i++;
+            }
+
+            reader.Close();
+            
+            return obj;
+
         }
 
-        public static int save<T>(T entity, string TableName) {
-            
-            _sqlCon.Open();
-            string query = "INSERT INTO "+TableName+" (";
+        public static int update<T>(T entity) {
+
+            String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
+
+            if (tablename == null) throw new Exception("Type " + typeof(T) + "has no static field named TableName.");
+
+            if (_sqlCon == null) throw new Exception("Must call connect() before calling any DAO's method.");
+
+            if(_sqlCon.State == ConnectionState.Closed) _sqlCon.Open();
+
+            string query = "UPDATE " + tablename;
+            string set = " SET ";
+
+            var props = entity.GetType().GetProperties();
+
+            foreach (var prop in props) {
+
+                if (prop.GetValue(entity) == null || prop.GetValue(entity).Equals("")) continue;
+                if (String.Equals(prop.Name, "Id")) continue; //not updating Id
+                    
+                set += prop.Name + "=";
+
+                if (String.Equals(prop.PropertyType.Name, "Boolean")) {
+                    if (prop.GetValue(entity).Equals("True")) {
+                        set += 1 + ", ";
+                    }
+                    else{
+                        set += 0 + ", ";
+                    }
+                }
+                else if (String.Equals(prop.PropertyType.Name, "String")) {
+                    set += "'" + prop.GetValue(entity) + "'" + ", ";
+                }
+                else {
+                    set += prop.GetValue(entity) + ", ";
+                }
+
+            }
+
+            set = set.Substring(0, set.Length - 2); //borra la ultima ", "
+
+            query += set;
+
+            query += " WHERE Id = " + entity.GetType().GetProperty("Id").GetValue(entity);
+
+            SqlCommand command = new SqlCommand(query, _sqlCon);
+            int rowsAffected = command.ExecuteNonQuery();
+
+            return rowsAffected;
+
+        }
+
+        public static int insert<T>(T entity) {
+
+            String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
+
+            if (tablename == null) throw new Exception("Type " + typeof(T) + "has no static field named TableName.");
+
+            if (_sqlCon == null) throw new Exception("Must call connect() before calling any DAO's method.");
+
+            if (_sqlCon.State == ConnectionState.Closed) _sqlCon.Open();
+
+            string query = "INSERT INTO " + tablename + " (";
             string queryValues = "VALUES (";
 
             var props = entity.GetType().GetProperties();
@@ -102,18 +197,6 @@ namespace AerolineaFrba.Services {
                      database + ";User ID=" + username + ";Password=" + password + ";";
         }
 
-
-        //TODO borrar esto
-        public static List<TSalida> map<TEntrada, TSalida>(Func<TEntrada, TSalida> function, List<TEntrada> list) {
-
-            List<TSalida> mappedList = new List<TSalida>();
-
-            foreach (TEntrada item in list)
-                mappedList.Add(function(item));
-
-            return mappedList;
-
-        }
 
     }
 }

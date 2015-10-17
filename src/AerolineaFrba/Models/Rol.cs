@@ -9,6 +9,7 @@ namespace AerolineaFrba.Models {
 
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        public bool Activo { get; set; }
 
         public int[] FuncionalidadesIds { get; set; }
         public List<Funcionalidad> Funcionalidades { get; set; }

@@ -71,6 +71,12 @@ namespace AerolineaFrba {
 
         }
 
+        private void generarViaje_Click(object sender, EventArgs e) {
+
+
+
+        }
+
 
 
 
