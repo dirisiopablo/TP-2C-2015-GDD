@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using AerolineaFrba.Interfaces;
 using AerolineaFrba.Config;
 
@@ -215,7 +216,6 @@ namespace AerolineaFrba.Services {
              return "Data Source=" + direccion + ";Initial Catalog=" +
                      database + ";User ID=" + username + ";Password=" + password + ";";
         }
-
 
     }
 }

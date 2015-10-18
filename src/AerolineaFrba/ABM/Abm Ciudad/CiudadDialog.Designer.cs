@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.descripcionCiudad = new System.Windows.Forms.TextBox();
             this.Descripcion = new System.Windows.Forms.Label();
+            this.descripcionCiudad = new System.Windows.Forms.TextBox();
             this.guardarCiudad = new System.Windows.Forms.Button();
             this.cancelarCiudad = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -40,13 +40,6 @@
             this.panel1.Size = new System.Drawing.Size(260, 120);
             this.panel1.TabIndex = 0;
             // 
-            // descripcionCiudad
-            // 
-            this.descripcionCiudad.Location = new System.Drawing.Point(112, 29);
-            this.descripcionCiudad.Name = "descripcionCiudad";
-            this.descripcionCiudad.Size = new System.Drawing.Size(119, 20);
-            this.descripcionCiudad.TabIndex = 0;
-            // 
             // Descripcion
             // 
             this.Descripcion.AutoSize = true;
@@ -55,6 +48,13 @@
             this.Descripcion.Size = new System.Drawing.Size(63, 13);
             this.Descripcion.TabIndex = 1;
             this.Descripcion.Text = "Descripción";
+            // 
+            // descripcionCiudad
+            // 
+            this.descripcionCiudad.Location = new System.Drawing.Point(112, 29);
+            this.descripcionCiudad.Name = "descripcionCiudad";
+            this.descripcionCiudad.Size = new System.Drawing.Size(119, 20);
+            this.descripcionCiudad.TabIndex = 0;
             // 
             // guardarCiudad
             // 
@@ -84,7 +84,7 @@
             this.Controls.Add(this.guardarCiudad);
             this.Controls.Add(this.panel1);
             this.Name = "CiudadDialog";
-            this.Text = "CiudadDialog";
+            this.Text = "Ciudad";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

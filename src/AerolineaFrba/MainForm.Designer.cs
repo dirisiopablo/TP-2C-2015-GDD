@@ -24,45 +24,58 @@
         /// </summary>
         private void InitializeComponent() {
             this.ABMRol_Button = new System.Windows.Forms.Button();
-            this.generarViaje = new System.Windows.Forms.Button();
             this.ABMCiudad_Button = new System.Windows.Forms.Button();
+            this.ABMAeronave_Button = new System.Windows.Forms.Button();
+            this.ABMRuta_Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
             // 
             this.ABMRol_Button.Location = new System.Drawing.Point(40, 28);
             this.ABMRol_Button.Name = "ABMRol_Button";
-            this.ABMRol_Button.Size = new System.Drawing.Size(77, 51);
+            this.ABMRol_Button.Size = new System.Drawing.Size(87, 51);
             this.ABMRol_Button.TabIndex = 0;
             this.ABMRol_Button.Text = "ABM Rol";
             this.ABMRol_Button.Click += new System.EventHandler(this.ABMRol_Button_Click);
             // 
-            // generarViaje
-            // 
-            this.generarViaje.Location = new System.Drawing.Point(42, 371);
-            this.generarViaje.Name = "generarViaje";
-            this.generarViaje.Size = new System.Drawing.Size(75, 45);
-            this.generarViaje.TabIndex = 1;
-            this.generarViaje.Text = "Generar Viaje";
-            this.generarViaje.UseVisualStyleBackColor = true;
-            // 
             // ABMCiudad_Button
             // 
-            this.ABMCiudad_Button.Location = new System.Drawing.Point(140, 28);
+            this.ABMCiudad_Button.Location = new System.Drawing.Point(148, 28);
             this.ABMCiudad_Button.Name = "ABMCiudad_Button";
-            this.ABMCiudad_Button.Size = new System.Drawing.Size(78, 51);
+            this.ABMCiudad_Button.Size = new System.Drawing.Size(92, 51);
             this.ABMCiudad_Button.TabIndex = 2;
             this.ABMCiudad_Button.Text = "ABM Ciudad";
             this.ABMCiudad_Button.UseVisualStyleBackColor = true;
             this.ABMCiudad_Button.Click += new System.EventHandler(this.ABMCiudad_Button_Click);
+            // 
+            // ABMAeronave_Button
+            // 
+            this.ABMAeronave_Button.Location = new System.Drawing.Point(260, 28);
+            this.ABMAeronave_Button.Name = "ABMAeronave_Button";
+            this.ABMAeronave_Button.Size = new System.Drawing.Size(88, 51);
+            this.ABMAeronave_Button.TabIndex = 3;
+            this.ABMAeronave_Button.Text = "ABM Aeronave";
+            this.ABMAeronave_Button.UseVisualStyleBackColor = true;
+            this.ABMAeronave_Button.Click += new System.EventHandler(this.ABMAeronave_Button_Click);
+            // 
+            // ABMRuta_Button
+            // 
+            this.ABMRuta_Button.Location = new System.Drawing.Point(366, 28);
+            this.ABMRuta_Button.Name = "ABMRuta_Button";
+            this.ABMRuta_Button.Size = new System.Drawing.Size(88, 51);
+            this.ABMRuta_Button.TabIndex = 4;
+            this.ABMRuta_Button.Text = "ABM Ruta";
+            this.ABMRuta_Button.UseVisualStyleBackColor = true;
+            this.ABMRuta_Button.Click += new System.EventHandler(this.ABMRuta_Button_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.ABMRuta_Button);
+            this.Controls.Add(this.ABMAeronave_Button);
             this.Controls.Add(this.ABMCiudad_Button);
-            this.Controls.Add(this.generarViaje);
             this.Controls.Add(this.ABMRol_Button);
             this.Name = "MainForm";
             this.Text = "Aerolinea FRBA";
@@ -74,8 +87,9 @@
         #endregion
 
         private System.Windows.Forms.Button ABMRol_Button;
-        private System.Windows.Forms.Button generarViaje;
         private System.Windows.Forms.Button ABMCiudad_Button;
+        private System.Windows.Forms.Button ABMAeronave_Button;
+        private System.Windows.Forms.Button ABMRuta_Button;
 
     }
 }

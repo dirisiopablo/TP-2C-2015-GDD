@@ -29,7 +29,6 @@ namespace AerolineaFrba.Abm_Rol{
             }
 
             return _instance;
-
         }
 
         private void Nuevo_Click(object sender, EventArgs e) {
@@ -74,6 +73,8 @@ namespace AerolineaFrba.Abm_Rol{
 
             RolDialog rolDialog = new RolDialog(descripcion, Enums.tipoDialog.modificar);
             var dr = rolDialog.ShowDialog();
+
+            if (rolDialog.dr == DialogResult.Cancel) return;
 
             String nuevaDescripcion = rolDialog.descripcion;
 

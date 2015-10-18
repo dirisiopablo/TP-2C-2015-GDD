@@ -47,6 +47,7 @@
             this.Cancelar.TabIndex = 0;
             this.Cancelar.Text = "Cancelar";
             this.Cancelar.UseVisualStyleBackColor = true;
+            this.Cancelar.Click += new System.EventHandler(this.Cancelar_Click);
             // 
             // Guardar
             // 
@@ -101,7 +102,7 @@
             this.ClientSize = new System.Drawing.Size(284, 165);
             this.Controls.Add(this.splitContainer1);
             this.Name = "RolDialog";
-            this.Text = "RolDialog";
+            this.Text = "Rol";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

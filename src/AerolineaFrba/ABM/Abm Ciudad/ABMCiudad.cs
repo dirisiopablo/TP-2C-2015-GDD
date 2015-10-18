@@ -73,6 +73,8 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
             CiudadDialog ciudadDialog = new CiudadDialog(descripcion, Enums.tipoDialog.modificar);
             var dr = ciudadDialog.ShowDialog();
 
+            if (ciudadDialog.dr == DialogResult.Cancel) return;
+
             String nuevaDescripcion = ciudadDialog.descripcion;
 
             DAO.connect();

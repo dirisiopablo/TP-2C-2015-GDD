@@ -50,6 +50,12 @@
     <Compile Include="ABM\Abm Aeronave\ABMAeronave.Designer.cs">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM\Abm Aeronave\AeronaveDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Aeronave\AeronaveDialog.Designer.cs">
+      <DependentUpon>AeronaveDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM\Abm Ciudad\ABMCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,17 +80,33 @@
     <Compile Include="ABM\Abm Rol\RolDialog.Designer.cs">
       <DependentUpon>RolDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM\Abm Ruta\Form1.cs">
+    <Compile Include="ABM\Abm Ruta\ABMRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM\Abm Ruta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM\Abm Ruta\ABMRuta.Designer.cs">
+      <DependentUpon>ABMRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM\Abm Ruta\RutaDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Ruta\RutaDialog.Designer.cs">
+      <DependentUpon>RutaDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
+    <Compile Include="DataSetAeronave.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetAeronave.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetCiudad.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetCiudad.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetCiudad2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetCiudad2.xsd</DependentUpon>
     </Compile>
     <Compile Include="DataSetRol.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -134,6 +156,11 @@
     <Compile Include="Forms\Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="rutaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rutaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Security\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +200,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\DAO.cs" />
+    <EmbeddedResource Include="ABM\Abm Aeronave\ABMAeronave.resx">
+      <DependentUpon>ABMAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Aeronave\AeronaveDialog.resx">
+      <DependentUpon>AeronaveDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Ciudad\ABMCiudad.resx">
       <DependentUpon>ABMCiudad.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Rol\RolDialog.resx">
       <DependentUpon>RolDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Ruta\ABMRuta.resx">
+      <DependentUpon>ABMRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Ruta\RutaDialog.resx">
+      <DependentUpon>RutaDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -200,6 +239,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DataSetAeronave.xsc">
+      <DependentUpon>DataSetAeronave.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetAeronave.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetAeronave.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSetAeronave.xss">
+      <DependentUpon>DataSetAeronave.xsd</DependentUpon>
+    </None>
     <None Include="DataSetCiudad.xsc">
       <DependentUpon>DataSetCiudad.xsd</DependentUpon>
     </None>
@@ -210,6 +260,17 @@
     </None>
     <None Include="DataSetCiudad.xss">
       <DependentUpon>DataSetCiudad.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetCiudad2.xsc">
+      <DependentUpon>DataSetCiudad2.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetCiudad2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetCiudad2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSetCiudad2.xss">
+      <DependentUpon>DataSetCiudad2.xsd</DependentUpon>
     </None>
     <None Include="DataSetRol.xsc">
       <DependentUpon>DataSetRol.xsd</DependentUpon>
@@ -231,6 +292,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="rutaDataSet.xsc">
+      <DependentUpon>rutaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="rutaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rutaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="rutaDataSet.xss">
+      <DependentUpon>rutaDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

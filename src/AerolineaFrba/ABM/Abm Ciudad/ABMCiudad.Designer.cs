@@ -51,6 +51,7 @@
             this.ciudadDataGrid.DataSource = this.ciudadBindingSource;
             this.ciudadDataGrid.Location = new System.Drawing.Point(28, 76);
             this.ciudadDataGrid.Name = "ciudadDataGrid";
+            this.ciudadDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ciudadDataGrid.Size = new System.Drawing.Size(258, 169);
             this.ciudadDataGrid.TabIndex = 0;
             // 
@@ -146,7 +147,7 @@
             this.Controls.Add(this.Limpiar);
             this.Controls.Add(this.ciudadDataGrid);
             this.Name = "ABMCiudad";
-            this.Text = "ABMCiudad";
+            this.Text = "ABM Ciudad";
             this.Load += new System.EventHandler(this.ABMCiudad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).EndInit();

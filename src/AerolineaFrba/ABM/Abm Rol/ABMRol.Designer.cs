@@ -110,6 +110,7 @@
             this.rolDataGrid.Location = new System.Drawing.Point(12, 76);
             this.rolDataGrid.Name = "rolDataGrid";
             this.rolDataGrid.ReadOnly = true;
+            this.rolDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.rolDataGrid.Size = new System.Drawing.Size(349, 191);
             this.rolDataGrid.TabIndex = 6;
             // 
