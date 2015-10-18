@@ -8,14 +8,14 @@ namespace AerolineaFrba.Models {
     class Viaje {
 
         public int Id { get; set; }
-        public DateTime FechaSalida { get; set; }
-        public DateTime FechaLlegada { get; set; }
-        public DateTime FechaLlegadaEstimada { get; set; }
+        public DateTime Fecha_Salida { get; set; }
+        public DateTime Fecha_Llegada { get; set; }
+        public DateTime Fecha_Llegada_Estimada { get; set; }
 
-        public int RutaId { get; set; }
+        public int Ruta_Id { get; set; }
         public Ruta Ruta { get; set; }
 
-        public int AeronaveId { get; set; }
+        public int Aeronave_Id { get; set; }
         public Aeronave Aeronave { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Viaje";

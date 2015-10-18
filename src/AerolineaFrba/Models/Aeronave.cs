@@ -13,7 +13,7 @@ namespace AerolineaFrba.Models {
 
         public int Id { get; set; }
         public int Numero { get; set; }
-        public int KilogramosDisponibles { get; set; }
+        public int Kilogramos_Disponibles { get; set; }
         public string Matricula { get; set; }
         public string Modelo { get; set; }
         public string Fabricante { get; set; }

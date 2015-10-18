@@ -12,7 +12,7 @@ namespace AerolineaFrba.Models {
         public int Piso { get; set; }
         public string Tipo { get; set; }
 
-        public int AeronaveId { get; set; }
+        public int Aeronave_Id { get; set; }
         public Aeronave Aeronave { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Butaca";

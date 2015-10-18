@@ -19,6 +19,11 @@ namespace AerolineaFrba.Services {
         private static string _username;
         private static string _password;
         private static string _strCon;
+
+        private static String[] ignoredTypes = {"Aeronave", "BajaAeronave", "Butaca", "Cancelacion", "Canje", "Catalogo",
+                                                "Ciudad", "Cliente", "Funcionalidad", "Paquete", "Pasaje", "Rol", "Ruta",
+                                                "TipoBaja", "TipoServicio", "Usuario", "Viaje"
+                                               };
         
         static public Exception exception;
 
@@ -119,6 +124,7 @@ namespace AerolineaFrba.Services {
 
                 if (prop.GetValue(entity) == null || prop.GetValue(entity).Equals("")) continue;
                 if (String.Equals(prop.Name, "Id")) continue; //not updating Id
+                if (ignoredTypes.Contains(prop.PropertyType.Name)) continue; //ignore model types (lazy load)
                     
                 set += prop.Name + "=";
 
@@ -171,6 +177,7 @@ namespace AerolineaFrba.Services {
 
                 if (prop.GetValue(entity) == null || prop.GetValue(entity).Equals("")) continue;
                 if (String.Equals(prop.Name, "Id")) continue; //not updating Id
+                if (ignoredTypes.Contains(prop.PropertyType.Name)) continue; //ignore model types (lazy load)
 
                 query += prop.Name + ",";
 

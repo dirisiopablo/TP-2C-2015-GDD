@@ -11,12 +11,12 @@ namespace AerolineaFrba.Models {
         public int Codigo { get; set; }
         public float Precio { get; set; }
         public int Kg { get; set; }
-        public DateTime FechaCompra { get; set; }
+        public DateTime Fecha_Compra { get; set; }
 
-        public int ViajeId { get; set; }
+        public int Viaje_Id { get; set; }
         public Viaje Viaje { get; set; }
 
-        public int ClienteId { get; set; }
+        public int Cliente_Id { get; set; }
         public Cliente Cliente { get; set; }
 
         public int[] CancelacionesIds { get; set; }

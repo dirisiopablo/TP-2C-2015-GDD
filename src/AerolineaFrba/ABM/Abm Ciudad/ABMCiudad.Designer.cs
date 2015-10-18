@@ -35,6 +35,7 @@
             this.nuevoCiudad = new System.Windows.Forms.Button();
             this.modificarCiudad = new System.Windows.Forms.Button();
             this.eliminarCiudad = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
@@ -50,7 +51,7 @@
             this.ciudadDataGrid.DataSource = this.ciudadBindingSource;
             this.ciudadDataGrid.Location = new System.Drawing.Point(28, 76);
             this.ciudadDataGrid.Name = "ciudadDataGrid";
-            this.ciudadDataGrid.Size = new System.Drawing.Size(287, 169);
+            this.ciudadDataGrid.Size = new System.Drawing.Size(258, 169);
             this.ciudadDataGrid.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -100,7 +101,7 @@
             // 
             // nuevoCiudad
             // 
-            this.nuevoCiudad.Location = new System.Drawing.Point(342, 97);
+            this.nuevoCiudad.Location = new System.Drawing.Point(334, 97);
             this.nuevoCiudad.Name = "nuevoCiudad";
             this.nuevoCiudad.Size = new System.Drawing.Size(75, 23);
             this.nuevoCiudad.TabIndex = 3;
@@ -110,7 +111,7 @@
             // 
             // modificarCiudad
             // 
-            this.modificarCiudad.Location = new System.Drawing.Point(342, 142);
+            this.modificarCiudad.Location = new System.Drawing.Point(334, 142);
             this.modificarCiudad.Name = "modificarCiudad";
             this.modificarCiudad.Size = new System.Drawing.Size(75, 23);
             this.modificarCiudad.TabIndex = 4;
@@ -120,13 +121,18 @@
             // 
             // eliminarCiudad
             // 
-            this.eliminarCiudad.Location = new System.Drawing.Point(342, 190);
+            this.eliminarCiudad.Location = new System.Drawing.Point(334, 190);
             this.eliminarCiudad.Name = "eliminarCiudad";
             this.eliminarCiudad.Size = new System.Drawing.Size(75, 23);
             this.eliminarCiudad.TabIndex = 5;
             this.eliminarCiudad.Text = "Eliminar";
             this.eliminarCiudad.UseVisualStyleBackColor = true;
             this.eliminarCiudad.Click += new System.EventHandler(this.eliminarCiudad_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // ABMCiudad
             // 
@@ -162,5 +168,6 @@
         private System.Windows.Forms.Button nuevoCiudad;
         private System.Windows.Forms.Button modificarCiudad;
         private System.Windows.Forms.Button eliminarCiudad;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

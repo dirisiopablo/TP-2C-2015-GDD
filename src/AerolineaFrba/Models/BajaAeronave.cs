@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 namespace AerolineaFrba.Models {
     class BajaAeronave {
 
-        public int AeronaveId { get; set; }
+        public int Id { get; set; }
+
+        public DateTime Fecha_Baja { get; set; }
+        public DateTime Fecha_Reinicio { get; set; }
+
+        public int Aeronave_Id { get; set; }
         public Aeronave Aeronave { get; set; }
 
-        public int TipoBajaId { get; set; }
+        public int Tipo_Baja_Id { get; set; }
         public TipoBaja TipoBaja { get; set; }
-
-        public DateTime FechaBaja { get; set; }
-        public DateTime FechaReinicio { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Baja_Aeronave";
     }
