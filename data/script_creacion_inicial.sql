@@ -96,6 +96,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
+	activo		   bit              1,
 )
 GO
 

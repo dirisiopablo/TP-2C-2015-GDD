@@ -169,6 +169,7 @@ namespace AerolineaFrba.Abm_Rol{
         {
             this.descripcionInput.Text = "";
             this.activoInput.Checked = false;
+            this.inactivoInput.Checked = false;
         }
 
         private void GetData(string selectCommand)
@@ -180,7 +181,7 @@ namespace AerolineaFrba.Abm_Rol{
 
             // Populate a new data table and bind it to the BindingSource.
             DataTable table = new DataTable();
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataAdapter.Fill(table);
             rolDataGrid.DataSource = table;
 

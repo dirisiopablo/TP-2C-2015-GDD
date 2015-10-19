@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,14 @@ using System.Windows.Forms;
 
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
+using AerolineaFrba.Config;
 
 namespace AerolineaFrba.ABM.Abm_Ciudad {
 
     public sealed partial class ABMCiudad : Form {
 
         private static ABMCiudad _instance = null;
+        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
         private ABMCiudad() {
             this.InitializeComponent();
@@ -49,7 +52,7 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
             DAO.closeConnection();
 
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-            ciudadDataGrid.Update(); 
+            ciudadDataGrid.DataSource = this.dataSetCiudad.Ciudad;
 
         }
 
@@ -86,7 +89,7 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
             DAO.closeConnection();
 
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-            ciudadDataGrid.Update();
+            ciudadDataGrid.DataSource = this.dataSetCiudad.Ciudad;
 
         }
 
@@ -118,7 +121,7 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
                 DAO.closeConnection();
 
                 this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-                ciudadDataGrid.Update();
+                ciudadDataGrid.DataSource = this.dataSetCiudad.Ciudad;
 
             }
 
@@ -133,6 +136,64 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
         private void ciudadBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void limpiarCampos_Click(object sender, EventArgs e)
+        {
+            this.descripcionInput.Text = "";
+            this.activoInput.Checked = false;
+            this.inactivoInput.Checked = false;
+        }
+
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            String buscarDescripcion = this.descripcionInput.Text;
+            Boolean activoDescripcion = this.activoInput.Checked;
+            Boolean inactivoDescripcion = this.inactivoInput.Checked;
+            String query = "SELECT * FROM BIEN_MIGRADO_RAFA.Ciudad WHERE";
+
+            if (inactivoDescripcion && activoDescripcion)
+            {
+                query += " (activo = 1 OR activo = 0) AND ";
+            }
+
+            if (buscarDescripcion != null && buscarDescripcion != "")
+            {
+                query += " descripcion LIKE " + "'%" + buscarDescripcion + "%' AND ";
+            }
+
+            if (activoDescripcion && !inactivoDescripcion)
+            {
+                query += " activo = 1 AND ";
+            }
+
+            if (inactivoDescripcion && !activoDescripcion)
+            {
+                query += " activo = 0 AND ";
+            }
+
+            query = query.Substring(0, query.Length - 5);
+
+            // Bind the DataGridView to the BindingSource
+            // and load the data from the database.
+            ciudadDataGrid.DataSource = ciudadBindingSource;
+            GetData(query);
+        }
+
+        private void GetData(string selectCommand)
+        {
+            DAO.connect();
+            String connectionString = DAO.makeStringConnection(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
+
+            dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+            // Populate a new data table and bind it to the BindingSource.
+            DataTable table = new DataTable();
+            //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataAdapter.Fill(table);
+            ciudadDataGrid.DataSource = table;
+
+            DAO.closeConnection();
         }
 
     }
