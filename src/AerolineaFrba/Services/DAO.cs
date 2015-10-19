@@ -14,7 +14,7 @@ namespace AerolineaFrba.Services {
 
     public static class DAO {
 
-        private static SqlConnection _sqlCon;
+        public static SqlConnection _sqlCon { get; set; }
         private static string _direccion;
         private static string _database;
         private static string _username;
@@ -212,10 +212,10 @@ namespace AerolineaFrba.Services {
         }
 
 
-        private static string makeStringConnection(string direccion, string database, string username, string password){
+        public static string makeStringConnection(string direccion, string database, string username, string password){
              return "Data Source=" + direccion + ";Initial Catalog=" +
                      database + ";User ID=" + username + ";Password=" + password + ";";
         }
-
+      
     }
 }

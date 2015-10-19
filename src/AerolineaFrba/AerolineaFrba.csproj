@@ -109,6 +109,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetCiudad2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSetRol.cs">
+      <DependentUpon>DataSetRol.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataSetRol.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

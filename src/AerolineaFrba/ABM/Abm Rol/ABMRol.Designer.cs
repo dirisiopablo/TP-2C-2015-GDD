@@ -42,9 +42,10 @@
             this.dataSetRol = new AerolineaFrba.DataSetRol();
             this.rolTableAdapter = new AerolineaFrba.DataSetRolTableAdapters.RolTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.activoInput = new System.Windows.Forms.CheckBox();
             this.descripcionInput = new System.Windows.Forms.TextBox();
+            this.activoInput = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.inactivoInput = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.rolDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetRol)).BeginInit();
@@ -158,6 +159,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.inactivoInput);
             this.panel1.Controls.Add(this.descripcionInput);
             this.panel1.Controls.Add(this.activoInput);
             this.panel1.Controls.Add(this.label1);
@@ -168,14 +170,12 @@
             this.panel1.Size = new System.Drawing.Size(349, 54);
             this.panel1.TabIndex = 7;
             // 
-            // label1
+            // descripcionInput
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Descripción";
+            this.descripcionInput.Location = new System.Drawing.Point(49, 6);
+            this.descripcionInput.Name = "descripcionInput";
+            this.descripcionInput.Size = new System.Drawing.Size(100, 20);
+            this.descripcionInput.TabIndex = 8;
             // 
             // activoInput
             // 
@@ -187,12 +187,24 @@
             this.activoInput.Text = "Activo";
             this.activoInput.UseVisualStyleBackColor = true;
             // 
-            // descripcionInput
+            // label1
             // 
-            this.descripcionInput.Location = new System.Drawing.Point(49, 6);
-            this.descripcionInput.Name = "descripcionInput";
-            this.descripcionInput.Size = new System.Drawing.Size(100, 20);
-            this.descripcionInput.TabIndex = 8;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(155, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Descripción";
+            // 
+            // inactivoInput
+            // 
+            this.inactivoInput.AutoSize = true;
+            this.inactivoInput.Location = new System.Drawing.Point(138, 32);
+            this.inactivoInput.Name = "inactivoInput";
+            this.inactivoInput.Size = new System.Drawing.Size(64, 17);
+            this.inactivoInput.TabIndex = 9;
+            this.inactivoInput.Text = "Inactivo";
+            this.inactivoInput.UseVisualStyleBackColor = true;
             // 
             // ABMRol
             // 
@@ -235,5 +247,6 @@
         private System.Windows.Forms.TextBox descripcionInput;
         private System.Windows.Forms.CheckBox activoInput;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox inactivoInput;
     }
 }

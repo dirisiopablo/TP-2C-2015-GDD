@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,14 @@ using System.Windows.Forms;
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
 using AerolineaFrba.ABM.Abm_Rol;
+using AerolineaFrba.Config;
 
 namespace AerolineaFrba.Abm_Rol{
     
     public sealed partial class ABMRol : Form{
 
         private static ABMRol _instance = null;
+        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
         private ABMRol() {
             this.InitializeComponent();
@@ -50,7 +53,7 @@ namespace AerolineaFrba.Abm_Rol{
             DAO.closeConnection();
 
             this.rolTableAdapter.Fill(this.dataSetRol.Rol);
-            rolDataGrid.Update(); 
+            rolDataGrid.DataSource = this.dataSetRol.Rol; // Vuelve a cargar los datos en la tabla
 
         }
 
@@ -86,9 +89,8 @@ namespace AerolineaFrba.Abm_Rol{
 
             DAO.closeConnection();
 
-            this.rolTableAdapter.Fill(this.dataSetRol.Rol); 
-            rolDataGrid.Update(); 
-
+            this.rolTableAdapter.Fill(this.dataSetRol.Rol);
+            rolDataGrid.DataSource = this.dataSetRol.Rol; // Vuelve a cargar los datos en la tabla
         }
 
         private void Eliminar_Click(object sender, EventArgs e) {
@@ -119,8 +121,8 @@ namespace AerolineaFrba.Abm_Rol{
 
                 DAO.closeConnection();
 
-                this.rolTableAdapter.Fill(this.dataSetRol.Rol); 
-                rolDataGrid.Update(); 
+                this.rolTableAdapter.Fill(this.dataSetRol.Rol);
+                rolDataGrid.DataSource = this.dataSetRol.Rol; // Vuelve a cargar los datos en la tabla
 
             }
 
@@ -135,7 +137,32 @@ namespace AerolineaFrba.Abm_Rol{
         {
             String buscarDescripcion = this.descripcionInput.Text;
             Boolean activoDescripcion = this.activoInput.Checked;
-            this.rolTableAdapter.Fill(this.dataSetRol.Rol);
+            Boolean inactivoDescripcion = this.inactivoInput.Checked;
+            String query = "SELECT * FROM BIEN_MIGRADO_RAFA.Rol WHERE";
+
+            if (inactivoDescripcion && activoDescripcion){
+                query += " (activo = 1 OR activo = 0) AND ";
+            }
+
+            if (buscarDescripcion != null && buscarDescripcion != ""){
+                query += " descripcion LIKE " + "'%" + buscarDescripcion + "%' AND ";
+            }
+ 
+            if (activoDescripcion && !inactivoDescripcion){
+                query += " activo = 1 AND "; 
+            }
+
+            if (inactivoDescripcion && !activoDescripcion){
+                query += " activo = 0 AND "; 
+            }
+
+            query = query.Substring(0, query.Length - 5);
+            
+            // Bind the DataGridView to the BindingSource
+            // and load the data from the database.
+            rolDataGrid.DataSource = rolBindingSource;
+            GetData(query);
+
         }
 
         private void Limpiar_Click(object sender, EventArgs e)
@@ -144,6 +171,21 @@ namespace AerolineaFrba.Abm_Rol{
             this.activoInput.Checked = false;
         }
 
+        private void GetData(string selectCommand)
+        {
+            DAO.connect();
+            String connectionString = DAO.makeStringConnection(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
+            
+            dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+            // Populate a new data table and bind it to the BindingSource.
+            DataTable table = new DataTable();
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataAdapter.Fill(table);
+            rolDataGrid.DataSource = table;
+
+            DAO.closeConnection();
+        }
           
     }
 }
