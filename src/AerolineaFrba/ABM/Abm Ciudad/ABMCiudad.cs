@@ -130,5 +130,10 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
 
         }
 
+        private void ciudadBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

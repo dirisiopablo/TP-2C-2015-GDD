@@ -126,8 +126,22 @@ namespace AerolineaFrba.Abm_Rol{
 
         }
 
-        private void ABMRol_Load(object sender, EventArgs e) {
+        private void ABMRol_Load(object sender, EventArgs e) 
+        {
+            
+        }
+
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            String buscarDescripcion = this.descripcionInput.Text;
+            Boolean activoDescripcion = this.activoInput.Checked;
             this.rolTableAdapter.Fill(this.dataSetRol.Rol);
+        }
+
+        private void Limpiar_Click(object sender, EventArgs e)
+        {
+            this.descripcionInput.Text = "";
+            this.activoInput.Checked = false;
         }
 
           

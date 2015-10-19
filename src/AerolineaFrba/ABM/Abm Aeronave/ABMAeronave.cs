@@ -79,7 +79,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             decimal kgDisponibles = Convert.ToDecimal(row.Cells[3].Value);
             String fabricante = (String)row.Cells[4].Value;
 
-            AeronaveDialog aeronaveDialog = new AeronaveDialog(matricula, modelo, kgDisponibles, fabricante, Enums.tipoDialog.nuevo);
+            AeronaveDialog aeronaveDialog = new AeronaveDialog(matricula, modelo, kgDisponibles, fabricante, Enums.tipoDialog.modificar);
             var dr = aeronaveDialog.ShowDialog();
 
             if (aeronaveDialog.dr == DialogResult.Cancel) return;

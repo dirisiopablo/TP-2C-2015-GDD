@@ -72,6 +72,7 @@
             // 
             this.ciudadBindingSource.DataMember = "Ciudad";
             this.ciudadBindingSource.DataSource = this.dataSetCiudad;
+            this.ciudadBindingSource.CurrentChanged += new System.EventHandler(this.ciudadBindingSource_CurrentChanged);
             // 
             // dataSetCiudad
             // 
