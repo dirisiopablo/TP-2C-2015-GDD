@@ -71,7 +71,7 @@ SELECT id, descripcion, activo FROM BIEN_MIGRADO_RAFA.Rol WHERE (id = @id)</Comm
   <xs:element name="DataSetRol" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSetRol" msprop:Generator_UserDSName="DataSetRol">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Rol" msprop:Generator_TableClassName="RolDataTable" msprop:Generator_TableVarName="tableRol" msprop:Generator_TablePropName="Rol" msprop:Generator_RowDeletingName="RolRowDeleting" msprop:Generator_RowChangingName="RolRowChanging" msprop:Generator_RowEvHandlerName="RolRowChangeEventHandler" msprop:Generator_RowDeletedName="RolRowDeleted" msprop:Generator_UserTableName="Rol" msprop:Generator_RowChangedName="RolRowChanged" msprop:Generator_RowEvArgName="RolRowChangeEvent" msprop:Generator_RowClassName="RolRow">
+        <xs:element name="Rol" msprop:Generator_TableClassName="RolDataTable" msprop:Generator_TableVarName="tableRol" msprop:Generator_RowChangedName="RolRowChanged" msprop:Generator_TablePropName="Rol" msprop:Generator_RowDeletingName="RolRowDeleting" msprop:Generator_RowChangingName="RolRowChanging" msprop:Generator_RowEvHandlerName="RolRowChangeEventHandler" msprop:Generator_RowDeletedName="RolRowDeleted" msprop:Generator_RowClassName="RolRow" msprop:Generator_UserTableName="Rol" msprop:Generator_RowEvArgName="RolRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -88,7 +88,7 @@ SELECT id, descripcion, activo FROM BIEN_MIGRADO_RAFA.Rol WHERE (id = @id)</Comm
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+    <xs:unique name="Constraint1">
       <xs:selector xpath=".//mstns:Rol" />
       <xs:field xpath="mstns:id" />
     </xs:unique>

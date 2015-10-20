@@ -533,3 +533,16 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Viaje ADD CONSTRAINT RefAeronave4
 GO
 
  --END FOREIGN KEYS
+
+ -- START FIXTURE
+INSERT INTO [BIEN_MIGRADO_RAFA].[Tipo_Baja]
+           ([descripcion])
+     VALUES
+           ('Fuera de servicio')
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Tipo_Baja]
+           ([descripcion])
+     VALUES
+           ('Baja definitiva')
+GO

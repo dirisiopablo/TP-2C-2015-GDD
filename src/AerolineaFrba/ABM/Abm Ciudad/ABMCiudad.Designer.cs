@@ -24,12 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.ciudadDataGrid = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudadBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSetCiudad = new AerolineaFrba.DataSetCiudad();
-            this.ciudadTableAdapter = new AerolineaFrba.DataSetCiudadTableAdapters.CiudadTableAdapter();
             this.nuevoCiudad = new System.Windows.Forms.Button();
             this.modificarCiudad = new System.Windows.Forms.Button();
             this.eliminarCiudad = new System.Windows.Forms.Button();
@@ -40,57 +34,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Buscar = new System.Windows.Forms.Button();
             this.limpiarCampos = new System.Windows.Forms.Button();
+            this.ciudadDataGrid = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ciudadBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSetCiudad = new AerolineaFrba.GD2C2015DataSet();
+            this.ciudadTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.CiudadTableAdapter();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ciudadDataGrid
-            // 
-            this.ciudadDataGrid.AutoGenerateColumns = false;
-            this.ciudadDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ciudadDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.descripcionDataGridViewTextBoxColumn});
-            this.ciudadDataGrid.DataSource = this.ciudadBindingSource;
-            this.ciudadDataGrid.Location = new System.Drawing.Point(28, 76);
-            this.ciudadDataGrid.Name = "ciudadDataGrid";
-            this.ciudadDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ciudadDataGrid.Size = new System.Drawing.Size(300, 169);
-            this.ciudadDataGrid.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descripcionDataGridViewTextBoxColumn
-            // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
-            // 
-            // ciudadBindingSource
-            // 
-            this.ciudadBindingSource.DataMember = "Ciudad";
-            this.ciudadBindingSource.DataSource = this.dataSetCiudad;
-            this.ciudadBindingSource.CurrentChanged += new System.EventHandler(this.ciudadBindingSource_CurrentChanged);
-            // 
-            // dataSetCiudad
-            // 
-            this.dataSetCiudad.DataSetName = "DataSetCiudad";
-            this.dataSetCiudad.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // ciudadTableAdapter
-            // 
-            this.ciudadTableAdapter.ClearBeforeFill = true;
             // 
             // nuevoCiudad
             // 
-            this.nuevoCiudad.Location = new System.Drawing.Point(334, 97);
+            this.nuevoCiudad.Location = new System.Drawing.Point(368, 73);
             this.nuevoCiudad.Name = "nuevoCiudad";
             this.nuevoCiudad.Size = new System.Drawing.Size(75, 23);
             this.nuevoCiudad.TabIndex = 3;
@@ -100,7 +59,7 @@
             // 
             // modificarCiudad
             // 
-            this.modificarCiudad.Location = new System.Drawing.Point(334, 142);
+            this.modificarCiudad.Location = new System.Drawing.Point(368, 118);
             this.modificarCiudad.Name = "modificarCiudad";
             this.modificarCiudad.Size = new System.Drawing.Size(75, 23);
             this.modificarCiudad.TabIndex = 4;
@@ -110,7 +69,7 @@
             // 
             // eliminarCiudad
             // 
-            this.eliminarCiudad.Location = new System.Drawing.Point(334, 190);
+            this.eliminarCiudad.Location = new System.Drawing.Point(368, 166);
             this.eliminarCiudad.Name = "eliminarCiudad";
             this.eliminarCiudad.Size = new System.Drawing.Size(75, 23);
             this.eliminarCiudad.TabIndex = 5;
@@ -126,7 +85,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Buscar);
             this.panel1.Controls.Add(this.limpiarCampos);
-            this.panel1.Location = new System.Drawing.Point(28, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(349, 54);
             this.panel1.TabIndex = 8;
@@ -187,36 +146,84 @@
             this.limpiarCampos.UseVisualStyleBackColor = true;
             this.limpiarCampos.Click += new System.EventHandler(this.limpiarCampos_Click);
             // 
+            // ciudadDataGrid
+            // 
+            this.ciudadDataGrid.AllowUserToAddRows = false;
+            this.ciudadDataGrid.AllowUserToDeleteRows = false;
+            this.ciudadDataGrid.AllowUserToResizeColumns = false;
+            this.ciudadDataGrid.AllowUserToResizeRows = false;
+            this.ciudadDataGrid.AutoGenerateColumns = false;
+            this.ciudadDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ciudadDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.descripcionDataGridViewTextBoxColumn,
+            this.activoDataGridViewCheckBoxColumn});
+            this.ciudadDataGrid.DataSource = this.ciudadBindingSource;
+            this.ciudadDataGrid.Location = new System.Drawing.Point(12, 73);
+            this.ciudadDataGrid.Name = "ciudadDataGrid";
+            this.ciudadDataGrid.ReadOnly = true;
+            this.ciudadDataGrid.Size = new System.Drawing.Size(346, 150);
+            this.ciudadDataGrid.TabIndex = 9;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descripcionDataGridViewTextBoxColumn
+            // 
+            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "descripcion";
+            this.descripcionDataGridViewTextBoxColumn.HeaderText = "descripcion";
+            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            this.descripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // activoDataGridViewCheckBoxColumn
+            // 
+            this.activoDataGridViewCheckBoxColumn.DataPropertyName = "activo";
+            this.activoDataGridViewCheckBoxColumn.HeaderText = "activo";
+            this.activoDataGridViewCheckBoxColumn.Name = "activoDataGridViewCheckBoxColumn";
+            this.activoDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // ciudadBindingSource
+            // 
+            this.ciudadBindingSource.DataMember = "Ciudad";
+            this.ciudadBindingSource.DataSource = this.dataSetCiudad;
+            // 
+            // dataSetCiudad
+            // 
+            this.dataSetCiudad.DataSetName = "dataSetCiudad";
+            this.dataSetCiudad.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // ciudadTableAdapter
+            // 
+            this.ciudadTableAdapter.ClearBeforeFill = true;
+            // 
             // ABMCiudad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 324);
+            this.Controls.Add(this.ciudadDataGrid);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.eliminarCiudad);
             this.Controls.Add(this.modificarCiudad);
             this.Controls.Add(this.nuevoCiudad);
-            this.Controls.Add(this.ciudadDataGrid);
             this.Name = "ABMCiudad";
             this.Text = "ABM Ciudad";
             this.Load += new System.EventHandler(this.ABMCiudad_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ciudadDataGrid;
-        private DataSetCiudad dataSetCiudad;
-        private System.Windows.Forms.BindingSource ciudadBindingSource;
-        private DataSetCiudadTableAdapters.CiudadTableAdapter ciudadTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button nuevoCiudad;
         private System.Windows.Forms.Button modificarCiudad;
         private System.Windows.Forms.Button eliminarCiudad;
@@ -227,5 +234,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Buscar;
         private System.Windows.Forms.Button limpiarCampos;
+        private System.Windows.Forms.DataGridView ciudadDataGrid;
+        private GD2C2015DataSet dataSetCiudad;
+        private System.Windows.Forms.BindingSource ciudadBindingSource;
+        private GD2C2015DataSetTableAdapters.CiudadTableAdapter ciudadTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn activoDataGridViewCheckBoxColumn;
     }
 }
