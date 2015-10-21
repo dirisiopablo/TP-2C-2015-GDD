@@ -51,6 +51,12 @@
     <Compile Include="ABM\Abm Aeronave\ABMAeronave.Designer.cs">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM\Abm Aeronave\AeronaveBaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM\Abm Aeronave\AeronaveBaja.Designer.cs">
+      <DependentUpon>AeronaveBaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM\Abm Aeronave\AeronaveDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet11.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IMappedModel.cs" />
     <Compile Include="Models\Aeronave.cs" />
@@ -221,6 +232,9 @@
     <Compile Include="Services\DAO.cs" />
     <EmbeddedResource Include="ABM\Abm Aeronave\ABMAeronave.resx">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM\Abm Aeronave\AeronaveBaja.resx">
+      <DependentUpon>AeronaveBaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Aeronave\AeronaveDialog.resx">
       <DependentUpon>AeronaveDialog.cs</DependentUpon>
@@ -323,6 +337,17 @@
     </None>
     <None Include="GD2C2015DataSet11.xss">
       <DependentUpon>GD2C2015DataSet11.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet2.xsc">
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet2.xss">
+      <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

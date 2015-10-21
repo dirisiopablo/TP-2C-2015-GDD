@@ -22,6 +22,10 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
         public String modelo { get; set; }
         public decimal kgDisponibles { get; set; }
         public String fabricante { get; set; }
+        public int cantidadPasillo1 { get; set; }
+        public int cantidadVentana1 { get; set; }
+        public int cantidadPasillo2 { get; set; }
+        public int cantidadVentana2 { get; set; }
         public DialogResult dr { get; set; }
 
         public AeronaveDialog(String _matricula, String _modelo, decimal _kgDisponibles, String _fabricante, Enums.tipoDialog tipoDialog) {
@@ -43,6 +47,10 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
             this.modelo = this.modeloTextbox.Text;
             this.kgDisponibles = Convert.ToDecimal(this.kgTextbox.Text);
             this.fabricante = this.fabricanteTextbox.Text;
+            this.cantidadPasillo1 = Convert.ToInt32(this.cantidadPasillo1Input.Text);
+            this.cantidadVentana1 = Convert.ToInt32(this.cantidadVentana1Input.Text);
+            this.cantidadPasillo2 = Convert.ToInt32(this.cantidadPasillo2Input.Text);
+            this.cantidadVentana2 = Convert.ToInt32(this.cantidadVentana2Input.Text);
 
             this.dr = DialogResult.OK;
             this.Close();
@@ -51,6 +59,11 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
 
         private void cancelarAeronave_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void AeronaveDialog_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -26,8 +26,13 @@
             this.aeronaveDataGrid = new System.Windows.Forms.DataGridView();
             this.NuevoAeronave = new System.Windows.Forms.Button();
             this.ModificarAeronave = new System.Windows.Forms.Button();
-            this.EliminarAeronave = new System.Windows.Forms.Button();
+            this.bajaAeronave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bajaLabel = new System.Windows.Forms.Label();
+            this.bajaInput = new System.Windows.Forms.ComboBox();
+            this.butacasInput = new System.Windows.Forms.NumericUpDown();
+            this.butacasLabel = new System.Windows.Forms.Label();
+            this.kilogramosInput = new System.Windows.Forms.NumericUpDown();
             this.kilogramosLabel = new System.Windows.Forms.Label();
             this.fabricanteInput = new System.Windows.Forms.TextBox();
             this.fabricanteLabel = new System.Windows.Forms.Label();
@@ -37,16 +42,11 @@
             this.matriculaLabel = new System.Windows.Forms.Label();
             this.Buscar = new System.Windows.Forms.Button();
             this.Limpiar = new System.Windows.Forms.Button();
-            this.kilogramosInput = new System.Windows.Forms.NumericUpDown();
-            this.butacasInput = new System.Windows.Forms.NumericUpDown();
-            this.butacasLabel = new System.Windows.Forms.Label();
-            this.bajaInput = new System.Windows.Forms.ComboBox();
-            this.bajaLabel = new System.Windows.Forms.Label();
             this.gD2C2015DataSet1 = new AerolineaFrba.GD2C2015DataSet1();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.butacasInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,15 +84,15 @@
             this.ModificarAeronave.UseVisualStyleBackColor = true;
             this.ModificarAeronave.Click += new System.EventHandler(this.ModificarAeronave_Click);
             // 
-            // EliminarAeronave
+            // bajaAeronave
             // 
-            this.EliminarAeronave.Location = new System.Drawing.Point(832, 207);
-            this.EliminarAeronave.Name = "EliminarAeronave";
-            this.EliminarAeronave.Size = new System.Drawing.Size(75, 23);
-            this.EliminarAeronave.TabIndex = 3;
-            this.EliminarAeronave.Text = "Eliminar";
-            this.EliminarAeronave.UseVisualStyleBackColor = true;
-            this.EliminarAeronave.Click += new System.EventHandler(this.EliminarAeronave_Click);
+            this.bajaAeronave.Location = new System.Drawing.Point(832, 207);
+            this.bajaAeronave.Name = "bajaAeronave";
+            this.bajaAeronave.Size = new System.Drawing.Size(75, 23);
+            this.bajaAeronave.TabIndex = 3;
+            this.bajaAeronave.Text = "Baja";
+            this.bajaAeronave.UseVisualStyleBackColor = true;
+            this.bajaAeronave.Click += new System.EventHandler(this.bajaAeronave_Click);
             // 
             // panel1
             // 
@@ -114,6 +114,60 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(814, 91);
             this.panel1.TabIndex = 8;
+            // 
+            // bajaLabel
+            // 
+            this.bajaLabel.AutoSize = true;
+            this.bajaLabel.Location = new System.Drawing.Point(532, 6);
+            this.bajaLabel.Name = "bajaLabel";
+            this.bajaLabel.Size = new System.Drawing.Size(60, 13);
+            this.bajaLabel.TabIndex = 19;
+            this.bajaLabel.Text = "Ultima Baja";
+            // 
+            // bajaInput
+            // 
+            this.bajaInput.FormattingEnabled = true;
+            this.bajaInput.Items.AddRange(new object[] {
+            "Ninguna",
+            "Fuera de servicio",
+            "Baja definitiva"});
+            this.bajaInput.Location = new System.Drawing.Point(405, 3);
+            this.bajaInput.Name = "bajaInput";
+            this.bajaInput.Size = new System.Drawing.Size(121, 21);
+            this.bajaInput.TabIndex = 18;
+            // 
+            // butacasInput
+            // 
+            this.butacasInput.Location = new System.Drawing.Point(178, 30);
+            this.butacasInput.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.butacasInput.Name = "butacasInput";
+            this.butacasInput.Size = new System.Drawing.Size(100, 20);
+            this.butacasInput.TabIndex = 17;
+            // 
+            // butacasLabel
+            // 
+            this.butacasLabel.AutoSize = true;
+            this.butacasLabel.Location = new System.Drawing.Point(284, 32);
+            this.butacasLabel.Name = "butacasLabel";
+            this.butacasLabel.Size = new System.Drawing.Size(103, 13);
+            this.butacasLabel.TabIndex = 16;
+            this.butacasLabel.Text = "Butacas Disponibles";
+            // 
+            // kilogramosInput
+            // 
+            this.kilogramosInput.Location = new System.Drawing.Point(178, 4);
+            this.kilogramosInput.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.kilogramosInput.Name = "kilogramosInput";
+            this.kilogramosInput.Size = new System.Drawing.Size(100, 20);
+            this.kilogramosInput.TabIndex = 15;
             // 
             // kilogramosLabel
             // 
@@ -190,60 +244,7 @@
             this.Limpiar.TabIndex = 5;
             this.Limpiar.Text = "Limpiar Campos";
             this.Limpiar.UseVisualStyleBackColor = true;
-            // 
-            // kilogramosInput
-            // 
-            this.kilogramosInput.Location = new System.Drawing.Point(178, 4);
-            this.kilogramosInput.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.kilogramosInput.Name = "kilogramosInput";
-            this.kilogramosInput.Size = new System.Drawing.Size(100, 20);
-            this.kilogramosInput.TabIndex = 15;
-            // 
-            // butacasInput
-            // 
-            this.butacasInput.Location = new System.Drawing.Point(178, 30);
-            this.butacasInput.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.butacasInput.Name = "butacasInput";
-            this.butacasInput.Size = new System.Drawing.Size(100, 20);
-            this.butacasInput.TabIndex = 17;
-            // 
-            // butacasLabel
-            // 
-            this.butacasLabel.AutoSize = true;
-            this.butacasLabel.Location = new System.Drawing.Point(284, 32);
-            this.butacasLabel.Name = "butacasLabel";
-            this.butacasLabel.Size = new System.Drawing.Size(103, 13);
-            this.butacasLabel.TabIndex = 16;
-            this.butacasLabel.Text = "Butacas Disponibles";
-            // 
-            // bajaInput
-            // 
-            this.bajaInput.FormattingEnabled = true;
-            this.bajaInput.Items.AddRange(new object[] {
-            "Ninguna",
-            "Fuera de servicio",
-            "Baja definitiva"});
-            this.bajaInput.Location = new System.Drawing.Point(405, 3);
-            this.bajaInput.Name = "bajaInput";
-            this.bajaInput.Size = new System.Drawing.Size(121, 21);
-            this.bajaInput.TabIndex = 18;
-            // 
-            // bajaLabel
-            // 
-            this.bajaLabel.AutoSize = true;
-            this.bajaLabel.Location = new System.Drawing.Point(532, 6);
-            this.bajaLabel.Name = "bajaLabel";
-            this.bajaLabel.Size = new System.Drawing.Size(60, 13);
-            this.bajaLabel.TabIndex = 19;
-            this.bajaLabel.Text = "Ultima Baja";
+            this.Limpiar.Click += new System.EventHandler(this.Limpiar_Click);
             // 
             // gD2C2015DataSet1
             // 
@@ -256,7 +257,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 394);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.EliminarAeronave);
+            this.Controls.Add(this.bajaAeronave);
             this.Controls.Add(this.ModificarAeronave);
             this.Controls.Add(this.NuevoAeronave);
             this.Controls.Add(this.aeronaveDataGrid);
@@ -266,8 +267,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.butacasInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).EndInit();
             this.ResumeLayout(false);
 
@@ -278,7 +279,7 @@
         private System.Windows.Forms.DataGridView aeronaveDataGrid;
         private System.Windows.Forms.Button NuevoAeronave;
         private System.Windows.Forms.Button ModificarAeronave;
-        private System.Windows.Forms.Button EliminarAeronave;
+        private System.Windows.Forms.Button bajaAeronave;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label kilogramosLabel;
         private System.Windows.Forms.TextBox fabricanteInput;

@@ -53,12 +53,20 @@ namespace AerolineaFrba.Abm_Aeronave {
             aeronave.Modelo = nuevoModelo;
             aeronave.Kilogramos_Disponibles = nuevoKgDisponibles;
             aeronave.Fabricante = nuevoFabricante;
-            int affected = DAO.insert<Aeronave>(aeronave);
+            int idInsertado = DAO.insert<Aeronave>(aeronave);
 
             DAO.closeConnection();
 
+            this.insertarButacas(aeronaveDialog.cantidadPasillo1, idInsertado, "Pasillo");
+            this.insertarButacas(aeronaveDialog.cantidadVentana1, idInsertado, "Ventanilla");
+            this.insertarButacas(aeronaveDialog.cantidadPasillo2, idInsertado, "Pasillo");
+            this.insertarButacas(aeronaveDialog.cantidadVentana2, idInsertado, "Ventanilla");
+
             //this.aeronaveTableAdapter.Fill(this.dataSetAeronave.Aeronave);
-            aeronaveDataGrid.Update(); 
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
 
         }
 
@@ -76,11 +84,11 @@ namespace AerolineaFrba.Abm_Aeronave {
 
             DataGridViewRow row = this.aeronaveDataGrid.SelectedRows[0];
 
-            int id = (int)row.Cells[0].Value;
-            String matricula = (String)row.Cells[1].Value;
-            String modelo = (String)row.Cells[2].Value;
-            decimal kgDisponibles = Convert.ToDecimal(row.Cells[3].Value);
-            String fabricante = (String)row.Cells[4].Value;
+            //int id = (int)row.Cells[0].Value;
+            String matricula = (String)row.Cells[0].Value;
+            String modelo = (String)row.Cells[1].Value;
+            decimal kgDisponibles = Convert.ToDecimal(row.Cells[2].Value);
+            String fabricante = (String)row.Cells[3].Value;
 
             AeronaveDialog aeronaveDialog = new AeronaveDialog(matricula, modelo, kgDisponibles, fabricante, Enums.tipoDialog.modificar);
             var dr = aeronaveDialog.ShowDialog();
@@ -94,37 +102,33 @@ namespace AerolineaFrba.Abm_Aeronave {
 
             DAO.connect();
 
-            Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "id = " + id });
+            Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "matricula = '" + matricula +"' " });
             aeronave.Matricula = nuevaMatricula;
             aeronave.Modelo = nuevoModelo;
             aeronave.Kilogramos_Disponibles = nuevoKgDisponibles;
             aeronave.Fabricante = nuevoFabricante;
-            int affected = DAO.update<Aeronave>(aeronave);
+            int idInsertado = DAO.update<Aeronave>(aeronave);
 
             DAO.closeConnection();
 
-            //this.aeronaveTableAdapter.Fill(this.dataSetAeronave.Aeronave);
-            aeronaveDataGrid.Update(); 
+            //this.insertarButacas(aeronaveDialog.cantidadPasillo1, idInsertado, "Pasillo");
+            //this.insertarButacas(aeronaveDialog.cantidadVentana1, idInsertado, "Ventanilla");
+            //this.insertarButacas(aeronaveDialog.cantidadPasillo2, idInsertado, "Pasillo");
+            //this.insertarButacas(aeronaveDialog.cantidadVentana2, idInsertado, "Ventanilla");
 
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
         }
 
-        private void EliminarAeronave_Click(object sender, EventArgs e) {
-            // usar TipoBaja
-        }
 
         private void ABMAeronave_Load(object sender, EventArgs e) {
         }
 
         private void Buscar_Click(object sender, EventArgs e)
         {
-            String query =  "SELECT aero.matricula 'Matrícula', " + 
-                            "aero.modelo 'Modelo', " + 
-                            "aero.kilogramos_disponibles 'Kilogramos Disponibles', " + 
-                            "aero.fabricante 'Fabricante', " + 
-                            "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) as 'Cantidad Butacas', " +
-                            "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is null THEN 'SI' WHEN ba.fecha_reinicio is not null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
-                            "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja' " +
-                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero WHERE";
+            string query = obtenerQueryBase();
 
             String matricula = this.matriculaInput.Text;
             String modelo = this.modeloInput.Text;
@@ -159,8 +163,6 @@ namespace AerolineaFrba.Abm_Aeronave {
                 query += "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) > " + cantidadButacas + " AND ";
             }
 
-            
-
             if (baja != "" && baja != "Ninguna")
             {
                 query += "(SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC) = '" + baja + "' AND ";
@@ -184,6 +186,73 @@ namespace AerolineaFrba.Abm_Aeronave {
             aeronaveDataGrid.DataSource = table;
 
             DAO.closeConnection();
+        }
+
+        private void Limpiar_Click(object sender, EventArgs e)
+        {
+            this.matriculaInput.Text = "";
+            this.modeloInput.Text = "";
+            this.kilogramosInput.Text = "0";
+            this.fabricanteInput.Text = "";
+            this.butacasInput.Text = "0";
+            this.bajaInput.Text = "";
+        }
+
+        private void insertarButacas(int cantidadButacas, int idAeronave, string tipoButaca) {
+            for (int i = 1; i <= cantidadButacas; i++)
+            {
+                DAO.connect();
+                Butaca butaca = new Butaca();
+                butaca.Numero = i;
+                butaca.Piso = 1;
+                butaca.Tipo = tipoButaca;
+                butaca.Aeronave_Id = idAeronave;
+                int idButaca = DAO.insert<Butaca>(butaca);
+                DAO.closeConnection();
+            }
+        }
+
+        private string obtenerQueryBase()
+        {
+            return "SELECT aero.matricula 'Matrícula', " + 
+                            "aero.modelo 'Modelo', " + 
+                            "aero.kilogramos_disponibles 'Kilogramos Disponibles', " + 
+                            "aero.fabricante 'Fabricante', " + 
+                            "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) as 'Cantidad Butacas', " +
+                            "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is null THEN 'SI' WHEN ba.fecha_reinicio is not null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
+                            "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja' " +
+                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero WHERE";
+        }
+
+        private void bajaAeronave_Click(object sender, EventArgs e)
+        {
+            if (this.aeronaveDataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe elegir una aeronave para dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (this.aeronaveDataGrid.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Solo puede elegir una aeronave para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataGridViewRow row = this.aeronaveDataGrid.SelectedRows[0];
+
+            String matricula = (String)row.Cells[0].Value;
+            String modelo = (String)row.Cells[1].Value;
+            decimal kgDisponibles = Convert.ToDecimal(row.Cells[2].Value);
+            String fabricante = (String)row.Cells[3].Value;
+
+            AeronaveBaja aeronaveBaja = new AeronaveBaja(matricula);
+            var dr = aeronaveBaja.ShowDialog();
+
+            if (aeronaveBaja.dr == DialogResult.Cancel) return;
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
         }
     }
 }

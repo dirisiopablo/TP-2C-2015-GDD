@@ -155,10 +155,11 @@ namespace AerolineaFrba.Services {
             SqlCommand command = new SqlCommand(query, _sqlCon);
             int rowsAffected = command.ExecuteNonQuery();
 
-            return rowsAffected;
+            if (rowsAffected == 0) return rowsAffected;
+            else return Convert.ToInt32(entity.GetType().GetProperty("Id").GetValue(entity));
 
         }
-
+        
         public static int insert<T>(T entity) {
 
             String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
@@ -203,12 +204,15 @@ namespace AerolineaFrba.Services {
             queryValues += ")";
 
             query += queryValues;
-
+            query += "; SELECT SCOPE_IDENTITY();"; //Devuelve el Last Inserted ID
+            
             SqlCommand command = new SqlCommand(query, _sqlCon);
-            int rowsAffected = command.ExecuteNonQuery();
+            //bool insertado = false;
+            object lastInsertedId = command.ExecuteScalar();;
 
-            return rowsAffected;
+            if (!Convert.ToBoolean(lastInsertedId)) return 0;
 
+            return Convert.ToInt32(lastInsertedId); // Devuelve el last insert ID o 0 en caso de falla.
         }
 
 
