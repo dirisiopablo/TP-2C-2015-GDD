@@ -143,6 +143,10 @@ namespace AerolineaFrba.Services {
                 else if (String.Equals(prop.PropertyType.Name, "String")) {
                     set += "'" + prop.GetValue(entity) + "'" + ", ";
                 }
+                else if (String.Equals(prop.PropertyType.Name, "DateTime")) {
+                    DateTime date = (DateTime)prop.GetValue(entity);
+                    set += "'" + date.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", ";
+                }
                 else {
                     set += prop.GetValue(entity) + ", ";
                 }
@@ -194,8 +198,13 @@ namespace AerolineaFrba.Services {
                         queryValues += 0 + ", ";
                     }
                 }
-                else if (String.Equals(prop.PropertyType.Name, "String"))
+                else if (String.Equals(prop.PropertyType.Name, "String")) {
                     queryValues += "'" + prop.GetValue(entity) + "'" + ", ";
+                }
+                else if (String.Equals(prop.PropertyType.Name, "DateTime")) {
+                    DateTime date = (DateTime)prop.GetValue(entity);
+                    queryValues += "'" + date.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", ";
+                }
                 else
                     queryValues += prop.GetValue(entity) + ", ";
             }
