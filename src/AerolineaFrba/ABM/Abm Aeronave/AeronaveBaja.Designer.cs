@@ -36,15 +36,15 @@
             this.modeloTexto = new System.Windows.Forms.Label();
             this.fabricanteTexto = new System.Windows.Forms.Label();
             this.tipoBajaLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet2 = new AerolineaFrba.GD2C2015DataSet2();
+            this.tipoBajaCombo = new System.Windows.Forms.ComboBox();
             this.tipoBajaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet2 = new AerolineaFrba.GD2C2015DataSet2();
             this.tipo_BajaTableAdapter = new AerolineaFrba.GD2C2015DataSet2TableAdapters.Tipo_BajaTableAdapter();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.confirmarBaja = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tipoBajaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,24 +112,25 @@
             this.tipoBajaLabel.TabIndex = 1;
             this.tipoBajaLabel.Text = "Seleccione un tipo de baja:";
             // 
-            // comboBox1
+            // tipoBajaCombo
             // 
-            this.comboBox1.DataSource = this.tipoBajaBindingSource;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(72, 111);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
-            // 
-            // gD2C2015DataSet2
-            // 
-            this.gD2C2015DataSet2.DataSetName = "GD2C2015DataSet2";
-            this.gD2C2015DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tipoBajaCombo.DataSource = this.tipoBajaBindingSource;
+            this.tipoBajaCombo.DisplayMember = "descripcion";
+            this.tipoBajaCombo.FormattingEnabled = true;
+            this.tipoBajaCombo.Location = new System.Drawing.Point(72, 111);
+            this.tipoBajaCombo.Name = "tipoBajaCombo";
+            this.tipoBajaCombo.Size = new System.Drawing.Size(121, 21);
+            this.tipoBajaCombo.TabIndex = 2;
             // 
             // tipoBajaBindingSource
             // 
             this.tipoBajaBindingSource.DataMember = "Tipo_Baja";
             this.tipoBajaBindingSource.DataSource = this.gD2C2015DataSet2;
+            // 
+            // gD2C2015DataSet2
+            // 
+            this.gD2C2015DataSet2.DataSetName = "GD2C2015DataSet2";
+            this.gD2C2015DataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tipo_BajaTableAdapter
             // 
@@ -176,13 +177,13 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.confirmarBaja);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tipoBajaCombo);
             this.Controls.Add(this.tipoBajaLabel);
             this.Name = "AeronaveBaja";
             this.Text = "AeronaveBaja";
             this.Load += new System.EventHandler(this.AeronaveBaja_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tipoBajaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -199,7 +200,7 @@
         private System.Windows.Forms.Label modeloTexto;
         private System.Windows.Forms.Label matriculaTexto;
         private System.Windows.Forms.Label tipoBajaLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox tipoBajaCombo;
         private GD2C2015DataSet2 gD2C2015DataSet2;
         private System.Windows.Forms.BindingSource tipoBajaBindingSource;
         private GD2C2015DataSet2TableAdapters.Tipo_BajaTableAdapter tipo_BajaTableAdapter;

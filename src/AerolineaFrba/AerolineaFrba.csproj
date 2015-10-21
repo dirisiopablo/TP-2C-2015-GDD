@@ -155,6 +155,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD2C2015DataSet4.cs">
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GD2C2015DataSet4.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

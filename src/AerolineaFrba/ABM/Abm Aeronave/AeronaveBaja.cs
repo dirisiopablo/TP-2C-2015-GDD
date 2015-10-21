@@ -29,6 +29,7 @@ namespace AerolineaFrba.ABM.Abm_Aeronave
             Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "matricula = '" + matricula + "' " });
 
             this.tipo_BajaTableAdapter.Fill(this.gD2C2015DataSet2.Tipo_Baja);
+
             this.matriculaTexto.Text = aeronave.Matricula;
             this.fabricanteTexto.Text = aeronave.Fabricante;
             this.modeloTexto.Text = aeronave.Modelo;
