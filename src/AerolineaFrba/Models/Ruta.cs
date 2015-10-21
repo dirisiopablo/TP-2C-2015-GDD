@@ -8,7 +8,7 @@ namespace AerolineaFrba.Models {
     class Ruta {
 
         public int Id { get; set; }
-        public int Codigo { get; set; }
+        public decimal Codigo { get; set; }
         public decimal Precio_Base_Kg { get; set; }
         public decimal Precio_Base_Pasajes { get; set; }
 

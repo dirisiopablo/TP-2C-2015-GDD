@@ -89,12 +89,15 @@ namespace AerolineaFrba.Services {
 
             SqlDataReader reader = command.ExecuteReader();
 
+            if (!reader.HasRows) return default(T);
+
             reader.Read();
             Object[] values = new Object[reader.FieldCount];
             reader.GetValues(values);
 
             int i = 0;
             foreach (var prop in obj.GetType().GetProperties()) {
+                if (ignoredTypes.Contains(prop.PropertyType.Name)) continue; //ignore model types (lazy load)
                 if (values.Length < i + 1) break;
                 prop.SetValue(obj, values[i], null);
                 i++;

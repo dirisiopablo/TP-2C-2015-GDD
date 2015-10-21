@@ -129,6 +129,12 @@
       <DependentUpon>DataSetRol.xsd</DependentUpon>
     </Compile>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Forms\Generacion Viaje\GenerarViaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Generacion Viaje\GenerarViaje.Designer.cs">
+      <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="GD2C2015DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,6 +149,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IMappedModel.cs" />
     <Compile Include="Models\Aeronave.cs" />
@@ -203,12 +219,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Generacion Viaje\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Generacion Viaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Ruta\RutaDialog.resx">
       <DependentUpon>RutaDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Generacion Viaje\GenerarViaje.resx">
+      <DependentUpon>GenerarViaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -348,6 +361,28 @@
     </None>
     <None Include="GD2C2015DataSet2.xss">
       <DependentUpon>GD2C2015DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet3.xsc">
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet3.xss">
+      <DependentUpon>GD2C2015DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet4.xsc">
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet4.xss">
+      <DependentUpon>GD2C2015DataSet4.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
