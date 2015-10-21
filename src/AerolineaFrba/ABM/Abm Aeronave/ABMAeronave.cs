@@ -124,9 +124,49 @@ namespace AerolineaFrba.Abm_Aeronave {
                             "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) as 'Cantidad Butacas', " +
                             "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is null THEN 'SI' WHEN ba.fecha_reinicio is not null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
                             "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja' " +
-                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero;";
+                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero WHERE";
 
-            //query = query.Substring(0, query.Length - 5);
+            String matricula = this.matriculaInput.Text;
+            String modelo = this.modeloInput.Text;
+            int kilogramos = Int32.Parse(this.kilogramosInput.Text);
+            String fabricante = this.fabricanteInput.Text;
+            int cantidadButacas = Int32.Parse(this.butacasInput.Text);
+            String baja = this.bajaInput.Text;
+
+
+            if (matricula != null && matricula != "")
+            {
+                query += " aero.matricula LIKE " + "'%" + matricula + "%' AND ";
+            }
+
+            if (modelo != null && modelo != "")
+            {
+                query += " aero.modelo LIKE " + "'%" + modelo + "%' AND ";
+            }
+
+            if (kilogramos != 0)
+            {
+                query += " aero.kilogramos_disponibles > " + kilogramos + " AND ";
+            }
+
+            if (fabricante != null && fabricante != "")
+            {
+                query += " aero.fabricante LIKE " + "'%" + fabricante + "%' AND ";
+            }
+
+            if (cantidadButacas != 0)
+            {
+                query += "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) > " + cantidadButacas + " AND ";
+            }
+
+            
+
+            if (baja != "" && baja != "Ninguna")
+            {
+                query += "(SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC) = '" + baja + "' AND ";
+            }                
+
+            query = query.Substring(0, query.Length - 5);
             GetData(query);
         }
 
