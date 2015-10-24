@@ -262,5 +262,10 @@ namespace AerolineaFrba.Abm_Aeronave {
 
             GetData(query);
         }
+
+        private void altaAeronave_Click(object sender, EventArgs e)
+        {
+            //TODO: MAKE ME WORK PLS :)
+        }
     }
 }

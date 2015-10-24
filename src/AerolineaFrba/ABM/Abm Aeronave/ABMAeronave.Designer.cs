@@ -43,6 +43,7 @@
             this.Buscar = new System.Windows.Forms.Button();
             this.Limpiar = new System.Windows.Forms.Button();
             this.gD2C2015DataSet1 = new AerolineaFrba.GD2C2015DataSet1();
+            this.altaAeronave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.butacasInput)).BeginInit();
@@ -76,7 +77,7 @@
             // 
             // ModificarAeronave
             // 
-            this.ModificarAeronave.Location = new System.Drawing.Point(832, 159);
+            this.ModificarAeronave.Location = new System.Drawing.Point(833, 138);
             this.ModificarAeronave.Name = "ModificarAeronave";
             this.ModificarAeronave.Size = new System.Drawing.Size(75, 23);
             this.ModificarAeronave.TabIndex = 2;
@@ -86,7 +87,7 @@
             // 
             // bajaAeronave
             // 
-            this.bajaAeronave.Location = new System.Drawing.Point(832, 207);
+            this.bajaAeronave.Location = new System.Drawing.Point(833, 167);
             this.bajaAeronave.Name = "bajaAeronave";
             this.bajaAeronave.Size = new System.Drawing.Size(75, 23);
             this.bajaAeronave.TabIndex = 3;
@@ -251,11 +252,22 @@
             this.gD2C2015DataSet1.DataSetName = "GD2C2015DataSet1";
             this.gD2C2015DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // altaAeronave
+            // 
+            this.altaAeronave.Location = new System.Drawing.Point(833, 196);
+            this.altaAeronave.Name = "altaAeronave";
+            this.altaAeronave.Size = new System.Drawing.Size(75, 23);
+            this.altaAeronave.TabIndex = 9;
+            this.altaAeronave.Text = "Alta";
+            this.altaAeronave.UseVisualStyleBackColor = true;
+            this.altaAeronave.Click += new System.EventHandler(this.altaAeronave_Click);
+            // 
             // ABMAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 394);
+            this.Controls.Add(this.altaAeronave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bajaAeronave);
             this.Controls.Add(this.ModificarAeronave);
@@ -296,5 +308,6 @@
         private System.Windows.Forms.Label bajaLabel;
         private System.Windows.Forms.ComboBox bajaInput;
         private GD2C2015DataSet1 gD2C2015DataSet1;
+        private System.Windows.Forms.Button altaAeronave;
     }
 }
