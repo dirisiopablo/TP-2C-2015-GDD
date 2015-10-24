@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.codigoTextbox = new System.Windows.Forms.TextBox();
-            this.kgTextbox = new System.Windows.Forms.TextBox();
             this.pasajeTextbox = new System.Windows.Forms.TextBox();
             this.origenCombo = new System.Windows.Forms.ComboBox();
             this.ciudadBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -43,11 +42,13 @@
             this.ciudadTableAdapter = new AerolineaFrba.DataSetCiudadTableAdapters.CiudadTableAdapter();
             this.ciudadBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.ciudadTableAdapter1 = new AerolineaFrba.DataSetCiudad2TableAdapters.CiudadTableAdapter();
+            this.kgTextbox = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).BeginInit();
             this.SuspendLayout();
             // 
             // codigoTextbox
@@ -56,13 +57,6 @@
             this.codigoTextbox.Name = "codigoTextbox";
             this.codigoTextbox.Size = new System.Drawing.Size(155, 20);
             this.codigoTextbox.TabIndex = 0;
-            // 
-            // kgTextbox
-            // 
-            this.kgTextbox.Location = new System.Drawing.Point(216, 80);
-            this.kgTextbox.Name = "kgTextbox";
-            this.kgTextbox.Size = new System.Drawing.Size(155, 20);
-            this.kgTextbox.TabIndex = 1;
             // 
             // pasajeTextbox
             // 
@@ -191,6 +185,14 @@
             // 
             this.ciudadTableAdapter1.ClearBeforeFill = true;
             // 
+            // kgTextbox
+            // 
+            this.kgTextbox.DecimalPlaces = 2;
+            this.kgTextbox.Location = new System.Drawing.Point(216, 80);
+            this.kgTextbox.Name = "kgTextbox";
+            this.kgTextbox.Size = new System.Drawing.Size(155, 20);
+            this.kgTextbox.TabIndex = 12;
+            // 
             // RutaDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,8 +208,8 @@
             this.Controls.Add(this.destinoCombo);
             this.Controls.Add(this.origenCombo);
             this.Controls.Add(this.pasajeTextbox);
-            this.Controls.Add(this.kgTextbox);
             this.Controls.Add(this.codigoTextbox);
+            this.Controls.Add(this.kgTextbox);
             this.Name = "RutaDialog";
             this.Text = "Ruta";
             this.Load += new System.EventHandler(this.RutaDialog_Load);
@@ -216,6 +218,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,7 +227,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox codigoTextbox;
-        private System.Windows.Forms.TextBox kgTextbox;
         private System.Windows.Forms.TextBox pasajeTextbox;
         private System.Windows.Forms.ComboBox origenCombo;
         private System.Windows.Forms.ComboBox destinoCombo;
@@ -242,5 +244,6 @@
         private System.Windows.Forms.BindingSource ciudadBindingSource1;
         private DataSetCiudad2TableAdapters.CiudadTableAdapter ciudadTableAdapter1;
         private System.Windows.Forms.BindingSource ciudadBindingSource2;
+        private System.Windows.Forms.NumericUpDown kgTextbox;
     }
 }

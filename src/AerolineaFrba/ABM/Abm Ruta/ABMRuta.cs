@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ using System.Windows.Forms;
 
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
+using AerolineaFrba.Config;
 
 namespace AerolineaFrba.ABM.Abm_Ruta {
     public sealed partial class ABMRuta : Form {
 
         private static ABMRuta _instance = null;
+        private SqlDataAdapter dataAdapter;
 
         private ABMRuta() {
             this.InitializeComponent();
@@ -55,8 +58,10 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
 
             DAO.closeConnection();
 
-            this.rutaTableAdapter.Fill(this.rutaDataSet.Ruta);
-            rutaDataGrid.Update(); 
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
 
         }
 
@@ -105,8 +110,10 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
 
             DAO.closeConnection();
 
-            this.rutaTableAdapter.Fill(this.rutaDataSet.Ruta);
-            rutaDataGrid.Update(); 
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
 
         }
 
@@ -116,7 +123,38 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
 
         private void ABMRuta_Load(object sender, EventArgs e) {
             // TODO: This line of code loads data into the 'rutaDataSet.Ruta' table. You can move, or remove it, as needed.
-            this.rutaTableAdapter.Fill(this.rutaDataSet.Ruta);
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
+        }
+
+        private void GetData(string selectCommand)
+        {
+            DAO.connect();
+            String connectionString = DAO.makeStringConnection(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
+
+            dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+            // Populate a new data table and bind it to the BindingSource.
+            DataTable table = new DataTable();
+            //table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            dataAdapter.Fill(table);
+            rutaDataGrid.DataSource = table;
+
+            DAO.closeConnection();
+        }
+
+        private string obtenerQueryBase()
+        {
+            return "SELECT ruta.id 'Id', " +
+                    "ruta.codigo 'Codigo', " +
+                    "ruta.precio_base_kg 'Precio Base Kg', " +
+                    "ruta.precio_base_pasajes 'Precio Base Pasajes', " +
+                    "ruta.ciudad_origen_id 'Ciudad de Origen', " +
+                    "ruta.ciudad_destino_id 'Ciudad Destino', " +
+                    "ruta.activo 'Activo' " +
+                    "FROM BIEN_MIGRADO_RAFA.Ruta ruta WHERE";
         }
     }
 }

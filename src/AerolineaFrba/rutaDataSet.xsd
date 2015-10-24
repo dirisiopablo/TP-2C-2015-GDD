@@ -92,7 +92,7 @@ SELECT id, codigo, precio_base_kg, precio_base_pasajes, ciudad_origen_id, ciudad
   <xs:element name="rutaDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="rutaDataSet" msprop:Generator_UserDSName="rutaDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Ruta" msprop:Generator_TableClassName="RutaDataTable" msprop:Generator_TableVarName="tableRuta" msprop:Generator_TablePropName="Ruta" msprop:Generator_RowDeletingName="RutaRowDeleting" msprop:Generator_RowChangingName="RutaRowChanging" msprop:Generator_RowEvHandlerName="RutaRowChangeEventHandler" msprop:Generator_RowDeletedName="RutaRowDeleted" msprop:Generator_UserTableName="Ruta" msprop:Generator_RowChangedName="RutaRowChanged" msprop:Generator_RowEvArgName="RutaRowChangeEvent" msprop:Generator_RowClassName="RutaRow">
+        <xs:element name="Ruta" msprop:Generator_TableClassName="RutaDataTable" msprop:Generator_TableVarName="tableRuta" msprop:Generator_RowChangedName="RutaRowChanged" msprop:Generator_TablePropName="Ruta" msprop:Generator_RowDeletingName="RutaRowDeleting" msprop:Generator_RowChangingName="RutaRowChanging" msprop:Generator_RowEvHandlerName="RutaRowChangeEventHandler" msprop:Generator_RowDeletedName="RutaRowDeleted" msprop:Generator_RowClassName="RutaRow" msprop:Generator_UserTableName="Ruta" msprop:Generator_RowEvArgName="RutaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -106,7 +106,7 @@ SELECT id, codigo, precio_base_kg, precio_base_pasajes, ciudad_origen_id, ciudad
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+    <xs:unique name="Constraint1">
       <xs:selector xpath=".//mstns:Ruta" />
       <xs:field xpath="mstns:id" />
     </xs:unique>
