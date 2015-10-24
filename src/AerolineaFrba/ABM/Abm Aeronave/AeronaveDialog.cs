@@ -63,7 +63,10 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
 
         private void AeronaveDialog_Load(object sender, EventArgs e)
         {
-
+            if (this.tipo == Enums.tipoDialog.modificar)
+            {
+                this.splitContainer1.Visible = false;
+            }
         }
     }
 }

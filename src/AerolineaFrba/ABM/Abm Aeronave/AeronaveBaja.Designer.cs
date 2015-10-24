@@ -42,7 +42,7 @@
             this.tipo_BajaTableAdapter = new AerolineaFrba.GD2C2015DataSet2TableAdapters.Tipo_BajaTableAdapter();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.confirmarBaja = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cancelarBaja = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tipoBajaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -121,6 +121,7 @@
             this.tipoBajaCombo.Name = "tipoBajaCombo";
             this.tipoBajaCombo.Size = new System.Drawing.Size(121, 21);
             this.tipoBajaCombo.TabIndex = 2;
+            this.tipoBajaCombo.ValueMember = "id";
             // 
             // tipoBajaBindingSource
             // 
@@ -159,22 +160,24 @@
             this.confirmarBaja.TabIndex = 4;
             this.confirmarBaja.Text = "Confirmar Baja";
             this.confirmarBaja.UseVisualStyleBackColor = true;
+            this.confirmarBaja.Click += new System.EventHandler(this.confirmarBaja_Click);
             // 
-            // button1
+            // cancelarBaja
             // 
-            this.button1.Location = new System.Drawing.Point(268, 111);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Descartar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cancelarBaja.Location = new System.Drawing.Point(268, 111);
+            this.cancelarBaja.Name = "cancelarBaja";
+            this.cancelarBaja.Size = new System.Drawing.Size(107, 23);
+            this.cancelarBaja.TabIndex = 5;
+            this.cancelarBaja.Text = "Cancelar";
+            this.cancelarBaja.UseVisualStyleBackColor = true;
+            this.cancelarBaja.Click += new System.EventHandler(this.cancelarBaja_Click);
             // 
             // AeronaveBaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 153);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cancelarBaja);
             this.Controls.Add(this.confirmarBaja);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tipoBajaCombo);
@@ -206,6 +209,6 @@
         private GD2C2015DataSet2TableAdapters.Tipo_BajaTableAdapter tipo_BajaTableAdapter;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button confirmarBaja;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cancelarBaja;
     }
 }

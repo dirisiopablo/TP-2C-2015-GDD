@@ -111,11 +111,6 @@ namespace AerolineaFrba.Abm_Aeronave {
 
             DAO.closeConnection();
 
-            //this.insertarButacas(aeronaveDialog.cantidadPasillo1, idInsertado, "Pasillo");
-            //this.insertarButacas(aeronaveDialog.cantidadVentana1, idInsertado, "Ventanilla");
-            //this.insertarButacas(aeronaveDialog.cantidadPasillo2, idInsertado, "Pasillo");
-            //this.insertarButacas(aeronaveDialog.cantidadVentana2, idInsertado, "Ventanilla");
-
             string query = obtenerQueryBase();
             query = query.Substring(0, query.Length - 5);
 
@@ -219,7 +214,7 @@ namespace AerolineaFrba.Abm_Aeronave {
                             "aero.kilogramos_disponibles 'Kilogramos Disponibles', " + 
                             "aero.fabricante 'Fabricante', " + 
                             "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) as 'Cantidad Butacas', " +
-                            "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is null THEN 'SI' WHEN ba.fecha_reinicio is not null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
+                            "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is not null THEN 'SI' WHEN ba.fecha_reinicio is null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
                             "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja' " +
                             "FROM BIEN_MIGRADO_RAFA.Aeronave aero WHERE";
         }
@@ -249,6 +244,19 @@ namespace AerolineaFrba.Abm_Aeronave {
             var dr = aeronaveBaja.ShowDialog();
 
             if (aeronaveBaja.dr == DialogResult.Cancel) return;
+            
+            DAO.connect();
+
+            Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "matricula = '" + matricula + "' " });
+
+            BajaAeronave bajaAeronave = new BajaAeronave();
+            bajaAeronave.Aeronave_Id = aeronave.Id;
+            bajaAeronave.Tipo_Baja_Id = aeronaveBaja.tipoBajaId;
+            bajaAeronave.Fecha_Baja = DateTime.Now;
+            int idInsertado = DAO.insert<BajaAeronave>(bajaAeronave);
+
+            DAO.closeConnection();
+
             string query = obtenerQueryBase();
             query = query.Substring(0, query.Length - 5);
 

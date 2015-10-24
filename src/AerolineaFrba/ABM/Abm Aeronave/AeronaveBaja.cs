@@ -16,12 +16,14 @@ namespace AerolineaFrba.ABM.Abm_Aeronave
     public partial class AeronaveBaja : Form
     {
         public String matricula { get; set; }
+        public int tipoBajaId { get; set; }
         public DialogResult dr { get; set; }
 
         public AeronaveBaja(String _matricula)
         {
             InitializeComponent();
             this.matricula = _matricula.ToString();
+            this.dr = DialogResult.Cancel;
         }
 
         private void AeronaveBaja_Load(object sender, EventArgs e)
@@ -33,6 +35,19 @@ namespace AerolineaFrba.ABM.Abm_Aeronave
             this.matriculaTexto.Text = aeronave.Matricula;
             this.fabricanteTexto.Text = aeronave.Fabricante;
             this.modeloTexto.Text = aeronave.Modelo;
+        }
+
+        private void cancelarBaja_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void confirmarBaja_Click(object sender, EventArgs e)
+        {
+            this.tipoBajaId = (int)this.tipoBajaCombo.SelectedValue;
+
+            this.dr = DialogResult.OK;
+            this.Close();
         }
     }
 }
