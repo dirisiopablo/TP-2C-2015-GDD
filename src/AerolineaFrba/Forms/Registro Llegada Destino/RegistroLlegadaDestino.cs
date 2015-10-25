@@ -36,12 +36,30 @@ namespace AerolineaFrba.Forms.Registro_Llegada_Destino {
             int id_aeronave = (int)this.matriculaCombo.SelectedValue;
             int id_origen = (int)this.origenCombo.SelectedValue;
             int id_destino = (int)this.destinoCombo.SelectedValue;
-            DateTime fecha = this.fechaPicker.Value;
+            DateTime fecha_llegada = this.fechaPicker.Value;
 
-            DAO.selectOne<Aeronave>(new[] { "id = " + id_aeronave });
+            DAO.connect();
+            Viaje viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + id_aeronave, "fecha_llegada_estimada = " + fecha_llegada });
 
+            if (viaje == null) {
+                MessageBox.Show("No existe un viaje con la aeronave ingresada con una llegada estimada cercana a la fecha ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DAO.closeConnection();
+                return;
+            }
 
-            //TODO, hay que pensar, lo dejamos para otro ma;ana
+            int ruta_id = viaje.Ruta_Id;
+            Ruta ruta = DAO.selectOne<Ruta>( new[] {"id = " + ruta_id} );
+
+            if (ruta.Ciudad_Origen_Id != id_origen || ruta.Ciudad_Destino_Id != id_destino) {
+                MessageBox.Show("La ciudad origen o destino es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DAO.closeConnection();
+                return;
+            }
+
+            viaje.Fecha_Llegada = fecha_llegada;
+
+            DAO.update<Viaje>(viaje);
+            DAO.closeConnection();
 
         }
 

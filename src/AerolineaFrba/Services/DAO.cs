@@ -34,7 +34,7 @@ namespace AerolineaFrba.Services {
             _username = DBConfig.username;
             _password = DBConfig.password;
 
-            _strCon = makeStringConnection(_direccion, _database, _username, _password);
+            _strCon = makeConnectionString(_direccion, _database, _username, _password);
             _sqlCon = new SqlConnection(_strCon);
         }
 
@@ -44,7 +44,7 @@ namespace AerolineaFrba.Services {
             _username  = username;
             _password  = password;
 
-            _strCon = makeStringConnection(_direccion, _database, _username, _password);
+            _strCon = makeConnectionString(_direccion, _database, _username, _password);
             _sqlCon = new SqlConnection(_strCon);
         }
 
@@ -97,10 +97,28 @@ namespace AerolineaFrba.Services {
 
             int i = 0;
             foreach (var prop in obj.GetType().GetProperties()) {
+                
                 if (ignoredTypes.Contains(prop.PropertyType.Name)) continue; //ignore model types (lazy load)
+                
                 if (values.Length < i + 1) break;
-                prop.SetValue(obj, values[i], null);
+
+                if (values[i] == System.DBNull.Value) {
+
+                    if (prop.PropertyType.Name.Equals("Int32")) {
+                        prop.SetValue(obj, 0, null);
+                    }
+
+                    if (prop.PropertyType.Name.Equals("String")) {
+                        prop.SetValue(obj, "", null);
+                    }
+
+                }
+                else {
+                    prop.SetValue(obj, values[i], null);
+                }
+
                 i++;
+
             }
 
             reader.Close();
@@ -228,8 +246,12 @@ namespace AerolineaFrba.Services {
             return Convert.ToInt32(lastInsertedId); // Devuelve el last insert ID o 0 en caso de falla.
         }
 
+        public static string makeConnectionString() {
+            return "Data Source=" + DBConfig.direccion + ";Initial Catalog=" +
+                     DBConfig.database + ";User ID=" + DBConfig.username + ";Password=" + DBConfig.password + ";";
+        }
 
-        public static string makeStringConnection(string direccion, string database, string username, string password){
+        public static string makeConnectionString(string direccion, string database, string username, string password){
              return "Data Source=" + direccion + ";Initial Catalog=" +
                      database + ";User ID=" + username + ";Password=" + password + ";";
         }

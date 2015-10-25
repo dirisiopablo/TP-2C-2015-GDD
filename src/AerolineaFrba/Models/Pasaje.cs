@@ -18,6 +18,9 @@ namespace AerolineaFrba.Models {
         public int Cliente_Id { get; set; }
         public Cliente Cliente { get; set; }
 
+        public int Viaje_id { get; set; }
+        public Viaje Viaje { get; set; }
+
         public int[] CancelacionesIds { get; set; }
         List<Cancelacion> Cancelaciones { get; set; }
 

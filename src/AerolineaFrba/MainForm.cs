@@ -14,6 +14,7 @@ using AerolineaFrba.ABM.Abm_Ciudad;
 using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.ABM.Abm_Ruta;
 using AerolineaFrba.Forms.Generacion_Viaje;
+using AerolineaFrba.Forms.Compra;
 
 using AerolineaFrba.Services;
 using AerolineaFrba.Models;
@@ -91,6 +92,11 @@ namespace AerolineaFrba {
         private void generarViajeButton_Click(object sender, EventArgs e) {
             GenerarViaje GenerarViajeForm = GenerarViaje.getInstance();
             var dr = GenerarViajeForm.ShowDialog();
+        }
+
+        private void compraButton_Click(object sender, EventArgs e) {
+            Compra CompraForm = Compra.getInstance();
+            var dr = CompraForm.ShowDialog();
         }
 
 

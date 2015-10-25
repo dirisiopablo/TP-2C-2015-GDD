@@ -132,7 +132,7 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         private void GetData(string selectCommand)
         {
             DAO.connect();
-            String connectionString = DAO.makeStringConnection(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
+            String connectionString = DAO.makeConnectionString(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
 
             dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
 

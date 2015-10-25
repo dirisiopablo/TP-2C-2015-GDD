@@ -9,12 +9,12 @@ namespace AerolineaFrba.Models {
 
         public int Id { get; set; }
 
-        public int Puntos { get; set; }
+        public decimal Puntos { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public int DNI { get; set; }
+        public decimal DNI { get; set; }
         public string Direccion { get; set; }
-        public int Telefono { get; set; }
+        public decimal Telefono { get; set; }
         public string Email { get; set; }
         public DateTime Fecha_Nacimiento { get; set; }
 

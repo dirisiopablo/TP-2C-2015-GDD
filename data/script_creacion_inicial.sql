@@ -19,13 +19,13 @@ GO
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-	CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
-		id                        int               IDENTITY(1,1),
-		matricula                 nvarchar(255)     NULL,
-		modelo                    nvarchar(255)     NULL,
-		kilogramos_disponibles    numeric(18, 0)    NULL,
-		fabricante                nvarchar(255)     NULL,
-	)
+CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
+	id                        int               IDENTITY(1,1),
+	matricula                 nvarchar(255)     NULL,
+	modelo                    nvarchar(255)     NULL,
+	kilogramos_disponibles    numeric(18, 0)    NULL,
+	fabricante                nvarchar(255)     NULL,
+)
 GO
 
 
@@ -96,7 +96,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              1,
+	activo		   bit              NULL,
 )
 GO
 
@@ -156,7 +156,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Rol(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              1
+	activo		   bit              NULL
 )
 GO
 
@@ -168,7 +168,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
-	activo		   		   bit               1
+	activo		   		   bit               NULL
 )
 GO
 
@@ -272,7 +272,7 @@ GO
 
 --Paquete
 INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
-SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, c.id, v.id FROM gd_esquema.Maestra m
+SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, m.Paquete_Precio, c.id, v.id FROM gd_esquema.Maestra m
 JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.Ruta_Codigo
 JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
 JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni
@@ -384,23 +384,6 @@ GO
 ALTER TABLE BIEN_MIGRADO_RAFA.Viaje
 ADD CONSTRAINT PK5 PRIMARY KEY CLUSTERED (id)
 GO
-
-
---INDEXES
-
-CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065350] ON [BIEN_MIGRADO_RAFA].[Ciudad]
-(
-	[descripcion] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065145] ON [BIEN_MIGRADO_RAFA].[Tipo_Servicio]
-(
-	[descripcion] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-GO
-
-
  
 
  --FOREIGN KEYS
@@ -533,6 +516,22 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Viaje ADD CONSTRAINT RefAeronave4
 GO
 
  --END FOREIGN KEYS
+
+
+ --INDEXES
+
+CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065350] ON [BIEN_MIGRADO_RAFA].[Ciudad]
+(
+	[descripcion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+CREATE NONCLUSTERED INDEX [NonClusteredIndex-20150921-065145] ON [BIEN_MIGRADO_RAFA].[Tipo_Servicio]
+(
+	[descripcion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
 
  -- START FIXTURE
 INSERT INTO [BIEN_MIGRADO_RAFA].[Tipo_Baja]

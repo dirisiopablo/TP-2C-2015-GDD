@@ -28,6 +28,7 @@
             this.ABMAeronave_Button = new System.Windows.Forms.Button();
             this.ABMRuta_Button = new System.Windows.Forms.Button();
             this.generarViajeButton = new System.Windows.Forms.Button();
+            this.compraButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -79,11 +80,22 @@
             this.generarViajeButton.UseVisualStyleBackColor = true;
             this.generarViajeButton.Click += new System.EventHandler(this.generarViajeButton_Click);
             // 
+            // compraButton
+            // 
+            this.compraButton.Location = new System.Drawing.Point(39, 101);
+            this.compraButton.Name = "compraButton";
+            this.compraButton.Size = new System.Drawing.Size(88, 51);
+            this.compraButton.TabIndex = 6;
+            this.compraButton.Text = "Comprar ";
+            this.compraButton.UseVisualStyleBackColor = true;
+            this.compraButton.Click += new System.EventHandler(this.compraButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.compraButton);
             this.Controls.Add(this.generarViajeButton);
             this.Controls.Add(this.ABMRuta_Button);
             this.Controls.Add(this.ABMAeronave_Button);
@@ -103,6 +115,7 @@
         private System.Windows.Forms.Button ABMAeronave_Button;
         private System.Windows.Forms.Button ABMRuta_Button;
         private System.Windows.Forms.Button generarViajeButton;
+        private System.Windows.Forms.Button compraButton;
 
     }
 }

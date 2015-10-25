@@ -129,6 +129,12 @@
       <DependentUpon>DataSetRol.xsd</DependentUpon>
     </Compile>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Forms\Compra\Compra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Compra\Compra.Designer.cs">
+      <DependentUpon>Compra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Generacion Viaje\GenerarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,12 +196,6 @@
     <Compile Include="Forms\Canje Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Compra\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Compra\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Consulta Millas\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +240,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\DAO.cs" />
+    <Compile Include="ViajeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViajeDataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ABM\Abm Aeronave\ABMAeronave.resx">
       <DependentUpon>ABMAeronave.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Ruta\RutaDialog.resx">
       <DependentUpon>RutaDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compra\Compra.resx">
+      <DependentUpon>Compra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generacion Viaje\GenerarViaje.resx">
       <DependentUpon>GenerarViaje.cs</DependentUpon>
@@ -406,6 +414,17 @@
     </None>
     <None Include="rutaDataSet.xss">
       <DependentUpon>rutaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ViajeDataSet.xsc">
+      <DependentUpon>ViajeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ViajeDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ViajeDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ViajeDataSet.xss">
+      <DependentUpon>ViajeDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

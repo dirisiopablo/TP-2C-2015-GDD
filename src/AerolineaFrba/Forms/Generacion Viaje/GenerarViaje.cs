@@ -91,7 +91,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
             int affected = DAO.insert<Viaje>(nuevoViaje);
             DAO.closeConnection();
 
-            if (affected > 0)
+            if (affected != 0)
                 MessageBox.Show("Nuevo viaje creado con exito.", "Nuevo viaje creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("Error al crear nuevo viaje.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
