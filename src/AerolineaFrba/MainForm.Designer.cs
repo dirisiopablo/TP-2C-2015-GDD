@@ -29,6 +29,7 @@
             this.ABMRuta_Button = new System.Windows.Forms.Button();
             this.generarViajeButton = new System.Windows.Forms.Button();
             this.compraButton = new System.Windows.Forms.Button();
+            this.estadisticasButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -90,11 +91,22 @@
             this.compraButton.UseVisualStyleBackColor = true;
             this.compraButton.Click += new System.EventHandler(this.compraButton_Click);
             // 
+            // estadisticasButton
+            // 
+            this.estadisticasButton.Location = new System.Drawing.Point(148, 101);
+            this.estadisticasButton.Name = "estadisticasButton";
+            this.estadisticasButton.Size = new System.Drawing.Size(92, 51);
+            this.estadisticasButton.TabIndex = 7;
+            this.estadisticasButton.Text = "Estadisticas";
+            this.estadisticasButton.UseVisualStyleBackColor = true;
+            this.estadisticasButton.Click += new System.EventHandler(this.estadisticasButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.estadisticasButton);
             this.Controls.Add(this.compraButton);
             this.Controls.Add(this.generarViajeButton);
             this.Controls.Add(this.ABMRuta_Button);
@@ -116,6 +128,7 @@
         private System.Windows.Forms.Button ABMRuta_Button;
         private System.Windows.Forms.Button generarViajeButton;
         private System.Windows.Forms.Button compraButton;
+        private System.Windows.Forms.Button estadisticasButton;
 
     }
 }

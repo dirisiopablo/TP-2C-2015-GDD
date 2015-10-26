@@ -15,6 +15,7 @@ using AerolineaFrba.Abm_Aeronave;
 using AerolineaFrba.ABM.Abm_Ruta;
 using AerolineaFrba.Forms.Generacion_Viaje;
 using AerolineaFrba.Forms.Compra;
+using AerolineaFrba.Forms.Listado_Estadistico;
 
 using AerolineaFrba.Services;
 using AerolineaFrba.Models;
@@ -97,6 +98,11 @@ namespace AerolineaFrba {
         private void compraButton_Click(object sender, EventArgs e) {
             Compra CompraForm = Compra.getInstance();
             var dr = CompraForm.ShowDialog();
+        }
+
+        private void estadisticasButton_Click(object sender, EventArgs e) {
+            ListadoEstadistico ListadoEstadisticoForm = ListadoEstadistico.getInstance();
+            var dr = ListadoEstadisticoForm.ShowDialog();
         }
 
 

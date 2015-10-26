@@ -141,6 +141,12 @@
     <Compile Include="Forms\Generacion Viaje\GenerarViaje.Designer.cs">
       <DependentUpon>GenerarViaje.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Listado Estadistico\ListadoEstadistico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Registro Llegada Destino\RegistroLlegadaDestino.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,12 +231,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Listado Estadistico\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Registro de Usuario\Form1.cs">
@@ -277,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Generacion Viaje\GenerarViaje.resx">
       <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Registro Llegada Destino\RegistroLlegadaDestino.resx">
       <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
