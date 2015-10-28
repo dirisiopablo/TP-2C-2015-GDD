@@ -134,7 +134,7 @@ namespace AerolineaFrba.Forms.Compra {
         }
 
         private void FillDataGrid(string selectCommand) {
-            DAO.connect();
+
             String connectionString = DAO.makeConnectionString();
 
             this.dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
@@ -147,7 +147,6 @@ namespace AerolineaFrba.Forms.Compra {
 
             this.viajesDataGrid.DataSource = table;
 
-            DAO.closeConnection();
         }
 
         private String getBaseQuery() {

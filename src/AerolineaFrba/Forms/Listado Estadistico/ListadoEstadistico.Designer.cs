@@ -45,6 +45,7 @@
             // 
             // anioCombo
             // 
+            this.anioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.anioCombo.FormattingEnabled = true;
             this.anioCombo.Location = new System.Drawing.Point(61, 25);
             this.anioCombo.Name = "anioCombo";
@@ -62,6 +63,7 @@
             // 
             // semestreCombo
             // 
+            this.semestreCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.semestreCombo.FormattingEnabled = true;
             this.semestreCombo.Items.AddRange(new object[] {
             "Primero",
@@ -79,6 +81,7 @@
             this.destinosPasajesButton.TabIndex = 4;
             this.destinosPasajesButton.Text = "Destinos mas vendidos";
             this.destinosPasajesButton.UseVisualStyleBackColor = true;
+            this.destinosPasajesButton.Click += new System.EventHandler(this.destinosPasajesButton_Click);
             // 
             // destinosVaciosButton
             // 
@@ -88,6 +91,7 @@
             this.destinosVaciosButton.TabIndex = 5;
             this.destinosVaciosButton.Text = "Destinos con aeronaves mas vacias";
             this.destinosVaciosButton.UseVisualStyleBackColor = true;
+            this.destinosVaciosButton.Click += new System.EventHandler(this.destinosVaciosButton_Click);
             // 
             // clientesPuntosButton
             // 
@@ -97,6 +101,7 @@
             this.clientesPuntosButton.TabIndex = 6;
             this.clientesPuntosButton.Text = "Clientes con mas puntos acumulados";
             this.clientesPuntosButton.UseVisualStyleBackColor = true;
+            this.clientesPuntosButton.Click += new System.EventHandler(this.clientesPuntosButton_Click);
             // 
             // destinosCanceladosButton
             // 
@@ -106,6 +111,7 @@
             this.destinosCanceladosButton.TabIndex = 7;
             this.destinosCanceladosButton.Text = "Destinos con pasajes mas cancelados";
             this.destinosCanceladosButton.UseVisualStyleBackColor = true;
+            this.destinosCanceladosButton.Click += new System.EventHandler(this.destinosCanceladosButton_Click);
             // 
             // aeronaveBajaButton
             // 
@@ -115,6 +121,7 @@
             this.aeronaveBajaButton.TabIndex = 8;
             this.aeronaveBajaButton.Text = "Aeronaves con mas dias fuera de servicio";
             this.aeronaveBajaButton.UseVisualStyleBackColor = true;
+            this.aeronaveBajaButton.Click += new System.EventHandler(this.aeronaveBajaButton_Click);
             // 
             // ListadoEstadistico
             // 
