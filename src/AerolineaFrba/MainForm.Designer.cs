@@ -30,6 +30,7 @@
             this.generarViajeButton = new System.Windows.Forms.Button();
             this.compraButton = new System.Windows.Forms.Button();
             this.estadisticasButton = new System.Windows.Forms.Button();
+            this.devolucionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -101,11 +102,23 @@
             this.estadisticasButton.UseVisualStyleBackColor = true;
             this.estadisticasButton.Click += new System.EventHandler(this.estadisticasButton_Click);
             // 
+            // devolucionButton
+            // 
+            this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.devolucionButton.Location = new System.Drawing.Point(260, 101);
+            this.devolucionButton.Name = "devolucionButton";
+            this.devolucionButton.Size = new System.Drawing.Size(88, 51);
+            this.devolucionButton.TabIndex = 8;
+            this.devolucionButton.Text = "Devolución";
+            this.devolucionButton.UseVisualStyleBackColor = true;
+            this.devolucionButton.Click += new System.EventHandler(this.devolucionButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.devolucionButton);
             this.Controls.Add(this.estadisticasButton);
             this.Controls.Add(this.compraButton);
             this.Controls.Add(this.generarViajeButton);
@@ -129,6 +142,7 @@
         private System.Windows.Forms.Button generarViajeButton;
         private System.Windows.Forms.Button compraButton;
         private System.Windows.Forms.Button estadisticasButton;
+        private System.Windows.Forms.Button devolucionButton;
 
     }
 }
