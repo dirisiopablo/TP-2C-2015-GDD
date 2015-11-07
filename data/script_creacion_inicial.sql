@@ -96,7 +96,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              NULL,
+	activo		   bit              NULL DEFAULT (1)
 )
 GO
 
@@ -156,7 +156,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Rol(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              NULL
+	activo		   bit              NULL DEFAULT (1)
 )
 GO
 
@@ -168,7 +168,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
-	activo		   		   bit               NULL
+	activo		   		   bit               NULL DEFAULT (1)
 )
 GO
 
