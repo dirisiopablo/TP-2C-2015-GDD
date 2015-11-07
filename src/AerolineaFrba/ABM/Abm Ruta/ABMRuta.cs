@@ -122,6 +122,10 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         }
 
         private void ABMRuta_Load(object sender, EventArgs e) {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet6.Ciudad' Puede moverla o quitarla según sea necesario.
+            this.ciudadTableAdapter1.Fill(this.gD2C2015DataSet6.Ciudad);
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet5.Ciudad' Puede moverla o quitarla según sea necesario.
+            this.ciudadTableAdapter.Fill(this.gD2C2015DataSet5.Ciudad);
             // TODO: This line of code loads data into the 'rutaDataSet.Ruta' table. You can move, or remove it, as needed.
             string query = obtenerQueryBase();
             query = query.Substring(0, query.Length - 5);
@@ -151,10 +155,63 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                     "ruta.codigo 'Codigo', " +
                     "ruta.precio_base_kg 'Precio Base Kg', " +
                     "ruta.precio_base_pasajes 'Precio Base Pasajes', " +
-                    "ruta.ciudad_origen_id 'Ciudad de Origen', " +
-                    "ruta.ciudad_destino_id 'Ciudad Destino', " +
+                    "c2.descripcion 'Ciudad Destino', " +
+                    "c1.descripcion 'Ciudad de Origen', " +
                     "ruta.activo 'Activo' " +
-                    "FROM BIEN_MIGRADO_RAFA.Ruta ruta WHERE";
+                    "FROM BIEN_MIGRADO_RAFA.Ruta ruta " +
+                    "JOIN BIEN_MIGRADO_RAFA.ciudad c1 ON c1.id = ruta.ciudad_origen_id " +
+                    "JOIN BIEN_MIGRADO_RAFA.ciudad c2 ON c2.id = ruta.ciudad_destino_id WHERE";
+        }
+
+        private void Buscar_Click(object sender, EventArgs e)
+        {
+            string query = obtenerQueryBase();
+
+            String codigo = this.codigoInput.Text;
+            int precioBaseKg = Int32.Parse(this.baseKgInput.Text);
+            int precioBasePasaje = Int32.Parse(this.basePasajeInput.Text);
+            int destinoId = (int) this.destinoCombo.SelectedValue;
+            int origenId = (int) this.origenCombo.SelectedValue;
+            bool origenTodos = this.origenTodosCheckBox.Checked;
+            bool destinoTodos = this.destinoTodosCheckBox.Checked;
+
+
+            if (codigo != null && codigo != "")
+            {
+                query += " ruta.codigo LIKE " + "'%" + codigo + "%' AND ";
+            }
+
+            if (precioBaseKg != 0)
+            {
+                query += " ruta.precio_base_kg < " + precioBaseKg + " AND ";
+            }
+
+            if (precioBasePasaje != 0)
+            {
+                query += " ruta.precio_base_pasajes < " + precioBasePasaje + " AND ";
+            }
+
+            if (destinoId != 0 && !destinoTodos)
+            {
+                query += " ruta.ciudad_destino_id = " + destinoId + " AND ";
+            }
+
+            if (origenId != 0 && !origenTodos)
+            {
+                query += " ruta.ciudad_origen_id = " + origenId + " AND ";
+            }
+            
+            query = query.Substring(0, query.Length - 5);
+            GetData(query);
+        }
+
+        private void Limpiar_Click(object sender, EventArgs e)
+        {
+            this.codigoInput.Text = "";
+            this.baseKgInput.Text = "0";
+            this.basePasajeInput.Text = "0";
+            this.origenTodosCheckBox.Checked = true;
+            this.destinoTodosCheckBox.Checked = true;
         }
     }
 }

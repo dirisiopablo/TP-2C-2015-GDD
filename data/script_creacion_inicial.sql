@@ -96,7 +96,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              NULL,
+	activo		   bit              NULL DEFAULT (1)
 )
 GO
 
@@ -156,7 +156,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Rol(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              NULL
+	activo		   bit              NULL DEFAULT (1)
 )
 GO
 
@@ -168,7 +168,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
-	activo		   		   bit               NULL
+	activo		   		   bit               NULL DEFAULT (1)
 )
 GO
 
@@ -256,7 +256,7 @@ GO
 
 --Ruta
 INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
-select m.codigo, sum(m.baseKG), sum(m.basePasaje), c.id, c2.id
+select m.codigo, max(m.baseKG), max(m.basePasaje), c.id, c2.id
 from (SELECT DISTINCT m.Ruta_Codigo codigo, m.Ruta_Ciudad_Destino destino, m.Ruta_Ciudad_Origen origen, m.Ruta_Precio_BasePasaje basePasaje, m.Ruta_Precio_BaseKG baseKG 
 	FROM gd_esquema.Maestra m) m
 JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = destino
