@@ -198,6 +198,12 @@ namespace AerolineaFrba.Services {
                     DateTime date = (DateTime)prop.GetValue(entity);
                     set += "'" + date.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", ";
                 }
+                else if (String.Equals(prop.PropertyType.Name, "Decimal"))
+                {
+                    Decimal numero = (Decimal)prop.GetValue(entity);
+                    //set += numero.ToString("G") + ", ";
+                    set += numero + ", ";
+                }
                 else {
                     set += prop.GetValue(entity) + ", ";
                 }

@@ -118,7 +118,36 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         }
 
         private void rutaEliminar_Click(object sender, EventArgs e) {
+            if (this.rutaDataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe elegir una ruta para dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
+            if (this.rutaDataGrid.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Solo puede elegir una ruta para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataGridViewRow row = this.rutaDataGrid.SelectedRows[0];
+
+            int id = (int)row.Cells[0].Value;
+
+            DAO.connect();
+
+            Ruta ruta = DAO.selectOne<Ruta>(new[] { "id = " + id + " " });
+
+
+            ruta.Activo = false;
+            int idInsertado = DAO.update<Ruta>(ruta);
+
+            DAO.closeConnection();
+
+            string query = obtenerQueryBase();
+            query = query.Substring(0, query.Length - 5);
+
+            GetData(query);
         }
 
         private void ABMRuta_Load(object sender, EventArgs e) {

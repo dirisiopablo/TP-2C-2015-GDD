@@ -10,12 +10,13 @@ namespace AerolineaFrba.Models {
     class Ruta {
 
         public int Id { get; set; }
-        public decimal Codigo { get; set; }
-        public decimal Precio_Base_Kg { get; set; }
-        public decimal Precio_Base_Pasajes { get; set; }
+        public Decimal Codigo { get; set; }
+        public Decimal Precio_Base_Kg { get; set; }
+        public Decimal Precio_Base_Pasajes { get; set; }
 
         public int Ciudad_Origen_Id { get; set; }
         public int Ciudad_Destino_Id { get; set; }
+        public Boolean Activo { get; set; }
 
         private Ciudad _ciudadOrigen = null;
         public Ciudad CiudadOrigen {
