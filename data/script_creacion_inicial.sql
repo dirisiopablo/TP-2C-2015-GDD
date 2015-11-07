@@ -256,9 +256,12 @@ GO
 
 --Ruta
 INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
-SELECT DISTINCT m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, c.id, c2.id FROM gd_esquema.Maestra m
-JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = m.Ruta_Ciudad_Destino
-JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = m.Ruta_Ciudad_Origen 
+select m.codigo, sum(m.baseKG), sum(m.basePasaje), c.id, c2.id
+from (SELECT DISTINCT m.Ruta_Codigo codigo, m.Ruta_Ciudad_Destino destino, m.Ruta_Ciudad_Origen origen, m.Ruta_Precio_BasePasaje basePasaje, m.Ruta_Precio_BaseKG baseKG 
+	FROM gd_esquema.Maestra m) m
+JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = destino
+JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = origen
+group by codigo, c.id, c2.id
 GO
 
 
