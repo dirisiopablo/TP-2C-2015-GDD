@@ -33,11 +33,11 @@
             this.pasajesDatagrid = new System.Windows.Forms.DataGridView();
             this.buscarButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.paquetesDatagrid = new System.Windows.Forms.DataGridView();
             this.devolucionPasajeButton = new System.Windows.Forms.Button();
             this.devolucionEncomiendaButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pasajesDatagrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paquetesDatagrid)).BeginInit();
             this.SuspendLayout();
             // 
             // dniLabel
@@ -124,13 +124,13 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Encomiendas";
             // 
-            // dataGridView1
+            // paquetesDatagrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 315);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(707, 150);
-            this.dataGridView1.TabIndex = 10;
+            this.paquetesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paquetesDatagrid.Location = new System.Drawing.Point(27, 315);
+            this.paquetesDatagrid.Name = "paquetesDatagrid";
+            this.paquetesDatagrid.Size = new System.Drawing.Size(707, 150);
+            this.paquetesDatagrid.TabIndex = 10;
             // 
             // devolucionPasajeButton
             // 
@@ -159,7 +159,7 @@
             this.ClientSize = new System.Drawing.Size(846, 518);
             this.Controls.Add(this.devolucionEncomiendaButton);
             this.Controls.Add(this.devolucionPasajeButton);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.paquetesDatagrid);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.buscarButton);
             this.Controls.Add(this.pasajesDatagrid);
@@ -173,7 +173,7 @@
             this.Name = "Devolucion";
             this.Text = "Devolucion";
             ((System.ComponentModel.ISupportInitialize)(this.pasajesDatagrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paquetesDatagrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +191,7 @@
         private System.Windows.Forms.DataGridView pasajesDatagrid;
         private System.Windows.Forms.Button buscarButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView paquetesDatagrid;
         private System.Windows.Forms.Button devolucionPasajeButton;
         private System.Windows.Forms.Button devolucionEncomiendaButton;
     }
