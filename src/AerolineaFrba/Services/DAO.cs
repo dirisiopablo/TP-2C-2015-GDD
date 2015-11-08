@@ -283,12 +283,12 @@ namespace AerolineaFrba.Services {
 
         public static string makeConnectionString() {
             return "Data Source=" + DBConfig.direccion + ";Initial Catalog=" +
-                     DBConfig.database + ";User ID=" + DBConfig.username + ";Password=" + DBConfig.password + ";";
+                     DBConfig.database + ";User ID=" + DBConfig.username + ";Password=" + DBConfig.password + ";" + "MultipleActiveResultSets=True;";
         }
 
         public static string makeConnectionString(string direccion, string database, string username, string password){
              return "Data Source=" + direccion + ";Initial Catalog=" +
-                     database + ";User ID=" + username + ";Password=" + password + ";";
+                     database + ";User ID=" + username + ";Password=" + password + ";" + "MultipleActiveResultSets=True;";
         }
 
 

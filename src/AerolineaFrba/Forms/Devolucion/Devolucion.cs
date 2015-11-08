@@ -64,81 +64,57 @@ namespace AerolineaFrba.Forms.Devolucion {
 
         }
 
-        private void devolucionPasajeButton_Click(object sender, EventArgs e) {
+        private void devolucionButton_Click(object sender, EventArgs e) {
 
-            if (this.pasajesDatagrid.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe elegir un pasaje para iniciar la cancelación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            int pasajesCount = this.pasajesDatagrid.SelectedRows.Count;
+            int paquetesCount = this.paquetesDatagrid.SelectedRows.Count;
+
+            if (pasajesCount == 0 && paquetesCount == 0) {
+                MessageBox.Show("Debe elegir por lo menos un pasaje o una encomienda para iniciar la cancelación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            if (this.pasajesDatagrid.SelectedRows.Count > 1)
-            {
-                MessageBox.Show("Solo puede elegir un pasaje para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            DialogResult result = MessageBox.Show(this.buildConfirmMsg(pasajesCount, paquetesCount), "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-            DataGridViewRow row = this.pasajesDatagrid.SelectedRows[0];
+            if (result != DialogResult.OK) return;
 
-            String codigo = (String)row.Cells[0].Value;
+            DAO.connect();
 
-            //AeronaveBaja aeronaveBaja = new AeronaveBaja(matricula);
-            //var dr = aeronaveBaja.ShowDialog();
+            Cancelacion cancelacion = new Cancelacion();
+            cancelacion.Fecha = DateTime.Now;
+            cancelacion.Motivo = "";
+            cancelacion.NumeroCompra = 0000;
+            int cancelacion_id = DAO.insert<Cancelacion>(cancelacion);
 
-            //if (aeronaveBaja.dr == DialogResult.Cancel) return;
+            foreach (DataGridViewRow pasaje in this.pasajesDatagrid.SelectedRows) {
 
-            //TODO instanciar dialog de baja y eso...
+                String codigo = (String)pasaje.Cells[0].Value;
+                Pasaje pasaje_cancelado = DAO.selectOne<Pasaje>(new[] { "codigo = " + codigo });
+
+                Cancelacion_Pasaje cp = new Cancelacion_Pasaje();
+                cp.Cancelacion_Id = cancelacion_id;
+                cp.Pasaje_Id = pasaje_cancelado.Id;
+
+                DAO.insert<Cancelacion_Pasaje>(cp);
             
-            DAO.connect();
+            }
 
-            Cancelacion cancelacion = new Cancelacion();
-            cancelacion.Fecha = DateTime.Now;
-            cancelacion.Motivo = "";
-            cancelacion.NumeroCompra = 0000;
+            foreach (DataGridViewRow paquete in this.paquetesDatagrid.SelectedRows) {
 
-            //TODO agregar intermedia n shit
-           
-            int idInsertado = DAO.insert<Cancelacion>(cancelacion);
+                String codigo = (String)paquete.Cells[0].Value;
+                Paquete paquete_cancelado = DAO.selectOne<Paquete>(new[] { "codigo = " + codigo });
+
+                Cancelacion_Paquete cp = new Cancelacion_Paquete();
+                cp.Cancelacion_Id = cancelacion_id;
+                cp.Paquete_Id = paquete_cancelado.Id;
+
+                DAO.insert<Cancelacion_Paquete>(cp);
+
+            }
 
             DAO.closeConnection();
 
-        }
-
-        private void devolucionEncomiendaButton_Click(object sender, EventArgs e) {
-
-            if (this.paquetesDatagrid.SelectedRows.Count == 0) {
-                MessageBox.Show("Debe elegir una encomienda para iniciar la cancelación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            if (this.paquetesDatagrid.SelectedRows.Count > 1) {
-                MessageBox.Show("Solo puede elegir una encomienda para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            DataGridViewRow row = this.paquetesDatagrid.SelectedRows[0];
-
-            String codigo = (String)row.Cells[0].Value;
-
-            //AeronaveBaja aeronaveBaja = new AeronaveBaja(matricula);
-            //var dr = aeronaveBaja.ShowDialog();
-
-            //if (aeronaveBaja.dr == DialogResult.Cancel) return;
-
-            //TODO instanciar dialog de baja y eso...
-
-            DAO.connect();
-
-            Cancelacion cancelacion = new Cancelacion();
-            cancelacion.Fecha = DateTime.Now;
-            cancelacion.Motivo = "";
-            cancelacion.NumeroCompra = 0000;
-
-            //TODO agregar intermedia n shit
-
-            int idInsertado = DAO.insert<Cancelacion>(cancelacion);
-
-            DAO.closeConnection();
+            MessageBox.Show("Baja concretada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
@@ -217,7 +193,32 @@ namespace AerolineaFrba.Forms.Devolucion {
             return true;
         }
 
+        private String buildConfirmMsg(int pasajesCount, int paquetesCount) {
 
+            String msg = "Está por dar de baja ";
+
+            if (pasajesCount == 1)
+                msg += "un pasaje ";
+
+            if (pasajesCount > 1)
+                msg += pasajesCount + " pasajes ";
+
+            if (pasajesCount != 0)
+                msg += "y ";
+
+            if (paquetesCount == 1)
+                msg += "un paquete";
+
+            if (paquetesCount > 1)
+                msg += paquetesCount + " paquetes";
+
+            msg += ". ¿Desea continuar?";
+
+            return msg;
+
+        }
+
+       
     }
 
 }

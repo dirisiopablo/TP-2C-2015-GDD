@@ -16,7 +16,6 @@ namespace AerolineaFrba.Models {
 
         public int Aeronave_Id { get; set; }
 
-
         private Aeronave _aeronave = null;
         public Aeronave Aeronave {
             get {
