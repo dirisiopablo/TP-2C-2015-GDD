@@ -264,14 +264,15 @@ JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = origen
 group by codigo, c.id, c2.id
 GO
 
-
 --Viaje
 INSERT INTO BIEN_MIGRADO_RAFA.Viaje(fecha_llegada, fecha_llegada_estimada, fecha_salida, aeronave_id, ruta_id)
-SELECT DISTINCT m.FechaLLegada, m.Fecha_LLegada_Estimada, m.FechaSalida, a.id, r.id FROM gd_esquema.Maestra m
-JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
-JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.Ruta_Codigo
+SELECT DISTINCT m.fechaLLegada, m.fechaLlegadaEstimada, m.fechaSalida, a.id, r.id
+FROM (SELECT DISTINCT m2.FechaSalida fechaSalida, m2.Fecha_LLegada_Estimada fechaLlegadaEstimada, m2.FechaLLegada fechaLlegada, m2.Ruta_Codigo rutaCodigo, m2.Ruta_Ciudad_Destino ciudadDestino, m2.Ruta_Ciudad_Origen ciudadOrigen, m2.Aeronave_Matricula matricula
+		FROM gd_esquema.Maestra m2) m
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.matricula
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.rutaCodigo
+WHERE r.ciudad_destino_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadDestino) AND r.ciudad_origen_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadOrigen)
 GO
-
 
 --Paquete
 INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
