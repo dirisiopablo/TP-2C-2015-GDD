@@ -135,6 +135,12 @@
     <Compile Include="Forms\Compra\Compra.Designer.cs">
       <DependentUpon>Compra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Consulta Millas\ConsultaMillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Consulta Millas\ConsultaMillas.Designer.cs">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Devolucion\Devolucion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Canje.cs" />
     <Compile Include="Models\Cancelacion.cs" />
+    <Compile Include="Models\Cancelacion_Paquete.cs" />
+    <Compile Include="Models\Cancelacion_Pasaje.cs" />
+    <Compile Include="Models\Funcionalidad_Rol.cs" />
     <Compile Include="Models\Viaje.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\TipoServicio.cs" />
@@ -222,12 +231,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Canje Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Consulta Millas\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Consulta Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="rutaDataSet.Designer.cs">
@@ -290,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compra\Compra.resx">
       <DependentUpon>Compra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Consulta Millas\ConsultaMillas.resx">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Devolucion\Devolucion.resx">
       <DependentUpon>Devolucion.cs</DependentUpon>

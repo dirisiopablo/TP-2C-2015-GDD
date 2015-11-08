@@ -30,6 +30,7 @@
             this.compraButton = new System.Windows.Forms.Button();
             this.estadisticasButton = new System.Windows.Forms.Button();
             this.devolucionButton = new System.Windows.Forms.Button();
+            this.consultarMillasButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -94,7 +95,7 @@
             // devolucionButton
             // 
             this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.devolucionButton.Location = new System.Drawing.Point(260, 101);
+            this.devolucionButton.Location = new System.Drawing.Point(325, 101);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(88, 51);
             this.devolucionButton.TabIndex = 8;
@@ -102,11 +103,22 @@
             this.devolucionButton.UseVisualStyleBackColor = true;
             this.devolucionButton.Click += new System.EventHandler(this.devolucionButton_Click);
             // 
+            // consultarMillasButton
+            // 
+            this.consultarMillasButton.Location = new System.Drawing.Point(419, 104);
+            this.consultarMillasButton.Name = "consultarMillasButton";
+            this.consultarMillasButton.Size = new System.Drawing.Size(88, 48);
+            this.consultarMillasButton.TabIndex = 9;
+            this.consultarMillasButton.Text = "Consultar Millas";
+            this.consultarMillasButton.UseVisualStyleBackColor = true;
+            this.consultarMillasButton.Click += new System.EventHandler(this.consultarMillasButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.consultarMillasButton);
             this.Controls.Add(this.devolucionButton);
             this.Controls.Add(this.estadisticasButton);
             this.Controls.Add(this.compraButton);
@@ -130,6 +142,7 @@
         private System.Windows.Forms.Button compraButton;
         private System.Windows.Forms.Button estadisticasButton;
         private System.Windows.Forms.Button devolucionButton;
+        private System.Windows.Forms.Button consultarMillasButton;
 
     }
 }

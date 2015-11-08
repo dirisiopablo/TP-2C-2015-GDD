@@ -10,9 +10,9 @@ namespace AerolineaFrba.Models {
     class Paquete {
 
         public int Id { get; set; }
-        public int Codigo { get; set; }
-        public float Precio { get; set; }
-        public int Kg { get; set; }
+        public Decimal Codigo { get; set; }
+        public Decimal Precio { get; set; }
+        public Decimal Kg { get; set; }
         public DateTime Fecha_Compra { get; set; }
 
         public int Viaje_Id { get; set; }
@@ -47,9 +47,6 @@ namespace AerolineaFrba.Models {
                 }
             }
         }
-
-        public int[] CancelacionesIds { get; set; }
-        public List<Cancelacion> Cancelaciones { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Paquete";
 
