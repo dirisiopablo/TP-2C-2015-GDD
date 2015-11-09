@@ -32,11 +32,12 @@
             this.devolucionButton = new System.Windows.Forms.Button();
             this.consultarMillasButton = new System.Windows.Forms.Button();
             this.canjearMillasButton = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
             // 
-            this.ABMRol_Button.Location = new System.Drawing.Point(40, 28);
+            this.ABMRol_Button.Location = new System.Drawing.Point(117, 286);
             this.ABMRol_Button.Name = "ABMRol_Button";
             this.ABMRol_Button.Size = new System.Drawing.Size(87, 51);
             this.ABMRol_Button.TabIndex = 0;
@@ -45,7 +46,7 @@
             // 
             // ABMAeronave_Button
             // 
-            this.ABMAeronave_Button.Location = new System.Drawing.Point(133, 28);
+            this.ABMAeronave_Button.Location = new System.Drawing.Point(210, 286);
             this.ABMAeronave_Button.Name = "ABMAeronave_Button";
             this.ABMAeronave_Button.Size = new System.Drawing.Size(92, 51);
             this.ABMAeronave_Button.TabIndex = 3;
@@ -55,7 +56,7 @@
             // 
             // ABMRuta_Button
             // 
-            this.ABMRuta_Button.Location = new System.Drawing.Point(231, 28);
+            this.ABMRuta_Button.Location = new System.Drawing.Point(308, 286);
             this.ABMRuta_Button.Name = "ABMRuta_Button";
             this.ABMRuta_Button.Size = new System.Drawing.Size(88, 51);
             this.ABMRuta_Button.TabIndex = 4;
@@ -65,7 +66,7 @@
             // 
             // generarViajeButton
             // 
-            this.generarViajeButton.Location = new System.Drawing.Point(231, 101);
+            this.generarViajeButton.Location = new System.Drawing.Point(402, 286);
             this.generarViajeButton.Name = "generarViajeButton";
             this.generarViajeButton.Size = new System.Drawing.Size(88, 51);
             this.generarViajeButton.TabIndex = 5;
@@ -75,9 +76,9 @@
             // 
             // compraButton
             // 
-            this.compraButton.Location = new System.Drawing.Point(39, 101);
+            this.compraButton.Location = new System.Drawing.Point(156, 90);
             this.compraButton.Name = "compraButton";
-            this.compraButton.Size = new System.Drawing.Size(88, 51);
+            this.compraButton.Size = new System.Drawing.Size(88, 48);
             this.compraButton.TabIndex = 6;
             this.compraButton.Text = "Comprar ";
             this.compraButton.UseVisualStyleBackColor = true;
@@ -85,9 +86,9 @@
             // 
             // estadisticasButton
             // 
-            this.estadisticasButton.Location = new System.Drawing.Point(133, 101);
+            this.estadisticasButton.Location = new System.Drawing.Point(438, 90);
             this.estadisticasButton.Name = "estadisticasButton";
-            this.estadisticasButton.Size = new System.Drawing.Size(92, 51);
+            this.estadisticasButton.Size = new System.Drawing.Size(92, 48);
             this.estadisticasButton.TabIndex = 7;
             this.estadisticasButton.Text = "Estadisticas";
             this.estadisticasButton.UseVisualStyleBackColor = true;
@@ -96,7 +97,7 @@
             // devolucionButton
             // 
             this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.devolucionButton.Location = new System.Drawing.Point(325, 101);
+            this.devolucionButton.Location = new System.Drawing.Point(496, 286);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(88, 51);
             this.devolucionButton.TabIndex = 8;
@@ -106,7 +107,7 @@
             // 
             // consultarMillasButton
             // 
-            this.consultarMillasButton.Location = new System.Drawing.Point(419, 104);
+            this.consultarMillasButton.Location = new System.Drawing.Point(250, 90);
             this.consultarMillasButton.Name = "consultarMillasButton";
             this.consultarMillasButton.Size = new System.Drawing.Size(88, 48);
             this.consultarMillasButton.TabIndex = 9;
@@ -116,7 +117,7 @@
             // 
             // canjearMillasButton
             // 
-            this.canjearMillasButton.Location = new System.Drawing.Point(513, 104);
+            this.canjearMillasButton.Location = new System.Drawing.Point(344, 90);
             this.canjearMillasButton.Name = "canjearMillasButton";
             this.canjearMillasButton.Size = new System.Drawing.Size(88, 48);
             this.canjearMillasButton.TabIndex = 10;
@@ -124,11 +125,22 @@
             this.canjearMillasButton.UseVisualStyleBackColor = true;
             this.canjearMillasButton.Click += new System.EventHandler(this.canjearMillasButton_Click);
             // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(223, 186);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(239, 23);
+            this.loginButton.TabIndex = 11;
+            this.loginButton.Text = "Ingresar como Administrador";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 469);
+            this.ClientSize = new System.Drawing.Size(686, 382);
+            this.Controls.Add(this.loginButton);
             this.Controls.Add(this.canjearMillasButton);
             this.Controls.Add(this.consultarMillasButton);
             this.Controls.Add(this.devolucionButton);
@@ -156,6 +168,7 @@
         private System.Windows.Forms.Button devolucionButton;
         private System.Windows.Forms.Button consultarMillasButton;
         private System.Windows.Forms.Button canjearMillasButton;
+        private System.Windows.Forms.Button loginButton;
 
     }
 }

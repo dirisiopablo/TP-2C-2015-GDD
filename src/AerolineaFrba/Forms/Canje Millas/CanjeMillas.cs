@@ -18,7 +18,6 @@ namespace AerolineaFrba.Forms.Canje_Millas {
     public sealed partial class CanjeMillas : Form {
 
         private static CanjeMillas _instance = null;
-        private SqlDataAdapter dataAdapter;
         private Cliente cliente_activo = null;
         private int[] indexer;
 

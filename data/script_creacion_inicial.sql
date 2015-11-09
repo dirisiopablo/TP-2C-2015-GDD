@@ -103,7 +103,6 @@ GO
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Cliente(
     id                  int               IDENTITY(1,1),
-    puntos              numeric(18, 0)    NULL,
     nombre              nvarchar(255)     NULL,
     apellido            nvarchar(255)     NULL,
     dni                 numeric(18, 0)    NULL,
