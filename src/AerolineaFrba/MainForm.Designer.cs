@@ -31,6 +31,7 @@
             this.estadisticasButton = new System.Windows.Forms.Button();
             this.devolucionButton = new System.Windows.Forms.Button();
             this.consultarMillasButton = new System.Windows.Forms.Button();
+            this.canjearMillasButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
@@ -113,11 +114,22 @@
             this.consultarMillasButton.UseVisualStyleBackColor = true;
             this.consultarMillasButton.Click += new System.EventHandler(this.consultarMillasButton_Click);
             // 
+            // canjearMillasButton
+            // 
+            this.canjearMillasButton.Location = new System.Drawing.Point(513, 104);
+            this.canjearMillasButton.Name = "canjearMillasButton";
+            this.canjearMillasButton.Size = new System.Drawing.Size(88, 48);
+            this.canjearMillasButton.TabIndex = 10;
+            this.canjearMillasButton.Text = "Canjear Millas";
+            this.canjearMillasButton.UseVisualStyleBackColor = true;
+            this.canjearMillasButton.Click += new System.EventHandler(this.canjearMillasButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 469);
+            this.Controls.Add(this.canjearMillasButton);
             this.Controls.Add(this.consultarMillasButton);
             this.Controls.Add(this.devolucionButton);
             this.Controls.Add(this.estadisticasButton);
@@ -143,6 +155,7 @@
         private System.Windows.Forms.Button estadisticasButton;
         private System.Windows.Forms.Button devolucionButton;
         private System.Windows.Forms.Button consultarMillasButton;
+        private System.Windows.Forms.Button canjearMillasButton;
 
     }
 }

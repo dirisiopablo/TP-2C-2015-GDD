@@ -129,6 +129,12 @@
       <DependentUpon>DataSetRol.xsd</DependentUpon>
     </Compile>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Forms\Canje Millas\CanjeMillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Canje Millas\CanjeMillas.Designer.cs">
+      <DependentUpon>CanjeMillas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Compra\Compra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,12 +233,6 @@
     <Compile Include="Models\Paquete.cs" />
     <Compile Include="Models\Funcionalidad.cs" />
     <Compile Include="Models\TipoBaja.cs" />
-    <Compile Include="Forms\Canje Millas\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Canje Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="rutaDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -290,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM\Abm Ruta\RutaDialog.resx">
       <DependentUpon>RutaDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Canje Millas\CanjeMillas.resx">
+      <DependentUpon>CanjeMillas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compra\Compra.resx">
       <DependentUpon>Compra.cs</DependentUpon>

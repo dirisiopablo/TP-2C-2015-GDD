@@ -11,7 +11,7 @@ namespace AerolineaFrba.Models {
     class Canje {
 
         public int Id { get; set; }
-        public int Cantidad { get; set; }
+        public Decimal Cantidad { get; set; }
         public DateTime Fecha { get; set; }
 
         public int Cliente_Id { get; set; }
