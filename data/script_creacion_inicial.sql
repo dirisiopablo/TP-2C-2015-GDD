@@ -148,6 +148,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Pasaje(
     precio          numeric(18, 2)    NULL,
     fecha_compra    datetime          NULL,
     butaca_id       int               NULL,
+    viaje_id        int               NULL,
     cliente_id      int               NULL,
 )
 GO
@@ -276,22 +277,58 @@ GO
 
 --Paquete
 INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
-SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, m.Paquete_Precio, c.id, v.id FROM gd_esquema.Maestra m
-JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.Ruta_Codigo
-JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
-JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni
-JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id AND v.ruta_id = r.id
-WHERE m.Paquete_Codigo != 0
+SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, m.Paquete_Precio, c.id, v.id 
+FROM (SELECT	Paquete_Codigo, 
+				Paquete_FechaCompra, 
+				Paquete_KG, 
+				Paquete_Precio, 
+				Ruta_Codigo rutaCodigo, 
+				Ruta_Ciudad_Destino ciudadDestino, 
+				Ruta_Ciudad_Origen ciudadOrigen,
+				Aeronave_Matricula matricula,
+				Cli_Dni,
+				Cli_Apellido,
+				Cli_Nombre,
+				Cli_Telefono,
+				Fecha_LLegada_Estimada,
+				FechaLLegada,
+				FechaSalida    
+		FROM gd_esquema.Maestra where Paquete_KG != 0) m
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.rutaCodigo
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.matricula
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni and m.Cli_Telefono = c.telefono
+JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id AND v.ruta_id = r.id AND v.fecha_llegada_estimada = m.Fecha_LLegada_Estimada AND v.fecha_llegada = m.FechaLLegada AND v.fecha_salida = m.FechaSalida
+WHERE r.ciudad_destino_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadDestino) 
+AND r.ciudad_origen_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadOrigen)
 GO
 
 
 --Pasaje
-INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id)
-SELECT DISTINCT m.Pasaje_Codigo, m.Pasaje_Precio, m.Pasaje_FechaCompra, c.id, b.id FROM gd_esquema.Maestra m
-JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.Aeronave_Matricula
-JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni
-JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id AND b.numero = m.Butaca_Nro
-WHERE m.Pasaje_Codigo != 0
+INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id, viaje_id)
+SELECT DISTINCT m.Pasaje_Codigo, m.Pasaje_Precio, m.Pasaje_FechaCompra, c.id, (SELECT id FROM BIEN_MIGRADO_RAFA.Butaca where numero = m.Butaca_Nro and aeronave_id = a.id), v.id 
+FROM (SELECT	Pasaje_Codigo, 
+				Pasaje_Precio, 
+				Pasaje_FechaCompra, 
+				Ruta_Codigo rutaCodigo, 
+				Ruta_Ciudad_Destino ciudadDestino, 
+				Ruta_Ciudad_Origen ciudadOrigen,
+				Aeronave_Matricula matricula,
+				Cli_Dni,
+				Cli_Apellido,
+				Cli_Nombre,
+				Cli_Telefono,
+				Butaca_Nro,
+				Fecha_LLegada_Estimada,
+				FechaLLegada,
+				FechaSalida   
+		FROM gd_esquema.Maestra where Pasaje_Codigo != 0 and Butaca_Nro != 0) m
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.rutaCodigo
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.matricula
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni and m.Cli_Telefono = c.telefono
+JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id AND v.ruta_id = r.id AND v.fecha_llegada_estimada = m.Fecha_LLegada_Estimada AND v.fecha_llegada = m.FechaLLegada AND v.fecha_salida = m.FechaSalida
+WHERE r.ciudad_destino_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadDestino) 
+AND r.ciudad_origen_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadOrigen)
+
 GO
 
  
@@ -487,6 +524,12 @@ GO
 ALTER TABLE BIEN_MIGRADO_RAFA.Pasaje ADD CONSTRAINT RefCliente15 
     FOREIGN KEY (cliente_id)
     REFERENCES BIEN_MIGRADO_RAFA.Cliente(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Pasaje ADD CONSTRAINT RefViaje17
+    FOREIGN KEY (viaje_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Viaje(id)
 GO
 
 
