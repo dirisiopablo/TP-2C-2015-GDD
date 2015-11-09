@@ -54,7 +54,7 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
             }
 
             this.clienteNameLabel.Text = cliente.Nombre + " " + cliente.Apellido;
-            this.puntosLabel.Text = this.calcularPuntos(cliente.Id).ToString();
+            this.puntosLabel.Text = cliente.Puntos.ToString();
 
             String queryMillas = this.BuildQuery(cliente.Id);
 
@@ -102,32 +102,6 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
 
         }
 
-        private int calcularPuntos(int clienteId) {
-
-            DAO.connect();
-
-            String condicionFecha = "BETWEEN DATEADD(year, -1, GETDATE()) AND GETDATE() ";
-
-            List<Pasaje> pasajes = DAO.selectAll<Pasaje>(new[] { "cliente_id = " + clienteId, "( fecha_compra " + condicionFecha + ")"});
-            List<Paquete> paquetes = DAO.selectAll<Paquete>(new[] { "cliente_id = " + clienteId, "( fecha_compra " + condicionFecha + ")" });
-            List<Canje> canjes = DAO.selectAll<Canje>(new[] { "cliente_id = " + clienteId, "( fecha " + condicionFecha + ")" });
-
-            DAO.closeConnection();
-
-            decimal puntos = 0;
-
-            foreach (Pasaje p in pasajes)
-                puntos += p.Precio / 10;
-
-            foreach (Paquete p in paquetes)
-                puntos += p.Precio / 10;
-           
-            foreach (Canje c in canjes)
-                puntos -= c.Cantidad * c.Catalogo.Costo;
-
-            return (int)puntos;
-
-        }
 
     }
 

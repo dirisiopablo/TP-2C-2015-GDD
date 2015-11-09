@@ -18,6 +18,7 @@ using AerolineaFrba.Forms.Compra;
 using AerolineaFrba.Forms.Listado_Estadistico;
 using AerolineaFrba.Forms.Devolucion;
 using AerolineaFrba.Forms.Consulta_Millas;
+using AerolineaFrba.Forms.Canje_Millas;
 
 using AerolineaFrba.Services;
 using AerolineaFrba.Models;
@@ -115,6 +116,11 @@ namespace AerolineaFrba {
         private void consultarMillasButton_Click(object sender, EventArgs e) {
             ConsultaMillas ConsultaMillasForm = ConsultaMillas.getInstance();
             var dr = ConsultaMillasForm.ShowDialog();
+        }
+
+        private void canjearMillasButton_Click(object sender, EventArgs e) {
+            CanjeMillas CanjeMillasForm = CanjeMillas.getInstance();
+            var dr = CanjeMillasForm.ShowDialog();
         }
 
     }
