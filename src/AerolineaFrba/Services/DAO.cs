@@ -201,8 +201,9 @@ namespace AerolineaFrba.Services {
                 else if (String.Equals(prop.PropertyType.Name, "Decimal"))
                 {
                     Decimal numero = (Decimal)prop.GetValue(entity);
-                    //set += numero.ToString("G") + ", ";
-                    set += numero + ", ";
+                    String numeroS = numero.ToString();
+                    numeroS = numeroS.Replace(",", ".");
+                    set +=  numeroS + ", ";
                 }
                 else {
                     set += prop.GetValue(entity) + ", ";
@@ -262,6 +263,13 @@ namespace AerolineaFrba.Services {
                     DateTime date = (DateTime)prop.GetValue(entity);
                     if (date.Day == 1 && date.Month == 1 && date.Year == 1) queryValues += "null" + ", ";
                     else queryValues += "'" + date.ToString("yyyyMMdd HH:mm:ss") + "'" + ", ";
+                }
+                else if (String.Equals(prop.PropertyType.Name, "Decimal"))
+                {
+                    Decimal numero = (Decimal)prop.GetValue(entity);
+                    String numeroS = numero.ToString();
+                    numeroS = numeroS.Replace(",", ".");
+                    queryValues += numeroS + ", ";
                 }
                 else
                     queryValues += prop.GetValue(entity) + ", ";

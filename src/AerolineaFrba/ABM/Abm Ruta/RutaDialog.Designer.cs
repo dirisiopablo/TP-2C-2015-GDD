@@ -189,9 +189,15 @@
             // 
             this.kgTextbox.DecimalPlaces = 2;
             this.kgTextbox.Location = new System.Drawing.Point(216, 80);
+            this.kgTextbox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.kgTextbox.Name = "kgTextbox";
             this.kgTextbox.Size = new System.Drawing.Size(155, 20);
             this.kgTextbox.TabIndex = 12;
+            this.kgTextbox.Validating += new System.ComponentModel.CancelEventHandler(this.kgTextbox_Validating);
             // 
             // RutaDialog
             // 

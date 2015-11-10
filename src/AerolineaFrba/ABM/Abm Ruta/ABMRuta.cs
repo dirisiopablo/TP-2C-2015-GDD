@@ -83,8 +83,16 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
             String codigo = row.Cells[1].Value.ToString();
             decimal preciokg = (decimal)row.Cells[2].Value;
             decimal precioPasaje = (decimal)row.Cells[3].Value;
-            int origen_id = (int)row.Cells[4].Value;
-            int destino_id = (int)row.Cells[5].Value;
+
+            DAO.connect();
+
+            Ciudad ciudadOrigen = DAO.selectOne<Ciudad>(new[] { "descripcion = " + "'" +  (String)row.Cells[4].Value + "'" });
+            Ciudad ciudadDestino = DAO.selectOne<Ciudad>(new[] { "descripcion = " + "'" +  (String)row.Cells[5].Value + "'" });
+
+            DAO.closeConnection();
+
+            int origen_id = ciudadOrigen.Id;
+            int destino_id = ciudadDestino.Id;
 
             RutaDialog rutaDialog = new RutaDialog(codigo, preciokg, precioPasaje, origen_id, destino_id, Enums.tipoDialog.modificar);
             var dr = rutaDialog.ShowDialog();

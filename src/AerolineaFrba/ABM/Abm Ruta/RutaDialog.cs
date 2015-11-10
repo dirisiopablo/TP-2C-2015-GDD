@@ -64,5 +64,18 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
             // TODO: This line of code loads data into the 'dataSetCiudad.Ciudad' table. You can move, or remove it, as needed.
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
         }
+
+        private void kgTextbox_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void kgTextbox_Validating(object sender, CancelEventArgs e)
+        {
+            if (kgTextbox.Value == null)
+            {
+                kgTextbox.Value = 0;
+            }
+        }
     }
 }
