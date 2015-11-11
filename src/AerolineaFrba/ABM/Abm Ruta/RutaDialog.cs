@@ -41,6 +41,8 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
 
         private void guardarRuta_Click(object sender, EventArgs e) {
 
+            if (!validar()) return;
+
             if (MessageBox.Show(this.tipo == Enums.tipoDialog.nuevo ? nuevoMsg : modificarMsg, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
             this.codigo = codigoTextbox.Text;
@@ -77,5 +79,24 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                 kgTextbox.Value = 0;
             }
         }
+
+        private Boolean validar(){
+            int n;
+
+            if (codigoTextbox.Text.Length == 0 || codigoTextbox.Text.Length != 8)
+            {
+                MessageBox.Show("Se debe ingresar un código de vuelo de 8 dígitos.");
+                return false;
+            }
+
+            if (!int.TryParse(codigoTextbox.Text, out n))
+            {
+                MessageBox.Show("El valor del código de Ruta debe ser númerico.");
+                return false;
+            }
+            return true;
+        }
+
+
     }
 }

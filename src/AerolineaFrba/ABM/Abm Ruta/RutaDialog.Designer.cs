@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.codigoTextbox = new System.Windows.Forms.TextBox();
-            this.pasajeTextbox = new System.Windows.Forms.TextBox();
             this.origenCombo = new System.Windows.Forms.ComboBox();
             this.ciudadBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSetCiudad = new AerolineaFrba.DataSetCiudad();
@@ -43,12 +42,14 @@
             this.ciudadBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.ciudadTableAdapter1 = new AerolineaFrba.DataSetCiudad2TableAdapters.CiudadTableAdapter();
             this.kgTextbox = new System.Windows.Forms.NumericUpDown();
+            this.pasajeTextbox = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajeTextbox)).BeginInit();
             this.SuspendLayout();
             // 
             // codigoTextbox
@@ -57,13 +58,6 @@
             this.codigoTextbox.Name = "codigoTextbox";
             this.codigoTextbox.Size = new System.Drawing.Size(155, 20);
             this.codigoTextbox.TabIndex = 0;
-            // 
-            // pasajeTextbox
-            // 
-            this.pasajeTextbox.Location = new System.Drawing.Point(216, 120);
-            this.pasajeTextbox.Name = "pasajeTextbox";
-            this.pasajeTextbox.Size = new System.Drawing.Size(155, 20);
-            this.pasajeTextbox.TabIndex = 2;
             // 
             // origenCombo
             // 
@@ -199,6 +193,19 @@
             this.kgTextbox.TabIndex = 12;
             this.kgTextbox.Validating += new System.ComponentModel.CancelEventHandler(this.kgTextbox_Validating);
             // 
+            // pasajeTextbox
+            // 
+            this.pasajeTextbox.DecimalPlaces = 2;
+            this.pasajeTextbox.Location = new System.Drawing.Point(216, 120);
+            this.pasajeTextbox.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.pasajeTextbox.Name = "pasajeTextbox";
+            this.pasajeTextbox.Size = new System.Drawing.Size(155, 20);
+            this.pasajeTextbox.TabIndex = 13;
+            // 
             // RutaDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,9 +220,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.destinoCombo);
             this.Controls.Add(this.origenCombo);
-            this.Controls.Add(this.pasajeTextbox);
             this.Controls.Add(this.codigoTextbox);
             this.Controls.Add(this.kgTextbox);
+            this.Controls.Add(this.pasajeTextbox);
             this.Name = "RutaDialog";
             this.Text = "Ruta";
             this.Load += new System.EventHandler(this.RutaDialog_Load);
@@ -225,6 +232,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajeTextbox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,7 +241,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox codigoTextbox;
-        private System.Windows.Forms.TextBox pasajeTextbox;
         private System.Windows.Forms.ComboBox origenCombo;
         private System.Windows.Forms.ComboBox destinoCombo;
         private System.Windows.Forms.Label label1;
@@ -251,5 +258,6 @@
         private DataSetCiudad2TableAdapters.CiudadTableAdapter ciudadTableAdapter1;
         private System.Windows.Forms.BindingSource ciudadBindingSource2;
         private System.Windows.Forms.NumericUpDown kgTextbox;
+        private System.Windows.Forms.NumericUpDown pasajeTextbox;
     }
 }
