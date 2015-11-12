@@ -25,6 +25,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
 	modelo                    nvarchar(255)     NULL,
 	kilogramos_disponibles    numeric(18, 0)    NULL,
 	fabricante                nvarchar(255)     NULL,
+	tipo_servicio_id          int               NULL,
 )
 GO
 
@@ -96,7 +97,6 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Ciudad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	activo		   bit              NULL DEFAULT (1)
 )
 GO
 
@@ -127,6 +127,12 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol(
     rol_id              int    NULL,
 )
 GO
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Intentos_Login(
+	id					int	   IDENTITY(1,1),
+	usuario_id          int    NULL,
+	intentos            int    NULL DEFAULT (0),
+)
 
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Paquete(
@@ -192,6 +198,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Usuario(
     username    nvarchar(255)    NULL	UNIQUE,
     password    nvarchar(255)    NULL,
     rol_id      int              NULL,
+	activo		bit              NULL DEFAULT (1)
 )
 GO
 
@@ -228,14 +235,16 @@ INSERT INTO BIEN_MIGRADO_RAFA.Cliente (apellido, nombre, direccion, dni, fecha_n
 SELECT DISTINCT Cli_Apellido, Cli_Nombre, Cli_Dir, Cli_Dni, Cli_Fecha_Nac, Cli_Mail, Cli_Telefono FROM gd_esquema.Maestra
 GO
 
---Aeronave
-INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (fabricante, kilogramos_disponibles, matricula, modelo)
-SELECT DISTINCT Aeronave_Fabricante, Aeronave_KG_Disponibles, Aeronave_Matricula, Aeronave_Modelo FROM gd_esquema.Maestra
-GO
-
 --Tipo servicio
 INSERT INTO BIEN_MIGRADO_RAFA.Tipo_Servicio (descripcion)
 SELECT DISTINCT Tipo_Servicio FROM gd_esquema.Maestra
+GO
+
+--Aeronave
+INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (fabricante, kilogramos_disponibles, matricula, modelo, tipo_servicio_id)
+SELECT DISTINCT m.Aeronave_Fabricante, m.Aeronave_KG_Disponibles, m.Aeronave_Matricula, m.Aeronave_Modelo, t.id 
+FROM gd_esquema.Maestra m
+JOIN BIEN_MIGRADO_RAFA.Tipo_Servicio t ON t.descripcion = tipo_servicio
 GO
 
 --Ciudad
@@ -245,14 +254,12 @@ UNION
 SELECT DISTINCT Ruta_Ciudad_Origen FROM gd_esquema.Maestra
 GO
 
-
 --Butaca
 INSERT INTO BIEN_MIGRADO_RAFA.Butaca (numero, piso, tipo, aeronave_id)
 SELECT DISTINCT m.Butaca_Nro, m.Butaca_Piso, m.Butaca_Tipo, a.id FROM gd_esquema.Maestra m
 JOIN BIEN_MIGRADO_RAFA.Aeronave a ON m.Aeronave_Matricula = a.matricula
 WHERE m.Butaca_Nro != '0'
 GO
-
 
 --Ruta
 INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
@@ -393,6 +400,10 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol
 ADD CONSTRAINT PK11 PRIMARY KEY CLUSTERED (id)
 GO
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Intentos_Login
+ADD CONSTRAINT PK79 PRIMARY KEY CLUSTERED (id)
+GO
+
 ALTER TABLE BIEN_MIGRADO_RAFA.Paquete
 ADD CONSTRAINT PK4 PRIMARY KEY CLUSTERED (id)
 GO
@@ -435,6 +446,11 @@ GO
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave ADD CONSTRAINT RefTipoServicio1
+    FOREIGN KEY (tipo_servicio_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Tipo_Servicio(id)
+GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave ADD CONSTRAINT RefAeronave1 
     FOREIGN KEY (aeronave_id)
@@ -501,6 +517,10 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol ADD CONSTRAINT RefRol6
     REFERENCES BIEN_MIGRADO_RAFA.Rol(id)
 GO
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Intentos_Login ADD CONSTRAINT RefUsuario77
+    FOREIGN KEY (usuario_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Usuario(id)
+GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Paquete ADD CONSTRAINT RefViaje16 
     FOREIGN KEY (viaje_id)
@@ -590,4 +610,22 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Tipo_Baja]
            ([descripcion])
      VALUES
            ('Baja definitiva')
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].Rol
+           ([descripcion], [activo])
+     VALUES
+           ('Administrador', 1)
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Usuario]
+           ([username], [password], [rol_id])
+     VALUES
+           ('admin1', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 1)
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Intentos_Login]
+           ([usuario_id], [intentos])
+     VALUES
+           (1, 0)
 GO

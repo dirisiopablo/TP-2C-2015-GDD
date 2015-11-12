@@ -31,51 +31,37 @@ namespace AerolineaFrba {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e) {
-
-            this.showLoginForm();
-          
-        }
 
         private void loginButton_Click(object sender, EventArgs e) {
 
-        }
-
-        private void showLoginForm() {
-
             LoginForm loginForm = new LoginForm();
             var dr = loginForm.ShowDialog();
-         
+
             if (dr == DialogResult.Cancel) { //si cierra la ventana
-
                 loginForm.Close();
-                this.Close();
-
             }
 
             if (dr == DialogResult.OK) { //si se loguea
-
                 var loginResult = loginForm.lastLoginResult;
-
-                this.onLogin(loginForm.getLoggedUser());
-
+                this.onLogin(loginForm.loggedUser);
             }
 
         }
 
-        private void onLogin(User loggedUser){
+        private void onLogin(Usuario loggedUser){
 
-            //segun rol, ocultar/bloquear botones
-            
-            if (loggedUser.role == "admin")
-                this.adminConfig();
+            this.ABMAeronave_Button.Visible = true;
+            this.ABMRol_Button.Visible = true;
+            this.ABMRuta_Button.Visible = true;
+            this.devolucionButton.Visible = true;
+            this.generarViajeButton.Visible = true;
+
+            this.loginButton.Visible = false;
+
+            this.loggedAs.Text = "Logueado como " + loggedUser.Rol.Descripcion + " " + loggedUser.Username;
 
         }
 
-        private void adminConfig(){
-
-
-        }
 
         private void ABMRol_Button_Click(object sender, EventArgs e) {
             ABMRol ABMRolForm = ABMRol.getInstance();

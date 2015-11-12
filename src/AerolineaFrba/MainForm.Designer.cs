@@ -33,50 +33,56 @@
             this.consultarMillasButton = new System.Windows.Forms.Button();
             this.canjearMillasButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.loggedAs = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ABMRol_Button
             // 
-            this.ABMRol_Button.Location = new System.Drawing.Point(117, 286);
+            this.ABMRol_Button.Location = new System.Drawing.Point(111, 297);
             this.ABMRol_Button.Name = "ABMRol_Button";
             this.ABMRol_Button.Size = new System.Drawing.Size(87, 51);
             this.ABMRol_Button.TabIndex = 0;
             this.ABMRol_Button.Text = "ABM Rol";
+            this.ABMRol_Button.Visible = false;
             this.ABMRol_Button.Click += new System.EventHandler(this.ABMRol_Button_Click);
             // 
             // ABMAeronave_Button
             // 
-            this.ABMAeronave_Button.Location = new System.Drawing.Point(210, 286);
+            this.ABMAeronave_Button.Location = new System.Drawing.Point(204, 297);
             this.ABMAeronave_Button.Name = "ABMAeronave_Button";
             this.ABMAeronave_Button.Size = new System.Drawing.Size(92, 51);
             this.ABMAeronave_Button.TabIndex = 3;
             this.ABMAeronave_Button.Text = "ABM Aeronave";
             this.ABMAeronave_Button.UseVisualStyleBackColor = true;
+            this.ABMAeronave_Button.Visible = false;
             this.ABMAeronave_Button.Click += new System.EventHandler(this.ABMAeronave_Button_Click);
             // 
             // ABMRuta_Button
             // 
-            this.ABMRuta_Button.Location = new System.Drawing.Point(308, 286);
+            this.ABMRuta_Button.Location = new System.Drawing.Point(302, 297);
             this.ABMRuta_Button.Name = "ABMRuta_Button";
             this.ABMRuta_Button.Size = new System.Drawing.Size(88, 51);
             this.ABMRuta_Button.TabIndex = 4;
             this.ABMRuta_Button.Text = "ABM Ruta";
             this.ABMRuta_Button.UseVisualStyleBackColor = true;
+            this.ABMRuta_Button.Visible = false;
             this.ABMRuta_Button.Click += new System.EventHandler(this.ABMRuta_Button_Click);
             // 
             // generarViajeButton
             // 
-            this.generarViajeButton.Location = new System.Drawing.Point(402, 286);
+            this.generarViajeButton.Location = new System.Drawing.Point(396, 297);
             this.generarViajeButton.Name = "generarViajeButton";
             this.generarViajeButton.Size = new System.Drawing.Size(88, 51);
             this.generarViajeButton.TabIndex = 5;
             this.generarViajeButton.Text = "Generar Viaje";
             this.generarViajeButton.UseVisualStyleBackColor = true;
+            this.generarViajeButton.Visible = false;
             this.generarViajeButton.Click += new System.EventHandler(this.generarViajeButton_Click);
             // 
             // compraButton
             // 
-            this.compraButton.Location = new System.Drawing.Point(156, 90);
+            this.compraButton.Location = new System.Drawing.Point(150, 101);
             this.compraButton.Name = "compraButton";
             this.compraButton.Size = new System.Drawing.Size(88, 48);
             this.compraButton.TabIndex = 6;
@@ -86,7 +92,7 @@
             // 
             // estadisticasButton
             // 
-            this.estadisticasButton.Location = new System.Drawing.Point(438, 90);
+            this.estadisticasButton.Location = new System.Drawing.Point(432, 101);
             this.estadisticasButton.Name = "estadisticasButton";
             this.estadisticasButton.Size = new System.Drawing.Size(92, 48);
             this.estadisticasButton.TabIndex = 7;
@@ -97,17 +103,18 @@
             // devolucionButton
             // 
             this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.devolucionButton.Location = new System.Drawing.Point(496, 286);
+            this.devolucionButton.Location = new System.Drawing.Point(490, 297);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(88, 51);
             this.devolucionButton.TabIndex = 8;
             this.devolucionButton.Text = "Devolución";
             this.devolucionButton.UseVisualStyleBackColor = true;
+            this.devolucionButton.Visible = false;
             this.devolucionButton.Click += new System.EventHandler(this.devolucionButton_Click);
             // 
             // consultarMillasButton
             // 
-            this.consultarMillasButton.Location = new System.Drawing.Point(250, 90);
+            this.consultarMillasButton.Location = new System.Drawing.Point(244, 101);
             this.consultarMillasButton.Name = "consultarMillasButton";
             this.consultarMillasButton.Size = new System.Drawing.Size(88, 48);
             this.consultarMillasButton.TabIndex = 9;
@@ -117,7 +124,7 @@
             // 
             // canjearMillasButton
             // 
-            this.canjearMillasButton.Location = new System.Drawing.Point(344, 90);
+            this.canjearMillasButton.Location = new System.Drawing.Point(338, 101);
             this.canjearMillasButton.Name = "canjearMillasButton";
             this.canjearMillasButton.Size = new System.Drawing.Size(88, 48);
             this.canjearMillasButton.TabIndex = 10;
@@ -127,7 +134,7 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(223, 186);
+            this.loginButton.Location = new System.Drawing.Point(217, 197);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(239, 23);
             this.loginButton.TabIndex = 11;
@@ -135,11 +142,31 @@
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(202, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(278, 39);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Aerolinea FRBA";
+            // 
+            // loggedAs
+            // 
+            this.loggedAs.AutoSize = true;
+            this.loggedAs.Location = new System.Drawing.Point(496, 9);
+            this.loggedAs.Name = "loggedAs";
+            this.loggedAs.Size = new System.Drawing.Size(0, 13);
+            this.loggedAs.TabIndex = 13;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 382);
+            this.Controls.Add(this.loggedAs);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.canjearMillasButton);
             this.Controls.Add(this.consultarMillasButton);
@@ -152,8 +179,8 @@
             this.Controls.Add(this.ABMRol_Button);
             this.Name = "MainForm";
             this.Text = "Aerolinea FRBA";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -169,6 +196,8 @@
         private System.Windows.Forms.Button consultarMillasButton;
         private System.Windows.Forms.Button canjearMillasButton;
         private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label loggedAs;
 
     }
 }

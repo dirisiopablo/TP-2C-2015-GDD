@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Models {
-    class Usuario {
+   public class Usuario {
 
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
         public int Rol_Id { get; set; }
+        public bool Activo { get; set; }
 
         private Rol _rol = null;
         public Rol Rol {

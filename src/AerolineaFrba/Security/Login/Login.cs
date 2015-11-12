@@ -7,30 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AerolineaFrba.Abm_Aeronave;
+
+using AerolineaFrba.Models;
+using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Login {
 
-
-    public class User { //TEST
-
-        public User() { }
-
-        public User(String u, String p, String r) {
-            this.username = u;
-            this.password = p;
-            this.role = r;
-        }
-
-        public String username { get; set; }
-        public String password { get; set; }
-        public String role { get; set; }
-    }
-
-
     public partial class LoginForm : Form {
 
-        public User loggedUser { get; set; }
+        public Usuario loggedUser { get; set; }
         public String lastLoginResult { get; set; }
 
         public LoginForm() {
@@ -38,50 +23,67 @@ namespace AerolineaFrba.Login {
         }
 
         //Functions Section 
-
-        private void LoginForm_Load(object sender, EventArgs e) {
-
-        }
-
-        public User getLoggedUser() {
-
-            return this.loggedUser;
-
-        }
-
         private void login(String username, String password) {
 
-            if(username == "qq" && password == "qq"){
+            String hashedPass = sha256(password);
 
-                this.DialogResult = DialogResult.OK;
-                loggedUser = new User(username, password, "admin");
-
-            }else{
-
-                MessageBox.Show("Invalid User or Password", "Login Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            DAO.connect();
+            Usuario usuario = DAO.selectOne<Usuario>(new[] { "username = '" + username + "'"});
+            if (usuario == null) {
+                MessageBox.Show("Usuario incorrecto.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.None;
+                return;
+            }
+            IntentosLogin intentos = DAO.selectOne<IntentosLogin>(new[] { "usuario_id = " + usuario.Id });
+            Rol adminRol = DAO.selectOne<Rol>(new[] { "descripcion = 'Administrador'" });
+            DAO.closeConnection();
 
+            if (usuario != null && usuario.Password.Equals(hashedPass) && usuario.Rol.Id == adminRol.Id) {
+                intentos.Intentos = 0;
+                DAO.connect();
+                DAO.update<IntentosLogin>(intentos);
+                DAO.closeConnection();
+                this.DialogResult = DialogResult.OK;
+                this.loggedUser = usuario;
+            }
+            else {
+                intentos.Intentos += 1;
+                DAO.connect();
+                DAO.update<IntentosLogin>(intentos);
+                if (intentos.Intentos == 3) {
+                    usuario.Activo = false;
+                    DAO.update<Usuario>(usuario);
+                    MessageBox.Show("El usuario fue bloqueado por exceder los intentos permitidos.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else {
+                    MessageBox.Show("Contraseña invalida. Recuerde que solo puede tener hasta 3 intentos fallidos. Le quedan " + (3 - intentos.Intentos) + " intentos.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                DAO.closeConnection();
+                this.DialogResult = DialogResult.None;
             }
 
         }
 
-
         //Buttons Section
-
         private void login_btn_Click(object sender, EventArgs e) {
-
             var username = username_input.Text;
             var password = password_input.Text;
-
             this.login(username, password);
-            
         }
 
         private void clear_btn_Click(object sender, EventArgs e) {
-
             username_input.Clear();
             password_input.Clear();
+        }
 
+        static string sha256(string password) {
+            System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+            System.Text.StringBuilder hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(password), 0, Encoding.UTF8.GetByteCount(password));
+            foreach (byte theByte in crypto) {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
         }
 
     }
