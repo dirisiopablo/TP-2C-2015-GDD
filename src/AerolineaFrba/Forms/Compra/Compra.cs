@@ -153,7 +153,8 @@ namespace AerolineaFrba.Forms.Compra {
 
             String query = "";
 
-            query += "SELECT v.fecha_salida 'Fecha Salida', " +
+            query += "SELECT v.id 'ID', " +
+                            "v.fecha_salida 'Fecha Salida', " +
                             "v.fecha_llegada_estimada 'Llegada estimada', " +
                             "a.matricula 'Matricula Aeronave', " +
                             "a.modelo 'Modelo Aeronave', " +
@@ -191,6 +192,11 @@ namespace AerolineaFrba.Forms.Compra {
         private void agregarPaqueteButton_Click(object sender, EventArgs e)
         {
             if (!validar()) return;
+        }
+
+        private void viajesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }

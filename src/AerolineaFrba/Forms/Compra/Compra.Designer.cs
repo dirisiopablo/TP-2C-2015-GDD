@@ -226,6 +226,7 @@
             this.viajesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.viajesDataGrid.Size = new System.Drawing.Size(888, 136);
             this.viajesDataGrid.TabIndex = 7;
+            this.viajesDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viajesDataGrid_CellContentClick);
             // 
             // dataGridView1
             // 
@@ -589,8 +590,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(981, 741);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(984, 461);
             this.Controls.Add(this.splitContainer);
             this.Name = "Compra";
             this.Text = "Compra";
