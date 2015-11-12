@@ -14,4 +14,11 @@ namespace AerolineaFrba.Config {
         static public string password = "gd2015";
 
     }
+
+    public static class SystemConfig {
+
+        static public DateTime systemDate = new DateTime(2016, 12, 25);
+
+    }
+
 }

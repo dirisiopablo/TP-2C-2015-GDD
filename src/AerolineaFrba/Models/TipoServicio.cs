@@ -9,6 +9,7 @@ namespace AerolineaFrba.Models {
 
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        public Decimal Porcentaje { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Tipo_Servicio";
     }

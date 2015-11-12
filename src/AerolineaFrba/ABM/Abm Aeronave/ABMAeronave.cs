@@ -255,7 +255,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             BajaAeronave bajaAeronave = new BajaAeronave();
             bajaAeronave.Aeronave_Id = aeronave.Id;
             bajaAeronave.Tipo_Baja_Id = aeronaveBaja.tipoBajaId;
-            bajaAeronave.Fecha_Baja = DateTime.Now;
+            bajaAeronave.Fecha_Baja = Config.SystemConfig.systemDate;
             int idInsertado = DAO.insert<BajaAeronave>(bajaAeronave);
 
             DAO.closeConnection();

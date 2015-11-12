@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
+using AerolineaFrba.Config;
 
 
 namespace AerolineaFrba.Forms.Canje_Millas {
@@ -97,7 +98,7 @@ namespace AerolineaFrba.Forms.Canje_Millas {
             canje.Catalogo_Id = productoId;
             canje.Cliente_Id = this.cliente_activo.Id;
             canje.Cantidad = cantidadNumeric.Value;
-            canje.Fecha = DateTime.Now;
+            canje.Fecha = Config.SystemConfig.systemDate;
 
             producto.Stock -= cantidadNumeric.Value;
 

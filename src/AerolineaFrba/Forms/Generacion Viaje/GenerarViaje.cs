@@ -104,7 +104,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
 
         private bool validarViaje(Aeronave aeronave, Ruta ruta, DateTime fechaSalida, ref String error) {
 
-            if (fechaSalida < DateTime.Now) {
+            if (fechaSalida < Config.SystemConfig.systemDate) {
                 error = "La fecha de salida ingresada no puede ser menor a la fecha actual.";
                 return false;
             }

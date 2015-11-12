@@ -36,6 +36,30 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
         }
 
         private void destinosPasajesButton_Click(object sender, EventArgs e) {
+            String title = "Destinos más comprados";
+
+            String rango = this.getRango();
+
+            String tabla = Viaje.TableName + " v";
+            String pasajeTabla = Pasaje.TableName + " p";
+            String rutaTabla = Ruta.TableName + " r";
+            String ciudadTabla = Ciudad.TableName + " c";
+
+            String query = "";
+            query += "SELECT TOP 5 c.descripcion as 'Destino', count(1) as 'Ventas'" + " FROM " + tabla;
+            query += " INNER JOIN " + pasajeTabla + " ON p.viaje_id = v.id";
+            query += " INNER JOIN " + rutaTabla + " ON v.ruta_id = r.id";
+            query += " INNER JOIN " + ciudadTabla + " ON r.ciudad_destino_id = c.id";
+            query += " WHERE (p.fecha_compra " + rango + ")";
+            query += " GROUP BY c.descripcion";
+            query += " ORDER BY 'Ventas' DESC";
+
+            DataTable table = this.buildDatatable(query);
+
+            TableDialog dialog = new TableDialog(table, title);
+
+            dialog.ShowDialog();
+
 
         }
 

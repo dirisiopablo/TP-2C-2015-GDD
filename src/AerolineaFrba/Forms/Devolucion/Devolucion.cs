@@ -81,7 +81,7 @@ namespace AerolineaFrba.Forms.Devolucion {
             DAO.connect();
 
             Cancelacion cancelacion = new Cancelacion();
-            cancelacion.Fecha = DateTime.Now;
+            cancelacion.Fecha = Config.SystemConfig.systemDate;
             cancelacion.Motivo = "";
             cancelacion.NumeroCompra = 0000;
             int cancelacion_id = DAO.insert<Cancelacion>(cancelacion);

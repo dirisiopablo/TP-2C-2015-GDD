@@ -23,7 +23,7 @@ namespace AerolineaFrba.Models {
             get {
                 DAO.connect();
 
-                String condicionFecha = "BETWEEN DATEADD(year, -1, GETDATE()) AND GETDATE() ";
+                String condicionFecha = "BETWEEN DATEADD(year, -1, " + Config.SystemConfig.systemDate.ToString() + ") AND " + Config.SystemConfig.systemDate.ToString() + " ";
 
                 List<Pasaje> pasajes = DAO.selectAll<Pasaje>(new[] { "cliente_id = " + this.Id, "( fecha_compra " + condicionFecha + ")" });
                 List<Paquete> paquetes = DAO.selectAll<Paquete>(new[] { "cliente_id = " + this.Id, "( fecha_compra " + condicionFecha + ")" });

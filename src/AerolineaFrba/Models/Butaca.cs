@@ -10,9 +10,9 @@ namespace AerolineaFrba.Models {
     class Butaca {
 
         public int Id { get; set; }
-        public int Numero { get; set; }
-        public int Piso { get; set; }
+        public Decimal Numero { get; set; }
         public string Tipo { get; set; }
+        public Decimal Piso { get; set; }
 
         public int Aeronave_Id { get; set; }
 

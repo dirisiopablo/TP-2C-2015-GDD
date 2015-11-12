@@ -42,7 +42,7 @@
             this.viajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.viajeTableAdapter = new AerolineaFrba.ViajeDataSetTableAdapters.ViajeTableAdapter();
             this.viajesDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.pasajerosDataGrid = new System.Windows.Forms.DataGridView();
             this.agregarPasajeroButton = new System.Windows.Forms.Button();
             this.fechaNacimientoPicker = new System.Windows.Forms.DateTimePicker();
             this.emailTextbox = new System.Windows.Forms.TextBox();
@@ -57,7 +57,7 @@
             this.documentoTextbox = new System.Windows.Forms.TextBox();
             this.documentoLabel = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.paquetesDataGrid = new System.Windows.Forms.DataGridView();
             this.agregarPaqueteButton = new System.Windows.Forms.Button();
             this.emailTextboxPaquete = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -79,6 +79,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.pesoBox = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
+            this.confirmarCompraButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
@@ -87,12 +88,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.viajeDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.viajeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.viajesDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajerosDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paquetesDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pesoBox)).BeginInit();
@@ -228,13 +229,13 @@
             this.viajesDataGrid.TabIndex = 7;
             this.viajesDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viajesDataGrid_CellContentClick);
             // 
-            // dataGridView1
+            // pasajerosDataGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 140);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(888, 114);
-            this.dataGridView1.TabIndex = 13;
+            this.pasajerosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pasajerosDataGrid.Location = new System.Drawing.Point(14, 140);
+            this.pasajerosDataGrid.Name = "pasajerosDataGrid";
+            this.pasajerosDataGrid.Size = new System.Drawing.Size(888, 114);
+            this.pasajerosDataGrid.TabIndex = 13;
             // 
             // agregarPasajeroButton
             // 
@@ -244,6 +245,7 @@
             this.agregarPasajeroButton.TabIndex = 12;
             this.agregarPasajeroButton.Text = "Agregar Pasajero";
             this.agregarPasajeroButton.UseVisualStyleBackColor = true;
+            this.agregarPasajeroButton.Click += new System.EventHandler(this.agregarPasajeroButton_Click);
             // 
             // fechaNacimientoPicker
             // 
@@ -361,7 +363,7 @@
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.dataGridView2);
+            this.splitContainer.Panel2.Controls.Add(this.paquetesDataGrid);
             this.splitContainer.Panel2.Controls.Add(this.agregarPaqueteButton);
             this.splitContainer.Panel2.Controls.Add(this.emailTextboxPaquete);
             this.splitContainer.Panel2.Controls.Add(this.label10);
@@ -379,7 +381,7 @@
             this.splitContainer.Panel2.Controls.Add(this.label4);
             this.splitContainer.Panel2.Controls.Add(this.agregarPasajeroButton);
             this.splitContainer.Panel2.Controls.Add(this.fechaNacimientoPicker);
-            this.splitContainer.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer.Panel2.Controls.Add(this.pasajerosDataGrid);
             this.splitContainer.Panel2.Controls.Add(this.emailTextbox);
             this.splitContainer.Panel2.Controls.Add(this.documentoLabel);
             this.splitContainer.Panel2.Controls.Add(this.emailLabel);
@@ -397,13 +399,13 @@
             this.splitContainer.SplitterDistance = 228;
             this.splitContainer.TabIndex = 14;
             // 
-            // dataGridView2
+            // paquetesDataGrid
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(14, 415);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(888, 113);
-            this.dataGridView2.TabIndex = 29;
+            this.paquetesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paquetesDataGrid.Location = new System.Drawing.Point(14, 415);
+            this.paquetesDataGrid.Name = "paquetesDataGrid";
+            this.paquetesDataGrid.Size = new System.Drawing.Size(888, 113);
+            this.paquetesDataGrid.TabIndex = 29;
             // 
             // agregarPaqueteButton
             // 
@@ -573,6 +575,11 @@
             // pesoBox
             // 
             this.pesoBox.Location = new System.Drawing.Point(487, 96);
+            this.pesoBox.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.pesoBox.Name = "pesoBox";
             this.pesoBox.Size = new System.Drawing.Size(102, 20);
             this.pesoBox.TabIndex = 1;
@@ -586,12 +593,23 @@
             this.label12.TabIndex = 0;
             this.label12.Text = "Peso (KG):";
             // 
+            // confirmarCompraButton
+            // 
+            this.confirmarCompraButton.Location = new System.Drawing.Point(361, 813);
+            this.confirmarCompraButton.Name = "confirmarCompraButton";
+            this.confirmarCompraButton.Size = new System.Drawing.Size(271, 53);
+            this.confirmarCompraButton.TabIndex = 15;
+            this.confirmarCompraButton.Text = "Confirmar Compra";
+            this.confirmarCompraButton.UseVisualStyleBackColor = true;
+            this.confirmarCompraButton.Click += new System.EventHandler(this.confirmarCompraButton_Click);
+            // 
             // Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.confirmarCompraButton);
             this.Controls.Add(this.splitContainer);
             this.Name = "Compra";
             this.Text = "Compra";
@@ -604,14 +622,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.viajeDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.viajeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.viajesDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pasajerosDataGrid)).EndInit();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paquetesDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -654,7 +672,7 @@
         private System.Windows.Forms.Label nombreLabel;
         private System.Windows.Forms.TextBox documentoTextbox;
         private System.Windows.Forms.Label documentoLabel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView pasajerosDataGrid;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.DateTimePicker fechaNacimientoPickerPaquete;
         private System.Windows.Forms.Label label9;
@@ -668,7 +686,7 @@
         private System.Windows.Forms.Label documentoLabelPaquete;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView paquetesDataGrid;
         private System.Windows.Forms.Button agregarPaqueteButton;
         private System.Windows.Forms.TextBox emailTextboxPaquete;
         private System.Windows.Forms.Label label10;
@@ -678,5 +696,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown pesoBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button confirmarCompraButton;
     }
 }

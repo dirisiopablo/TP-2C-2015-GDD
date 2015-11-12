@@ -18,9 +18,15 @@ namespace AerolineaFrba.Forms.Compra {
        
         private static Compra _instance = null;
         private SqlDataAdapter dataAdapter;
+        private DataTable pasajerosDatatable;
+        private DataTable paquetesDatatable;
+        private Viaje selectedViaje;
+        private Aeronave selectedAeronave;
 
         private Compra() {
             this.InitializeComponent();
+            this.pasajerosDatatable = new DataTable();
+            this.paquetesDatatable = new DataTable();
         }
 
         public static Compra getInstance() {
@@ -45,7 +51,7 @@ namespace AerolineaFrba.Forms.Compra {
                 return;
             }
 
-            String query = this.getBaseQuery();
+            String query = this.getBaseQueryViajes();
 
             query += " WHERE ";
 
@@ -55,7 +61,7 @@ namespace AerolineaFrba.Forms.Compra {
 
             query += "r.ciudad_destino_id = " + id_destino;
 
-            this.FillDataGrid(query);
+            this.FillDataGridViajes(query);
 
         }
 
@@ -115,7 +121,7 @@ namespace AerolineaFrba.Forms.Compra {
 
         private bool validarBusqueda(DateTime fechaSalida, int id_origen, int id_destino, ref String error) {
 
-            if (fechaSalida < DateTime.Now) {
+            if (fechaSalida < Config.SystemConfig.systemDate) {
                 error = "La fecha de salida ingresada no puede ser menor a la fecha actual.";
                 return false;
             }
@@ -133,7 +139,7 @@ namespace AerolineaFrba.Forms.Compra {
             return true;
         }
 
-        private void FillDataGrid(string selectCommand) {
+        private void FillDataGridViajes(string selectCommand) {
 
             String connectionString = DAO.makeConnectionString();
 
@@ -149,7 +155,31 @@ namespace AerolineaFrba.Forms.Compra {
 
         }
 
-        private String getBaseQuery() {
+        private void FillDataGridPasajeros(string selectCommand) {
+
+            String connectionString = DAO.makeConnectionString();
+
+            this.dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+            this.dataAdapter.Fill(this.pasajerosDatatable);
+
+            this.pasajerosDataGrid.DataSource = this.pasajerosDatatable;
+
+        }
+
+        private void FillDataGridPaquetes(string selectCommand) {
+
+            String connectionString = DAO.makeConnectionString();
+
+            this.dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+            this.dataAdapter.Fill(this.paquetesDatatable);
+
+            this.paquetesDataGrid.DataSource = this.paquetesDatatable;
+
+        }
+
+        private String getBaseQueryViajes() {
 
             String query = "";
 
@@ -169,6 +199,36 @@ namespace AerolineaFrba.Forms.Compra {
 
         }
 
+        private String getBaseQueryPasajero(int butaca_numero) {
+
+            String query = "";
+
+            query += "SELECT c.id 'Cliente ID', " +
+                            "c.dni 'Cliente DNI', " +
+                            "c.nombre 'Cliente Nombre', " +
+                            "c.apellido 'Cliente Apellido', " +
+                            butaca_numero + " 'Butaca' " +
+                     "FROM BIEN_MIGRADO_RAFA.Cliente c ";
+
+            return query;
+
+        }
+
+        private String getBaseQueryPaquete(int peso) {
+
+            String query = "";
+
+            query += "SELECT c.id 'Cliente ID', " +
+                            "c.dni 'Cliente DNI', " +
+                            "c.nombre 'Cliente Nombre', " +
+                            "c.apellido 'Cliente Apellido', " +
+                            peso + " 'Peso' " +
+                     "FROM BIEN_MIGRADO_RAFA.Cliente c ";
+
+            return query;
+
+        }
+
         private void Compra_Load(object sender, EventArgs e) {
 
             this.ciudadTableAdapter1.Fill(this.dataSetCiudad2.Ciudad);
@@ -179,43 +239,186 @@ namespace AerolineaFrba.Forms.Compra {
 
         }
 
-        private Boolean validar()
-        {
-            if (pesoBox.Text == "")
-            {
-                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
-                return false;
+        private void agregarPasajeroButton_Click(object sender, EventArgs e) {
+
+            if (this.selectedViaje == null) {
+                MessageBox.Show("Debe seleccionar un viaje.");
+                return;
             }
 
-            return true;
+            if (String.IsNullOrWhiteSpace(this.documentoTextbox.Text)) {
+                MessageBox.Show("Debe ingresar el DNI del cliente.");
+                return;
+            }
+
+            String dni = this.documentoTextbox.Text;
+            int butaca_id = (int)this.butacaCombo.SelectedValue;
+
+            DAO.connect();
+            Cliente cliente = DAO.selectOne<Cliente>(new[] { "dni = " + dni });
+            if (cliente == null) {
+                Cliente c = new Cliente();
+                c.Apellido = this.apellidoTextbox.Text;
+                c.Nombre = this.nombreTextbox.Text;
+                c.DNI = Convert.ToInt32(this.documentoTextbox.Text);
+                c.Email = this.emailTextbox.Text;
+                c.Fecha_Nacimiento = this.fechaNacimientoPicker.Value;
+                int id = DAO.insert<Cliente>(c);
+                c.Id = id;
+                cliente = c;
+            }
+            Butaca butaca = DAO.selectOne<Butaca>(new[] { "id = " + butaca_id });
+            DAO.closeConnection();
+
+            String query = this.getBaseQueryPasajero((int)butaca.Numero);
+
+            query += " WHERE c.id = " + cliente.Id ;
+
+            //butacaCombo.Items.RemoveAt(butacaCombo.SelectedIndex);  //sacar del dataset y updatear
+
+            this.FillDataGridPasajeros(query);
         }
 
-        private void agregarPaqueteButton_Click(object sender, EventArgs e)
-        {
-            if (!validar()) return;
+        private void agregarPaqueteButton_Click(object sender, EventArgs e){
+            
+            if (this.selectedViaje == null) {
+                MessageBox.Show("Debe seleccionar un viaje.");
+                return;
+            }
+
+            if (pesoBox.Text == "") {
+                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(this.documentoTextboxPaquete.Text)) {
+                MessageBox.Show("Debe ingresar el DNI del cliente.");
+                return;
+            }
+
+            if (this.selectedAeronave.Kilogramos_Disponibles < Convert.ToInt32(pesoBox.Text)) {
+                MessageBox.Show("Su encomienda supera el peso disponible de la aeronave.");
+                return;
+            }
+
+            String dni = this.documentoTextboxPaquete.Text;
+
+            DAO.connect();
+            Cliente cliente = DAO.selectOne<Cliente>(new[] { "dni = '" + dni +"'" });
+            if (cliente == null) {
+                Cliente c = new Cliente();
+                c.Apellido = this.apellidoTextboxPaquete.Text;
+                c.Nombre = this.nombreTextboxPaquete.Text;
+                c.DNI = Convert.ToInt32(this.documentoTextboxPaquete.Text);
+                c.Email = this.emailTextboxPaquete.Text;
+                c.Fecha_Nacimiento = this.fechaNacimientoPickerPaquete.Value;
+                int id = DAO.insert<Cliente>(c);
+                c.Id = id;
+                cliente = c;
+            }
+
+            DAO.closeConnection();
+
+            this.selectedAeronave.Kilogramos_Disponibles -= Convert.ToInt32(pesoBox.Text);
+
+            String query = this.getBaseQueryPaquete(Convert.ToInt32(pesoBox.Text));
+
+            query += " WHERE c.id = " + cliente.Id;
+
+            this.FillDataGridPaquetes(query);
+
         }
 
-        private void viajesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        private void viajesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e){
+
+            if (this.selectedViaje == null || (int)this.viajesDataGrid.SelectedRows[0].Cells[1].Value != this.selectedViaje.Id) {
+                this.paquetesDatatable.Clear();
+                this.pasajerosDatatable.Clear();
+            }
+
             DataGridViewRow row = this.viajesDataGrid.SelectedRows[0];
             DAO.connect();
+            this.selectedViaje = DAO.selectOne<Viaje>( new[] { "id = " + row.Cells[1].Value });
+            this.selectedAeronave = this.selectedViaje.Aeronave;
             String connectionString = DAO.makeConnectionString(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
-            String selectCommand = "SELECT id, numero FROM BIEN_MIGRADO_RAFA.Butaca WHERE aeronave_id = " + row.Cells[0].Value.ToString();
+            String selectCommand = "SELECT id, numero FROM BIEN_MIGRADO_RAFA.Butaca";
+            selectCommand += " WHERE aeronave_id = " + row.Cells[0].Value.ToString();
+            selectCommand += " AND id NOT IN (SELECT butaca_id FROM BIEN_MIGRADO_RAFA.Pasaje WHERE viaje_id = " + row.Cells[1].Value.ToString() + ")";
+            selectCommand += " ORDER BY numero";
             dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
 
             DataSet ds = new DataSet();
 
             dataAdapter.Fill(ds);
 
-            
             butacaCombo.DisplayMember = "numero";
             butacaCombo.ValueMember = "id";
             butacaCombo.DataSource = ds.Tables[0];
 
-
-
             DAO.closeConnection();
         }
+
+        private void confirmarCompraButton_Click(object sender, EventArgs e) {
+
+            List<int> pasajerosIds = new List<int>();
+            List<int> butacasNumeros = new List<int>();
+
+            List<int> clientesIds = new List<int>();
+            List<Decimal> pesos = new List<Decimal>();
+
+            foreach (DataRow d in this.pasajerosDatatable.Rows) {
+                pasajerosIds.Add((int)d.ItemArray[0]);
+                butacasNumeros.Add((int)d.ItemArray[4]);
+            }
+
+            foreach (DataRow d in this.paquetesDatatable.Rows) {
+                clientesIds.Add((int)d.ItemArray[0]);
+                pesos.Add(Convert.ToDecimal(d.ItemArray[4]));
+            }
+
+            if (pasajerosIds.Count == 0 && clientesIds.Count == 0) {
+                MessageBox.Show("No selecciono nada para comprar.");
+                return;
+            }
+
+            List<String> detalle = this.buildDetalle(pasajerosIds, butacasNumeros, clientesIds, pesos);
+
+        }
+
+        private List<String> buildDetalle(List<int> pasajerosIds, List<int> butacasNumeros, List<int> clientesIds, List<Decimal> pesos) {
+
+            List<String> detalle = new List<String>();
+
+            int i = 0;
+            foreach (int id in pasajerosIds) {
+                DAO.connect();
+                Cliente cliente = DAO.selectOne<Cliente>( new[] {"id = " + id } );
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Pasajes;
+                Decimal mult = this.selectedAeronave.Tipo_Servicio.Porcentaje;
+                DAO.closeConnection();
+                String str = "";
+                str += "Pasaje - DNI Cliente: " + cliente.DNI + " - Precio: $" + precioBase * mult + " - Butaca: " + butacasNumeros[i]  + ".";
+                detalle.Add(str);
+                i++;
+            }
+
+            int j = 0;
+            foreach (int id in clientesIds) {
+                DAO.connect();
+                Cliente cliente = DAO.selectOne<Cliente>(new[] { "id = " + id });
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Kg;
+                DAO.closeConnection();
+                String str = "";
+                str += "Encomienda - DNI Cliente: " + cliente.DNI + " - Precio: $" + precioBase * pesos[j] + " - Peso: " + pesos[j] + " kg.";
+                detalle.Add(str);
+                j++;
+            }
+
+            return detalle;
+
+        }
+
+        
 
     }
 }
