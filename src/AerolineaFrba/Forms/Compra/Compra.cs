@@ -153,7 +153,8 @@ namespace AerolineaFrba.Forms.Compra {
 
             String query = "";
 
-            query += "SELECT v.id 'ID', " +
+            query += "SELECT a.id 'Aeronave ID', " +
+                            "v.id 'Viaje ID', " +
                             "v.fecha_salida 'Fecha Salida', " +
                             "v.fecha_llegada_estimada 'Llegada estimada', " +
                             "a.matricula 'Matricula Aeronave', " +
@@ -196,7 +197,24 @@ namespace AerolineaFrba.Forms.Compra {
 
         private void viajesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            DataGridViewRow row = this.viajesDataGrid.SelectedRows[0];
+            DAO.connect();
+            String connectionString = DAO.makeConnectionString(DBConfig.direccion, DBConfig.database, DBConfig.username, DBConfig.password);
+            String selectCommand = "SELECT id, numero FROM BIEN_MIGRADO_RAFA.Butaca WHERE aeronave_id = " + row.Cells[0].Value.ToString();
+            dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
 
+            DataSet ds = new DataSet();
+
+            dataAdapter.Fill(ds);
+
+            
+            butacaCombo.DisplayMember = "numero";
+            butacaCombo.ValueMember = "id";
+            butacaCombo.DataSource = ds.Tables[0];
+
+
+
+            DAO.closeConnection();
         }
 
     }
