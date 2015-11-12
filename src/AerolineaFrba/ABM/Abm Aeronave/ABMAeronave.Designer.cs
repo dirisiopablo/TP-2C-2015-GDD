@@ -119,7 +119,7 @@
             // bajaLabel
             // 
             this.bajaLabel.AutoSize = true;
-            this.bajaLabel.Location = new System.Drawing.Point(532, 6);
+            this.bajaLabel.Location = new System.Drawing.Point(551, 6);
             this.bajaLabel.Name = "bajaLabel";
             this.bajaLabel.Size = new System.Drawing.Size(60, 13);
             this.bajaLabel.TabIndex = 19;
@@ -127,14 +127,15 @@
             // 
             // bajaInput
             // 
+            this.bajaInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bajaInput.FormattingEnabled = true;
             this.bajaInput.Items.AddRange(new object[] {
-            "Ninguna",
+            "Todas las aeronaves",
             "Fuera de servicio",
             "Baja definitiva"});
             this.bajaInput.Location = new System.Drawing.Point(405, 3);
             this.bajaInput.Name = "bajaInput";
-            this.bajaInput.Size = new System.Drawing.Size(121, 21);
+            this.bajaInput.Size = new System.Drawing.Size(140, 21);
             this.bajaInput.TabIndex = 18;
             // 
             // butacasInput

@@ -116,6 +116,7 @@
             // 
             this.tipoBajaCombo.DataSource = this.tipoBajaBindingSource;
             this.tipoBajaCombo.DisplayMember = "descripcion";
+            this.tipoBajaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipoBajaCombo.FormattingEnabled = true;
             this.tipoBajaCombo.Location = new System.Drawing.Point(72, 111);
             this.tipoBajaCombo.Name = "tipoBajaCombo";

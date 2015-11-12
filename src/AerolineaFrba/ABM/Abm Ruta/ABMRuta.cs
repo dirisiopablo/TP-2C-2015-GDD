@@ -53,6 +53,7 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
             ruta.Precio_Base_Pasajes = (decimal)nuevoPrecioPasaje;
             ruta.Ciudad_Origen_Id = nuevoOrigen_id;
             ruta.Ciudad_Destino_Id = nuevoDestino_id;
+            ruta.Activo = true;
 
             int affected = DAO.insert<Ruta>(ruta);
 
@@ -204,6 +205,8 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         {
             string query = obtenerQueryBase();
 
+            if (!validar()) return;
+
             String codigo = this.codigoInput.Text;
             int precioBaseKg = Int32.Parse(this.baseKgInput.Text);
             int precioBasePasaje = Int32.Parse(this.basePasajeInput.Text);
@@ -211,7 +214,6 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
             int origenId = (int) this.origenCombo.SelectedValue;
             bool origenTodos = this.origenTodosCheckBox.Checked;
             bool destinoTodos = this.destinoTodosCheckBox.Checked;
-
 
             if (codigo != null && codigo != "")
             {
@@ -250,5 +252,23 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
             this.origenTodosCheckBox.Checked = true;
             this.destinoTodosCheckBox.Checked = true;
         }
+
+        private Boolean validar()
+        {
+            if (baseKgInput.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de precio base de kilogramo.");
+                return false;
+            }
+
+            if (basePasajeInput.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de precio base de pasaje.");
+                return false;
+            }
+
+            return true;
+        }
     }
+
 }

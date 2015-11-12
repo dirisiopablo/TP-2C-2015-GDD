@@ -127,5 +127,16 @@ namespace AerolineaFrba.Forms.Canje_Millas {
         
         }
 
+        private Boolean validar()
+        {
+            if (cantidadNumeric.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 using AerolineaFrba.Enums;
 
@@ -41,7 +42,10 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
 
         private void guardarAeronave_Click(object sender, EventArgs e) {
 
+            if (!validar()) return;
+
             if (MessageBox.Show(this.tipo == Enums.tipoDialog.nuevo ? nuevoMsg : modificarMsg, "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
 
             this.matricula = this.matriculaTextbox.Text;
             this.modelo = this.modeloTextbox.Text;
@@ -67,6 +71,53 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
             {
                 this.splitContainer1.Visible = false;
             }
+        }
+
+        private Boolean validar()
+        {
+            string txt = matriculaTextbox.Text;
+
+            string regex = @"^([A-Z]{3})(-)([0-9]{3})$";
+
+            Regex r = new Regex(regex, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            Match m = r.Match(txt);
+            if (!m.Success)
+            {
+                MessageBox.Show("La matricula debe respetar el siguiente formato XXX-### (letra-numero).");
+                return false;
+            }
+
+            if (kgTextbox.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
+                return false;
+            }
+
+            if (cantidadPasillo1Input.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de butacas pasillo del primer piso.");
+                return false;
+            }
+
+            if (cantidadVentana1Input.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de butacas ventana del primer piso.");
+                return false;
+            }
+
+            if (cantidadPasillo2Input.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de butacas pasillo del segundo piso.");
+                return false;
+            }
+
+            if (cantidadVentana2Input.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de butacas ventana del segundo piso.");
+                return false;
+            }
+
+            return true;
         }
     }
 }

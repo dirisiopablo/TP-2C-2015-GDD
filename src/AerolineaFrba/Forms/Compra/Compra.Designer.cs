@@ -136,6 +136,7 @@
             // 
             this.origenCombo.DataSource = this.ciudadBindingSource;
             this.origenCombo.DisplayMember = "descripcion";
+            this.origenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenCombo.FormattingEnabled = true;
             this.origenCombo.Location = new System.Drawing.Point(380, 22);
             this.origenCombo.Name = "origenCombo";
@@ -162,6 +163,7 @@
             // 
             this.destinoCombo.DataSource = this.ciudadBindingSource1;
             this.destinoCombo.DisplayMember = "descripcion";
+            this.destinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoCombo.FormattingEnabled = true;
             this.destinoCombo.Location = new System.Drawing.Point(600, 22);
             this.destinoCombo.Name = "destinoCombo";
@@ -341,7 +343,7 @@
             // 
             // splitContainer
             // 
-            this.splitContainer.Location = new System.Drawing.Point(38, 28);
+            this.splitContainer.Location = new System.Drawing.Point(25, 12);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -410,6 +412,7 @@
             this.agregarPaqueteButton.TabIndex = 28;
             this.agregarPaqueteButton.Text = "Agregar Paquete";
             this.agregarPaqueteButton.UseVisualStyleBackColor = true;
+            this.agregarPaqueteButton.Click += new System.EventHandler(this.agregarPaqueteButton_Click);
             // 
             // emailTextboxPaquete
             // 
@@ -540,6 +543,7 @@
             // 
             // butacaCombo
             // 
+            this.butacaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.butacaCombo.FormattingEnabled = true;
             this.butacaCombo.Location = new System.Drawing.Point(487, 97);
             this.butacaCombo.Name = "butacaCombo";
@@ -586,7 +590,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(998, 886);
+            this.ClientSize = new System.Drawing.Size(981, 741);
             this.Controls.Add(this.splitContainer);
             this.Name = "Compra";
             this.Text = "Compra";

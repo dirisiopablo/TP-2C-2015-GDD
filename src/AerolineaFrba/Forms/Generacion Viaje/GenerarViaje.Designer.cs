@@ -87,6 +87,7 @@
             // 
             this.aeronaveCombo.DataSource = this.aeronaveBindingSource;
             this.aeronaveCombo.DisplayMember = "matricula";
+            this.aeronaveCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aeronaveCombo.FormattingEnabled = true;
             this.aeronaveCombo.Location = new System.Drawing.Point(142, 112);
             this.aeronaveCombo.Name = "aeronaveCombo";
@@ -123,6 +124,7 @@
             this.rutaCombo.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.rutaBindingSource, "id", true));
             this.rutaCombo.DataSource = this.rutaBindingSource;
             this.rutaCombo.DisplayMember = "codigo";
+            this.rutaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.rutaCombo.FormattingEnabled = true;
             this.rutaCombo.Location = new System.Drawing.Point(142, 161);
             this.rutaCombo.Name = "rutaCombo";

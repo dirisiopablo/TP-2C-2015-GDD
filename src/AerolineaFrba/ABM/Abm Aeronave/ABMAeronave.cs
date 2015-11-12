@@ -22,6 +22,7 @@ namespace AerolineaFrba.Abm_Aeronave {
 
         private ABMAeronave() {
             this.InitializeComponent();
+            this.bajaInput.SelectedIndex = 0;
         }
 
         public static ABMAeronave getInstance() {
@@ -125,6 +126,8 @@ namespace AerolineaFrba.Abm_Aeronave {
         {
             string query = obtenerQueryBase();
 
+            if (!validar()) return;
+
             String matricula = this.matriculaInput.Text;
             String modelo = this.modeloInput.Text;
             int kilogramos = Int32.Parse(this.kilogramosInput.Text);
@@ -158,7 +161,7 @@ namespace AerolineaFrba.Abm_Aeronave {
                 query += "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) > " + cantidadButacas + " AND ";
             }
 
-            if (baja != "" && baja != "Ninguna")
+            if (baja != "" && baja != "Todas las aeronaves")
             {
                 query += "(SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC) = '" + baja + "' AND ";
             }                
@@ -267,5 +270,24 @@ namespace AerolineaFrba.Abm_Aeronave {
         {
             //TODO: MAKE ME WORK PLS :)
         }
+
+        private Boolean validar()
+        {
+            if (kilogramosInput.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
+                return false;
+            }
+
+            if (butacasInput.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de butacas disponibles.");
+                return false;
+            }
+
+            return true;
+        }
+
+
     }
 }

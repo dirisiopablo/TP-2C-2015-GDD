@@ -160,6 +160,7 @@
             // 
             this.origenCombo.DataSource = this.ciudadBindingSource1;
             this.origenCombo.DisplayMember = "descripcion";
+            this.origenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenCombo.FormattingEnabled = true;
             this.origenCombo.Location = new System.Drawing.Point(424, 30);
             this.origenCombo.Name = "origenCombo";
@@ -190,6 +191,7 @@
             // 
             this.destinoCombo.DataSource = this.ciudadBindingSource;
             this.destinoCombo.DisplayMember = "descripcion";
+            this.destinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoCombo.FormattingEnabled = true;
             this.destinoCombo.Location = new System.Drawing.Point(424, 4);
             this.destinoCombo.Name = "destinoCombo";

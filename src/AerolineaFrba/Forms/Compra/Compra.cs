@@ -177,5 +177,21 @@ namespace AerolineaFrba.Forms.Compra {
 
         }
 
+        private Boolean validar()
+        {
+            if (pesoBox.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un valor en el campo de kilogramos disponibles.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void agregarPaqueteButton_Click(object sender, EventArgs e)
+        {
+            if (!validar()) return;
+        }
+
     }
 }

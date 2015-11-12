@@ -15,8 +15,8 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
     public partial class RutaDialog : Form {
 
         private Enums.tipoDialog tipo { get; set; }
-        private String nuevoMsg = "Confirma la creación de la nueva Aeronave?";
-        private String modificarMsg = "Seguro desea modificar los campos?";
+        private String nuevoMsg = "¿Confirma la creación de la nueva Ruta?";
+        private String modificarMsg = "¿Seguro desea modificar los campos?";
 
         public String codigo { get; set; }
         public decimal precio_kg { get; set; }
@@ -28,12 +28,14 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         public RutaDialog(String _codigo, decimal _precio_kg, decimal _precio_pasaje, int _origen_id, int _destino_id, Enums.tipoDialog tipoDialog) {
 
             InitializeComponent();
+            this.ciudadTableAdapter1.Fill(this.dataSetCiudad2.Ciudad);
+            this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
 
             this.codigoTextbox.Text = _codigo;
             this.kgTextbox.Text = _precio_kg.ToString();
             this.pasajeTextbox.Text = _precio_pasaje.ToString();
-            this.origenCombo.SelectedValue = _origen_id; //FIXME
-            this.destinoCombo.SelectedValue = _destino_id; //FIXME
+            this.origenCombo.SelectedValue = _origen_id;
+            this.destinoCombo.SelectedValue = _destino_id;
             this.tipo = tipoDialog;
             this.dr = DialogResult.Cancel;
 
@@ -61,23 +63,6 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         }
 
         private void RutaDialog_Load(object sender, EventArgs e) {
-            // TODO: This line of code loads data into the 'dataSetCiudad2.Ciudad' table. You can move, or remove it, as needed.
-            this.ciudadTableAdapter1.Fill(this.dataSetCiudad2.Ciudad);
-            // TODO: This line of code loads data into the 'dataSetCiudad.Ciudad' table. You can move, or remove it, as needed.
-            this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-        }
-
-        private void kgTextbox_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void kgTextbox_Validating(object sender, CancelEventArgs e)
-        {
-            if (kgTextbox.Value == null)
-            {
-                kgTextbox.Value = 0;
-            }
         }
 
         private Boolean validar(){
@@ -94,6 +79,22 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                 MessageBox.Show("El valor del código de Ruta debe ser númerico.");
                 return false;
             }
+
+            if (kgTextbox.Text == "") {
+                MessageBox.Show("Debe ingresar un valor en el campo de precio base de kilogramo.");
+                return false;
+            }
+
+            if (pasajeTextbox.Text == "") {
+                MessageBox.Show("Debe ingresar un valor en el campo de precio base de pasaje.");
+                return false;
+            }
+
+            if ((int)origenCombo.SelectedValue == (int)destinoCombo.SelectedValue){
+                MessageBox.Show("El origen y el destino deben ser distintos.");
+                return false;
+            }
+
             return true;
         }
 

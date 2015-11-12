@@ -84,6 +84,7 @@
             // 
             // productosCombo
             // 
+            this.productosCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productosCombo.FormattingEnabled = true;
             this.productosCombo.Location = new System.Drawing.Point(184, 130);
             this.productosCombo.Name = "productosCombo";
