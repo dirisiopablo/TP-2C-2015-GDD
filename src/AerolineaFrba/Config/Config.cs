@@ -8,7 +8,7 @@ namespace AerolineaFrba.Config {
     
     public static class DBConfig {
 
-        static public string direccion = @"LEO\SQLSERVER2012"; 
+        static public string direccion = @"PABLO-NOTEBOOK\SQLSERVER2012"; 
         static public string database = "GD2C2015";
         static public string username = "gd";
         static public string password = "gd2015";
@@ -17,7 +17,7 @@ namespace AerolineaFrba.Config {
 
     public static class SystemConfig {
 
-        static public DateTime systemDate = new DateTime(2016, 12, 25);
+        static public DateTime systemDate = new DateTime(2015, 12, 25);
 
     }
 
