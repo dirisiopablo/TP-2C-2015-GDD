@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.matriculaTextbox = new System.Windows.Forms.TextBox();
             this.modeloTextbox = new System.Windows.Forms.TextBox();
             this.fabricanteTextbox = new System.Windows.Forms.TextBox();
@@ -39,13 +40,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.primerPiso = new System.Windows.Forms.Label();
+            this.cantidadPasillo1Input = new System.Windows.Forms.NumericUpDown();
+            this.cantidadVentana1Input = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.segundoPiso = new System.Windows.Forms.Label();
-            this.cantidadPasillo1Input = new System.Windows.Forms.NumericUpDown();
-            this.cantidadVentana1Input = new System.Windows.Forms.NumericUpDown();
             this.cantidadPasillo2Input = new System.Windows.Forms.NumericUpDown();
             this.cantidadVentana2Input = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tipoServicioCombo = new System.Windows.Forms.ComboBox();
+            this.gD2C2015DataSet7 = new AerolineaFrba.GD2C2015DataSet7();
+            this.tipoServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tipo_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSet7TableAdapters.Tipo_ServicioTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -56,6 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana1Input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadPasillo2Input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana2Input)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // matriculaTextbox
@@ -138,6 +146,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.tipoServicioCombo);
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.descripcionGeneral);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.matriculaTextbox);
@@ -231,6 +241,30 @@
             this.primerPiso.TabIndex = 10;
             this.primerPiso.Text = "Primer Piso";
             // 
+            // cantidadPasillo1Input
+            // 
+            this.cantidadPasillo1Input.Location = new System.Drawing.Point(106, 31);
+            this.cantidadPasillo1Input.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cantidadPasillo1Input.Name = "cantidadPasillo1Input";
+            this.cantidadPasillo1Input.Size = new System.Drawing.Size(148, 20);
+            this.cantidadPasillo1Input.TabIndex = 15;
+            // 
+            // cantidadVentana1Input
+            // 
+            this.cantidadVentana1Input.Location = new System.Drawing.Point(106, 70);
+            this.cantidadVentana1Input.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.cantidadVentana1Input.Name = "cantidadVentana1Input";
+            this.cantidadVentana1Input.Size = new System.Drawing.Size(148, 20);
+            this.cantidadVentana1Input.TabIndex = 16;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -259,30 +293,6 @@
             this.segundoPiso.TabIndex = 11;
             this.segundoPiso.Text = "Segundo Piso";
             // 
-            // cantidadPasillo1Input
-            // 
-            this.cantidadPasillo1Input.Location = new System.Drawing.Point(106, 31);
-            this.cantidadPasillo1Input.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.cantidadPasillo1Input.Name = "cantidadPasillo1Input";
-            this.cantidadPasillo1Input.Size = new System.Drawing.Size(148, 20);
-            this.cantidadPasillo1Input.TabIndex = 15;
-            // 
-            // cantidadVentana1Input
-            // 
-            this.cantidadVentana1Input.Location = new System.Drawing.Point(106, 70);
-            this.cantidadVentana1Input.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.cantidadVentana1Input.Name = "cantidadVentana1Input";
-            this.cantidadVentana1Input.Size = new System.Drawing.Size(148, 20);
-            this.cantidadVentana1Input.TabIndex = 16;
-            // 
             // cantidadPasillo2Input
             // 
             this.cantidadPasillo2Input.Location = new System.Drawing.Point(106, 34);
@@ -306,6 +316,41 @@
             this.cantidadVentana2Input.Name = "cantidadVentana2Input";
             this.cantidadVentana2Input.Size = new System.Drawing.Size(148, 20);
             this.cantidadVentana2Input.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 187);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Tipo de Servicio";
+            // 
+            // tipoServicioCombo
+            // 
+            this.tipoServicioCombo.DataSource = this.tipoServicioBindingSource;
+            this.tipoServicioCombo.DisplayMember = "descripcion";
+            this.tipoServicioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tipoServicioCombo.FormattingEnabled = true;
+            this.tipoServicioCombo.Location = new System.Drawing.Point(129, 183);
+            this.tipoServicioCombo.Name = "tipoServicioCombo";
+            this.tipoServicioCombo.Size = new System.Drawing.Size(148, 21);
+            this.tipoServicioCombo.TabIndex = 12;
+            this.tipoServicioCombo.ValueMember = "id";
+            // 
+            // gD2C2015DataSet7
+            // 
+            this.gD2C2015DataSet7.DataSetName = "GD2C2015DataSet7";
+            this.gD2C2015DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tipoServicioBindingSource
+            // 
+            this.tipoServicioBindingSource.DataMember = "Tipo_Servicio";
+            this.tipoServicioBindingSource.DataSource = this.gD2C2015DataSet7;
+            // 
+            // tipo_ServicioTableAdapter
+            // 
+            this.tipo_ServicioTableAdapter.ClearBeforeFill = true;
             // 
             // AeronaveDialog
             // 
@@ -332,6 +377,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana1Input)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadPasillo2Input)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana2Input)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +408,10 @@
         private System.Windows.Forms.NumericUpDown cantidadVentana1Input;
         private System.Windows.Forms.NumericUpDown cantidadPasillo2Input;
         private System.Windows.Forms.NumericUpDown cantidadVentana2Input;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox tipoServicioCombo;
+        private GD2C2015DataSet7 gD2C2015DataSet7;
+        private System.Windows.Forms.BindingSource tipoServicioBindingSource;
+        private GD2C2015DataSet7TableAdapters.Tipo_ServicioTableAdapter tipo_ServicioTableAdapter;
     }
 }

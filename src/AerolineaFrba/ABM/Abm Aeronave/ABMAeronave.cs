@@ -46,6 +46,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             String nuevoModelo = aeronaveDialog.modelo;
             decimal nuevoKgDisponibles = aeronaveDialog.kgDisponibles;
             String nuevoFabricante = aeronaveDialog.fabricante;
+            int tipoServicioId = aeronaveDialog.tipoServicioId;
 
             DAO.connect();
 
@@ -54,6 +55,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             aeronave.Modelo = nuevoModelo;
             aeronave.Kilogramos_Disponibles = nuevoKgDisponibles;
             aeronave.Fabricante = nuevoFabricante;
+            aeronave.Tipo_Servicio_Id = tipoServicioId;
             int idInsertado = DAO.insert<Aeronave>(aeronave);
 
             DAO.closeConnection();
@@ -100,6 +102,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             String nuevoModelo = aeronaveDialog.modelo;
             decimal nuevoKgDisponibles = aeronaveDialog.kgDisponibles;
             String nuevoFabricante = aeronaveDialog.fabricante;
+            int tipoServicioId = aeronaveDialog.tipoServicioId;
 
             DAO.connect();
 
@@ -108,6 +111,7 @@ namespace AerolineaFrba.Abm_Aeronave {
             aeronave.Modelo = nuevoModelo;
             aeronave.Kilogramos_Disponibles = nuevoKgDisponibles;
             aeronave.Fabricante = nuevoFabricante;
+            aeronave.Tipo_Servicio_Id = tipoServicioId;
             int idInsertado = DAO.update<Aeronave>(aeronave);
 
             DAO.closeConnection();
@@ -120,6 +124,8 @@ namespace AerolineaFrba.Abm_Aeronave {
 
 
         private void ABMAeronave_Load(object sender, EventArgs e) {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet8.Tipo_Servicio' Puede moverla o quitarla según sea necesario.
+            this.tipo_ServicioTableAdapter.Fill(this.gD2C2015DataSet8.Tipo_Servicio);
         }
 
         private void Buscar_Click(object sender, EventArgs e)
@@ -134,6 +140,8 @@ namespace AerolineaFrba.Abm_Aeronave {
             String fabricante = this.fabricanteInput.Text;
             int cantidadButacas = Int32.Parse(this.butacasInput.Text);
             String baja = this.bajaInput.Text;
+            int tipoServicioId = (int)this.tipoServicioCombo.SelectedValue;
+            bool tipoServicioTodos = this.tipoServicioTodosCheckBox.Checked;
 
 
             if (matricula != null && matricula != "")
@@ -164,7 +172,12 @@ namespace AerolineaFrba.Abm_Aeronave {
             if (baja != "" && baja != "Todas las aeronaves")
             {
                 query += "(SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC) = '" + baja + "' AND ";
-            }                
+            }
+
+            if (tipoServicioId != 0 && !tipoServicioTodos)
+            {
+                query += " aero.tipo_servicio_id = " + tipoServicioId + " AND ";
+            }
 
             query = query.Substring(0, query.Length - 5);
             GetData(query);
@@ -212,14 +225,16 @@ namespace AerolineaFrba.Abm_Aeronave {
 
         private string obtenerQueryBase()
         {
-            return "SELECT aero.matricula 'Matrícula', " + 
-                            "aero.modelo 'Modelo', " + 
-                            "aero.kilogramos_disponibles 'Kilogramos Disponibles', " + 
-                            "aero.fabricante 'Fabricante', " + 
+            return "SELECT aero.matricula 'Matrícula', " +
+                            "aero.modelo 'Modelo', " +
+                            "aero.kilogramos_disponibles 'Kilogramos Disponibles', " +
+                            "aero.fabricante 'Fabricante', " +
                             "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = aero.id) as 'Cantidad Butacas', " +
                             "isnull((SELECT TOP 1 CASE WHEN ba.fecha_reinicio is not null THEN 'SI' WHEN ba.fecha_reinicio is null THEN 'NO' ELSE 'SI' END FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba where ba.aeronave_id = aero.id order by ba.fecha_baja DESC), 'SI') as 'Activo', " +
-                            "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja' " +
-                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero WHERE";
+                            "isnull((SELECT TOP 1 tb.descripcion FROM BIEN_MIGRADO_RAFA.Baja_Aeronave ba JOIN BIEN_MIGRADO_RAFA.Tipo_Baja tb on ba.tipo_baja_id = tb.id WHERE  ba.aeronave_id = aero.id order by ba.fecha_baja DESC), '---') as 'Tipo Baja', " +
+                            "t1.descripcion 'Tipo de Servicio' " +
+                            "FROM BIEN_MIGRADO_RAFA.Aeronave aero " +
+                            "JOIN BIEN_MIGRADO_RAFA.Tipo_Servicio t1 ON t1.id = aero.tipo_servicio_id WHERE";
         }
 
         private void bajaAeronave_Click(object sender, EventArgs e)

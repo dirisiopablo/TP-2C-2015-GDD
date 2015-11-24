@@ -212,6 +212,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet6.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GD2C2015DataSet7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet7.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2015DataSet8.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Models\Aeronave.cs" />
     <Compile Include="Models\BajaAeronave.cs" />
     <Compile Include="Models\Butaca.cs" />
@@ -444,6 +454,28 @@
     </None>
     <None Include="GD2C2015DataSet6.xss">
       <DependentUpon>GD2C2015DataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet7.xsc">
+      <DependentUpon>GD2C2015DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet7.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet7.xss">
+      <DependentUpon>GD2C2015DataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet8.xsc">
+      <DependentUpon>GD2C2015DataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2015DataSet8.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2015DataSet8.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2015DataSet8.xss">
+      <DependentUpon>GD2C2015DataSet8.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

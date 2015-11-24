@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.aeronaveDataGrid = new System.Windows.Forms.DataGridView();
             this.NuevoAeronave = new System.Windows.Forms.Button();
             this.ModificarAeronave = new System.Windows.Forms.Button();
@@ -44,11 +45,19 @@
             this.Limpiar = new System.Windows.Forms.Button();
             this.gD2C2015DataSet1 = new AerolineaFrba.GD2C2015DataSet1();
             this.altaAeronave = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tipoServicioCombo = new System.Windows.Forms.ComboBox();
+            this.gD2C2015DataSet8 = new AerolineaFrba.GD2C2015DataSet8();
+            this.tipoServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tipo_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSet8TableAdapters.Tipo_ServicioTableAdapter();
+            this.tipoServicioTodosCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.butacasInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // aeronaveDataGrid
@@ -62,12 +71,12 @@
             this.aeronaveDataGrid.Name = "aeronaveDataGrid";
             this.aeronaveDataGrid.ReadOnly = true;
             this.aeronaveDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.aeronaveDataGrid.Size = new System.Drawing.Size(814, 235);
+            this.aeronaveDataGrid.Size = new System.Drawing.Size(878, 235);
             this.aeronaveDataGrid.TabIndex = 0;
             // 
             // NuevoAeronave
             // 
-            this.NuevoAeronave.Location = new System.Drawing.Point(832, 109);
+            this.NuevoAeronave.Location = new System.Drawing.Point(896, 109);
             this.NuevoAeronave.Name = "NuevoAeronave";
             this.NuevoAeronave.Size = new System.Drawing.Size(75, 23);
             this.NuevoAeronave.TabIndex = 1;
@@ -77,7 +86,7 @@
             // 
             // ModificarAeronave
             // 
-            this.ModificarAeronave.Location = new System.Drawing.Point(833, 138);
+            this.ModificarAeronave.Location = new System.Drawing.Point(897, 138);
             this.ModificarAeronave.Name = "ModificarAeronave";
             this.ModificarAeronave.Size = new System.Drawing.Size(75, 23);
             this.ModificarAeronave.TabIndex = 2;
@@ -87,7 +96,7 @@
             // 
             // bajaAeronave
             // 
-            this.bajaAeronave.Location = new System.Drawing.Point(833, 167);
+            this.bajaAeronave.Location = new System.Drawing.Point(897, 167);
             this.bajaAeronave.Name = "bajaAeronave";
             this.bajaAeronave.Size = new System.Drawing.Size(75, 23);
             this.bajaAeronave.TabIndex = 3;
@@ -97,6 +106,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.tipoServicioTodosCheckBox);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.tipoServicioCombo);
             this.panel1.Controls.Add(this.bajaLabel);
             this.panel1.Controls.Add(this.bajaInput);
             this.panel1.Controls.Add(this.butacasInput);
@@ -113,7 +125,7 @@
             this.panel1.Controls.Add(this.Limpiar);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(814, 91);
+            this.panel1.Size = new System.Drawing.Size(878, 91);
             this.panel1.TabIndex = 8;
             // 
             // bajaLabel
@@ -230,7 +242,7 @@
             // 
             // Buscar
             // 
-            this.Buscar.Location = new System.Drawing.Point(708, 40);
+            this.Buscar.Location = new System.Drawing.Point(772, 40);
             this.Buscar.Name = "Buscar";
             this.Buscar.Size = new System.Drawing.Size(103, 23);
             this.Buscar.TabIndex = 4;
@@ -240,7 +252,7 @@
             // 
             // Limpiar
             // 
-            this.Limpiar.Location = new System.Drawing.Point(708, 65);
+            this.Limpiar.Location = new System.Drawing.Point(772, 65);
             this.Limpiar.Name = "Limpiar";
             this.Limpiar.Size = new System.Drawing.Size(103, 23);
             this.Limpiar.TabIndex = 5;
@@ -255,7 +267,7 @@
             // 
             // altaAeronave
             // 
-            this.altaAeronave.Location = new System.Drawing.Point(833, 196);
+            this.altaAeronave.Location = new System.Drawing.Point(897, 196);
             this.altaAeronave.Name = "altaAeronave";
             this.altaAeronave.Size = new System.Drawing.Size(75, 23);
             this.altaAeronave.TabIndex = 9;
@@ -263,11 +275,58 @@
             this.altaAeronave.UseVisualStyleBackColor = true;
             this.altaAeronave.Click += new System.EventHandler(this.altaAeronave_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(551, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Tipo de Servicio";
+            // 
+            // tipoServicioCombo
+            // 
+            this.tipoServicioCombo.DataSource = this.tipoServicioBindingSource;
+            this.tipoServicioCombo.DisplayMember = "descripcion";
+            this.tipoServicioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tipoServicioCombo.FormattingEnabled = true;
+            this.tipoServicioCombo.Location = new System.Drawing.Point(405, 30);
+            this.tipoServicioCombo.Name = "tipoServicioCombo";
+            this.tipoServicioCombo.Size = new System.Drawing.Size(140, 21);
+            this.tipoServicioCombo.TabIndex = 20;
+            this.tipoServicioCombo.ValueMember = "id";
+            // 
+            // gD2C2015DataSet8
+            // 
+            this.gD2C2015DataSet8.DataSetName = "GD2C2015DataSet8";
+            this.gD2C2015DataSet8.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tipoServicioBindingSource
+            // 
+            this.tipoServicioBindingSource.DataMember = "Tipo_Servicio";
+            this.tipoServicioBindingSource.DataSource = this.gD2C2015DataSet8;
+            // 
+            // tipo_ServicioTableAdapter
+            // 
+            this.tipo_ServicioTableAdapter.ClearBeforeFill = true;
+            // 
+            // tipoServicioTodosCheckBox
+            // 
+            this.tipoServicioTodosCheckBox.AutoSize = true;
+            this.tipoServicioTodosCheckBox.Checked = true;
+            this.tipoServicioTodosCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tipoServicioTodosCheckBox.Location = new System.Drawing.Point(641, 33);
+            this.tipoServicioTodosCheckBox.Name = "tipoServicioTodosCheckBox";
+            this.tipoServicioTodosCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.tipoServicioTodosCheckBox.TabIndex = 23;
+            this.tipoServicioTodosCheckBox.Text = "Todos";
+            this.tipoServicioTodosCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ABMAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(920, 394);
+            this.ClientSize = new System.Drawing.Size(983, 394);
             this.Controls.Add(this.altaAeronave);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bajaAeronave);
@@ -283,6 +342,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.butacasInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kilogramosInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -310,5 +371,11 @@
         private System.Windows.Forms.ComboBox bajaInput;
         private GD2C2015DataSet1 gD2C2015DataSet1;
         private System.Windows.Forms.Button altaAeronave;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox tipoServicioCombo;
+        private GD2C2015DataSet8 gD2C2015DataSet8;
+        private System.Windows.Forms.BindingSource tipoServicioBindingSource;
+        private GD2C2015DataSet8TableAdapters.Tipo_ServicioTableAdapter tipo_ServicioTableAdapter;
+        private System.Windows.Forms.CheckBox tipoServicioTodosCheckBox;
     }
 }
