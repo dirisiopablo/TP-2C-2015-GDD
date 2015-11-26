@@ -231,9 +231,14 @@
             // 
             // pasajerosDataGrid
             // 
+            this.pasajerosDataGrid.AllowUserToAddRows = false;
+            this.pasajerosDataGrid.AllowUserToDeleteRows = false;
             this.pasajerosDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pasajerosDataGrid.Location = new System.Drawing.Point(14, 140);
+            this.pasajerosDataGrid.MultiSelect = false;
             this.pasajerosDataGrid.Name = "pasajerosDataGrid";
+            this.pasajerosDataGrid.ReadOnly = true;
+            this.pasajerosDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pasajerosDataGrid.Size = new System.Drawing.Size(888, 114);
             this.pasajerosDataGrid.TabIndex = 13;
             // 
@@ -401,9 +406,14 @@
             // 
             // paquetesDataGrid
             // 
+            this.paquetesDataGrid.AllowUserToAddRows = false;
+            this.paquetesDataGrid.AllowUserToDeleteRows = false;
             this.paquetesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paquetesDataGrid.Location = new System.Drawing.Point(14, 415);
+            this.paquetesDataGrid.MultiSelect = false;
             this.paquetesDataGrid.Name = "paquetesDataGrid";
+            this.paquetesDataGrid.ReadOnly = true;
+            this.paquetesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.paquetesDataGrid.Size = new System.Drawing.Size(888, 113);
             this.paquetesDataGrid.TabIndex = 29;
             // 
