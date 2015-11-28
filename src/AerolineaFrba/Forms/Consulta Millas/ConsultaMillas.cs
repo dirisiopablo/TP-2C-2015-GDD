@@ -69,18 +69,18 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
             String queryPasajes = "SELECT 'Pasaje' 'Tipo', "
                                         + "p.fecha_compra 'Fecha', "
                                         + "(p.precio / 10) 'Puntos' ";
-            queryPasajes += "FROM BIEN_MIGRADO_RAFA.Pasaje p WHERE p.cliente_id = " + clienteId + " AND (p.fecha_compra BETWEEN DATEADD(year, -1, " + Config.SystemConfig.systemDate.ToString() + ") AND " + Config.SystemConfig.systemDate.ToString() + ")";
+            queryPasajes += "FROM BIEN_MIGRADO_RAFA.Pasaje p WHERE p.cliente_id = " + clienteId + " AND (p.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
 
             String queryPaquetes = "SELECT 'Encomienda' 'Tipo', "
                                          + "pq.fecha_compra 'Fecha', "
                                          + "(pq.precio / 10) 'Puntos' ";
-            queryPaquetes += "FROM BIEN_MIGRADO_RAFA.Paquete pq WHERE pq.cliente_id = " + clienteId + " AND (pq.fecha_compra BETWEEN DATEADD(year, -1, " + Config.SystemConfig.systemDate.ToString() + ") AND " + Config.SystemConfig.systemDate.ToString() + ")";
+            queryPaquetes += "FROM BIEN_MIGRADO_RAFA.Paquete pq WHERE pq.cliente_id = " + clienteId + " AND (pq.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
 
             String queryCanjes = "SELECT 'Canje de puntos' 'Tipo', "
                                        + "c.fecha 'Fecha', "
                                        + "(c.cantidad * cat.costo) 'Puntos' ";
             queryCanjes += "FROM BIEN_MIGRADO_RAFA.Canje c, BIEN_MIGRADO_RAFA.Catalogo cat ";
-            queryCanjes += "WHERE c.cliente_id = " + clienteId + " AND (c.fecha BETWEEN DATEADD(year, -1, " + Config.SystemConfig.systemDate.ToString() + ") AND " + Config.SystemConfig.systemDate.ToString() + ") AND c.catalogo_id = cat.id";
+            queryCanjes += "WHERE c.cliente_id = " + clienteId + " AND (c.fecha BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND c.catalogo_id = cat.id";
 
             return queryPasajes + " UNION " + queryPaquetes + " UNION " + queryCanjes + " ORDER BY Fecha DESC";
 

@@ -106,6 +106,7 @@
       <DependentUpon>RutaDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\INI.cs" />
     <Compile Include="DataSetAeronave.cs">
       <DependentUpon>DataSetAeronave.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -365,6 +366,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="config.ini" />
+    <None Include="Config\config.ini" />
     <None Include="DataSetAeronave.xsc">
       <DependentUpon>DataSetAeronave.xsd</DependentUpon>
     </None>

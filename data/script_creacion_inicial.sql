@@ -695,3 +695,11 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad_Rol]
 		   (4, 1),
 		   (5, 1)
 GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Catalogo]
+           ([descripcion], [costo], [stock])
+     VALUES
+           ('Cafetera', 450, 35),
+		   ('Home Theater', 1200, 15),
+		   ('Monitor Led 23"', 600, 20)
+GO

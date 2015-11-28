@@ -89,7 +89,13 @@ namespace AerolineaFrba.Forms.Canje_Millas {
             Catalogo producto = DAO.selectOne<Catalogo>(new[] { "id = " + productoId });
 
             if (cantidadNumeric.Value > producto.Stock) {
-                MessageBox.Show("El stock del producto " +producto.Descripcion + " no es suficiente. Solo se dispone de " + producto.Stock + "unidades.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("El stock del producto " +producto.Descripcion + " no es suficiente. Solo se dispone de " + producto.Stock + " unidades.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DAO.closeConnection();
+                return;
+            }
+
+            if (cantidadNumeric.Value * producto.Costo > cliente_activo.Puntos) {
+                MessageBox.Show("El cliente no dispone de la cantidad de puntos necesaria para canjear la cantidad de productos solicitada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 DAO.closeConnection();
                 return;
             }
@@ -109,6 +115,8 @@ namespace AerolineaFrba.Forms.Canje_Millas {
 
             MessageBox.Show("Canje realizado con exito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            this.buscarClienteButton.PerformClick();
+
         }
 
         private void populateCombo(int puntos) {
@@ -118,13 +126,15 @@ namespace AerolineaFrba.Forms.Canje_Millas {
             DAO.closeConnection();
 
             List<String> dataSource = new List<String>();
-            this.indexer = new int[dataSource.Count];
+            this.indexer = new int[productos.Count];
 
             int i = 0;
             foreach (Catalogo p in productos) {
                 dataSource.Add(p.Descripcion + " - " + p.Costo + " puntos");
                 this.indexer[i] = p.Id;
             }
+
+            this.productosCombo.DataSource = dataSource;
         
         }
 
