@@ -225,6 +225,27 @@ namespace AerolineaFrba.Services {
             else return Convert.ToInt32(entity.GetType().GetProperty("Id").GetValue(entity));
 
         }
+
+        public static int delete<T>(T entity)
+        {
+
+            String tablename = (String)typeof(T).GetField("TableName").GetValue(null);
+
+            if (tablename == null) throw new Exception("Type " + typeof(T) + "has no static field named TableName.");
+
+            if (_sqlCon == null) throw new Exception("Must call connect() before calling any DAO's method.");
+
+            string query = "DELETE " + tablename;
+            string set = " WHERE Id = " + entity.GetType().GetProperty("Id").GetValue(entity);
+            
+
+            if (_sqlCon.State == ConnectionState.Closed) _sqlCon.Open();
+
+            SqlCommand command = new SqlCommand(query, _sqlCon);
+            int rowsAffected = command.ExecuteNonQuery();
+
+            return rowsAffected;
+        }
         
         public static int insert<T>(T entity) {
 

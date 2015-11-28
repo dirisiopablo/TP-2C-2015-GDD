@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Models {
-    class Funcionalidad_Rol {
+    public class Funcionalidad_Rol {
 
         public int Id { get; set; }
 

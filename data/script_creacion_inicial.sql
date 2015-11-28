@@ -675,3 +675,23 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Intentos_Login]
      VALUES
            (1, 0)
 GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad]
+           ([descripcion])
+     VALUES
+           ('ABM_Rol'),
+		   ('ABM_Aeronave'),
+		   ('ABM_Ruta'),
+		   ('Generar_Viaje'),
+		   ('Devolucion')
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad_Rol]
+           ([funcionalidad_id], [rol_id])
+     VALUES
+           (1, 1),
+		   (2, 1),
+		   (3, 1),
+		   (4, 1),
+		   (5, 1)
+GO

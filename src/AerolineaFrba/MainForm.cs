@@ -50,11 +50,34 @@ namespace AerolineaFrba {
 
         private void onLogin(Usuario loggedUser){
 
-            this.ABMAeronave_Button.Visible = true;
-            this.ABMRol_Button.Visible = true;
-            this.ABMRuta_Button.Visible = true;
-            this.devolucionButton.Visible = true;
-            this.generarViajeButton.Visible = true;
+            DAO.connect();
+            List<Funcionalidad_Rol> funcionalidadesRol = DAO.selectAll<Funcionalidad_Rol>(new[] { "rol_id = " + loggedUser.Rol.Id });
+
+            foreach (var funcionalidadRol in funcionalidadesRol)
+            {
+                switch (funcionalidadRol.Funcionalidad.Descripcion)
+                {
+                    case "ABM_Rol":
+                        this.ABMRol_Button.Visible = true;
+                        break;
+                    case "ABM_Aeronave":
+                        this.ABMAeronave_Button.Visible = true;
+                        break;
+                    case "ABM_Ruta":
+                        this.ABMRuta_Button.Visible = true;
+                        break;
+                    case "Generar_Viaje":
+                        this.generarViajeButton.Visible = true;
+                        break;
+                    case "Devolucion":
+                        this.devolucionButton.Visible = true;
+                        break;
+                }               
+            }
+
+            DAO.closeConnection();
+
+            
 
             this.loginButton.Visible = false;
 

@@ -42,10 +42,11 @@
             this.dataSetRol = new AerolineaFrba.DataSetRol();
             this.rolTableAdapter = new AerolineaFrba.DataSetRolTableAdapters.RolTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.inactivoInput = new System.Windows.Forms.CheckBox();
             this.descripcionInput = new System.Windows.Forms.TextBox();
             this.activoInput = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.inactivoInput = new System.Windows.Forms.CheckBox();
+            this.asignarFuncionalidades = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rolDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetRol)).BeginInit();
@@ -54,9 +55,9 @@
             // 
             // Nuevo
             // 
-            this.Nuevo.Location = new System.Drawing.Point(375, 94);
+            this.Nuevo.Location = new System.Drawing.Point(367, 94);
             this.Nuevo.Name = "Nuevo";
-            this.Nuevo.Size = new System.Drawing.Size(75, 23);
+            this.Nuevo.Size = new System.Drawing.Size(100, 23);
             this.Nuevo.TabIndex = 0;
             this.Nuevo.Text = "Nuevo";
             this.Nuevo.UseVisualStyleBackColor = true;
@@ -64,9 +65,9 @@
             // 
             // Modificar
             // 
-            this.Modificar.Location = new System.Drawing.Point(375, 123);
+            this.Modificar.Location = new System.Drawing.Point(367, 123);
             this.Modificar.Name = "Modificar";
-            this.Modificar.Size = new System.Drawing.Size(75, 23);
+            this.Modificar.Size = new System.Drawing.Size(100, 23);
             this.Modificar.TabIndex = 1;
             this.Modificar.Text = "Modificar";
             this.Modificar.UseVisualStyleBackColor = true;
@@ -74,9 +75,9 @@
             // 
             // Eliminar
             // 
-            this.Eliminar.Location = new System.Drawing.Point(375, 152);
+            this.Eliminar.Location = new System.Drawing.Point(367, 152);
             this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Size = new System.Drawing.Size(75, 23);
+            this.Eliminar.Size = new System.Drawing.Size(100, 23);
             this.Eliminar.TabIndex = 2;
             this.Eliminar.Text = "Eliminar";
             this.Eliminar.UseVisualStyleBackColor = true;
@@ -170,6 +171,16 @@
             this.panel1.Size = new System.Drawing.Size(349, 54);
             this.panel1.TabIndex = 7;
             // 
+            // inactivoInput
+            // 
+            this.inactivoInput.AutoSize = true;
+            this.inactivoInput.Location = new System.Drawing.Point(138, 32);
+            this.inactivoInput.Name = "inactivoInput";
+            this.inactivoInput.Size = new System.Drawing.Size(64, 17);
+            this.inactivoInput.TabIndex = 9;
+            this.inactivoInput.Text = "Inactivo";
+            this.inactivoInput.UseVisualStyleBackColor = true;
+            // 
             // descripcionInput
             // 
             this.descripcionInput.Location = new System.Drawing.Point(49, 6);
@@ -196,21 +207,22 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Descripción";
             // 
-            // inactivoInput
+            // asignarFuncionalidades
             // 
-            this.inactivoInput.AutoSize = true;
-            this.inactivoInput.Location = new System.Drawing.Point(138, 32);
-            this.inactivoInput.Name = "inactivoInput";
-            this.inactivoInput.Size = new System.Drawing.Size(64, 17);
-            this.inactivoInput.TabIndex = 9;
-            this.inactivoInput.Text = "Inactivo";
-            this.inactivoInput.UseVisualStyleBackColor = true;
+            this.asignarFuncionalidades.Location = new System.Drawing.Point(367, 181);
+            this.asignarFuncionalidades.Name = "asignarFuncionalidades";
+            this.asignarFuncionalidades.Size = new System.Drawing.Size(100, 34);
+            this.asignarFuncionalidades.TabIndex = 8;
+            this.asignarFuncionalidades.Text = "Asignar Funcionalidades";
+            this.asignarFuncionalidades.UseVisualStyleBackColor = true;
+            this.asignarFuncionalidades.Click += new System.EventHandler(this.asignarFuncionalidades_Click);
             // 
             // ABMRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 322);
+            this.ClientSize = new System.Drawing.Size(479, 322);
+            this.Controls.Add(this.asignarFuncionalidades);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.rolDataGrid);
             this.Controls.Add(this.Eliminar);
@@ -248,5 +260,6 @@
         private System.Windows.Forms.CheckBox activoInput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox inactivoInput;
+        private System.Windows.Forms.Button asignarFuncionalidades;
     }
 }

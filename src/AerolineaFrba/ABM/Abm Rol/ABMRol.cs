@@ -187,6 +187,35 @@ namespace AerolineaFrba.Abm_Rol{
 
             DAO.closeConnection();
         }
+
+        private void asignarFuncionalidades_Click(object sender, EventArgs e)
+        {
+            if (this.rolDataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe elegir un rol a modificar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (this.rolDataGrid.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Solo puede elegir un rol a modificar a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataGridViewRow row = this.rolDataGrid.SelectedRows[0];
+
+            int id = (int)row.Cells[0].Value;
+            Rol rol = DAO.selectOne<Rol>(new[] { "id = " + id });
+
+            DAO.connect();
+            List<Funcionalidad_Rol> funcionalidadesRol = DAO.selectAll<Funcionalidad_Rol>(new[] { "rol_id = " + rol.Id });
+            DAO.closeConnection();
+
+            AsignarFuncionalidades rolDialog = new AsignarFuncionalidades(rol, funcionalidadesRol);
+            rolDialog.ShowDialog();
+
+            if (rolDialog.dr == DialogResult.Cancel) return;
+        }
           
     }
 }

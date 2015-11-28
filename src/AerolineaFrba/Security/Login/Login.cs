@@ -38,7 +38,7 @@ namespace AerolineaFrba.Login {
             Rol adminRol = DAO.selectOne<Rol>(new[] { "descripcion = 'Administrador'" });
             DAO.closeConnection();
 
-            if (usuario != null && usuario.Password.Equals(hashedPass) && usuario.Rol.Id == adminRol.Id) {
+            if (usuario != null && usuario.Password.Equals(hashedPass) && usuario.Rol.Id == adminRol.Id && usuario.Activo) {
                 intentos.Intentos = 0;
                 DAO.connect();
                 DAO.update<IntentosLogin>(intentos);
@@ -46,16 +46,24 @@ namespace AerolineaFrba.Login {
                 this.DialogResult = DialogResult.OK;
                 this.loggedUser = usuario;
             }
-            else {
+            else if (!usuario.Activo)
+            {
+                MessageBox.Show("El usuario se encuentra bloqueado por exceder los intentos de autenticación permitidos.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.None;
+            }
+            else
+            {
                 intentos.Intentos += 1;
                 DAO.connect();
                 DAO.update<IntentosLogin>(intentos);
-                if (intentos.Intentos == 3) {
+                if (intentos.Intentos == 3)
+                {
                     usuario.Activo = false;
                     DAO.update<Usuario>(usuario);
                     MessageBox.Show("El usuario fue bloqueado por exceder los intentos permitidos.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Contraseña invalida. Recuerde que solo puede tener hasta 3 intentos fallidos. Le quedan " + (3 - intentos.Intentos) + " intentos.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 DAO.closeConnection();
