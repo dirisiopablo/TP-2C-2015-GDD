@@ -22,7 +22,7 @@ namespace AerolineaFrba.Services {
 
         private static String[] ignoredTypes = {"Aeronave", "BajaAeronave", "Butaca", "Cancelacion", "Canje", "Catalogo",
                                                 "Ciudad", "Cliente", "Funcionalidad", "Paquete", "Pasaje", "Rol", "Ruta",
-                                                "TipoBaja", "TipoServicio", "Usuario", "Viaje"
+                                                "TipoBaja", "TipoServicio", "Usuario", "Viaje", "Modelo", "Fabricante"
                                                };
         
         static public Exception exception;

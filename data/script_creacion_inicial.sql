@@ -20,12 +20,12 @@ GO
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Aeronave(
-	id                        int               IDENTITY(1,1),
-	matricula                 nvarchar(255)     NULL,
-	modelo                    nvarchar(255)     NULL,
-	kilogramos_disponibles    numeric(18, 0)    NULL,
-	fabricante                nvarchar(255)     NULL,
-	tipo_servicio_id          int               NULL,
+	id							int             IDENTITY(1,1),
+	matricula					nvarchar(255)   NULL,
+	modelo_id					int				NULL,
+	kilogramos_disponibles		numeric(18, 0)  NULL,
+	fabricante_id				int				NULL,
+	tipo_servicio_id			int			    NULL,
 )
 GO
 
@@ -211,7 +211,21 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Viaje(
     fecha_llegada             datetime    NULL,
     fecha_llegada_estimada    datetime    NULL,
     ruta_id                   int         NULL,
-    aeronave_id               int         NULL,
+    aeronave_id               int         NULL
+)
+GO
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Modelo(
+    id             int              IDENTITY(1,1),
+    descripcion    nvarchar(255)    NULL
+)
+GO
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Fabricante(
+    id             int              IDENTITY(1,1),
+    descripcion    nvarchar(255)    NULL
 )
 GO
 
@@ -242,11 +256,23 @@ INSERT INTO BIEN_MIGRADO_RAFA.Tipo_Servicio (descripcion)
 SELECT DISTINCT Tipo_Servicio FROM gd_esquema.Maestra
 GO
 
+--Fabricante
+INSERT INTO BIEN_MIGRADO_RAFA.Fabricante (descripcion)
+SELECT DISTINCT Aeronave_Fabricante FROM gd_esquema.Maestra
+GO
+
+--Modelo
+INSERT INTO BIEN_MIGRADO_RAFA.Modelo (descripcion)
+SELECT DISTINCT Aeronave_Modelo FROM gd_esquema.Maestra
+GO
+
 --Aeronave
-INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (fabricante, kilogramos_disponibles, matricula, modelo, tipo_servicio_id)
-SELECT DISTINCT m.Aeronave_Fabricante, m.Aeronave_KG_Disponibles, m.Aeronave_Matricula, m.Aeronave_Modelo, t.id 
+INSERT INTO BIEN_MIGRADO_RAFA.Aeronave (fabricante_id, kilogramos_disponibles, matricula, modelo_id, tipo_servicio_id)
+SELECT DISTINCT f.id, m.Aeronave_KG_Disponibles, m.Aeronave_Matricula, mo.id, t.id 
 FROM gd_esquema.Maestra m
 JOIN BIEN_MIGRADO_RAFA.Tipo_Servicio t ON t.descripcion = tipo_servicio
+JOIN BIEN_MIGRADO_RAFA.Fabricante f ON f.descripcion = m.Aeronave_Fabricante
+JOIN BIEN_MIGRADO_RAFA.Modelo mo ON mo.descripcion = m.Aeronave_Modelo
 GO
 
 --Ciudad
@@ -358,6 +384,14 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave
 ADD CONSTRAINT PK7 PRIMARY KEY CLUSTERED (id)
 GO
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Modelo
+ADD CONSTRAINT PK9999 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Fabricante
+ADD CONSTRAINT PK9998 PRIMARY KEY CLUSTERED (id)
+GO
+
 ALTER TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave
 ADD CONSTRAINT PK666 PRIMARY KEY CLUSTERED (id)
 GO
@@ -452,6 +486,16 @@ GO
 ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave ADD CONSTRAINT RefTipoServicio1
     FOREIGN KEY (tipo_servicio_id)
     REFERENCES BIEN_MIGRADO_RAFA.Tipo_Servicio(id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave ADD CONSTRAINT RefModelo1
+    FOREIGN KEY (modelo_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Modelo(id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Aeronave ADD CONSTRAINT RefFabricante1
+    FOREIGN KEY (fabricante_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Fabricante(id)
 GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Baja_Aeronave ADD CONSTRAINT RefAeronave1 

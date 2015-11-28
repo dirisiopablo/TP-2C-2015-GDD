@@ -25,8 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.matriculaTextbox = new System.Windows.Forms.TextBox();
-            this.modeloTextbox = new System.Windows.Forms.TextBox();
-            this.fabricanteTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -34,6 +32,10 @@
             this.guardarAeronave = new System.Windows.Forms.Button();
             this.cancelarAeronave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tipoServicioCombo = new System.Windows.Forms.ComboBox();
+            this.tipoServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet7 = new AerolineaFrba.GD2C2015DataSet7();
+            this.label9 = new System.Windows.Forms.Label();
             this.descripcionGeneral = new System.Windows.Forms.Label();
             this.kgTextbox = new System.Windows.Forms.NumericUpDown();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -47,12 +49,18 @@
             this.segundoPiso = new System.Windows.Forms.Label();
             this.cantidadPasillo2Input = new System.Windows.Forms.NumericUpDown();
             this.cantidadVentana2Input = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tipoServicioCombo = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet7 = new AerolineaFrba.GD2C2015DataSet7();
-            this.tipoServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tipo_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSet7TableAdapters.Tipo_ServicioTableAdapter();
+            this.modeloCombo = new System.Windows.Forms.ComboBox();
+            this.fabricanteCombo = new System.Windows.Forms.ComboBox();
+            this.gD2C2015DataSet11 = new AerolineaFrba.GD2C2015DataSet11();
+            this.fabricanteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fabricanteTableAdapter = new AerolineaFrba.GD2C2015DataSet11TableAdapters.FabricanteTableAdapter();
+            this.gD2C2015DataSet12 = new AerolineaFrba.GD2C2015DataSet12();
+            this.modeloBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.modeloTableAdapter = new AerolineaFrba.GD2C2015DataSet12TableAdapters.ModeloTableAdapter();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -62,8 +70,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana1Input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadPasillo2Input)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana2Input)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fabricanteBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // matriculaTextbox
@@ -72,20 +82,6 @@
             this.matriculaTextbox.Name = "matriculaTextbox";
             this.matriculaTextbox.Size = new System.Drawing.Size(148, 20);
             this.matriculaTextbox.TabIndex = 0;
-            // 
-            // modeloTextbox
-            // 
-            this.modeloTextbox.Location = new System.Drawing.Point(129, 72);
-            this.modeloTextbox.Name = "modeloTextbox";
-            this.modeloTextbox.Size = new System.Drawing.Size(148, 20);
-            this.modeloTextbox.TabIndex = 1;
-            // 
-            // fabricanteTextbox
-            // 
-            this.fabricanteTextbox.Location = new System.Drawing.Point(129, 152);
-            this.fabricanteTextbox.Name = "fabricanteTextbox";
-            this.fabricanteTextbox.Size = new System.Drawing.Size(148, 20);
-            this.fabricanteTextbox.TabIndex = 3;
             // 
             // label1
             // 
@@ -146,21 +142,52 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.fabricanteCombo);
+            this.panel1.Controls.Add(this.modeloCombo);
             this.panel1.Controls.Add(this.tipoServicioCombo);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.descripcionGeneral);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.matriculaTextbox);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.modeloTextbox);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.fabricanteTextbox);
             this.panel1.Controls.Add(this.kgTextbox);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(318, 214);
             this.panel1.TabIndex = 10;
+            // 
+            // tipoServicioCombo
+            // 
+            this.tipoServicioCombo.DataSource = this.tipoServicioBindingSource;
+            this.tipoServicioCombo.DisplayMember = "descripcion";
+            this.tipoServicioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tipoServicioCombo.FormattingEnabled = true;
+            this.tipoServicioCombo.Location = new System.Drawing.Point(129, 183);
+            this.tipoServicioCombo.Name = "tipoServicioCombo";
+            this.tipoServicioCombo.Size = new System.Drawing.Size(148, 21);
+            this.tipoServicioCombo.TabIndex = 12;
+            this.tipoServicioCombo.ValueMember = "id";
+            // 
+            // tipoServicioBindingSource
+            // 
+            this.tipoServicioBindingSource.DataMember = "Tipo_Servicio";
+            this.tipoServicioBindingSource.DataSource = this.gD2C2015DataSet7;
+            // 
+            // gD2C2015DataSet7
+            // 
+            this.gD2C2015DataSet7.DataSetName = "GD2C2015DataSet7";
+            this.gD2C2015DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 187);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Tipo de Servicio";
             // 
             // descripcionGeneral
             // 
@@ -174,7 +201,7 @@
             // 
             // kgTextbox
             // 
-            this.kgTextbox.Location = new System.Drawing.Point(129, 113);
+            this.kgTextbox.Location = new System.Drawing.Point(129, 115);
             this.kgTextbox.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -317,40 +344,61 @@
             this.cantidadVentana2Input.Size = new System.Drawing.Size(148, 20);
             this.cantidadVentana2Input.TabIndex = 19;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(29, 187);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 13);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Tipo de Servicio";
-            // 
-            // tipoServicioCombo
-            // 
-            this.tipoServicioCombo.DataSource = this.tipoServicioBindingSource;
-            this.tipoServicioCombo.DisplayMember = "descripcion";
-            this.tipoServicioCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tipoServicioCombo.FormattingEnabled = true;
-            this.tipoServicioCombo.Location = new System.Drawing.Point(129, 183);
-            this.tipoServicioCombo.Name = "tipoServicioCombo";
-            this.tipoServicioCombo.Size = new System.Drawing.Size(148, 21);
-            this.tipoServicioCombo.TabIndex = 12;
-            this.tipoServicioCombo.ValueMember = "id";
-            // 
-            // gD2C2015DataSet7
-            // 
-            this.gD2C2015DataSet7.DataSetName = "GD2C2015DataSet7";
-            this.gD2C2015DataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tipoServicioBindingSource
-            // 
-            this.tipoServicioBindingSource.DataMember = "Tipo_Servicio";
-            this.tipoServicioBindingSource.DataSource = this.gD2C2015DataSet7;
-            // 
             // tipo_ServicioTableAdapter
             // 
             this.tipo_ServicioTableAdapter.ClearBeforeFill = true;
+            // 
+            // modeloCombo
+            // 
+            this.modeloCombo.DataSource = this.modeloBindingSource;
+            this.modeloCombo.DisplayMember = "descripcion";
+            this.modeloCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modeloCombo.FormattingEnabled = true;
+            this.modeloCombo.Location = new System.Drawing.Point(129, 75);
+            this.modeloCombo.Name = "modeloCombo";
+            this.modeloCombo.Size = new System.Drawing.Size(148, 21);
+            this.modeloCombo.TabIndex = 25;
+            this.modeloCombo.ValueMember = "id";
+            // 
+            // fabricanteCombo
+            // 
+            this.fabricanteCombo.DataSource = this.fabricanteBindingSource;
+            this.fabricanteCombo.DisplayMember = "descripcion";
+            this.fabricanteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fabricanteCombo.FormattingEnabled = true;
+            this.fabricanteCombo.Location = new System.Drawing.Point(129, 147);
+            this.fabricanteCombo.Name = "fabricanteCombo";
+            this.fabricanteCombo.Size = new System.Drawing.Size(148, 21);
+            this.fabricanteCombo.TabIndex = 26;
+            this.fabricanteCombo.ValueMember = "id";
+            // 
+            // gD2C2015DataSet11
+            // 
+            this.gD2C2015DataSet11.DataSetName = "GD2C2015DataSet11";
+            this.gD2C2015DataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // fabricanteBindingSource
+            // 
+            this.fabricanteBindingSource.DataMember = "Fabricante";
+            this.fabricanteBindingSource.DataSource = this.gD2C2015DataSet11;
+            // 
+            // fabricanteTableAdapter
+            // 
+            this.fabricanteTableAdapter.ClearBeforeFill = true;
+            // 
+            // gD2C2015DataSet12
+            // 
+            this.gD2C2015DataSet12.DataSetName = "GD2C2015DataSet12";
+            this.gD2C2015DataSet12.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // modeloBindingSource
+            // 
+            this.modeloBindingSource.DataMember = "Modelo";
+            this.modeloBindingSource.DataSource = this.gD2C2015DataSet12;
+            // 
+            // modeloTableAdapter
+            // 
+            this.modeloTableAdapter.ClearBeforeFill = true;
             // 
             // AeronaveDialog
             // 
@@ -366,6 +414,8 @@
             this.Load += new System.EventHandler(this.AeronaveDialog_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kgTextbox)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -377,8 +427,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana1Input)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadPasillo2Input)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadVentana2Input)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tipoServicioBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fabricanteBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modeloBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -386,8 +438,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox matriculaTextbox;
-        private System.Windows.Forms.TextBox modeloTextbox;
-        private System.Windows.Forms.TextBox fabricanteTextbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -413,5 +463,13 @@
         private GD2C2015DataSet7 gD2C2015DataSet7;
         private System.Windows.Forms.BindingSource tipoServicioBindingSource;
         private GD2C2015DataSet7TableAdapters.Tipo_ServicioTableAdapter tipo_ServicioTableAdapter;
+        private System.Windows.Forms.ComboBox fabricanteCombo;
+        private System.Windows.Forms.ComboBox modeloCombo;
+        private GD2C2015DataSet11 gD2C2015DataSet11;
+        private System.Windows.Forms.BindingSource fabricanteBindingSource;
+        private GD2C2015DataSet11TableAdapters.FabricanteTableAdapter fabricanteTableAdapter;
+        private GD2C2015DataSet12 gD2C2015DataSet12;
+        private System.Windows.Forms.BindingSource modeloBindingSource;
+        private GD2C2015DataSet12TableAdapters.ModeloTableAdapter modeloTableAdapter;
     }
 }

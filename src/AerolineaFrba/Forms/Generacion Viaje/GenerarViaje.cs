@@ -39,7 +39,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
             Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "id = " + aeronaveId });
             DAO.closeConnection();
 
-            this.fabModeloLabel.Text = aeronave.Fabricante + ' ' + aeronave.Modelo;
+            this.fabModeloLabel.Text = aeronave.Fabricante.Descripcion + ' ' + aeronave.Modelo.Descripcion;
             this.matriculaLabel.Text = aeronave.Matricula;
             this.kgLabel.Text = aeronave.Kilogramos_Disponibles.ToString();
 

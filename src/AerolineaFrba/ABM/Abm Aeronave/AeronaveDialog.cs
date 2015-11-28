@@ -20,9 +20,9 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
         private String modificarMsg = "Seguro desea modificar los campos?";
 
         public String matricula { get; set; }
-        public String modelo { get; set; }
+        public int modelo { get; set; }
         public decimal kgDisponibles { get; set; }
-        public String fabricante { get; set; }
+        public int fabricante { get; set; }
         public int tipoServicioId { get; set; }
         public int cantidadPasillo1 { get; set; }
         public int cantidadVentana1 { get; set; }
@@ -30,13 +30,17 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
         public int cantidadVentana2 { get; set; }
         public DialogResult dr { get; set; }
 
-        public AeronaveDialog(String _matricula, String _modelo, decimal _kgDisponibles, String _fabricante, Enums.tipoDialog tipoDialog) {
+        public AeronaveDialog(String _matricula, int _modelo, decimal _kgDisponibles, int _fabricante, int _tipoServicio, Enums.tipoDialog tipoDialog) {
             InitializeComponent();
+            this.modeloTableAdapter.Fill(this.gD2C2015DataSet12.Modelo);
+            this.fabricanteTableAdapter.Fill(this.gD2C2015DataSet11.Fabricante);
+            this.tipo_ServicioTableAdapter.Fill(this.gD2C2015DataSet7.Tipo_Servicio);
 
             this.matriculaTextbox.Text = _matricula.ToString();
-            this.modeloTextbox.Text = _modelo.ToString();
+            this.modeloCombo.SelectedValue = _modelo;
             this.kgTextbox.Text = _kgDisponibles.ToString();
-            this.fabricanteTextbox.Text = _fabricante.ToString();
+            this.fabricanteCombo.SelectedValue = _fabricante;
+            this.tipoServicioCombo.SelectedValue = _tipoServicio;
             this.tipo = tipoDialog;
             this.dr = DialogResult.Cancel;
         }
@@ -49,9 +53,9 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
 
 
             this.matricula = this.matriculaTextbox.Text;
-            this.modelo = this.modeloTextbox.Text;
+            this.modelo = (int)this.modeloCombo.SelectedValue;
             this.kgDisponibles = Convert.ToDecimal(this.kgTextbox.Text);
-            this.fabricante = this.fabricanteTextbox.Text;
+            this.fabricante = (int)this.fabricanteCombo.SelectedValue;
             this.tipoServicioId = (int)this.tipoServicioCombo.SelectedValue;
             this.cantidadPasillo1 = Convert.ToInt32(this.cantidadPasillo1Input.Text);
             this.cantidadVentana1 = Convert.ToInt32(this.cantidadVentana1Input.Text);
@@ -69,8 +73,6 @@ namespace AerolineaFrba.ABM.Abm_Aeronave {
 
         private void AeronaveDialog_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet7.Tipo_Servicio' Puede moverla o quitarla según sea necesario.
-            this.tipo_ServicioTableAdapter.Fill(this.gD2C2015DataSet7.Tipo_Servicio);
             if (this.tipo == Enums.tipoDialog.modificar)
             {
                 this.splitContainer1.Visible = false;

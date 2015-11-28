@@ -33,8 +33,8 @@ namespace AerolineaFrba.ABM.Abm_Aeronave
             this.tipo_BajaTableAdapter.Fill(this.gD2C2015DataSet2.Tipo_Baja);
 
             this.matriculaTexto.Text = aeronave.Matricula;
-            this.fabricanteTexto.Text = aeronave.Fabricante;
-            this.modeloTexto.Text = aeronave.Modelo;
+            this.fabricanteTexto.Text = aeronave.Fabricante.Descripcion;
+            this.modeloTexto.Text = aeronave.Modelo.Descripcion;
         }
 
         private void cancelarBaja_Click(object sender, EventArgs e)
