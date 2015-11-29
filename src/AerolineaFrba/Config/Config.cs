@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using Utilities;
 
 namespace AerolineaFrba.Config {
     
     public static class DBConfig {
-
-        static public IniFile inifile = new IniFile("C://Development/TP-2C-2015-GDD/src/AerolineaFrba/Config/config.ini");
+        static public string currentDir = Environment.CurrentDirectory;
+        static public DirectoryInfo directory = new DirectoryInfo(Path.GetFullPath(Path.Combine(currentDir, @"..\..\Config\")));
+        static public string directoryString = directory.ToString();
+        static public IniFile inifile = new IniFile(directoryString + "\\config.ini");
 
         static public string direccion = inifile.GetString("DB", "direccion", "");
         static public string database = inifile.GetString("DB", "database", "");
@@ -18,9 +21,13 @@ namespace AerolineaFrba.Config {
 
     }
 
-    public static class SystemConfig {
+    public static class SystemConfig
+    {
+        static public string currentDir = Environment.CurrentDirectory;
+        static public DirectoryInfo directory = new DirectoryInfo(Path.GetFullPath(Path.Combine(currentDir, @"..\..\Config\")));
+        static public string directoryString = directory.ToString();
+        static public IniFile inifile = new IniFile(directoryString + "\\config.ini");
 
-        static public IniFile inifile = new IniFile("C://Development/TP-2C-2015-GDD/src/AerolineaFrba/Config/config.ini");
 
         static public DateTime systemDate = Convert.ToDateTime(inifile.GetString("FECHA", "fecha", ""));
         
