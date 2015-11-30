@@ -10,6 +10,6 @@ namespace AerolineaFrba.Models {
         public int Id { get; set; }
         public string Descripcion { get; set; }
 
-        public static string TableName = "BIEN_MIGRADO_RAFA.TipoTarjeta";
+        public static string TableName = "BIEN_MIGRADO_RAFA.Tipo_Tarjeta";
     }
 }

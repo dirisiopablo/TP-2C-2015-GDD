@@ -14,7 +14,7 @@ namespace AerolineaFrba.Models {
         public DateTime Fecha_Compra { get; set; }
         public int Numero_Tarjeta { get; set; }
         public int Codigo_Tarjeta { get; set; }
-        public DateTime Vencimiento_Tarjeta { get; set; }
+        public int Vencimiento_Tarjeta { get; set; }
         public int Cant_Cuotas { get; set; }
 
         public int Cliente_Id { get; set; }

@@ -107,7 +107,7 @@ namespace AerolineaFrba.Forms.Compra {
                     this.apellidoTextboxPaquete.Text = cliente.Apellido;
                     this.direccionTextboxPaquete.Text = cliente.Direccion;
                     this.emailTextboxPaquete.Text = cliente.Email;
-                    //this.fechaNacimientoPickerPaquete.Value = cliente.Fecha_Nacimiento;
+                    //TODO this.fechaNacimientoPickerPaquete.Value = cliente.Fecha_Nacimiento; 
                 }
                 else {
                     this.nombreTextboxPaquete.Text = "";
@@ -360,33 +360,6 @@ namespace AerolineaFrba.Forms.Compra {
             DAO.closeConnection();
         }
 
-        private void confirmarCompraButton_Click(object sender, EventArgs e) {
-
-            List<int> pasajerosIds = new List<int>();
-            List<int> butacasNumeros = new List<int>();
-
-            List<int> clientesIds = new List<int>();
-            List<Decimal> pesos = new List<Decimal>();
-
-            foreach (DataRow d in this.pasajerosDatatable.Rows) {
-                pasajerosIds.Add((int)d.ItemArray[0]);
-                butacasNumeros.Add((int)d.ItemArray[4]);
-            }
-
-            foreach (DataRow d in this.paquetesDatatable.Rows) {
-                clientesIds.Add((int)d.ItemArray[0]);
-                pesos.Add(Convert.ToDecimal(d.ItemArray[4]));
-            }
-
-            if (pasajerosIds.Count == 0 && clientesIds.Count == 0) {
-                MessageBox.Show("No selecciono nada para comprar.");
-                return;
-            }
-
-            List<String> detalle = this.buildDetalle(pasajerosIds, butacasNumeros, clientesIds, pesos);
-
-        }
-
         private List<String> buildDetalle(List<int> pasajerosIds, List<int> butacasNumeros, List<int> clientesIds, List<Decimal> pesos) {
 
             List<String> detalle = new List<String>();
@@ -420,7 +393,72 @@ namespace AerolineaFrba.Forms.Compra {
 
         }
 
-        
+        private void confirmarCompraButton_Click(object sender, EventArgs e) {
+
+            List<int> pasajerosIds = new List<int>();
+            List<int> butacasNumeros = new List<int>();
+
+            List<int> clientesIds = new List<int>();
+            List<Decimal> pesos = new List<Decimal>();
+
+            foreach (DataRow d in this.pasajerosDatatable.Rows) {
+                pasajerosIds.Add((int)d.ItemArray[0]);
+                butacasNumeros.Add((int)d.ItemArray[4]);
+            }
+
+            foreach (DataRow d in this.paquetesDatatable.Rows) {
+                clientesIds.Add((int)d.ItemArray[0]);
+                pesos.Add(Convert.ToDecimal(d.ItemArray[4]));
+            }
+
+            if (pasajerosIds.Count == 0 && clientesIds.Count == 0) {
+                MessageBox.Show("No selecciono nada para comprar.");
+                return;
+            }
+
+            List<String> detalle = this.buildDetalle(pasajerosIds, butacasNumeros, clientesIds, pesos);
+
+            List<int> pasajesIds = new List<int>();
+
+            int i = 0;
+            foreach (int p in pasajerosIds) {
+                Pasaje pasaje = new Pasaje();
+                pasaje.Viaje_id = selectedViaje.Id;
+                pasaje.Cliente_Id = p;
+                pasaje.Butaca_Id = butacasNumeros[i];
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Pasajes;
+                Decimal mult = this.selectedAeronave.Tipo_Servicio.Porcentaje;
+                pasaje.Precio = precioBase * mult;
+                pasaje.Codigo = 0; // TODO
+                DAO.connect();
+                int id = DAO.insert<Pasaje>(pasaje);
+                DAO.closeConnection();
+                pasajesIds.Add(id);
+                i++;
+            }
+
+            List<int> paquetesIds = new List<int>();
+
+            int j = 0;
+            foreach (int p in clientesIds) {
+                Paquete paquete = new Paquete();
+                paquete.Viaje_Id = selectedViaje.Id;
+                paquete.Cliente_Id = p;
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Kg;
+                paquete.Precio = precioBase * pesos[j];
+                paquete.Codigo = 0; // TODO
+                DAO.connect();
+                int id = DAO.insert<Paquete>(paquete);
+                DAO.closeConnection();
+                paquetesIds.Add(id);
+                j++;
+            }
+
+            Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajesIds, paquetesIds);
+            var dr = confirmacionDialog.ShowDialog();
+
+        }
+
 
     }
 }

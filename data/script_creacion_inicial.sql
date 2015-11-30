@@ -121,7 +121,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Compra(
 	fecha_compra         datetime         NULL,
 	numero_tarjeta       int              NULL,
 	codigo_tarjeta       int              NULL,
-	vencimiento_tarjeta  datetime		  NULL,
+	vencimiento_tarjeta  int              NULL,
 	cant_cuotas          int              NULL,
 	cliente_id           int              NULL,
 	medio_pago_id        int              NULL,
@@ -228,7 +228,7 @@ GO
 CREATE TABLE BIEN_MIGRADO_RAFA.Tipo_Servicio(
 	id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
-	porcentaje     numeric(18, 2)   NULL
+	porcentaje     numeric(18, 2)   NULL DEFAULT(1)
 )
 GO
 

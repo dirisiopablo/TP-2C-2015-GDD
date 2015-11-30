@@ -21,7 +21,6 @@ using AerolineaFrba.Forms.Consulta_Millas;
 using AerolineaFrba.Forms.Canje_Millas;
 
 using AerolineaFrba.Services;
-using AerolineaFrba.Models;
 
 namespace AerolineaFrba {
     public partial class MainForm : Form {
@@ -48,10 +47,10 @@ namespace AerolineaFrba {
 
         }
 
-        private void onLogin(Usuario loggedUser){
+        private void onLogin(AerolineaFrba.Models.Usuario loggedUser){
 
             DAO.connect();
-            List<Funcionalidad_Rol> funcionalidadesRol = DAO.selectAll<Funcionalidad_Rol>(new[] { "rol_id = " + loggedUser.Rol.Id });
+            List<AerolineaFrba.Models.Funcionalidad_Rol> funcionalidadesRol = DAO.selectAll<AerolineaFrba.Models.Funcionalidad_Rol>(new[] { "rol_id = " + loggedUser.Rol.Id });
 
             foreach (var funcionalidadRol in funcionalidadesRol)
             {

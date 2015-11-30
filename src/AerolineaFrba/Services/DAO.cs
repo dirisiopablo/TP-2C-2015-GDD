@@ -20,9 +20,12 @@ namespace AerolineaFrba.Services {
         private static string _password;
         private static string _strCon;
 
-        private static String[] ignoredTypes = {"Aeronave", "BajaAeronave", "Butaca", "Cancelacion", "Canje", "Catalogo",
-                                                "Ciudad", "Cliente", "Funcionalidad", "Paquete", "Pasaje", "Rol", "Ruta",
-                                                "TipoBaja", "TipoServicio", "Usuario", "Viaje", "Modelo", "Fabricante"
+        private static String[] ignoredTypes = {"Aeronave", "BajaAeronave", "Butaca", "Cancelacion", "Cancelacion_Paquete", 
+                                                "Cancelacion_Pasaje", "Canje", "Catalogo", "Ciudad", "Cliente", "Compra",
+                                                "Compra_Paquete", "Compra_Pasaje", "Fabricante", "Funcionalidad",
+                                                "Functionalidad_Rol", "IntentosLogin", "MedioPago", "Modelo",
+                                                "Paquete", "Pasaje", "Rol", "Ruta", "TipoBaja", "TipoServicio", 
+                                                "TipoTarjeta", "Usuario", "Viaje"
                                                };
         
         static public Exception exception;
