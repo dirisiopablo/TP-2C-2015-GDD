@@ -188,12 +188,14 @@ namespace AerolineaFrba.Forms.Compra {
                             "v.fecha_salida 'Fecha Salida', " +
                             "v.fecha_llegada_estimada 'Llegada estimada', " +
                             "a.matricula 'Matricula Aeronave', " +
-                            "a.modelo 'Modelo Aeronave', " +
+                            "m.descripcion 'Modelo Aeronave', " +
                             "(SELECT count(1) FROM BIEN_MIGRADO_RAFA.Butaca butaca where butaca.aeronave_id = a.id) 'Butacas Disponibles', " +
                             "a.kilogramos_disponibles 'Kilogramos Disponibles' " +
                      "FROM BIEN_MIGRADO_RAFA.Viaje v " +
                      "INNER JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+                     "INNER JOIN BIEN_MIGRADO_RAFA.Modelo m ON m.id = a.modelo_id " +
                      "INNER JOIN BIEN_MIGRADO_RAFA.Ruta r ON v.ruta_id = r.id";
+
 
             return query;
 
