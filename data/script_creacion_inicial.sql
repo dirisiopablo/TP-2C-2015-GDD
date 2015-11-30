@@ -115,6 +115,38 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cliente(
 GO
 
 
+CREATE TABLE BIEN_MIGRADO_RAFA.Compra(
+    id                   int              IDENTITY(1,1),
+    PNR                  nvarchar(255)    NULL,
+	fecha_compra         datetime         NULL,
+	numero_tarjeta       int              NULL,
+	codigo_tarjeta       int              NULL,
+	vencimiento_tarjeta  datetime		  NULL,
+	cant_cuotas          int              NULL,
+	cliente_id           int              NULL,
+	medio_pago_id        int              NULL,
+	tipo_tarjeta_id      int              NULL,
+	
+)
+GO
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje(
+    id                  int    IDENTITY(1,1),
+    compra_id           int    NULL,
+    pasaje_id           int    NULL,
+)
+GO
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Compra_Paquete(
+    id                  int    IDENTITY(1,1),
+    compra_id           int    NULL,
+    paquete_id          int    NULL,
+)
+GO
+
+
 CREATE TABLE BIEN_MIGRADO_RAFA.Funcionalidad(
     id             int              IDENTITY(1,1),
     descripcion    nvarchar(255)    NULL,
@@ -133,6 +165,12 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Intentos_Login(
 	id					int	   IDENTITY(1,1),
 	usuario_id          int    NULL,
 	intentos            int    NULL DEFAULT (0),
+)
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Medio_Pago(
+	id					int	             IDENTITY(1,1),
+    descripcion         nvarchar(255)    NULL,
 )
 
 
@@ -228,6 +266,11 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Fabricante(
     descripcion    nvarchar(255)    NULL
 )
 GO
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Tipo_Tarjeta(
+	id					int	             IDENTITY(1,1),
+    descripcion         nvarchar(255)    NULL,
+)
 
 --End Tables
 
@@ -428,6 +471,10 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Cliente
 ADD CONSTRAINT PK1 PRIMARY KEY CLUSTERED (id)
 GO
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra
+ADD CONSTRAINT PK668 PRIMARY KEY CLUSTERED (id)
+GO
+
 ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad
 ADD CONSTRAINT PK10 PRIMARY KEY CLUSTERED (id)
 GO
@@ -438,6 +485,10 @@ GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Intentos_Login
 ADD CONSTRAINT PK79 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Medio_Pago
+ADD CONSTRAINT PK669 PRIMARY KEY CLUSTERED (id)
 GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Paquete
@@ -462,6 +513,10 @@ GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Tipo_Servicio
 ADD CONSTRAINT PK667 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Tipo_Tarjeta
+ADD CONSTRAINT PK700 PRIMARY KEY CLUSTERED (id)
 GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Usuario
@@ -552,6 +607,24 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Canje ADD CONSTRAINT RefCatalogo26
 GO
 
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra ADD CONSTRAINT RefCliente98 
+    FOREIGN KEY (cliente_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Cliente(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra ADD CONSTRAINT RefMedioPago98 
+    FOREIGN KEY (medio_pago_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Medio_Pago(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra ADD CONSTRAINT TipoTarjeta33 
+    FOREIGN KEY (tipo_tarjeta_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Tipo_Tarjeta(id)
+GO
+
+
 ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol ADD CONSTRAINT RefFuncionalidad5 
     FOREIGN KEY (funcionalidad_id)
     REFERENCES BIEN_MIGRADO_RAFA.Funcionalidad(id)
@@ -563,10 +636,12 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Funcionalidad_Rol ADD CONSTRAINT RefRol6
     REFERENCES BIEN_MIGRADO_RAFA.Rol(id)
 GO
 
+
 ALTER TABLE BIEN_MIGRADO_RAFA.Intentos_Login ADD CONSTRAINT RefUsuario77
     FOREIGN KEY (usuario_id)
     REFERENCES BIEN_MIGRADO_RAFA.Usuario(id)
 GO
+
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Paquete ADD CONSTRAINT RefViaje16 
     FOREIGN KEY (viaje_id)
@@ -702,4 +777,20 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Catalogo]
            ('Cafetera', 450, 35),
 		   ('Home Theater', 1200, 15),
 		   ('Monitor Led 23"', 600, 20)
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Medio_Pago]
+           ([descripcion])
+     VALUES
+           ('Efectivo'),
+		   ('Tarjeta de Credito')
+		   
+GO
+
+INSERT INTO [BIEN_MIGRADO_RAFA].[Tipo_Tarjeta]
+           ([descripcion])
+     VALUES
+           ('Tipo 1'),
+		   ('Tipo 2')
+		   
 GO

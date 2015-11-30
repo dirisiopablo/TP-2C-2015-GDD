@@ -366,7 +366,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="config.ini" />
     <None Include="Config\config.ini" />
     <None Include="DataSetAeronave.xsc">
       <DependentUpon>DataSetAeronave.xsd</DependentUpon>
