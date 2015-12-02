@@ -198,7 +198,8 @@ namespace AerolineaFrba.Services {
                 }
                 else if (String.Equals(prop.PropertyType.Name, "DateTime")) {
                     DateTime date = (DateTime)prop.GetValue(entity);
-                    set += "'" + date.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", ";
+                    if (date.Day == 1 && date.Month == 1 && date.Year == 1) set += "null" + ", ";
+                    else set += "'" + date.ToString("yyyy-MM-dd HH:mm:ss") + "'" + ", ";
                 }
                 else if (String.Equals(prop.PropertyType.Name, "Decimal"))
                 {

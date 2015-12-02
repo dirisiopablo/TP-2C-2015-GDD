@@ -54,7 +54,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Cancelacion(
     id               int               IDENTITY(1,1),
     fecha            datetime          NULL,
     motivo           nvarchar(255)     NULL,
-    numero_compra    numeric(18, 0)    NULL,
+    numero_compra    nvarchar(255)     NULL,
 )
 GO
 
@@ -180,8 +180,10 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Paquete(
     precio          numeric(18, 2)    NULL,
     kg              numeric(18, 0)    NULL,
     fecha_compra    datetime          NULL,
+	activo			bit				  NULL DEFAULT(1),
     viaje_id        int               NULL,
-    cliente_id      int               NULL,
+    cliente_id      int               NULL
+	
 )
 GO
 
@@ -191,9 +193,11 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Pasaje(
     codigo          numeric(18, 0)    NULL,
     precio          numeric(18, 2)    NULL,
     fecha_compra    datetime          NULL,
+	activo			bit				  NULL DEFAULT(1),
     butaca_id       int               NULL,
     viaje_id        int               NULL,
-    cliente_id      int               NULL,
+    cliente_id      int               NULL
+	
 )
 GO
 

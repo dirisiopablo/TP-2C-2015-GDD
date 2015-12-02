@@ -67,14 +67,24 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
         private String BuildQuery(int clienteId) {
 
             String queryPasajes = "SELECT 'Pasaje' 'Tipo', "
-                                        + "p.fecha_compra 'Fecha', "
+                                        + "c.fecha_compra 'Fecha', "
                                         + "(p.precio / 10) 'Puntos' ";
-            queryPasajes += "FROM BIEN_MIGRADO_RAFA.Pasaje p WHERE p.cliente_id = " + clienteId + " AND (p.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
+            queryPasajes += " FROM BIEN_MIGRADO_RAFA.Pasaje p ";
+            queryPasajes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra_pasaje cp on cp.pasaje_id = p.id ";
+            queryPasajes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra c on c.id = cp.compra_id ";
+            queryPasajes += " WHERE p.cliente_id = " + clienteId; 
+            queryPasajes += " AND (c.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
+            queryPasajes += " AND p.activo = 1";
 
             String queryPaquetes = "SELECT 'Encomienda' 'Tipo', "
-                                         + "pq.fecha_compra 'Fecha', "
+                                         + "c.fecha_compra 'Fecha', "
                                          + "(pq.precio / 10) 'Puntos' ";
-            queryPaquetes += "FROM BIEN_MIGRADO_RAFA.Paquete pq WHERE pq.cliente_id = " + clienteId + " AND (pq.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
+            queryPaquetes += " FROM BIEN_MIGRADO_RAFA.Paquete pq ";
+            queryPaquetes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra_paquete cpq on cpq.paquete_id = pq.id ";
+            queryPaquetes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra c on c.id = cpq.compra_id ";
+            queryPaquetes += " WHERE pq.cliente_id = " + clienteId;
+            queryPaquetes += " AND (c.fecha_compra BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ")";
+            queryPaquetes += " AND pq.activo = 1";
 
             String queryCanjes = "SELECT 'Canje de puntos' 'Tipo', "
                                        + "c.fecha 'Fecha', "

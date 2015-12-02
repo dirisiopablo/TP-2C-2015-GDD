@@ -35,6 +35,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.paquetesDatagrid = new System.Windows.Forms.DataGridView();
             this.devolucionButton = new System.Windows.Forms.Button();
+            this.motivoTextbox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pasajesDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paquetesDatagrid)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +56,7 @@
             this.dniTextbox.Name = "dniTextbox";
             this.dniTextbox.Size = new System.Drawing.Size(149, 20);
             this.dniTextbox.TabIndex = 1;
+            this.dniTextbox.TextChanged += new System.EventHandler(this.dniTextbox_TextChanged);
             // 
             // label1
             // 
@@ -101,6 +104,7 @@
             this.pasajesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pasajesDatagrid.Location = new System.Drawing.Point(27, 112);
             this.pasajesDatagrid.Name = "pasajesDatagrid";
+            this.pasajesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pasajesDatagrid.Size = new System.Drawing.Size(707, 150);
             this.pasajesDatagrid.TabIndex = 7;
             // 
@@ -128,12 +132,13 @@
             this.paquetesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paquetesDatagrid.Location = new System.Drawing.Point(26, 305);
             this.paquetesDatagrid.Name = "paquetesDatagrid";
+            this.paquetesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.paquetesDatagrid.Size = new System.Drawing.Size(707, 150);
             this.paquetesDatagrid.TabIndex = 10;
             // 
             // devolucionButton
             // 
-            this.devolucionButton.Location = new System.Drawing.Point(682, 494);
+            this.devolucionButton.Location = new System.Drawing.Point(683, 553);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(111, 43);
             this.devolucionButton.TabIndex = 11;
@@ -141,11 +146,30 @@
             this.devolucionButton.UseVisualStyleBackColor = true;
             this.devolucionButton.Click += new System.EventHandler(this.devolucionButton_Click);
             // 
+            // motivoTextbox
+            // 
+            this.motivoTextbox.Location = new System.Drawing.Point(29, 510);
+            this.motivoTextbox.Multiline = true;
+            this.motivoTextbox.Name = "motivoTextbox";
+            this.motivoTextbox.Size = new System.Drawing.Size(405, 51);
+            this.motivoTextbox.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(26, 494);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Breve motivo";
+            // 
             // Devolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 572);
+            this.ClientSize = new System.Drawing.Size(846, 617);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.motivoTextbox);
             this.Controls.Add(this.devolucionButton);
             this.Controls.Add(this.paquetesDatagrid);
             this.Controls.Add(this.label4);
@@ -181,5 +205,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView paquetesDatagrid;
         private System.Windows.Forms.Button devolucionButton;
+        private System.Windows.Forms.TextBox motivoTextbox;
+        private System.Windows.Forms.Label label5;
     }
 }

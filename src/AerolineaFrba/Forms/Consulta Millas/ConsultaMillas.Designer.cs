@@ -130,7 +130,7 @@
             this.Controls.Add(this.DNITextbox);
             this.Controls.Add(this.label1);
             this.Name = "ConsultaMillas";
-            this.Text = "ConsultaMillas";
+            this.Text = "Consulta Millas";
             ((System.ComponentModel.ISupportInitialize)(this.millasDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -430,6 +430,7 @@ namespace AerolineaFrba.Forms.Compra {
                 Decimal mult = this.selectedAeronave.Tipo_Servicio.Porcentaje;
                 pasaje.Precio = precioBase * mult;
                 pasaje.Codigo = 0; // TODO
+                pasaje.Activo = true; 
                 DAO.connect();
                 int id = DAO.insert<Pasaje>(pasaje);
                 DAO.closeConnection();
@@ -447,6 +448,7 @@ namespace AerolineaFrba.Forms.Compra {
                 Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Kg;
                 paquete.Precio = precioBase * pesos[j];
                 paquete.Codigo = 0; // TODO
+                paquete.Activo = true;
                 DAO.connect();
                 int id = DAO.insert<Paquete>(paquete);
                 DAO.closeConnection();

@@ -10,7 +10,7 @@ namespace AerolineaFrba.Models {
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public string Motivo { get; set; }
-        public int NumeroCompra { get; set; }
+        public string Numero_Compra { get; set; }
 
         public static string TableName = "BIEN_MIGRADO_RAFA.Cancelacion";
 

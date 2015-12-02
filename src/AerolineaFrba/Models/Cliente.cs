@@ -24,10 +24,26 @@ namespace AerolineaFrba.Models {
                 DAO.connect();
 
                 String condicionFecha = "BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + " ";
-                
-                List<Pasaje> pasajes = DAO.selectAll<Pasaje>(new[] { "cliente_id = " + this.Id, "( fecha_compra " + condicionFecha + ")" });
-                List<Paquete> paquetes = DAO.selectAll<Paquete>(new[] { "cliente_id = " + this.Id, "( fecha_compra " + condicionFecha + ")" });
+
+                List<Compra> compras = DAO.selectAll<Compra>(new[] { "cliente_id = " + this.Id, "( fecha_compra " + condicionFecha + ")" });
+
+                List<Pasaje> pasajes = new List<Pasaje>();
+                List<Paquete> paquetes = new List<Paquete>();
                 List<Canje> canjes = DAO.selectAll<Canje>(new[] { "cliente_id = " + this.Id, "( fecha " + condicionFecha + ")" });
+
+                foreach (Compra c in compras) {
+                    List<Compra_Pasaje> cp = DAO.selectAll<Compra_Pasaje>(new[] { "compra_id = " + c.Id});
+                    List<Compra_Paquete> cpq = DAO.selectAll<Compra_Paquete>(new[] { "compra_id = " + c.Id });
+
+                    foreach (Compra_Pasaje comp in cp) {
+                        Pasaje p = DAO.selectOne<Pasaje>(new[] { "id = " + comp.Pasaje_Id });
+                        if (p.Activo) pasajes.Add(p);
+                    }
+                    foreach (Compra_Paquete comp in cpq) {
+                        Paquete p = DAO.selectOne<Paquete>(new[] { "id = " + comp.Paquete_Id });
+                        if (p.Activo) paquetes.Add(p);
+                    }
+                }
 
                 DAO.closeConnection();
 
