@@ -316,7 +316,6 @@
             this.altaAeronave.TabIndex = 9;
             this.altaAeronave.Text = "Alta";
             this.altaAeronave.UseVisualStyleBackColor = true;
-            this.altaAeronave.Click += new System.EventHandler(this.altaAeronave_Click);
             // 
             // tipo_ServicioTableAdapter
             // 

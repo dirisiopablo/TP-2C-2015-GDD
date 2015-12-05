@@ -160,11 +160,8 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         }
 
         private void ABMRuta_Load(object sender, EventArgs e) {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet6.Ciudad' Puede moverla o quitarla según sea necesario.
             this.ciudadTableAdapter1.Fill(this.gD2C2015DataSet6.Ciudad);
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet5.Ciudad' Puede moverla o quitarla según sea necesario.
             this.ciudadTableAdapter.Fill(this.gD2C2015DataSet5.Ciudad);
-            // TODO: This line of code loads data into the 'rutaDataSet.Ruta' table. You can move, or remove it, as needed.
             string query = obtenerQueryBase();
             query = query.Substring(0, query.Length - 5);
 

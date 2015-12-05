@@ -68,7 +68,8 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
 
             String queryPasajes = "SELECT 'Pasaje' 'Tipo', "
                                         + "c.fecha_compra 'Fecha', "
-                                        + "(p.precio / 10) 'Puntos' ";
+                                        + "(p.precio / 10) 'Puntos', "
+                                        + "p.id 'Id' ";
             queryPasajes += " FROM BIEN_MIGRADO_RAFA.Pasaje p ";
             queryPasajes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra_pasaje cp on cp.pasaje_id = p.id ";
             queryPasajes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra c on c.id = cp.compra_id ";
@@ -78,7 +79,8 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
 
             String queryPaquetes = "SELECT 'Encomienda' 'Tipo', "
                                          + "c.fecha_compra 'Fecha', "
-                                         + "(pq.precio / 10) 'Puntos' ";
+                                         + "(pq.precio / 10) 'Puntos', "
+                                         + "pq.id 'Id' ";
             queryPaquetes += " FROM BIEN_MIGRADO_RAFA.Paquete pq ";
             queryPaquetes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra_paquete cpq on cpq.paquete_id = pq.id ";
             queryPaquetes += " INNER JOIN BIEN_MIGRADO_RAFA.Compra c on c.id = cpq.compra_id ";
@@ -88,7 +90,8 @@ namespace AerolineaFrba.Forms.Consulta_Millas {
 
             String queryCanjes = "SELECT 'Canje de puntos' 'Tipo', "
                                        + "c.fecha 'Fecha', "
-                                       + "(c.cantidad * cat.costo) 'Puntos' ";
+                                       + "(c.cantidad * cat.costo) 'Puntos', "
+                                       +"c.id 'Id' ";
             queryCanjes += "FROM BIEN_MIGRADO_RAFA.Canje c, BIEN_MIGRADO_RAFA.Catalogo cat ";
             queryCanjes += "WHERE c.cliente_id = " + clienteId + " AND (c.fecha BETWEEN DATEADD(year, -1, " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "'" + ") AND c.catalogo_id = cat.id";
 

@@ -123,11 +123,8 @@ namespace AerolineaFrba.Abm_Aeronave {
 
 
         private void ABMAeronave_Load(object sender, EventArgs e) {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet10.Fabricante' Puede moverla o quitarla según sea necesario.
             this.fabricanteTableAdapter.Fill(this.gD2C2015DataSet10.Fabricante);
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet9.Modelo' Puede moverla o quitarla según sea necesario.
             this.modeloTableAdapter.Fill(this.gD2C2015DataSet9.Modelo);
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet8.Tipo_Servicio' Puede moverla o quitarla según sea necesario.
             this.tipo_ServicioTableAdapter.Fill(this.gD2C2015DataSet8.Tipo_Servicio);
         }
 
@@ -287,11 +284,6 @@ namespace AerolineaFrba.Abm_Aeronave {
             query = query.Substring(0, query.Length - 5);
 
             GetData(query);
-        }
-
-        private void altaAeronave_Click(object sender, EventArgs e)
-        {
-            //TODO: MAKE ME WORK PLS :)
         }
 
         private Boolean validar()

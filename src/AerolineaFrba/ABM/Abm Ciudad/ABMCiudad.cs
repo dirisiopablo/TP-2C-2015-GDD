@@ -128,9 +128,7 @@ namespace AerolineaFrba.ABM.Abm_Ciudad {
         }
 
         private void ABMCiudad_Load(object sender, EventArgs e) {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ciudad' Puede moverla o quitarla según sea necesario.
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-            // TODO: This line of code loads data into the 'dataSetCiudad.Ciudad' table. You can move, or remove it, as needed.
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
 
         }

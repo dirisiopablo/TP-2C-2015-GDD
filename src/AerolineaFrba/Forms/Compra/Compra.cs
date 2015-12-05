@@ -22,6 +22,7 @@ namespace AerolineaFrba.Forms.Compra {
         private DataTable paquetesDatatable;
         private Viaje selectedViaje;
         private Aeronave selectedAeronave;
+        private DataSet butacasSource;
 
         private Compra() {
             this.InitializeComponent();
@@ -80,7 +81,7 @@ namespace AerolineaFrba.Forms.Compra {
                     this.apellidoTextbox.Text = cliente.Apellido;
                     this.direccionTextbox.Text = cliente.Direccion;
                     this.emailTextbox.Text = cliente.Email;
-                    //this.fechaNacimientoPicker.Value = cliente.Fecha_Nacimiento;
+                    //TODO this.fechaNacimientoPicker.Value = cliente.Fecha_Nacimiento;
                 }
                 else {
                     this.nombreTextbox.Text = "";
@@ -276,9 +277,19 @@ namespace AerolineaFrba.Forms.Compra {
 
             query += " WHERE c.id = " + cliente.Id ;
 
-            //butacaCombo.Items.RemoveAt(butacaCombo.SelectedIndex);  //sacar del dataset y updatear
+            //saca la butaca seleccionada del datasource
+            DataRowCollection rows = this.butacasSource.Tables[0].Rows;
+            for (int i = 0; i <= rows.Count; i++) {
+                if ((decimal)rows[i].ItemArray[1] == butaca.Numero) {
+                    rows.RemoveAt(i);
+                    break;
+                }
+            }
+
+            butacaCombo.Update();
 
             this.FillDataGridPasajeros(query);
+
         }
 
         private void agregarPaqueteButton_Click(object sender, EventArgs e){
@@ -349,13 +360,13 @@ namespace AerolineaFrba.Forms.Compra {
             selectCommand += " ORDER BY numero";
             dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
 
-            DataSet ds = new DataSet();
+            this.butacasSource = new DataSet();
 
-            dataAdapter.Fill(ds);
+            dataAdapter.Fill(butacasSource);
 
             butacaCombo.DisplayMember = "numero";
             butacaCombo.ValueMember = "id";
-            butacaCombo.DataSource = ds.Tables[0];
+            butacaCombo.DataSource = butacasSource.Tables[0];
 
             DAO.closeConnection();
         }
@@ -459,6 +470,11 @@ namespace AerolineaFrba.Forms.Compra {
             Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajesIds, paquetesIds);
             var dr = confirmacionDialog.ShowDialog();
 
+        }
+
+        private void cancelarButton_Click(object sender, EventArgs e) {
+            _instance = null;
+            this.Close();
         }
 
 

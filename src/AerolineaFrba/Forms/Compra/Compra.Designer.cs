@@ -80,6 +80,7 @@
             this.pesoBox = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.confirmarCompraButton = new System.Windows.Forms.Button();
+            this.cancelarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
@@ -605,7 +606,7 @@
             // 
             // confirmarCompraButton
             // 
-            this.confirmarCompraButton.Location = new System.Drawing.Point(361, 813);
+            this.confirmarCompraButton.Location = new System.Drawing.Point(173, 801);
             this.confirmarCompraButton.Name = "confirmarCompraButton";
             this.confirmarCompraButton.Size = new System.Drawing.Size(271, 53);
             this.confirmarCompraButton.TabIndex = 15;
@@ -613,12 +614,23 @@
             this.confirmarCompraButton.UseVisualStyleBackColor = true;
             this.confirmarCompraButton.Click += new System.EventHandler(this.confirmarCompraButton_Click);
             // 
+            // cancelarButton
+            // 
+            this.cancelarButton.Location = new System.Drawing.Point(503, 801);
+            this.cancelarButton.Name = "cancelarButton";
+            this.cancelarButton.Size = new System.Drawing.Size(271, 53);
+            this.cancelarButton.TabIndex = 16;
+            this.cancelarButton.Text = "Cancelar";
+            this.cancelarButton.UseVisualStyleBackColor = true;
+            this.cancelarButton.Click += new System.EventHandler(this.cancelarButton_Click);
+            // 
             // Compra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.cancelarButton);
             this.Controls.Add(this.confirmarCompraButton);
             this.Controls.Add(this.splitContainer);
             this.Name = "Compra";
@@ -707,5 +719,6 @@
         private System.Windows.Forms.NumericUpDown pesoBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button confirmarCompraButton;
+        private System.Windows.Forms.Button cancelarButton;
     }
 }

@@ -85,7 +85,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
             nuevoViaje.Ruta_Id = rutaId;
             nuevoViaje.Fecha_Salida = fechaSalida;
             nuevoViaje.Fecha_Llegada = fechaSalida; //fecha por default
-            nuevoViaje.Fecha_Llegada_Estimada = fechaSalida.AddDays(1); //TODO -- la carga a mano o consideramos lo maximo (24hs)?
+            nuevoViaje.Fecha_Llegada_Estimada = fechaSalida.AddDays(1); 
 
 
             int affected = DAO.insert<Viaje>(nuevoViaje);
