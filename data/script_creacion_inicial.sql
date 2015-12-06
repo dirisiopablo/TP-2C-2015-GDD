@@ -1,4 +1,4 @@
-USE [GD2C2015]
+	USE [GD2C2015]
 GO
 
 SET NOCOUNT	ON
@@ -275,6 +275,26 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Tipo_Tarjeta(
 	id					int	             IDENTITY(1,1),
     descripcion         nvarchar(255)    NULL,
 )
+GO
+
+
+CREATE TABLE BIEN_MIGRADO_RAFA.Compras_Temp(
+    id              int               IDENTITY(1,1),
+    codigo          numeric(18, 0)    NULL,
+    precio          numeric(18, 2)    NULL,
+    fecha_compra    datetime          NULL,
+    dni             numeric(18, 0)    NULL,
+    telefono        numeric(18, 0)    NULL,
+	codigo_ruta     numeric(18, 0)    NULL,
+	ruta_ciudad_origen     nvarchar(255)    NULL,
+	ruta_ciudad_destino     nvarchar(255)    NULL,
+	paquete_kg         numeric(18, 0)    NULL DEFAULT (0),
+	butaca_numero         numeric(18, 0)    NULL, 
+    butaca_tipo           nvarchar(255)     NULL,
+	aeronave_matricula			nvarchar(255)   NULL,
+	aeronave_modelo			nvarchar(255)    NULL
+)
+GO
 
 --End Tables
 
@@ -333,7 +353,7 @@ GO
 INSERT INTO BIEN_MIGRADO_RAFA.Butaca (numero, piso, tipo, aeronave_id)
 SELECT DISTINCT m.Butaca_Nro, m.Butaca_Piso, m.Butaca_Tipo, a.id FROM gd_esquema.Maestra m
 JOIN BIEN_MIGRADO_RAFA.Aeronave a ON m.Aeronave_Matricula = a.matricula
-WHERE m.Butaca_Nro != '0'
+WHERE m.Paquete_KG = '0'
 GO
 
 --Ruta
@@ -402,7 +422,7 @@ FROM (SELECT	Pasaje_Codigo,
 				Fecha_LLegada_Estimada,
 				FechaLLegada,
 				FechaSalida   
-		FROM gd_esquema.Maestra where Pasaje_Codigo != 0 and Butaca_Nro != 0) m
+		FROM gd_esquema.Maestra where Pasaje_Codigo != 0 and Paquete_KG = 0) m
 JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.codigo = m.rutaCodigo
 JOIN BIEN_MIGRADO_RAFA.Aeronave a ON a.matricula = m.matricula
 JOIN BIEN_MIGRADO_RAFA.Cliente c ON c.dni = m.Cli_Dni and m.Cli_Telefono = c.telefono
@@ -411,6 +431,60 @@ WHERE r.ciudad_destino_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descr
 AND r.ciudad_origen_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descripcion = m.ciudadOrigen)
 
 GO
+
+-- Compra
+INSERT INTO BIEN_MIGRADO_RAFA.Compras_Temp(aeronave_matricula, paquete_kg, aeronave_modelo, codigo, codigo_ruta, dni, fecha_compra, precio, ruta_ciudad_destino, ruta_ciudad_origen, telefono)
+SELECT DISTINCT Aeronave_Matricula, Paquete_KG, Aeronave_Modelo, Paquete_Codigo, Ruta_Codigo, Cli_Dni, Paquete_FechaCompra, Paquete_Precio, Ruta_Ciudad_Destino, Ruta_Ciudad_Origen, Cli_Telefono FROM gd_esquema.Maestra m
+WHERE m.Paquete_KG != '0'
+GO
+
+INSERT INTO BIEN_MIGRADO_RAFA.Compras_Temp(aeronave_matricula, aeronave_modelo, codigo, codigo_ruta, dni, fecha_compra, precio, ruta_ciudad_destino, ruta_ciudad_origen, telefono, butaca_numero, butaca_tipo)
+SELECT DISTINCT Aeronave_Matricula, Aeronave_Modelo, Pasaje_Codigo, Ruta_Codigo, Cli_Dni, Pasaje_FechaCompra, Pasaje_Precio, Ruta_Ciudad_Destino, Ruta_Ciudad_Origen, Cli_Telefono, Butaca_Nro, Butaca_Tipo FROM gd_esquema.Maestra m
+WHERE m.Paquete_KG = '0'
+GO
+
+INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
+output inserted.id, p.id into BIEN_MIGRADO_RAFA.Compra_Paquete(compra_id, paquete_id)
+SELECT DISTINCT t.fecha_compra, c.id FROM BIEN_MIGRADO_RAFA.Compras_Temp t
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON t.dni = c.dni and t.telefono = c.telefono 
+JOIN BIEN_MIGRADO_RAFA.Ciudad c1 ON c1.descripcion = t.ruta_ciudad_origen
+JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = t.ruta_ciudad_destino
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON t.codigo_ruta = r.codigo and r.ciudad_origen_id = c1.id and r.ciudad_destino_id = c2.id
+JOIN BIEN_MIGRADO_RAFA.Modelo m ON t.aeronave_modelo = m.descripcion
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON t.aeronave_matricula = a.matricula and m.id = a.modelo_id
+JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id and v.ruta_id = r.id
+JOIN BIEN_MIGRADO_RAFA.Paquete p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.kg = t.paquete_kg
+WHERE t.paquete_kg != '0'
+GO
+
+
+
+INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
+output inserted.id, res.paqueteId into BIEN_MIGRADO_RAFA.Compra_Paquete(compra_id, paquete_id)
+SELECT DISTINCT res.fechaCompra, res.clienteId FROM (	SELECT c.id clienteId, t.fecha_compra fechaCompra, p.id paqueteId FROM BIEN_MIGRADO_RAFA.Compras_Temp t
+											JOIN BIEN_MIGRADO_RAFA.Cliente c ON t.dni = c.dni and t.telefono = c.telefono 
+											JOIN BIEN_MIGRADO_RAFA.Ciudad c1 ON c1.descripcion = t.ruta_ciudad_origen
+											JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = t.ruta_ciudad_destino
+											JOIN BIEN_MIGRADO_RAFA.Ruta r ON t.codigo_ruta = r.codigo and r.ciudad_origen_id = c1.id and r.ciudad_destino_id = c2.id
+											JOIN BIEN_MIGRADO_RAFA.Modelo m ON t.aeronave_modelo = m.descripcion
+											JOIN BIEN_MIGRADO_RAFA.Aeronave a ON t.aeronave_matricula = a.matricula and m.id = a.modelo_id
+											JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id and v.ruta_id = r.id
+											JOIN BIEN_MIGRADO_RAFA.Paquete p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.kg = t.paquete_kg
+											WHERE t.paquete_kg != '0') res
+GO
+
+
+--INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
+--SELECT DISTINCT m.Paquete_FechaCompra, c.id FROM gd_esquema.Maestra m
+--JOIN BIEN_MIGRADO_RAFA.Cliente c ON m.Cli_Dni = c.dni and m.Cli_Telefono = c.telefono 
+--WHERE m.Paquete_KG != '0'
+--GO
+
+--INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
+--SELECT DISTINCT m.Pasaje_FechaCompra, c.id FROM gd_esquema.Maestra m
+--JOIN BIEN_MIGRADO_RAFA.Cliente c ON m.Cli_Dni = c.dni and m.Cli_Telefono = c.telefono 
+--WHERE m.Paquete_KG = '0'
+--GO
 
  
  --END MIGRATION
@@ -529,6 +603,38 @@ GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Viaje
 ADD CONSTRAINT PK5 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete
+ADD CONSTRAINT PK234 PRIMARY KEY CLUSTERED (id)
+GO
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje
+ADD CONSTRAINT PK235 PRIMARY KEY CLUSTERED (id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefPaquete77 
+    FOREIGN KEY (paquete_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Paquete(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefCompra77 
+    FOREIGN KEY (compra_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefPasaje123451
+    FOREIGN KEY (pasaje_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Pasaje(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefCompra78 
+    FOREIGN KEY (compra_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
 GO
  
 
