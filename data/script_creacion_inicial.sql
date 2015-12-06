@@ -126,6 +126,8 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Compra(
 	cliente_id           int              NULL,
 	medio_pago_id        int              NULL,
 	tipo_tarjeta_id      int              NULL,
+	paquete_id			int              NULL,
+	pasaje_id			int              NULL,
 	
 )
 GO
@@ -443,9 +445,9 @@ SELECT DISTINCT Aeronave_Matricula, Aeronave_Modelo, Pasaje_Codigo, Ruta_Codigo,
 WHERE m.Paquete_KG = '0'
 GO
 
-INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
-output inserted.id, p.id into BIEN_MIGRADO_RAFA.Compra_Paquete(compra_id, paquete_id)
-SELECT DISTINCT t.fecha_compra, c.id FROM BIEN_MIGRADO_RAFA.Compras_Temp t
+INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id, paquete_id)
+output inserted.id, inserted.paquete_id into BIEN_MIGRADO_RAFA.Compra_Paquete(compra_id, paquete_id)
+SELECT t.fecha_compra fechaCompra, c.id clienteId, p.id paqueteId FROM BIEN_MIGRADO_RAFA.Compras_Temp t
 JOIN BIEN_MIGRADO_RAFA.Cliente c ON t.dni = c.dni and t.telefono = c.telefono 
 JOIN BIEN_MIGRADO_RAFA.Ciudad c1 ON c1.descripcion = t.ruta_ciudad_origen
 JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = t.ruta_ciudad_destino
@@ -453,40 +455,34 @@ JOIN BIEN_MIGRADO_RAFA.Ruta r ON t.codigo_ruta = r.codigo and r.ciudad_origen_id
 JOIN BIEN_MIGRADO_RAFA.Modelo m ON t.aeronave_modelo = m.descripcion
 JOIN BIEN_MIGRADO_RAFA.Aeronave a ON t.aeronave_matricula = a.matricula and m.id = a.modelo_id
 JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id and v.ruta_id = r.id
-JOIN BIEN_MIGRADO_RAFA.Paquete p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.kg = t.paquete_kg
+JOIN BIEN_MIGRADO_RAFA.Paquete p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.kg = t.paquete_kg and p.cliente_id = c.id
 WHERE t.paquete_kg != '0'
 GO
 
-
-
-INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
-output inserted.id, res.paqueteId into BIEN_MIGRADO_RAFA.Compra_Paquete(compra_id, paquete_id)
-SELECT DISTINCT res.fechaCompra, res.clienteId FROM (	SELECT c.id clienteId, t.fecha_compra fechaCompra, p.id paqueteId FROM BIEN_MIGRADO_RAFA.Compras_Temp t
-											JOIN BIEN_MIGRADO_RAFA.Cliente c ON t.dni = c.dni and t.telefono = c.telefono 
-											JOIN BIEN_MIGRADO_RAFA.Ciudad c1 ON c1.descripcion = t.ruta_ciudad_origen
-											JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = t.ruta_ciudad_destino
-											JOIN BIEN_MIGRADO_RAFA.Ruta r ON t.codigo_ruta = r.codigo and r.ciudad_origen_id = c1.id and r.ciudad_destino_id = c2.id
-											JOIN BIEN_MIGRADO_RAFA.Modelo m ON t.aeronave_modelo = m.descripcion
-											JOIN BIEN_MIGRADO_RAFA.Aeronave a ON t.aeronave_matricula = a.matricula and m.id = a.modelo_id
-											JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id and v.ruta_id = r.id
-											JOIN BIEN_MIGRADO_RAFA.Paquete p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.kg = t.paquete_kg
-											WHERE t.paquete_kg != '0') res
+INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id, pasaje_id)
+output inserted.id, inserted.pasaje_id into BIEN_MIGRADO_RAFA.Compra_Pasaje(compra_id, pasaje_id)
+SELECT t.fecha_compra fechaCompra, c.id clienteId, p.id pasajeId FROM BIEN_MIGRADO_RAFA.Compras_Temp t
+JOIN BIEN_MIGRADO_RAFA.Cliente c ON t.dni = c.dni and t.telefono = c.telefono 
+JOIN BIEN_MIGRADO_RAFA.Ciudad c1 ON c1.descripcion = t.ruta_ciudad_origen
+JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = t.ruta_ciudad_destino
+JOIN BIEN_MIGRADO_RAFA.Ruta r ON t.codigo_ruta = r.codigo and r.ciudad_origen_id = c1.id and r.ciudad_destino_id = c2.id
+JOIN BIEN_MIGRADO_RAFA.Modelo m ON t.aeronave_modelo = m.descripcion
+JOIN BIEN_MIGRADO_RAFA.Aeronave a ON t.aeronave_matricula = a.matricula and m.id = a.modelo_id
+JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.aeronave_id = a.id and v.ruta_id = r.id
+JOIN BIEN_MIGRADO_RAFA.Butaca b ON t.butaca_tipo = b.tipo and t.butaca_numero = b.numero and b.aeronave_id = a.id
+JOIN BIEN_MIGRADO_RAFA.Pasaje p ON t.codigo = p.codigo and v.id = p.viaje_id and t.precio = p.precio and p.butaca_id = b.id and p.cliente_id = c.id
+WHERE t.paquete_kg = '0'
 GO
 
+UPDATE BIEN_MIGRADO_RAFA.Compra
+SET paquete_id = null, pasaje_id = null;
+GO
 
---INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
---SELECT DISTINCT m.Paquete_FechaCompra, c.id FROM gd_esquema.Maestra m
---JOIN BIEN_MIGRADO_RAFA.Cliente c ON m.Cli_Dni = c.dni and m.Cli_Telefono = c.telefono 
---WHERE m.Paquete_KG != '0'
---GO
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra DROP COLUMN paquete_id;
+GO
 
---INSERT INTO BIEN_MIGRADO_RAFA.Compra(fecha_compra, cliente_id)
---SELECT DISTINCT m.Pasaje_FechaCompra, c.id FROM gd_esquema.Maestra m
---JOIN BIEN_MIGRADO_RAFA.Cliente c ON m.Cli_Dni = c.dni and m.Cli_Telefono = c.telefono 
---WHERE m.Paquete_KG = '0'
---GO
-
- 
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra DROP COLUMN pasaje_id;
+GO 
  --END MIGRATION
 
  --PKS & INDEXES 
@@ -611,30 +607,6 @@ GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje
 ADD CONSTRAINT PK235 PRIMARY KEY CLUSTERED (id)
-GO
-
-
-ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefPaquete77 
-    FOREIGN KEY (paquete_id)
-    REFERENCES BIEN_MIGRADO_RAFA.Paquete(id)
-GO
-
-
-ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefCompra77 
-    FOREIGN KEY (compra_id)
-    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
-GO
-
-
-ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefPasaje123451
-    FOREIGN KEY (pasaje_id)
-    REFERENCES BIEN_MIGRADO_RAFA.Pasaje(id)
-GO
-
-
-ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefCompra78 
-    FOREIGN KEY (compra_id)
-    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
 GO
  
 
@@ -810,6 +782,30 @@ GO
 ALTER TABLE BIEN_MIGRADO_RAFA.Viaje ADD CONSTRAINT RefAeronave4 
     FOREIGN KEY (aeronave_id)
     REFERENCES BIEN_MIGRADO_RAFA.Aeronave(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefPaquete77 
+    FOREIGN KEY (paquete_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Paquete(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Paquete ADD CONSTRAINT RefCompra77 
+    FOREIGN KEY (compra_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefPasaje123451
+    FOREIGN KEY (pasaje_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Pasaje(id)
+GO
+
+
+ALTER TABLE BIEN_MIGRADO_RAFA.Compra_Pasaje ADD CONSTRAINT RefCompra78 
+    FOREIGN KEY (compra_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Compra(id)
 GO
 
  --END FOREIGN KEYS
