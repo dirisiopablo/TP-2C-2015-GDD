@@ -243,13 +243,23 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
         private String getRango() {
 
             String rango;
-            String anio = this.anioCombo.SelectedValue.ToString();
+            int anio = (int)this.anioCombo.SelectedValue;
+
+            DateTime firstDayOfYear = new DateTime(anio, 1, 1);
+            DateTime lastDayFirstSemester = new DateTime(anio, 6, 30);
+            DateTime firstDayLastSemester = new DateTime(anio, 7, 1);
+            DateTime lastDayOfYear = new DateTime(anio, 12, 31);
+
+            String a = firstDayOfYear.ToString("yyyy-MM-dd");
+            String b = lastDayFirstSemester.ToString("yyyy-MM-dd");
+            String c = firstDayLastSemester.ToString("yyyy-MM-dd");
+            String d = lastDayOfYear.ToString("yyyy-MM-dd");
 
             if (this.semestreCombo.SelectedIndex == 0) {
-                rango = "BETWEEN '" + anio + "-01-01'" + " AND '" + anio + "-06-30'";
+                rango = "BETWEEN '" + a + "' AND '" + b + "'";
             }
             else {
-                rango = "BETWEEN '" + anio + "-07-01'" + " AND '" + anio + "-12-31'";
+                rango = "BETWEEN '" + c + "' AND '" + d + "'";
             }
 
             return rango;
