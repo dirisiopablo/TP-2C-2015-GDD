@@ -365,7 +365,7 @@ from (SELECT DISTINCT m.Ruta_Codigo codigo, m.Ruta_Ciudad_Destino destino, m.Rut
 JOIN BIEN_MIGRADO_RAFA.Tipo_Servicio t ON t.descripcion = tipo_servicio
 JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = destino
 JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = origen
-group by codigo, c.id, c2.id
+group by codigo, c.id, c2.id, t.id
 GO
 
 --Viaje
