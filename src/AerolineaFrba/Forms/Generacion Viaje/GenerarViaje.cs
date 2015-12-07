@@ -41,6 +41,8 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
 
             this.fabModeloLabel.Text = aeronave.Fabricante.Descripcion + ' ' + aeronave.Modelo.Descripcion;
             this.matriculaLabel.Text = aeronave.Matricula;
+            this.tipoServicioLabel.Text = aeronave.Tipo_Servicio.Descripcion;
+
             this.kgLabel.Text = aeronave.Kilogramos_Disponibles.ToString();
 
         }
@@ -60,6 +62,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
             this.precioPasajeLabel.Text = ruta.Precio_Base_Pasajes.ToString();
             this.origenLabel.Text = origen.Descripcion;
             this.destinoLabel.Text = destino.Descripcion;
+            this.tipoServicioRutaLabel.Text = ruta.Tipo_Servicio.Descripcion;
 
         }
 

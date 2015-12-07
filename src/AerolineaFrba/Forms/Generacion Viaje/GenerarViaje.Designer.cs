@@ -56,6 +56,10 @@
             this.kgLabel = new System.Windows.Forms.Label();
             this.fabModeloLabel = new System.Windows.Forms.Label();
             this.matriculaLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tipoServicioLabel = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tipoServicioRutaLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rutaBindingSource)).BeginInit();
@@ -175,6 +179,10 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.tipoServicioRutaLabel);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.tipoServicioLabel);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label9);
@@ -200,7 +208,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(25, 281);
+            this.label11.Location = new System.Drawing.Point(25, 312);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(80, 13);
             this.label11.TabIndex = 16;
@@ -209,7 +217,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 259);
+            this.label10.Location = new System.Drawing.Point(25, 290);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 13);
             this.label10.TabIndex = 15;
@@ -218,7 +226,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 233);
+            this.label9.Location = new System.Drawing.Point(25, 264);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(108, 13);
             this.label9.TabIndex = 14;
@@ -227,7 +235,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(25, 209);
+            this.label8.Location = new System.Drawing.Point(25, 240);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 13;
@@ -236,7 +244,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 183);
+            this.label7.Location = new System.Drawing.Point(25, 214);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 13);
             this.label7.TabIndex = 12;
@@ -264,7 +272,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(22, 151);
+            this.label4.Location = new System.Drawing.Point(22, 182);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
             this.label4.TabIndex = 9;
@@ -283,7 +291,7 @@
             // destinoLabel
             // 
             this.destinoLabel.AutoSize = true;
-            this.destinoLabel.Location = new System.Drawing.Point(103, 281);
+            this.destinoLabel.Location = new System.Drawing.Point(103, 312);
             this.destinoLabel.Name = "destinoLabel";
             this.destinoLabel.Size = new System.Drawing.Size(0, 13);
             this.destinoLabel.TabIndex = 7;
@@ -291,7 +299,7 @@
             // origenLabel
             // 
             this.origenLabel.AutoSize = true;
-            this.origenLabel.Location = new System.Drawing.Point(103, 259);
+            this.origenLabel.Location = new System.Drawing.Point(103, 290);
             this.origenLabel.Name = "origenLabel";
             this.origenLabel.Size = new System.Drawing.Size(0, 13);
             this.origenLabel.TabIndex = 6;
@@ -299,7 +307,7 @@
             // precioPasajeLabel
             // 
             this.precioPasajeLabel.AutoSize = true;
-            this.precioPasajeLabel.Location = new System.Drawing.Point(139, 233);
+            this.precioPasajeLabel.Location = new System.Drawing.Point(139, 264);
             this.precioPasajeLabel.Name = "precioPasajeLabel";
             this.precioPasajeLabel.Size = new System.Drawing.Size(0, 13);
             this.precioPasajeLabel.TabIndex = 5;
@@ -307,7 +315,7 @@
             // precioKgLabel
             // 
             this.precioKgLabel.AutoSize = true;
-            this.precioKgLabel.Location = new System.Drawing.Point(119, 209);
+            this.precioKgLabel.Location = new System.Drawing.Point(119, 240);
             this.precioKgLabel.Name = "precioKgLabel";
             this.precioKgLabel.Size = new System.Drawing.Size(0, 13);
             this.precioKgLabel.TabIndex = 4;
@@ -315,7 +323,7 @@
             // codigoLabel
             // 
             this.codigoLabel.AutoSize = true;
-            this.codigoLabel.Location = new System.Drawing.Point(62, 183);
+            this.codigoLabel.Location = new System.Drawing.Point(62, 214);
             this.codigoLabel.Name = "codigoLabel";
             this.codigoLabel.Size = new System.Drawing.Size(0, 13);
             this.codigoLabel.TabIndex = 3;
@@ -345,6 +353,42 @@
             this.matriculaLabel.Size = new System.Drawing.Size(24, 13);
             this.matriculaLabel.TabIndex = 0;
             this.matriculaLabel.Text = "mat";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 131);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(90, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Tipo de Servicio: ";
+            // 
+            // tipoServicioLabel
+            // 
+            this.tipoServicioLabel.AutoSize = true;
+            this.tipoServicioLabel.Location = new System.Drawing.Point(115, 131);
+            this.tipoServicioLabel.Name = "tipoServicioLabel";
+            this.tipoServicioLabel.Size = new System.Drawing.Size(24, 13);
+            this.tipoServicioLabel.TabIndex = 17;
+            this.tipoServicioLabel.Text = "mat";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(25, 336);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Tipo de Servicio: ";
+            // 
+            // tipoServicioRutaLabel
+            // 
+            this.tipoServicioRutaLabel.AutoSize = true;
+            this.tipoServicioRutaLabel.Location = new System.Drawing.Point(115, 336);
+            this.tipoServicioRutaLabel.Name = "tipoServicioRutaLabel";
+            this.tipoServicioRutaLabel.Size = new System.Drawing.Size(24, 13);
+            this.tipoServicioRutaLabel.TabIndex = 19;
+            this.tipoServicioRutaLabel.Text = "mat";
             // 
             // GenerarViaje
             // 
@@ -408,5 +452,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label tipoServicioLabel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label tipoServicioRutaLabel;
     }
 }
