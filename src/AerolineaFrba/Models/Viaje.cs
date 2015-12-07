@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Models {
-    class Viaje {
+   
+    public class Viaje {
 
         public int Id { get; set; }
         public DateTime Fecha_Salida { get; set; }

@@ -429,45 +429,7 @@ namespace AerolineaFrba.Forms.Compra {
 
             List<String> detalle = this.buildDetalle(pasajerosIds, butacasNumeros, clientesIds, pesos);
 
-            List<int> pasajesIds = new List<int>();
-
-            int i = 0;
-            foreach (int p in pasajerosIds) {
-                Pasaje pasaje = new Pasaje();
-                pasaje.Viaje_id = selectedViaje.Id;
-                pasaje.Cliente_Id = p;
-                pasaje.Butaca_Id = butacasNumeros[i];
-                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Pasajes;
-                Decimal mult = this.selectedAeronave.Tipo_Servicio.Porcentaje;
-                pasaje.Precio = precioBase * mult;
-                pasaje.Codigo = 0; // TODO
-                pasaje.Activo = true; 
-                DAO.connect();
-                int id = DAO.insert<Pasaje>(pasaje);
-                DAO.closeConnection();
-                pasajesIds.Add(id);
-                i++;
-            }
-
-            List<int> paquetesIds = new List<int>();
-
-            int j = 0;
-            foreach (int p in clientesIds) {
-                Paquete paquete = new Paquete();
-                paquete.Viaje_Id = selectedViaje.Id;
-                paquete.Cliente_Id = p;
-                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Kg;
-                paquete.Precio = precioBase * pesos[j];
-                paquete.Codigo = 0; // TODO
-                paquete.Activo = true;
-                DAO.connect();
-                int id = DAO.insert<Paquete>(paquete);
-                DAO.closeConnection();
-                paquetesIds.Add(id);
-                j++;
-            }
-
-            Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajesIds, paquetesIds);
+            Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajerosIds, butacasNumeros, clientesIds, pesos, selectedViaje, selectedAeronave);
             var dr = confirmacionDialog.ShowDialog();
 
             if (dr == DialogResult.OK) {

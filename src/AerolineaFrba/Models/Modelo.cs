@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AerolineaFrba.Models {
-    class Modelo {
+    public class Modelo {
 
         public int Id { get; set; }
         public string Descripcion { get; set; }

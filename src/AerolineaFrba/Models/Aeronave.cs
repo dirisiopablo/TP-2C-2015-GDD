@@ -9,7 +9,7 @@ using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Models {
 
-    class Aeronave {
+    public class Aeronave {
 
         public int Id { get; set; }
         public string Matricula { get; set; }

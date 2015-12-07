@@ -312,7 +312,7 @@ namespace AerolineaFrba.Services {
             
             SqlCommand command = new SqlCommand(query, _sqlCon);
             //bool insertado = false;
-            object lastInsertedId = command.ExecuteScalar();;
+            object lastInsertedId = command.ExecuteScalar();
 
             if (!Convert.ToBoolean(lastInsertedId)) return 0;
 

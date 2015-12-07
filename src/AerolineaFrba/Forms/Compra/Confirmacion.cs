@@ -16,15 +16,24 @@ using AerolineaFrba.Config;
 namespace AerolineaFrba.Forms.Compra {
     public partial class Confirmacion : Form {
 
-        private List<int> pasajesIds;
-        private List<int> paquetesIds;
+        private List<int> pasajerosIds = new List<int>();
+        private List<int> butacasNumeros = new List<int>();
+        private List<int> clientesIds = new List<int>();
+        private List<Decimal> pesos = new List<Decimal>();
+        private Aeronave selectedAeronave;
+        private Viaje selectedViaje;
 
-        public Confirmacion(List<String> detalle, List<int> pasajesIds, List<int> paquetesIds) {
+
+        public Confirmacion(List<String> detalle, List<int> pasajerosIds, List<int> butacasNumeros, List<int> clientesIds, List<decimal> pesos, Viaje v, Aeronave a) {
 
             this.InitializeComponent();
 
-            this.pasajesIds = pasajesIds;
-            this.paquetesIds = paquetesIds;
+            this.pasajerosIds = pasajerosIds;
+            this.butacasNumeros = butacasNumeros;
+            this.clientesIds = clientesIds;
+            this.pesos = pesos;
+            this.selectedAeronave = a;
+            this.selectedViaje = v;
 
             this.detalleTextbox.Lines = detalle.ToArray();
             this.fillCombos();
@@ -193,15 +202,55 @@ namespace AerolineaFrba.Forms.Compra {
             }
 
             int compra_id = DAO.insert<Models.Compra>(compra);
+            compra.PNR = compra_id.ToString();
+            DAO.update<Models.Compra>(compra);
 
-            foreach (int p in this.pasajesIds) {
+            List<int> pasajesIds = new List<int>();
+
+            int i = 0;
+            foreach (int p in pasajerosIds) {
+                Pasaje pasaje = new Pasaje();
+                pasaje.Viaje_id = selectedViaje.Id;
+                pasaje.Cliente_Id = p;
+                pasaje.Butaca_Id = butacasNumeros[i];
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Pasajes;
+                Decimal mult = this.selectedAeronave.Tipo_Servicio.Porcentaje;
+                pasaje.Precio = precioBase * mult;
+                pasaje.Codigo = this.getMaxCodigoPasaje() + 1;
+                pasaje.Activo = true;
+                DAO.connect();
+                int id = DAO.insert<Pasaje>(pasaje);
+                DAO.closeConnection();
+                pasajesIds.Add(id);
+                i++;
+            }
+
+            List<int> paquetesIds = new List<int>();
+
+            int j = 0;
+            foreach (int p in clientesIds) {
+                Paquete paquete = new Paquete();
+                paquete.Viaje_Id = selectedViaje.Id;
+                paquete.Cliente_Id = p;
+                Decimal precioBase = this.selectedViaje.Ruta.Precio_Base_Kg;
+                paquete.Precio = precioBase * pesos[j];
+                paquete.Codigo = this.getMaxCodigoPaquete() + 1;
+                paquete.Activo = true;
+                DAO.connect();
+                int id = DAO.insert<Paquete>(paquete);
+                DAO.closeConnection();
+                paquetesIds.Add(id);
+                j++;
+            }
+
+            foreach (int p in pasajesIds) {
                 Compra_Pasaje cp = new Compra_Pasaje();
                 cp.Compra_Id = compra_id;
                 cp.Pasaje_Id = p;
                 DAO.insert<Compra_Pasaje>(cp);
             }
 
-            foreach (int p in this.paquetesIds) {
+            foreach (int p in paquetesIds) {
                 Compra_Paquete cp = new Compra_Paquete();
                 cp.Compra_Id = compra_id;
                 cp.Paquete_Id = p;
@@ -209,13 +258,45 @@ namespace AerolineaFrba.Forms.Compra {
             }
 
             DAO.closeConnection();
-            //TODO EL MENSAJE, CAMBIAR EL MENSAJE
-            var dr = MessageBox.Show("Pago confirmado con exito. Su PNR es NO SE QUE PONER ACA (GUARDA CON ESTO QUE NO QUEDE PARA LA ENTREGA :D)", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var dr = MessageBox.Show("Pago confirmado con exito. Su PNR es " + compra.PNR + ". Será solicitado en caso de querer efectuar una devolución.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             if (dr == DialogResult.OK) {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+
+        private int getMaxCodigoPasaje() {
+
+            String query = "select max(codigo) from BIEN_MIGRADO_RAFA.Pasaje";
+            
+            String connectionString = DAO.makeConnectionString();
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query, sqlCon);
+
+            sqlCon.Open();
+            object max = command.ExecuteScalar();
+            sqlCon.Close();
+
+            return Convert.ToInt32(max);
+
+        }
+
+        private int getMaxCodigoPaquete() {
+
+            String query = "select max(codigo) from BIEN_MIGRADO_RAFA.Paquete";
+
+            String connectionString = DAO.makeConnectionString();
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query, sqlCon);
+
+            sqlCon.Open();
+            object max = command.ExecuteScalar();
+            sqlCon.Close();
+
+            return Convert.ToInt32(max);
+      
         }
 
 

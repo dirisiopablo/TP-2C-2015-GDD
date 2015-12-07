@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AerolineaFrba.Services;
 
 namespace AerolineaFrba.Models {
-    class Ruta {
+    public class Ruta {
 
         public int Id { get; set; }
         public Decimal Codigo { get; set; }

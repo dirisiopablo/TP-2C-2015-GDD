@@ -60,7 +60,7 @@ GO
 
 
 CREATE TABLE BIEN_MIGRADO_RAFA.Cancelacion_Paquete(
-    id                int    NOT NULL,
+    id                int    IDENTITY(1,1),
     cancelacion_id    int    NULL,
     paquete_id        int    NULL,
 )
