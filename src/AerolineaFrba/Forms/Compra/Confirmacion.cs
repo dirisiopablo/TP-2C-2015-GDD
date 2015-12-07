@@ -189,6 +189,7 @@ namespace AerolineaFrba.Forms.Compra {
             compra.Medio_Pago_Id = this.medioDePagoCombo.SelectedIndex + 1; // :D
             compra.Cliente_Id = cliente.Id;
             compra.Fecha_Compra = Config.SystemConfig.systemDate;
+            compra.PNR = (this.getMaxIdCompra() + 1).ToString();
 
             if (this.medioDePagoCombo.SelectedIndex == 1) {
                 compra.Numero_Tarjeta = Convert.ToInt32(this.numeroTextbox.Text);
@@ -202,8 +203,6 @@ namespace AerolineaFrba.Forms.Compra {
             }
 
             int compra_id = DAO.insert<Models.Compra>(compra);
-            compra.PNR = compra_id.ToString();
-            DAO.update<Models.Compra>(compra);
 
             List<int> pasajesIds = new List<int>();
 
@@ -297,6 +296,22 @@ namespace AerolineaFrba.Forms.Compra {
 
             return Convert.ToInt32(max);
       
+        }
+
+        private int getMaxIdCompra() {
+
+            String query = "select max(id) from BIEN_MIGRADO_RAFA.Compra";
+
+            String connectionString = DAO.makeConnectionString();
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query, sqlCon);
+
+            sqlCon.Open();
+            object max = command.ExecuteScalar();
+            sqlCon.Close();
+
+            return Convert.ToInt32(max);
+
         }
 
 
