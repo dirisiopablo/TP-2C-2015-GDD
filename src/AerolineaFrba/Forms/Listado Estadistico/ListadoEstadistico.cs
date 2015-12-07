@@ -250,10 +250,10 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
             DateTime firstDayLastSemester = new DateTime(anio, 7, 1);
             DateTime lastDayOfYear = new DateTime(anio, 12, 31);
 
-            String a = firstDayOfYear.ToString("yyyy-MM-dd");
-            String b = lastDayFirstSemester.ToString("yyyy-MM-dd");
-            String c = firstDayLastSemester.ToString("yyyy-MM-dd");
-            String d = lastDayOfYear.ToString("yyyy-MM-dd");
+            String a = firstDayOfYear.ToString("yyyyMMdd HH:mm:ss");
+            String b = lastDayFirstSemester.ToString("yyyyMMdd HH:mm:ss");
+            String c = firstDayLastSemester.ToString("yyyyMMdd HH:mm:ss");
+            String d = lastDayOfYear.ToString("yyyyMMdd HH:mm:ss");
 
             if (this.semestreCombo.SelectedIndex == 0) {
                 rango = "BETWEEN '" + a + "' AND '" + b + "'";
