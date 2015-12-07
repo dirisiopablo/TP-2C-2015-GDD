@@ -12,7 +12,6 @@ namespace AerolineaFrba.Models {
         public int Id { get; set; }
         public Decimal Codigo { get; set; }
         public Decimal Precio { get; set; }
-        public DateTime Fecha_Compra { get; set; }
         public bool Activo { get; set; }
 
         public int Butaca_Id { get; set; }

@@ -13,7 +13,6 @@ namespace AerolineaFrba.Models {
         public Decimal Codigo { get; set; }
         public Decimal Precio { get; set; }
         public Decimal Kg { get; set; }
-        public DateTime Fecha_Compra { get; set; }
         public bool Activo { get; set; }
 
         public int Viaje_Id { get; set; }

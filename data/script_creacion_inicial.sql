@@ -181,7 +181,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Paquete(
     codigo          numeric(18, 0)    NULL,
     precio          numeric(18, 2)    NULL,
     kg              numeric(18, 0)    NULL,
-    fecha_compra    datetime          NULL,
 	activo			bit				  NULL DEFAULT(1),
     viaje_id        int               NULL,
     cliente_id      int               NULL
@@ -194,7 +193,6 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Pasaje(
     id              int               IDENTITY(1,1),
     codigo          numeric(18, 0)    NULL,
     precio          numeric(18, 2)    NULL,
-    fecha_compra    datetime          NULL,
 	activo			bit				  NULL DEFAULT(1),
     butaca_id       int               NULL,
     viaje_id        int               NULL,
@@ -219,6 +217,7 @@ CREATE TABLE BIEN_MIGRADO_RAFA.Ruta(
     precio_base_pasajes    numeric(18, 2)    NULL,
     ciudad_origen_id       int               NULL,
     ciudad_destino_id      int               NULL,
+	tipo_servicio_id	   int  			 NULL,
 	activo		   		   bit               NULL DEFAULT (1)
 )
 GO
@@ -359,10 +358,11 @@ WHERE m.Paquete_KG = '0'
 GO
 
 --Ruta
-INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id)
-select m.codigo, max(m.baseKG), max(m.basePasaje), c.id, c2.id
-from (SELECT DISTINCT m.Ruta_Codigo codigo, m.Ruta_Ciudad_Destino destino, m.Ruta_Ciudad_Origen origen, m.Ruta_Precio_BasePasaje basePasaje, m.Ruta_Precio_BaseKG baseKG 
+INSERT INTO BIEN_MIGRADO_RAFA.Ruta(codigo, precio_base_kg, precio_base_pasajes, ciudad_destino_id, ciudad_origen_id, tipo_servicio_id)
+select m.codigo, max(m.baseKG), max(m.basePasaje), c.id, c2.id, t.id
+from (SELECT DISTINCT m.Ruta_Codigo codigo, m.Ruta_Ciudad_Destino destino, m.Ruta_Ciudad_Origen origen, m.Ruta_Precio_BasePasaje basePasaje, m.Ruta_Precio_BaseKG baseKG, m.tipo_servicio 
 	FROM gd_esquema.Maestra m) m
+JOIN BIEN_MIGRADO_RAFA.Tipo_Servicio t ON t.descripcion = tipo_servicio
 JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.descripcion = destino
 JOIN BIEN_MIGRADO_RAFA.Ciudad c2 ON c2.descripcion = origen
 group by codigo, c.id, c2.id
@@ -379,10 +379,9 @@ WHERE r.ciudad_destino_id = (SELECT id from BIEN_MIGRADO_RAFA.Ciudad where descr
 GO
 
 --Paquete
-INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, fecha_compra, kg, precio, cliente_id, viaje_id)
-SELECT DISTINCT m.Paquete_Codigo, m.Paquete_FechaCompra, m.Paquete_KG, m.Paquete_Precio, c.id, v.id 
+INSERT INTO BIEN_MIGRADO_RAFA.Paquete(codigo, kg, precio, cliente_id, viaje_id)
+SELECT DISTINCT m.Paquete_Codigo, m.Paquete_KG, m.Paquete_Precio, c.id, v.id 
 FROM (SELECT	Paquete_Codigo, 
-				Paquete_FechaCompra, 
 				Paquete_KG, 
 				Paquete_Precio, 
 				Ruta_Codigo rutaCodigo, 
@@ -407,11 +406,10 @@ GO
 
 
 --Pasaje
-INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, fecha_compra, cliente_id, butaca_id, viaje_id)
-SELECT DISTINCT m.Pasaje_Codigo, m.Pasaje_Precio, m.Pasaje_FechaCompra, c.id, (SELECT id FROM BIEN_MIGRADO_RAFA.Butaca where numero = m.Butaca_Nro and aeronave_id = a.id), v.id 
+INSERT INTO BIEN_MIGRADO_RAFA.Pasaje(codigo, precio, cliente_id, butaca_id, viaje_id)
+SELECT DISTINCT m.Pasaje_Codigo, m.Pasaje_Precio, c.id, (SELECT id FROM BIEN_MIGRADO_RAFA.Butaca where numero = m.Butaca_Nro and aeronave_id = a.id), v.id 
 FROM (SELECT	Pasaje_Codigo, 
-				Pasaje_Precio, 
-				Pasaje_FechaCompra, 
+				Pasaje_Precio,
 				Ruta_Codigo rutaCodigo, 
 				Ruta_Ciudad_Destino ciudadDestino, 
 				Ruta_Ciudad_Origen ciudadOrigen,
@@ -766,6 +764,10 @@ ALTER TABLE BIEN_MIGRADO_RAFA.Ruta ADD CONSTRAINT RefCiudad9
     REFERENCES BIEN_MIGRADO_RAFA.Ciudad(id)
 GO
 
+ALTER TABLE BIEN_MIGRADO_RAFA.Ruta ADD CONSTRAINT RefTipoServicio7982
+    FOREIGN KEY (tipo_servicio_id)
+    REFERENCES BIEN_MIGRADO_RAFA.Tipo_Servicio(id)
+GO
 
 ALTER TABLE BIEN_MIGRADO_RAFA.Usuario ADD CONSTRAINT RefRol7 
     FOREIGN KEY (rol_id)
