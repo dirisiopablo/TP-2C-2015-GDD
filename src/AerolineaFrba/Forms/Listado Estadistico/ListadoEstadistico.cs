@@ -71,49 +71,34 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
 
             String rango = this.getRango();
 
-            String query = "SELECT top 5	c.descripcion, " +
-                                            "((SELECT COUNT(*) butacasTotales FROM BIEN_MIGRADO_RAFA.Ciudad d " +
-				                            "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
-				                            "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
-				                            "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
-				                            "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
-				                            "where d.id = pv.destinoId) - pv.viajesTotales) 'Butacas libres' " +
-                            "FROM (SELECT COUNT(*) viajesTotales, d.id destinoId FROM BIEN_MIGRADO_RAFA.Ciudad d " +
-		                            "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = d.id " +
-		                            "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
-		                            "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
-		                            "JOIN BIEN_MIGRADO_RAFA.Pasaje p ON p.viaje_id = v.id group by d.id) pv " +
-                            "JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.id = pv.destinoId " +
-                            "order by ((SELECT COUNT(*) butacasTotales FROM BIEN_MIGRADO_RAFA.Ciudad d " +
-				                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
-				                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
-				                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
-				                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
-				                    "where d.id = pv.destinoId) / pv.viajesTotales) DESC";
-            //TODO hay que arreglar la query, pero viene por aca
-            /*
-             
-                select top 5
-                d.descripcion, 
-                v.aeronave_id, 
-                v.id as 'viaje id',
-                (select count(1) from BIEN_MIGRADO_RAFA.Butaca b where b.aeronave_id = v.aeronave_id) - (select count(1) from BIEN_MIGRADO_RAFA.Pasaje where viaje_id = v.id) as 'butacas libres' 
-
-                from BIEN_MIGRADO_RAFA.Compra_Pasaje cp
-
-                inner join BIEN_MIGRADO_RAFA.Pasaje p on cp.pasaje_id = p.id 
-                inner join BIEN_MIGRADO_RAFA.Viaje v on p.viaje_id = v.id 
-                inner join BIEN_MIGRADO_RAFA.Ruta r on v.ruta_id = r.id 
-                inner join BIEN_MIGRADO_RAFA.Ciudad d on r.ciudad_destino_id = d.id 
-                inner join BIEN_MIGRADO_RAFA.Compra c on cp.compra_id = c.id 
-
-                WHERE (c.fecha_compra BETWEEN '2015-07-01' AND '2015-12-31') 
-
-                order by [butacas libres] DESC 
-              
-             
-             */
-
+            String query = "SELECT top 5    c.descripcion 'Ciudad destino', " +
+		                                    "(SELECT count(*) FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
+				                                    "where d.id = pv.destinoId) 'Butacas totales', " +
+		                                    "pv.viajesTotales 'Butacas vendidas', " +
+		                                    "((SELECT count(*) FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+				                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
+				                                    "where d.id = pv.destinoId) - pv.viajesTotales) 'Butacas libres', " +
+		                                    "1 - CAST(pv.viajesTotales AS DECIMAL) / (SELECT count(*) FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+								                                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
+								                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+								                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+								                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " + 
+								                                    "where d.id = pv.destinoId) 'Porcentaje butacas libres' " +
+                                "FROM (SELECT COUNT(*) viajesTotales, d.id destinoId FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+		                                "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = d.id " +
+		                                "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+		                                "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+		                                "JOIN BIEN_MIGRADO_RAFA.Pasaje p ON p.viaje_id = v.id group by d.id) pv " +
+                                "JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.id = pv.destinoId " +
+                                "order by 'Porcentaje butacas libres' DESC";
+            
             DataTable table = this.buildDatatable(query);
 
             TableDialog dialog = new TableDialog(table, title);
