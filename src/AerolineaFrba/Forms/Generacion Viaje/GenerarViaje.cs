@@ -51,8 +51,8 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
 
             DAO.connect();
             Ruta ruta = DAO.selectOne<Ruta>(new[] { "id = " + rutaId });
-            Ciudad origen = DAO.selectOne<Ciudad>(new[] { "id = " + ruta.Ciudad_Origen_Id }); //TODO cambiar cuando este el load
-            Ciudad destino = DAO.selectOne<Ciudad>(new[] { "id = " + ruta.Ciudad_Destino_Id }); //TODO cambiar cuando este el load
+            Ciudad origen = DAO.selectOne<Ciudad>(new[] { "id = " + ruta.Ciudad_Origen_Id });
+            Ciudad destino = DAO.selectOne<Ciudad>(new[] { "id = " + ruta.Ciudad_Destino_Id });
             DAO.closeConnection();
 
             this.codigoLabel.Text = ruta.Codigo.ToString();
@@ -109,13 +109,13 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
                 return false;
             }
 
-            if (false) { //TODO
+            if (aeronave.Tipo_Servicio_Id != ruta.Tipo_Servicio_Id) {
                 error = "La aeronave seleccionada no proporciona el tipo de servicio requerido por la ruta aerea seleccionada.";
                 return false;
             }
 
             DAO.connect();
-            Viaje viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + aeronave.Id + " AND fecha_salida = '" + fechaSalida.ToString("yyyy-MM-dd HH:mm:ss") + "'" });
+            Viaje viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + aeronave.Id, "fecha_salida = '" + fechaSalida.ToString("yyyyMMdd HH:mm:ss") + "'" });
             DAO.closeConnection();
 
             if (viaje != null) {

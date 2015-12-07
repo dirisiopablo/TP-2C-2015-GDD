@@ -151,7 +151,7 @@ namespace AerolineaFrba.Forms.Devolucion {
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad cd ON r.ciudad_destino_id = cd.id ";
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra_Pasaje cp ON cp.pasaje_id = p.id ";
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id ";
-            queryPasajes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyy-MM-dd HH:mm:ss") + "' AND p.activo = 1";
+            queryPasajes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "' AND p.activo = 1";
 
             return queryPasajes;
         }
@@ -173,7 +173,7 @@ namespace AerolineaFrba.Forms.Devolucion {
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad cd ON r.ciudad_destino_id = cd.id ";
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra_Paquete cp ON cp.paquete_id = p.id ";
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id ";
-            queryPaquetes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyy-MM-dd HH:mm:ss") + "' AND p.activo = 1";
+            queryPaquetes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "' AND p.activo = 1";
 
 
             return queryPaquetes;

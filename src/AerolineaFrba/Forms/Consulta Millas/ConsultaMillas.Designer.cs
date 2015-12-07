@@ -63,9 +63,12 @@
             // 
             // millasDataGrid
             // 
+            this.millasDataGrid.AllowUserToAddRows = false;
+            this.millasDataGrid.AllowUserToDeleteRows = false;
             this.millasDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.millasDataGrid.Location = new System.Drawing.Point(51, 176);
             this.millasDataGrid.Name = "millasDataGrid";
+            this.millasDataGrid.ReadOnly = true;
             this.millasDataGrid.Size = new System.Drawing.Size(422, 425);
             this.millasDataGrid.TabIndex = 3;
             // 

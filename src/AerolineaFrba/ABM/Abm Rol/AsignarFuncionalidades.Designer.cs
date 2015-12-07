@@ -144,6 +144,7 @@
             this.cancelarFuncionalidades.TabIndex = 7;
             this.cancelarFuncionalidades.Text = "Cancelar";
             this.cancelarFuncionalidades.UseVisualStyleBackColor = true;
+            this.cancelarFuncionalidades.Click += new System.EventHandler(this.cancelarFuncionalidades_Click);
             // 
             // confirmarFuncionalidades
             // 

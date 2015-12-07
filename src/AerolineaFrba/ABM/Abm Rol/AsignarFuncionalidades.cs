@@ -70,31 +70,31 @@ namespace AerolineaFrba.ABM.Abm_Rol
 
             if (this.abmRolCheck.Checked)
             {
-                fRol.Funcionalidad_Id = 1; //TODO: MAKE ME A CONSTANT DOOD
+                fRol.Funcionalidad_Id = 1; //TODO: MAKE ME A CONSTANT DOOD - NEIN
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
             if (this.abmAeronaveCheck.Checked)
             {
-                fRol.Funcionalidad_Id = 2; //TODO: MAKE ME A CONSTANT DOOD
+                fRol.Funcionalidad_Id = 2; //TODO: MAKE ME A CONSTANT DOOD - NO
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
             if (this.abmRutaCheck.Checked)
             {
-                fRol.Funcionalidad_Id = 3; //TODO: MAKE ME A CONSTANT DOOD
+                fRol.Funcionalidad_Id = 3; //TODO: MAKE ME A CONSTANT DOOD - NO I WONT
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
             if (this.generarViajeCheck.Checked)
             {
-                fRol.Funcionalidad_Id = 4; //TODO: MAKE ME A CONSTANT DOOD
+                fRol.Funcionalidad_Id = 4; //TODO: MAKE ME A CONSTANT DOOD - NOPE
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
             if (this.devolucionCheck.Checked)
             {
-                fRol.Funcionalidad_Id = 5; //TODO: MAKE ME A CONSTANT DOOD
+                fRol.Funcionalidad_Id = 5; //TODO: MAKE ME A CONSTANT DOOD - NOES
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
@@ -102,6 +102,10 @@ namespace AerolineaFrba.ABM.Abm_Rol
             this.dr = DialogResult.OK;
             this.Close();
 
+        }
+
+        private void cancelarFuncionalidades_Click(object sender, EventArgs e) {
+            this.Close();
         }
 
     }

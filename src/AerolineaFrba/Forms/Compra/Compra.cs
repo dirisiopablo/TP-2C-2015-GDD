@@ -470,6 +470,11 @@ namespace AerolineaFrba.Forms.Compra {
             Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajesIds, paquetesIds);
             var dr = confirmacionDialog.ShowDialog();
 
+            if (dr == DialogResult.OK) {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+
         }
 
         private void cancelarButton_Click(object sender, EventArgs e) {

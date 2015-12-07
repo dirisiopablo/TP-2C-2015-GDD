@@ -210,8 +210,12 @@ namespace AerolineaFrba.Forms.Compra {
 
             DAO.closeConnection();
             //TODO EL MENSAJE, CAMBIAR EL MENSAJE
-            MessageBox.Show("Pago confirmado con exito. Su PNR es NO SE QUE PONER ACA (GUARDA CON ESTO QUE NO QUEDE PARA LA ENTREGA :D)", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var dr = MessageBox.Show("Pago confirmado con exito. Su PNR es NO SE QUE PONER ACA (GUARDA CON ESTO QUE NO QUEDE PARA LA ENTREGA :D)", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            if (dr == DialogResult.OK) {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
 

@@ -68,6 +68,7 @@
             this.rutaDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.rutaDataGrid.Location = new System.Drawing.Point(12, 114);
             this.rutaDataGrid.Name = "rutaDataGrid";
+            this.rutaDataGrid.ReadOnly = true;
             this.rutaDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.rutaDataGrid.Size = new System.Drawing.Size(769, 253);
             this.rutaDataGrid.TabIndex = 0;

@@ -127,6 +127,20 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
         }
 
         private void rutaEliminar_Click(object sender, EventArgs e) {
+
+            DataGridViewRow row = this.rutaDataGrid.SelectedRows[0];
+
+            int id = (int)row.Cells[0].Value;
+
+            DAO.connect();
+            Ruta ruta = DAO.selectOne<Ruta>(new[] { "id = " + id + " " });
+            DAO.closeConnection();
+
+            if (!ruta.Activo) {
+                MessageBox.Show("La ruta seleccionada ya fue dada de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (this.rutaDataGrid.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Debe elegir una ruta para dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -139,14 +153,11 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                 return;
             }
 
-            DataGridViewRow row = this.rutaDataGrid.SelectedRows[0];
+            var dr = MessageBox.Show("¿Confirma la eliminación de la ruta seleccionada?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            int id = (int)row.Cells[0].Value;
+            if (dr != DialogResult.Yes) return;
 
             DAO.connect();
-
-            Ruta ruta = DAO.selectOne<Ruta>(new[] { "id = " + id + " " });
-
 
             ruta.Activo = false;
             int idInsertado = DAO.update<Ruta>(ruta);
@@ -190,8 +201,8 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                     "ruta.codigo 'Codigo', " +
                     "ruta.precio_base_kg 'Precio Base Kg', " +
                     "ruta.precio_base_pasajes 'Precio Base Pasajes', " +
-                    "c2.descripcion 'Ciudad Destino', " +
                     "c1.descripcion 'Ciudad de Origen', " +
+                    "c2.descripcion 'Ciudad Destino', " +
                     "ruta.activo 'Activo' " +
                     "FROM BIEN_MIGRADO_RAFA.Ruta ruta " +
                     "JOIN BIEN_MIGRADO_RAFA.ciudad c1 ON c1.id = ruta.ciudad_origen_id " +
