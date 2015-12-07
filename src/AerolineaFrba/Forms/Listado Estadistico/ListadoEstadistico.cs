@@ -71,7 +71,25 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
 
             String rango = this.getRango();
 
-            String query = "";
+            String query = "SELECT top 5	c.descripcion, " +
+                                            "((SELECT COUNT(*) butacasTotales FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+				                            "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
+				                            "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+				                            "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+				                            "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
+				                            "where d.id = pv.destinoId) - pv.viajesTotales) 'Butacas libres' " +
+                            "FROM (SELECT COUNT(*) viajesTotales, d.id destinoId FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+		                            "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = d.id " +
+		                            "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+		                            "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+		                            "JOIN BIEN_MIGRADO_RAFA.Pasaje p ON p.viaje_id = v.id group by d.id) pv " +
+                            "JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.id = pv.destinoId " +
+                            "order by ((SELECT COUNT(*) butacasTotales FROM BIEN_MIGRADO_RAFA.Ciudad d " +
+				                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
+				                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
+				                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
+				                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
+				                    "where d.id = pv.destinoId) / pv.viajesTotales) DESC";
             //TODO hay que arreglar la query, pero viene por aca
             /*
              
