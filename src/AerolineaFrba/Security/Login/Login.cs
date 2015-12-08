@@ -35,10 +35,9 @@ namespace AerolineaFrba.Login {
                 return;
             }
             IntentosLogin intentos = DAO.selectOne<IntentosLogin>(new[] { "usuario_id = " + usuario.Id });
-            Rol adminRol = DAO.selectOne<Rol>(new[] { "descripcion = 'Administrador'" });
             DAO.closeConnection();
 
-            if (usuario != null && usuario.Password.Equals(hashedPass) && usuario.Rol.Id == adminRol.Id && usuario.Activo) {
+            if (usuario != null && usuario.Password.Equals(hashedPass) && usuario.Activo) {
                 intentos.Intentos = 0;
                 DAO.connect();
                 DAO.update<IntentosLogin>(intentos);

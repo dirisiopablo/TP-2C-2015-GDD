@@ -37,6 +37,8 @@
             this.devolucionButton = new System.Windows.Forms.Button();
             this.motivoTextbox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.PNRTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pasajesDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paquetesDatagrid)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +46,7 @@
             // dniLabel
             // 
             this.dniLabel.AutoSize = true;
-            this.dniLabel.Location = new System.Drawing.Point(23, 43);
+            this.dniLabel.Location = new System.Drawing.Point(167, 29);
             this.dniLabel.Name = "dniLabel";
             this.dniLabel.Size = new System.Drawing.Size(29, 13);
             this.dniLabel.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             // dniTextbox
             // 
-            this.dniTextbox.Location = new System.Drawing.Point(58, 40);
+            this.dniTextbox.Location = new System.Drawing.Point(202, 26);
             this.dniTextbox.Name = "dniTextbox";
             this.dniTextbox.Size = new System.Drawing.Size(149, 20);
             this.dniTextbox.TabIndex = 1;
@@ -61,7 +63,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(235, 43);
+            this.label1.Location = new System.Drawing.Point(149, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 2;
@@ -69,7 +71,7 @@
             // 
             // nombreTextbox
             // 
-            this.nombreTextbox.Location = new System.Drawing.Point(288, 40);
+            this.nombreTextbox.Location = new System.Drawing.Point(202, 63);
             this.nombreTextbox.Name = "nombreTextbox";
             this.nombreTextbox.Size = new System.Drawing.Size(149, 20);
             this.nombreTextbox.TabIndex = 3;
@@ -77,7 +79,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(469, 43);
+            this.label2.Location = new System.Drawing.Point(383, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 4;
@@ -85,7 +87,7 @@
             // 
             // apellidoTextbox
             // 
-            this.apellidoTextbox.Location = new System.Drawing.Point(522, 40);
+            this.apellidoTextbox.Location = new System.Drawing.Point(436, 63);
             this.apellidoTextbox.Name = "apellidoTextbox";
             this.apellidoTextbox.Size = new System.Drawing.Size(149, 20);
             this.apellidoTextbox.TabIndex = 5;
@@ -93,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 86);
+            this.label3.Location = new System.Drawing.Point(21, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 6;
@@ -101,8 +103,10 @@
             // 
             // pasajesDatagrid
             // 
+            this.pasajesDatagrid.AllowUserToAddRows = false;
+            this.pasajesDatagrid.AllowUserToDeleteRows = false;
             this.pasajesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.pasajesDatagrid.Location = new System.Drawing.Point(27, 112);
+            this.pasajesDatagrid.Location = new System.Drawing.Point(24, 135);
             this.pasajesDatagrid.Name = "pasajesDatagrid";
             this.pasajesDatagrid.ReadOnly = true;
             this.pasajesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -122,7 +126,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 276);
+            this.label4.Location = new System.Drawing.Point(23, 299);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 13);
             this.label4.TabIndex = 9;
@@ -130,8 +134,10 @@
             // 
             // paquetesDatagrid
             // 
+            this.paquetesDatagrid.AllowUserToAddRows = false;
+            this.paquetesDatagrid.AllowUserToDeleteRows = false;
             this.paquetesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.paquetesDatagrid.Location = new System.Drawing.Point(27, 305);
+            this.paquetesDatagrid.Location = new System.Drawing.Point(24, 328);
             this.paquetesDatagrid.Name = "paquetesDatagrid";
             this.paquetesDatagrid.ReadOnly = true;
             this.paquetesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -140,7 +146,7 @@
             // 
             // devolucionButton
             // 
-            this.devolucionButton.Location = new System.Drawing.Point(683, 553);
+            this.devolucionButton.Location = new System.Drawing.Point(662, 553);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(111, 43);
             this.devolucionButton.TabIndex = 11;
@@ -150,7 +156,7 @@
             // 
             // motivoTextbox
             // 
-            this.motivoTextbox.Location = new System.Drawing.Point(29, 510);
+            this.motivoTextbox.Location = new System.Drawing.Point(26, 533);
             this.motivoTextbox.Multiline = true;
             this.motivoTextbox.Name = "motivoTextbox";
             this.motivoTextbox.Size = new System.Drawing.Size(405, 51);
@@ -159,17 +165,35 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 494);
+            this.label5.Location = new System.Drawing.Point(23, 517);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "Breve motivo";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(395, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "PNR:";
+            // 
+            // PNRTextbox
+            // 
+            this.PNRTextbox.Location = new System.Drawing.Point(436, 26);
+            this.PNRTextbox.Name = "PNRTextbox";
+            this.PNRTextbox.Size = new System.Drawing.Size(149, 20);
+            this.PNRTextbox.TabIndex = 15;
             // 
             // Devolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(846, 617);
+            this.Controls.Add(this.PNRTextbox);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.motivoTextbox);
             this.Controls.Add(this.devolucionButton);
@@ -209,5 +233,7 @@
         private System.Windows.Forms.Button devolucionButton;
         private System.Windows.Forms.TextBox motivoTextbox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox PNRTextbox;
     }
 }

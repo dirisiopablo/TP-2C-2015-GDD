@@ -39,9 +39,10 @@ namespace AerolineaFrba.Forms.Devolucion {
             String dni = this.dniTextbox.Text;
             String nombre = this.nombreTextbox.Text;
             String apellido = this.apellidoTextbox.Text;
+            String PNR = this.PNRTextbox.Text;
 
             String error = "";
-            if (!this.validarBusqueda(dni, nombre, apellido, ref error)) {
+            if (!this.validarBusqueda(dni, nombre, apellido, PNR, ref error)) {
                 MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -55,8 +56,15 @@ namespace AerolineaFrba.Forms.Devolucion {
                 return;
             }
 
-            String queryPasajes = this.BuildQueryPasajes(cliente.Id);
-            String queryPaquetes = this.BuildQueryPaquetes(cliente.Id);
+            Models.Compra compra = DAO.selectOne<Models.Compra>(new[] { "PNR = '" + PNR + "'"});
+
+            if (compra == null) {
+                MessageBox.Show("La compra no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            String queryPasajes = this.BuildQueryPasajes(cliente.Id, compra.PNR);
+            String queryPaquetes = this.BuildQueryPaquetes(cliente.Id, compra.PNR);
 
             this.FillDataGrid(queryPasajes, this.pasajesDatagrid);
             this.FillDataGrid(queryPaquetes, this.paquetesDatagrid);
@@ -80,10 +88,6 @@ namespace AerolineaFrba.Forms.Devolucion {
             if (result != DialogResult.OK) return;
 
             DAO.connect();
-
-            //TODO or not todo, agarro el pnr de la compra del 1er pasaje, a veces coinciden y a veces no
-            // porque le permitimos cancelar pasajes de varias compras en una sola devolucion
-            // debatir duramente hasta llegar a una conclusion y tomar una decision sabia
 
             DataGridViewRow d = this.pasajesDatagrid.SelectedRows[0];
             decimal cod = (decimal)d.Cells[0].Value;
@@ -135,7 +139,7 @@ namespace AerolineaFrba.Forms.Devolucion {
 
         }
 
-        private String BuildQueryPasajes (int clienteId) {
+        private String BuildQueryPasajes (int clienteId, String PNR) {
 
             String queryPasajes =  "SELECT p.codigo 'Código', "
                                         + "p.precio 'Precio', "
@@ -150,13 +154,13 @@ namespace AerolineaFrba.Forms.Devolucion {
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad co ON r.ciudad_origen_id = co.id ";
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad cd ON r.ciudad_destino_id = cd.id ";
             queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra_Pasaje cp ON cp.pasaje_id = p.id ";
-            queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id ";
+            queryPasajes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id AND c.PNR = " + PNR + " ";
             queryPasajes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "' AND p.activo = 1";
 
             return queryPasajes;
         }
 
-        private String BuildQueryPaquetes (int clienteId) {
+        private String BuildQueryPaquetes (int clienteId, String PNR) {
 
             String queryPaquetes = "SELECT p.codigo 'Código', "
                                         + "p.precio 'Precio', "
@@ -172,7 +176,7 @@ namespace AerolineaFrba.Forms.Devolucion {
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad co ON r.ciudad_origen_id = co.id ";
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Ciudad cd ON r.ciudad_destino_id = cd.id ";
             queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra_Paquete cp ON cp.paquete_id = p.id ";
-            queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id ";
+            queryPaquetes += "INNER JOIN BIEN_MIGRADO_RAFA.Compra c ON cp.compra_id = c.id AND c.PNR = " + PNR + " ";
             queryPaquetes += "WHERE c.cliente_id = " + clienteId + " AND v.fecha_salida >= " + "'" + Config.SystemConfig.systemDate.ToString("yyyyMMdd HH:mm:ss") + "' AND p.activo = 1";
 
 
@@ -188,14 +192,18 @@ namespace AerolineaFrba.Forms.Devolucion {
             DataTable table = new DataTable();
             this.dataAdapter.Fill(table);
 
-            //if (table.Rows.Count == 0)
-            //    MessageBox.Show("No se encontraron viajes con los parametros ingresados.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             datagrid.DataSource = table;
+
+            datagrid.ClearSelection();
 
         }
 
-        private bool validarBusqueda(String dni, String nombre, String apellido, ref String error) {
+        private bool validarBusqueda(String dni, String nombre, String apellido, String PNR, ref String error) {
+
+            if (String.IsNullOrWhiteSpace(PNR)) {
+                error = "Debe ingresar el PNR de la compra a buscar.";
+                return false;
+            }
 
             if ( String.IsNullOrWhiteSpace(dni) ) {
                 error = "Debe ingresar el DNI del cliente a buscar.";

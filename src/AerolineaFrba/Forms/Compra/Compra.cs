@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
+using AerolineaFrba.Login;
 using AerolineaFrba.Config;
 
 namespace AerolineaFrba.Forms.Compra {
@@ -23,18 +24,22 @@ namespace AerolineaFrba.Forms.Compra {
         private Viaje selectedViaje;
         private Aeronave selectedAeronave;
         private DataSet butacasSource;
+        private LoginForm loginform;
 
-        private Compra() {
+        private Compra(LoginForm loginform) {
             this.InitializeComponent();
             this.pasajerosDatatable = new DataTable();
             this.paquetesDatatable = new DataTable();
+            this.loginform = loginform;
         }
 
-        public static Compra getInstance() {
+        public static Compra getInstance(LoginForm loginform) {
 
             if (_instance == null) {
-                _instance = new Compra();
+                _instance = new Compra(loginform);
             }
+
+            _instance.loginform = loginform;
 
             return _instance;
 
@@ -155,6 +160,8 @@ namespace AerolineaFrba.Forms.Compra {
 
             this.viajesDataGrid.DataSource = table;
 
+            this.viajesDataGrid.ClearSelection();
+
         }
 
         private void FillDataGridPasajeros(string selectCommand) {
@@ -167,6 +174,8 @@ namespace AerolineaFrba.Forms.Compra {
 
             this.pasajerosDataGrid.DataSource = this.pasajerosDatatable;
 
+            this.pasajerosDataGrid.ClearSelection();
+
         }
 
         private void FillDataGridPaquetes(string selectCommand) {
@@ -178,6 +187,8 @@ namespace AerolineaFrba.Forms.Compra {
             this.dataAdapter.Fill(this.paquetesDatatable);
 
             this.paquetesDataGrid.DataSource = this.paquetesDatatable;
+
+            this.paquetesDataGrid.ClearSelection();
 
         }
 
@@ -430,7 +441,7 @@ namespace AerolineaFrba.Forms.Compra {
 
             List<String> detalle = this.buildDetalle(pasajerosIds, butacasNumeros, clientesIds, pesos);
 
-            Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajerosIds, butacasNumeros, clientesIds, pesos, selectedViaje, selectedAeronave);
+            Confirmacion confirmacionDialog = new Confirmacion(detalle, pasajerosIds, butacasNumeros, clientesIds, pesos, selectedViaje, selectedAeronave, this.loginform);
             var dr = confirmacionDialog.ShowDialog();
 
             if (dr == DialogResult.OK) {

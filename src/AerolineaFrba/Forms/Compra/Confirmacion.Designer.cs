@@ -52,10 +52,13 @@
             this.confirmarButton = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.tipoCombo = new System.Windows.Forms.ComboBox();
+            this.gD2C2015DataSet121 = new AerolineaFrba.GD2C2015DataSet12();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet121)).BeginInit();
             this.SuspendLayout();
             // 
             // medioDePagoCombo
             // 
+            this.medioDePagoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.medioDePagoCombo.FormattingEnabled = true;
             this.medioDePagoCombo.Location = new System.Drawing.Point(424, 137);
             this.medioDePagoCombo.Name = "medioDePagoCombo";
@@ -248,6 +251,7 @@
             // 
             // cuotasCombo
             // 
+            this.cuotasCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cuotasCombo.FormattingEnabled = true;
             this.cuotasCombo.Location = new System.Drawing.Point(276, 249);
             this.cuotasCombo.Name = "cuotasCombo";
@@ -296,12 +300,18 @@
             // 
             // tipoCombo
             // 
+            this.tipoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipoCombo.FormattingEnabled = true;
             this.tipoCombo.Location = new System.Drawing.Point(91, 249);
             this.tipoCombo.Name = "tipoCombo";
             this.tipoCombo.Size = new System.Drawing.Size(108, 21);
             this.tipoCombo.TabIndex = 28;
             this.tipoCombo.SelectedIndexChanged += new System.EventHandler(this.tipoCombo_SelectedIndexChanged);
+            // 
+            // gD2C2015DataSet121
+            // 
+            this.gD2C2015DataSet121.DataSetName = "GD2C2015DataSet12";
+            this.gD2C2015DataSet121.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // Confirmacion
             // 
@@ -340,6 +350,7 @@
             this.Controls.Add(this.medioDePagoCombo);
             this.Name = "Confirmacion";
             this.Text = "Confirmacion";
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet121)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,5 +387,6 @@
         private System.Windows.Forms.Button confirmarButton;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox tipoCombo;
+        private GD2C2015DataSet12 gD2C2015DataSet121;
     }
 }
