@@ -25,6 +25,8 @@ using AerolineaFrba.Services;
 namespace AerolineaFrba {
     public partial class MainForm : Form {
 
+        public LoginForm loginForm;
+
         public MainForm() {
 
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace AerolineaFrba {
 
         private void loginButton_Click(object sender, EventArgs e) {
 
-            LoginForm loginForm = new LoginForm();
+            this.loginForm = new LoginForm();
             var dr = loginForm.ShowDialog();
 
             if (dr == DialogResult.Cancel) { //si cierra la ventana
@@ -111,7 +113,7 @@ namespace AerolineaFrba {
         }
 
         private void compraButton_Click(object sender, EventArgs e) {
-            Compra CompraForm = Compra.getInstance();
+            Compra CompraForm = Compra.getInstance(this.loginForm);
             var dr = CompraForm.ShowDialog();
         }
 

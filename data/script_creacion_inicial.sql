@@ -846,19 +846,23 @@ GO
 INSERT INTO [BIEN_MIGRADO_RAFA].Rol
            ([descripcion], [activo])
      VALUES
-           ('Administrador', 1)
+           ('Administrador', 1),
+		   ('Encargado', 1)
 GO
+           
 
 INSERT INTO [BIEN_MIGRADO_RAFA].[Usuario]
            ([username], [password], [rol_id])
      VALUES
-           ('admin1', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 1)
+           ('admin1', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 1),
+		   ('encargado1', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 2)
 GO
 
 INSERT INTO [BIEN_MIGRADO_RAFA].[Intentos_Login]
            ([usuario_id], [intentos])
      VALUES
-           (1, 0)
+           (1, 0),
+		   (2, 0)
 GO
 
 INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad]
@@ -878,7 +882,8 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad_Rol]
 		   (2, 1),
 		   (3, 1),
 		   (4, 1),
-		   (5, 1)
+		   (5, 1),
+		   (5, 2)
 GO
 
 INSERT INTO [BIEN_MIGRADO_RAFA].[Catalogo]
@@ -892,8 +897,9 @@ GO
 INSERT INTO [BIEN_MIGRADO_RAFA].[Medio_Pago]
            ([descripcion])
      VALUES
-           ('Efectivo'),
-		   ('Tarjeta de Credito')
+		   ('Tarjeta de Credito'),
+           ('Efectivo')
+		   
 		   
 GO
 

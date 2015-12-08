@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 
 using AerolineaFrba.Models;
 using AerolineaFrba.Services;
+using AerolineaFrba.Login;
 using AerolineaFrba.Config;
 
 namespace AerolineaFrba.Forms.Compra {
@@ -23,8 +24,7 @@ namespace AerolineaFrba.Forms.Compra {
         private Aeronave selectedAeronave;
         private Viaje selectedViaje;
 
-
-        public Confirmacion(List<String> detalle, List<int> pasajerosIds, List<int> butacasNumeros, List<int> clientesIds, List<decimal> pesos, Viaje v, Aeronave a) {
+        public Confirmacion(List<String> detalle, List<int> pasajerosIds, List<int> butacasNumeros, List<int> clientesIds, List<decimal> pesos, Viaje v, Aeronave a, LoginForm loginform) {
 
             this.InitializeComponent();
 
@@ -38,6 +38,9 @@ namespace AerolineaFrba.Forms.Compra {
             this.detalleTextbox.Lines = detalle.ToArray();
             this.fillCombos();
 
+            if (loginform == null || loginform.loggedUser == null) 
+                this.medioDePagoCombo.Enabled = false;
+         
         }
 
         //autocompleta campos
@@ -108,7 +111,7 @@ namespace AerolineaFrba.Forms.Compra {
         private void medioDePagoCombo_SelectedIndexChanged(object sender, EventArgs e) {
             // 0 = efectivo
             // 1 = tarjeta
-            if (this.medioDePagoCombo.SelectedIndex == 1) {
+            if (this.medioDePagoCombo.SelectedIndex == 0) {
                 this.numeroTextbox.Enabled = true;
                 this.codigoTextbox.Enabled = true;
                 this.vencimientoTextbox.Enabled = true;
@@ -168,12 +171,12 @@ namespace AerolineaFrba.Forms.Compra {
         private void confirmarButton_Click(object sender, EventArgs e) {
             // 0 = efectivo
             // 1 = tarjeta
-            if (this.medioDePagoCombo.SelectedIndex == 1 && this.hayCamposVacios()) {
+            if (this.medioDePagoCombo.SelectedIndex == 0 && this.hayCamposVacios()) {
                 MessageBox.Show("Complete todos los datos de tarjeta para continuar.");
                 return;
             }
 
-            if (this.medioDePagoCombo.SelectedIndex == 1 && this.fechaTarjetaInvalida()) {
+            if (this.medioDePagoCombo.SelectedIndex == 0 && this.fechaTarjetaInvalida()) {
                 MessageBox.Show("La fecha de vencimiento de la tarjeta es invalida.");
                 return;
             }
@@ -191,7 +194,8 @@ namespace AerolineaFrba.Forms.Compra {
             compra.Fecha_Compra = Config.SystemConfig.systemDate;
             compra.PNR = (this.getMaxIdCompra() + 1).ToString();
 
-            if (this.medioDePagoCombo.SelectedIndex == 1) {
+            if (this.medioDePagoCombo.SelectedIndex == 0) {
+                
                 compra.Numero_Tarjeta = Convert.ToInt32(this.numeroTextbox.Text);
                 compra.Codigo_Tarjeta = Convert.ToInt32(this.codigoTextbox.Text);
                 compra.Vencimiento_Tarjeta = Convert.ToInt32(this.vencimientoTextbox.Text);
@@ -312,6 +316,26 @@ namespace AerolineaFrba.Forms.Compra {
 
             return Convert.ToInt32(max);
 
+        }
+
+        private bool validarBusqueda(DateTime fechaSalida, int id_origen, int id_destino, ref String error) {
+
+            if (fechaSalida < Config.SystemConfig.systemDate) {
+                error = "La fecha de salida ingresada no puede ser menor a la fecha actual.";
+                return false;
+            }
+
+            if (id_origen == 0) {
+                error = "Debe seleccionar una ciudad de origen para el vuelo.";
+                return false;
+            }
+
+            if (id_destino == 0) {
+                error = "Debe seleccionar una ciudad de destino para el vuelo.";
+                return false;
+            }
+
+            return true;
         }
 
 

@@ -39,7 +39,7 @@
             // 
             // ABMRol_Button
             // 
-            this.ABMRol_Button.Location = new System.Drawing.Point(111, 297);
+            this.ABMRol_Button.Location = new System.Drawing.Point(196, 295);
             this.ABMRol_Button.Name = "ABMRol_Button";
             this.ABMRol_Button.Size = new System.Drawing.Size(87, 51);
             this.ABMRol_Button.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             // ABMAeronave_Button
             // 
-            this.ABMAeronave_Button.Location = new System.Drawing.Point(204, 297);
+            this.ABMAeronave_Button.Location = new System.Drawing.Point(289, 295);
             this.ABMAeronave_Button.Name = "ABMAeronave_Button";
             this.ABMAeronave_Button.Size = new System.Drawing.Size(92, 51);
             this.ABMAeronave_Button.TabIndex = 3;
@@ -60,7 +60,7 @@
             // 
             // ABMRuta_Button
             // 
-            this.ABMRuta_Button.Location = new System.Drawing.Point(302, 297);
+            this.ABMRuta_Button.Location = new System.Drawing.Point(387, 295);
             this.ABMRuta_Button.Name = "ABMRuta_Button";
             this.ABMRuta_Button.Size = new System.Drawing.Size(88, 51);
             this.ABMRuta_Button.TabIndex = 4;
@@ -71,7 +71,7 @@
             // 
             // generarViajeButton
             // 
-            this.generarViajeButton.Location = new System.Drawing.Point(396, 297);
+            this.generarViajeButton.Location = new System.Drawing.Point(481, 295);
             this.generarViajeButton.Name = "generarViajeButton";
             this.generarViajeButton.Size = new System.Drawing.Size(88, 51);
             this.generarViajeButton.TabIndex = 5;
@@ -82,7 +82,7 @@
             // 
             // compraButton
             // 
-            this.compraButton.Location = new System.Drawing.Point(150, 101);
+            this.compraButton.Location = new System.Drawing.Point(235, 99);
             this.compraButton.Name = "compraButton";
             this.compraButton.Size = new System.Drawing.Size(88, 48);
             this.compraButton.TabIndex = 6;
@@ -92,7 +92,7 @@
             // 
             // estadisticasButton
             // 
-            this.estadisticasButton.Location = new System.Drawing.Point(432, 101);
+            this.estadisticasButton.Location = new System.Drawing.Point(517, 99);
             this.estadisticasButton.Name = "estadisticasButton";
             this.estadisticasButton.Size = new System.Drawing.Size(92, 48);
             this.estadisticasButton.TabIndex = 7;
@@ -103,7 +103,7 @@
             // devolucionButton
             // 
             this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.devolucionButton.Location = new System.Drawing.Point(490, 297);
+            this.devolucionButton.Location = new System.Drawing.Point(575, 295);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(88, 51);
             this.devolucionButton.TabIndex = 8;
@@ -114,7 +114,7 @@
             // 
             // consultarMillasButton
             // 
-            this.consultarMillasButton.Location = new System.Drawing.Point(244, 101);
+            this.consultarMillasButton.Location = new System.Drawing.Point(329, 99);
             this.consultarMillasButton.Name = "consultarMillasButton";
             this.consultarMillasButton.Size = new System.Drawing.Size(88, 48);
             this.consultarMillasButton.TabIndex = 9;
@@ -124,7 +124,7 @@
             // 
             // canjearMillasButton
             // 
-            this.canjearMillasButton.Location = new System.Drawing.Point(338, 101);
+            this.canjearMillasButton.Location = new System.Drawing.Point(423, 99);
             this.canjearMillasButton.Name = "canjearMillasButton";
             this.canjearMillasButton.Size = new System.Drawing.Size(88, 48);
             this.canjearMillasButton.TabIndex = 10;
@@ -134,7 +134,7 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(217, 197);
+            this.loginButton.Location = new System.Drawing.Point(302, 195);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(239, 23);
             this.loginButton.TabIndex = 11;
@@ -146,7 +146,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(202, 24);
+            this.label1.Location = new System.Drawing.Point(287, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(278, 39);
             this.label1.TabIndex = 12;
@@ -155,7 +155,7 @@
             // loggedAs
             // 
             this.loggedAs.AutoSize = true;
-            this.loggedAs.Location = new System.Drawing.Point(496, 9);
+            this.loggedAs.Location = new System.Drawing.Point(595, 9);
             this.loggedAs.Name = "loggedAs";
             this.loggedAs.Size = new System.Drawing.Size(0, 13);
             this.loggedAs.TabIndex = 13;
@@ -164,7 +164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 382);
+            this.ClientSize = new System.Drawing.Size(856, 382);
             this.Controls.Add(this.loggedAs);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
