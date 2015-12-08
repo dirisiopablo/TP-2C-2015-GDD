@@ -104,6 +104,7 @@
             this.pasajesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pasajesDatagrid.Location = new System.Drawing.Point(27, 112);
             this.pasajesDatagrid.Name = "pasajesDatagrid";
+            this.pasajesDatagrid.ReadOnly = true;
             this.pasajesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pasajesDatagrid.Size = new System.Drawing.Size(707, 150);
             this.pasajesDatagrid.TabIndex = 7;
@@ -130,8 +131,9 @@
             // paquetesDatagrid
             // 
             this.paquetesDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.paquetesDatagrid.Location = new System.Drawing.Point(26, 305);
+            this.paquetesDatagrid.Location = new System.Drawing.Point(27, 305);
             this.paquetesDatagrid.Name = "paquetesDatagrid";
+            this.paquetesDatagrid.ReadOnly = true;
             this.paquetesDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.paquetesDatagrid.Size = new System.Drawing.Size(707, 150);
             this.paquetesDatagrid.TabIndex = 10;

@@ -55,7 +55,7 @@ namespace AerolineaFrba.Forms.Compra {
                     this.apellidoTextbox.Text = cliente.Apellido;
                     this.direccionTextbox.Text = cliente.Direccion;
                     this.emailTextbox.Text = cliente.Email;
-                    //TODO this.fechaNacimientoPicker.Value = cliente.Fecha_Nacimiento;
+                    this.fechaNacimientoPicker.Value = cliente.Fecha_Nacimiento;
                 }
                 else {
                     this.nombreTextbox.Text = "";
