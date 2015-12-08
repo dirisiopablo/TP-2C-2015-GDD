@@ -128,6 +128,18 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
 
         private void rutaEliminar_Click(object sender, EventArgs e) {
 
+            if (this.rutaDataGrid.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe elegir una ruta para dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (this.rutaDataGrid.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Solo puede elegir una ruta para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             DataGridViewRow row = this.rutaDataGrid.SelectedRows[0];
 
             int id = (int)row.Cells[0].Value;
@@ -141,16 +153,13 @@ namespace AerolineaFrba.ABM.Abm_Ruta {
                 return;
             }
 
-            if (this.rutaDataGrid.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe elegir una ruta para dar de baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
+            List<Viaje> viajes = DAO.selectAll<Viaje>(new[] { "ruta_id = " + ruta.Id });
 
-            if (this.rutaDataGrid.SelectedRows.Count > 1)
-            {
-                MessageBox.Show("Solo puede elegir una ruta para dar de baja a la vez", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+            foreach (Viaje viaje in viajes) {
+                if (viaje.Fecha_Salida < Config.SystemConfig.systemDate) {
+                    MessageBox.Show("Existen futuros viajes con la ruta seleccionada asignada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
             }
 
             var dr = MessageBox.Show("¿Confirma la eliminación de la ruta seleccionada?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
