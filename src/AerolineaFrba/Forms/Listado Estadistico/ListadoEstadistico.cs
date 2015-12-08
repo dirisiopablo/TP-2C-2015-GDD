@@ -77,25 +77,26 @@ namespace AerolineaFrba.Forms.Listado_Estadistico {
 				                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
-				                                    "where d.id = pv.destinoId) 'Butacas totales', " +
+				                                    "where d.id = pv.destinoId AND v.fecha_salida " + rango + ") 'Butacas totales', " +
 		                                    "pv.viajesTotales 'Butacas vendidas', " +
 		                                    "((SELECT count(*) FROM BIEN_MIGRADO_RAFA.Ciudad d " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
 				                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
-				                                    "where d.id = pv.destinoId) - pv.viajesTotales) 'Butacas libres', " +
+                                                    "where d.id = pv.destinoId AND v.fecha_salida " + rango + ") - pv.viajesTotales) 'Butacas libres', " +
 		                                    "1 - CAST(pv.viajesTotales AS DECIMAL) / (SELECT count(*) FROM BIEN_MIGRADO_RAFA.Ciudad d " +
 								                                    "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = pv.destinoId " +
 								                                    "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
 								                                    "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
-								                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " + 
-								                                    "where d.id = pv.destinoId) 'Porcentaje butacas libres' " +
+								                                    "JOIN BIEN_MIGRADO_RAFA.Butaca b ON b.aeronave_id = a.id " +
+                                                                    "where d.id = pv.destinoId AND v.fecha_salida " + rango + ") 'Porcentaje butacas libres' " +
                                 "FROM (SELECT COUNT(*) viajesTotales, d.id destinoId FROM BIEN_MIGRADO_RAFA.Ciudad d " +
 		                                "JOIN BIEN_MIGRADO_RAFA.Ruta r ON r.ciudad_destino_id = d.id " +
 		                                "JOIN BIEN_MIGRADO_RAFA.Viaje v ON v.ruta_id = r.id " +
 		                                "JOIN BIEN_MIGRADO_RAFA.Aeronave a ON v.aeronave_id = a.id " +
-		                                "JOIN BIEN_MIGRADO_RAFA.Pasaje p ON p.viaje_id = v.id group by d.id) pv " +
+		                                "JOIN BIEN_MIGRADO_RAFA.Pasaje p ON p.viaje_id = v.id " +
+                                        "WHERE v.fecha_salida " + rango + " group by d.id) pv " +
                                 "JOIN BIEN_MIGRADO_RAFA.Ciudad c ON c.id = pv.destinoId " +
                                 "order by 'Porcentaje butacas libres' DESC";
             
