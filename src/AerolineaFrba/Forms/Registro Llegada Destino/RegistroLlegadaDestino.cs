@@ -32,35 +32,52 @@ namespace AerolineaFrba.Forms.Registro_Llegada_Destino {
 
         
         private void guardarButton_Click(object sender, EventArgs e) {
-
-            int id_aeronave = (int)this.matriculaCombo.SelectedValue;
+            string matricula = this.matriculaTextbox.Text;
             int id_origen = (int)this.origenCombo.SelectedValue;
             int id_destino = (int)this.destinoCombo.SelectedValue;
             DateTime fecha_llegada = this.fechaPicker.Value;
 
             DAO.connect();
-            Viaje viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + id_aeronave, "fecha_llegada_estimada = " + fecha_llegada });
+            Aeronave aeronave = DAO.selectOne<Aeronave>(new[] { "matricula = '" + matricula + "'"});
 
-            if (viaje == null) {
-                MessageBox.Show("No existe un viaje con la aeronave ingresada con una llegada estimada cercana a la fecha ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (aeronave == null)
+            {
+                MessageBox.Show("No existe la aeronave con la matrícula ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 DAO.closeConnection();
                 return;
             }
 
-            int ruta_id = viaje.Ruta_Id;
-            Ruta ruta = DAO.selectOne<Ruta>( new[] {"id = " + ruta_id} );
+            Ruta ruta = DAO.selectOne<Ruta>(new[] { "ciudad_origen_id = " + id_origen, "ciudad_destino_id = " + id_destino });
 
-            if (ruta.Ciudad_Origen_Id != id_origen || ruta.Ciudad_Destino_Id != id_destino) {
-                MessageBox.Show("La ciudad origen o destino es incorrecta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (ruta == null)
+            {
+                MessageBox.Show("No existe una ruta cargada con las ciudades ingresadas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 DAO.closeConnection();
                 return;
+            }
+
+            Viaje viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + aeronave.Id, "fecha_llegada = fecha_salida", "ruta_id = " + ruta.Id, "fecha_llegada_estimada <= '" + fecha_llegada.AddDays(1).ToString("yyyyMMdd HH:mm:ss") + "'", "fecha_llegada_estimada >= '" + fecha_llegada.AddDays(-1).ToString("yyyyMMdd HH:mm:ss") + "'" });
+
+            if (viaje == null) {
+                viaje = DAO.selectOne<Viaje>(new[] { "aeronave_id = " + aeronave.Id, "fecha_llegada = fecha_salida", "ruta_id = " + ruta.Id, "fecha_llegada_estimada <= '" + fecha_llegada.AddDays(2).ToString("yyyyMMdd HH:mm:ss") + "'", "fecha_llegada_estimada >= '" + fecha_llegada.AddDays(-2).ToString("yyyyMMdd HH:mm:ss") + "'" });
+                if (viaje == null)
+                {
+
+                    MessageBox.Show("No existe un viaje con la aeronave ingresada con una llegada estimada cercana a la fecha ingresada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    DAO.closeConnection();
+                    return;
+                }
             }
 
             viaje.Fecha_Llegada = fecha_llegada;
 
-            DAO.update<Viaje>(viaje);
+            int result = DAO.update<Viaje>(viaje);
             DAO.closeConnection();
 
+            if (result != 0)
+                MessageBox.Show("Llegada del viaje registrada correctamente.", "Nueva llegada de viaje creada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Error al registrar la llegada del viaje.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void cancelarButton_Click(object sender, EventArgs e) {
@@ -68,12 +85,8 @@ namespace AerolineaFrba.Forms.Registro_Llegada_Destino {
         }
 
         private void RegistroLlegadaDestino_Load(object sender, EventArgs e) {
-
             this.ciudadTableAdapter1.Fill(this.dataSetCiudad2.Ciudad);
             this.ciudadTableAdapter.Fill(this.dataSetCiudad.Ciudad);
-            this.aeronaveTableAdapter1.Fill(this.gD2C2015DataSet3.Aeronave);
-            this.aeronaveTableAdapter.Fill(this.dataSetAeronave.Aeronave);
-
         }
 
     }

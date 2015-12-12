@@ -98,6 +98,12 @@ namespace AerolineaFrba.ABM.Abm_Rol
                 DAO.insert<Funcionalidad_Rol>(fRol);
             }
 
+            if (this.registrarLlegadaCheck.Checked)
+            {
+                fRol.Funcionalidad_Id = 6; //TODO: MAKE ME A CONSTANT DOOD - NOES
+                DAO.insert<Funcionalidad_Rol>(fRol);
+            }
+
             DAO.closeConnection();
             this.dr = DialogResult.OK;
             this.Close();

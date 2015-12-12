@@ -39,6 +39,10 @@
             this.fechaPicker = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tipoServicioRutaLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tipoServicioLabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,10 +60,6 @@
             this.kgLabel = new System.Windows.Forms.Label();
             this.fabModeloLabel = new System.Windows.Forms.Label();
             this.matriculaLabel = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tipoServicioLabel = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tipoServicioRutaLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rutaBindingSource)).BeginInit();
@@ -166,6 +166,7 @@
             this.fechaPicker.Name = "fechaPicker";
             this.fechaPicker.Size = new System.Drawing.Size(200, 20);
             this.fechaPicker.TabIndex = 6;
+            this.fechaPicker.Value = new System.DateTime(2015, 12, 12, 0, 0, 0, 0);
             // 
             // label3
             // 
@@ -204,6 +205,42 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(345, 377);
             this.panel1.TabIndex = 8;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(25, 336);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Tipo de Servicio: ";
+            // 
+            // tipoServicioRutaLabel
+            // 
+            this.tipoServicioRutaLabel.AutoSize = true;
+            this.tipoServicioRutaLabel.Location = new System.Drawing.Point(115, 336);
+            this.tipoServicioRutaLabel.Name = "tipoServicioRutaLabel";
+            this.tipoServicioRutaLabel.Size = new System.Drawing.Size(24, 13);
+            this.tipoServicioRutaLabel.TabIndex = 19;
+            this.tipoServicioRutaLabel.Text = "mat";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 131);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(90, 13);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Tipo de Servicio: ";
+            // 
+            // tipoServicioLabel
+            // 
+            this.tipoServicioLabel.AutoSize = true;
+            this.tipoServicioLabel.Location = new System.Drawing.Point(115, 131);
+            this.tipoServicioLabel.Name = "tipoServicioLabel";
+            this.tipoServicioLabel.Size = new System.Drawing.Size(24, 13);
+            this.tipoServicioLabel.TabIndex = 17;
+            this.tipoServicioLabel.Text = "mat";
             // 
             // label11
             // 
@@ -353,42 +390,6 @@
             this.matriculaLabel.Size = new System.Drawing.Size(24, 13);
             this.matriculaLabel.TabIndex = 0;
             this.matriculaLabel.Text = "mat";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 131);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(90, 13);
-            this.label12.TabIndex = 18;
-            this.label12.Text = "Tipo de Servicio: ";
-            // 
-            // tipoServicioLabel
-            // 
-            this.tipoServicioLabel.AutoSize = true;
-            this.tipoServicioLabel.Location = new System.Drawing.Point(115, 131);
-            this.tipoServicioLabel.Name = "tipoServicioLabel";
-            this.tipoServicioLabel.Size = new System.Drawing.Size(24, 13);
-            this.tipoServicioLabel.TabIndex = 17;
-            this.tipoServicioLabel.Text = "mat";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(25, 336);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(90, 13);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Tipo de Servicio: ";
-            // 
-            // tipoServicioRutaLabel
-            // 
-            this.tipoServicioRutaLabel.AutoSize = true;
-            this.tipoServicioRutaLabel.Location = new System.Drawing.Point(115, 336);
-            this.tipoServicioRutaLabel.Name = "tipoServicioRutaLabel";
-            this.tipoServicioRutaLabel.Size = new System.Drawing.Size(24, 13);
-            this.tipoServicioRutaLabel.TabIndex = 19;
-            this.tipoServicioRutaLabel.Text = "mat";
             // 
             // GenerarViaje
             // 

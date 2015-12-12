@@ -39,6 +39,7 @@
             this.abmRolCheck = new System.Windows.Forms.CheckBox();
             this.cancelarFuncionalidades = new System.Windows.Forms.Button();
             this.confirmarFuncionalidades = new System.Windows.Forms.Button();
+            this.registrarLlegadaCheck = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -74,6 +75,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.registrarLlegadaCheck);
             this.groupBox2.Controls.Add(this.devolucionCheck);
             this.groupBox2.Controls.Add(this.generarViajeCheck);
             this.groupBox2.Controls.Add(this.abmRutaCheck);
@@ -81,7 +83,7 @@
             this.groupBox2.Controls.Add(this.abmRolCheck);
             this.groupBox2.Location = new System.Drawing.Point(12, 87);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(246, 140);
+            this.groupBox2.Size = new System.Drawing.Size(246, 164);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Funcionalidades Disponibles";
@@ -138,7 +140,7 @@
             // 
             // cancelarFuncionalidades
             // 
-            this.cancelarFuncionalidades.Location = new System.Drawing.Point(174, 245);
+            this.cancelarFuncionalidades.Location = new System.Drawing.Point(174, 257);
             this.cancelarFuncionalidades.Name = "cancelarFuncionalidades";
             this.cancelarFuncionalidades.Size = new System.Drawing.Size(84, 23);
             this.cancelarFuncionalidades.TabIndex = 7;
@@ -148,7 +150,7 @@
             // 
             // confirmarFuncionalidades
             // 
-            this.confirmarFuncionalidades.Location = new System.Drawing.Point(12, 245);
+            this.confirmarFuncionalidades.Location = new System.Drawing.Point(12, 257);
             this.confirmarFuncionalidades.Name = "confirmarFuncionalidades";
             this.confirmarFuncionalidades.Size = new System.Drawing.Size(73, 23);
             this.confirmarFuncionalidades.TabIndex = 6;
@@ -156,11 +158,21 @@
             this.confirmarFuncionalidades.UseVisualStyleBackColor = true;
             this.confirmarFuncionalidades.Click += new System.EventHandler(this.confirmarFuncionalidades_Click);
             // 
+            // registrarLlegadaCheck
+            // 
+            this.registrarLlegadaCheck.AutoSize = true;
+            this.registrarLlegadaCheck.Location = new System.Drawing.Point(9, 134);
+            this.registrarLlegadaCheck.Name = "registrarLlegadaCheck";
+            this.registrarLlegadaCheck.Size = new System.Drawing.Size(109, 17);
+            this.registrarLlegadaCheck.TabIndex = 19;
+            this.registrarLlegadaCheck.Text = "Registrar Llegada";
+            this.registrarLlegadaCheck.UseVisualStyleBackColor = true;
+            // 
             // AsignarFuncionalidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 291);
+            this.ClientSize = new System.Drawing.Size(270, 303);
             this.Controls.Add(this.cancelarFuncionalidades);
             this.Controls.Add(this.confirmarFuncionalidades);
             this.Controls.Add(this.groupBox2);
@@ -188,6 +200,7 @@
         private System.Windows.Forms.CheckBox abmRolCheck;
         private System.Windows.Forms.Button cancelarFuncionalidades;
         private System.Windows.Forms.Button confirmarFuncionalidades;
+        private System.Windows.Forms.CheckBox registrarLlegadaCheck;
 
     }
 }

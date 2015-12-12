@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.matriculaCombo = new System.Windows.Forms.ComboBox();
             this.aeronaveBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet3 = new AerolineaFrba.GD2C2015DataSet3();
             this.dataSetAeronave = new AerolineaFrba.DataSetAeronave();
@@ -36,47 +35,37 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.origenCombo = new System.Windows.Forms.ComboBox();
-            this.dataSetCiudad = new AerolineaFrba.DataSetCiudad();
             this.ciudadBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSetCiudad = new AerolineaFrba.DataSetCiudad();
             this.ciudadTableAdapter = new AerolineaFrba.DataSetCiudadTableAdapters.CiudadTableAdapter();
             this.destinoCombo = new System.Windows.Forms.ComboBox();
-            this.dataSetCiudad2 = new AerolineaFrba.DataSetCiudad2();
             this.ciudadBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSetCiudad2 = new AerolineaFrba.DataSetCiudad2();
             this.ciudadTableAdapter1 = new AerolineaFrba.DataSetCiudad2TableAdapters.CiudadTableAdapter();
             this.label4 = new System.Windows.Forms.Label();
             this.fechaPicker = new System.Windows.Forms.DateTimePicker();
             this.guardarButton = new System.Windows.Forms.Button();
             this.cancelarButton = new System.Windows.Forms.Button();
+            this.matriculaTextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetAeronave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetAeronaveBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 47);
+            this.label1.Location = new System.Drawing.Point(45, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Matricula";
-            // 
-            // matriculaCombo
-            // 
-            this.matriculaCombo.DataSource = this.aeronaveBindingSource1;
-            this.matriculaCombo.DisplayMember = "matricula";
-            this.matriculaCombo.FormattingEnabled = true;
-            this.matriculaCombo.Location = new System.Drawing.Point(132, 44);
-            this.matriculaCombo.Name = "matriculaCombo";
-            this.matriculaCombo.Size = new System.Drawing.Size(200, 21);
-            this.matriculaCombo.TabIndex = 1;
-            this.matriculaCombo.ValueMember = "id";
             // 
             // aeronaveBindingSource1
             // 
@@ -114,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(80, 88);
+            this.label2.Location = new System.Drawing.Point(57, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 3;
@@ -123,7 +112,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(75, 127);
+            this.label3.Location = new System.Drawing.Point(52, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 4;
@@ -133,22 +122,23 @@
             // 
             this.origenCombo.DataSource = this.ciudadBindingSource;
             this.origenCombo.DisplayMember = "descripcion";
+            this.origenCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.origenCombo.FormattingEnabled = true;
-            this.origenCombo.Location = new System.Drawing.Point(132, 85);
+            this.origenCombo.Location = new System.Drawing.Point(109, 84);
             this.origenCombo.Name = "origenCombo";
-            this.origenCombo.Size = new System.Drawing.Size(200, 21);
+            this.origenCombo.Size = new System.Drawing.Size(241, 21);
             this.origenCombo.TabIndex = 5;
             this.origenCombo.ValueMember = "id";
-            // 
-            // dataSetCiudad
-            // 
-            this.dataSetCiudad.DataSetName = "DataSetCiudad";
-            this.dataSetCiudad.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadBindingSource
             // 
             this.ciudadBindingSource.DataMember = "Ciudad";
             this.ciudadBindingSource.DataSource = this.dataSetCiudad;
+            // 
+            // dataSetCiudad
+            // 
+            this.dataSetCiudad.DataSetName = "DataSetCiudad";
+            this.dataSetCiudad.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadTableAdapter
             // 
@@ -158,22 +148,23 @@
             // 
             this.destinoCombo.DataSource = this.ciudadBindingSource1;
             this.destinoCombo.DisplayMember = "descripcion";
+            this.destinoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.destinoCombo.FormattingEnabled = true;
-            this.destinoCombo.Location = new System.Drawing.Point(132, 124);
+            this.destinoCombo.Location = new System.Drawing.Point(109, 123);
             this.destinoCombo.Name = "destinoCombo";
-            this.destinoCombo.Size = new System.Drawing.Size(200, 21);
+            this.destinoCombo.Size = new System.Drawing.Size(241, 21);
             this.destinoCombo.TabIndex = 6;
             this.destinoCombo.ValueMember = "id";
-            // 
-            // dataSetCiudad2
-            // 
-            this.dataSetCiudad2.DataSetName = "DataSetCiudad2";
-            this.dataSetCiudad2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadBindingSource1
             // 
             this.ciudadBindingSource1.DataMember = "Ciudad";
             this.ciudadBindingSource1.DataSource = this.dataSetCiudad2;
+            // 
+            // dataSetCiudad2
+            // 
+            this.dataSetCiudad2.DataSetName = "DataSetCiudad2";
+            this.dataSetCiudad2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadTableAdapter1
             // 
@@ -182,7 +173,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(49, 168);
+            this.label4.Location = new System.Drawing.Point(26, 167);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 7;
@@ -190,12 +181,12 @@
             // 
             // fechaPicker
             // 
-            this.fechaPicker.Location = new System.Drawing.Point(132, 162);
+            this.fechaPicker.Location = new System.Drawing.Point(109, 161);
             this.fechaPicker.MinDate = new System.DateTime(2015, 10, 22, 1, 14, 19, 0);
             this.fechaPicker.Name = "fechaPicker";
-            this.fechaPicker.Size = new System.Drawing.Size(200, 20);
+            this.fechaPicker.Size = new System.Drawing.Size(241, 20);
             this.fechaPicker.TabIndex = 8;
-            this.fechaPicker.Value = new System.DateTime(2015, 10, 22, 1, 14, 19, 0);
+            this.fechaPicker.Value = new System.DateTime(2015, 10, 22, 3, 14, 0, 0);
             // 
             // guardarButton
             // 
@@ -217,11 +208,19 @@
             this.cancelarButton.UseVisualStyleBackColor = true;
             this.cancelarButton.Click += new System.EventHandler(this.cancelarButton_Click);
             // 
+            // matriculaTextbox
+            // 
+            this.matriculaTextbox.Location = new System.Drawing.Point(109, 46);
+            this.matriculaTextbox.Name = "matriculaTextbox";
+            this.matriculaTextbox.Size = new System.Drawing.Size(241, 20);
+            this.matriculaTextbox.TabIndex = 11;
+            // 
             // RegistroLlegadaDestino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 275);
+            this.Controls.Add(this.matriculaTextbox);
             this.Controls.Add(this.cancelarButton);
             this.Controls.Add(this.guardarButton);
             this.Controls.Add(this.fechaPicker);
@@ -230,7 +229,6 @@
             this.Controls.Add(this.origenCombo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.matriculaCombo);
             this.Controls.Add(this.label1);
             this.Name = "RegistroLlegadaDestino";
             this.Text = "RegistroLlegadaDestino";
@@ -240,10 +238,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSetAeronave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetAeronaveBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronaveBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetCiudad2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,7 +250,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox matriculaCombo;
         private System.Windows.Forms.BindingSource dataSetAeronaveBindingSource;
         private DataSetAeronave dataSetAeronave;
         private System.Windows.Forms.BindingSource aeronaveBindingSource;
@@ -274,5 +271,6 @@
         private System.Windows.Forms.DateTimePicker fechaPicker;
         private System.Windows.Forms.Button guardarButton;
         private System.Windows.Forms.Button cancelarButton;
+        private System.Windows.Forms.TextBox matriculaTextbox;
     }
 }

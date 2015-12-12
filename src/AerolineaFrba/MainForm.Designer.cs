@@ -35,11 +35,12 @@
             this.loginButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.loggedAs = new System.Windows.Forms.Label();
+            this.RegistrarLLegadaButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ABMRol_Button
             // 
-            this.ABMRol_Button.Location = new System.Drawing.Point(196, 295);
+            this.ABMRol_Button.Location = new System.Drawing.Point(138, 289);
             this.ABMRol_Button.Name = "ABMRol_Button";
             this.ABMRol_Button.Size = new System.Drawing.Size(87, 51);
             this.ABMRol_Button.TabIndex = 0;
@@ -49,7 +50,7 @@
             // 
             // ABMAeronave_Button
             // 
-            this.ABMAeronave_Button.Location = new System.Drawing.Point(289, 295);
+            this.ABMAeronave_Button.Location = new System.Drawing.Point(231, 289);
             this.ABMAeronave_Button.Name = "ABMAeronave_Button";
             this.ABMAeronave_Button.Size = new System.Drawing.Size(92, 51);
             this.ABMAeronave_Button.TabIndex = 3;
@@ -60,7 +61,7 @@
             // 
             // ABMRuta_Button
             // 
-            this.ABMRuta_Button.Location = new System.Drawing.Point(387, 295);
+            this.ABMRuta_Button.Location = new System.Drawing.Point(329, 289);
             this.ABMRuta_Button.Name = "ABMRuta_Button";
             this.ABMRuta_Button.Size = new System.Drawing.Size(88, 51);
             this.ABMRuta_Button.TabIndex = 4;
@@ -71,7 +72,7 @@
             // 
             // generarViajeButton
             // 
-            this.generarViajeButton.Location = new System.Drawing.Point(481, 295);
+            this.generarViajeButton.Location = new System.Drawing.Point(423, 289);
             this.generarViajeButton.Name = "generarViajeButton";
             this.generarViajeButton.Size = new System.Drawing.Size(88, 51);
             this.generarViajeButton.TabIndex = 5;
@@ -103,7 +104,7 @@
             // devolucionButton
             // 
             this.devolucionButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.devolucionButton.Location = new System.Drawing.Point(575, 295);
+            this.devolucionButton.Location = new System.Drawing.Point(517, 289);
             this.devolucionButton.Name = "devolucionButton";
             this.devolucionButton.Size = new System.Drawing.Size(88, 51);
             this.devolucionButton.TabIndex = 8;
@@ -160,11 +161,24 @@
             this.loggedAs.Size = new System.Drawing.Size(0, 13);
             this.loggedAs.TabIndex = 13;
             // 
+            // RegistrarLLegadaButton
+            // 
+            this.RegistrarLLegadaButton.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.RegistrarLLegadaButton.Location = new System.Drawing.Point(611, 289);
+            this.RegistrarLLegadaButton.Name = "RegistrarLLegadaButton";
+            this.RegistrarLLegadaButton.Size = new System.Drawing.Size(88, 51);
+            this.RegistrarLLegadaButton.TabIndex = 14;
+            this.RegistrarLLegadaButton.Text = "Registrar Llegada a Destino";
+            this.RegistrarLLegadaButton.UseVisualStyleBackColor = true;
+            this.RegistrarLLegadaButton.Visible = false;
+            this.RegistrarLLegadaButton.Click += new System.EventHandler(this.RegistrarLLegadaButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 382);
+            this.Controls.Add(this.RegistrarLLegadaButton);
             this.Controls.Add(this.loggedAs);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loginButton);
@@ -198,6 +212,7 @@
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label loggedAs;
+        private System.Windows.Forms.Button RegistrarLLegadaButton;
 
     }
 }

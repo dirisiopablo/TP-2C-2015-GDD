@@ -19,6 +19,7 @@ using AerolineaFrba.Forms.Listado_Estadistico;
 using AerolineaFrba.Forms.Devolucion;
 using AerolineaFrba.Forms.Consulta_Millas;
 using AerolineaFrba.Forms.Canje_Millas;
+using AerolineaFrba.Forms.Registro_Llegada_Destino;
 
 using AerolineaFrba.Services;
 
@@ -72,6 +73,9 @@ namespace AerolineaFrba {
                         break;
                     case "Devolucion":
                         this.devolucionButton.Visible = true;
+                        break;
+                    case "Registro_Llegada_Destino":
+                        this.RegistrarLLegadaButton.Visible = true;
                         break;
                 }               
             }
@@ -135,6 +139,12 @@ namespace AerolineaFrba {
         private void canjearMillasButton_Click(object sender, EventArgs e) {
             CanjeMillas CanjeMillasForm = CanjeMillas.getInstance();
             var dr = CanjeMillasForm.ShowDialog();
+        }
+
+        private void RegistrarLLegadaButton_Click(object sender, EventArgs e)
+        {
+            RegistroLlegadaDestino RegistroLlegada = RegistroLlegadaDestino.getInstance();
+            var dr = RegistroLlegada.ShowDialog();
         }
 
     }

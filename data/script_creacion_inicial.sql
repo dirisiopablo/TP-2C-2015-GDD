@@ -872,7 +872,8 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad]
 		   ('ABM_Aeronave'),
 		   ('ABM_Ruta'),
 		   ('Generar_Viaje'),
-		   ('Devolucion')
+		   ('Devolucion'),
+		   ('Registro_Llegada_Destino')
 GO
 
 INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad_Rol]
@@ -883,6 +884,7 @@ INSERT INTO [BIEN_MIGRADO_RAFA].[Funcionalidad_Rol]
 		   (3, 1),
 		   (4, 1),
 		   (5, 1),
+		   (6, 1),
 		   (5, 2)
 GO
 

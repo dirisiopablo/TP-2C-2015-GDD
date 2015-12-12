@@ -15,7 +15,7 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
 
     public sealed partial class GenerarViaje : Form {
 
-        private static GenerarViaje _instance = null;
+        // private static GenerarViaje _instance = null;
 
         private GenerarViaje() {
             this.InitializeComponent();
@@ -23,11 +23,12 @@ namespace AerolineaFrba.Forms.Generacion_Viaje {
 
         public static GenerarViaje getInstance() {
 
-            if (_instance == null) {
+            /*if (_instance == null) {
                 _instance = new GenerarViaje();
             }
 
-            return _instance;
+            return _instance;*/
+            return new GenerarViaje();
 
         }
 
